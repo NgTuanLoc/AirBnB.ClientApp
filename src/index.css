@@ -1,13 +1,164 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+		'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+		sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+		monospace;
 }
+
+:root {
+	/* Custom */
+	--transition: all 0.5s linear;
+	--clr-background: #ffffff;
+	--clr-primary: #ff385c;
+
+	/* Breakpoint */
+	--breakpoint-small: 992px;
+	--breakpoint-medium: 1400px;
+
+	--spacing: 0.1rem;
+	--radius: 0.25rem;
+	--light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+	--dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+	--max-width: 1400px;
+	--min-width: 620px;
+}
+
+html {
+	font-size: 0.625;
+}
+
+*,
+*::before,
+*::after {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+body {
+	line-height: 1.5;
+	font-size: 2rem;
+	background-color: var(--clr-background);
+	overflow-x: hidden;
+}
+
+/* Typography */
+ul {
+	list-style-type: none;
+}
+a {
+	text-decoration: none;
+}
+h1,
+h2,
+h3,
+h4 {
+	letter-spacing: var(--spacing);
+	text-transform: capitalize;
+	line-height: 1.25;
+	margin-bottom: 0.25rem;
+}
+h1 {
+	font-size: 2.5rem;
+}
+h2 {
+	font-size: 2.25rem;
+}
+h3 {
+	font-size: 2rem;
+}
+h4 {
+	font-size: 1.75rem;
+}
+
+p {
+	font-size: 1.5rem;
+	font-weight: 400;
+}
+
+@media screen and (min-width: 992px) {
+	h1 {
+		font-size: 3rem;
+	}
+	h2 {
+		font-size: 2.75rem;
+	}
+	h3 {
+		font-size: 2.5rem;
+	}
+	h4 {
+		font-size: 2.25rem;
+	}
+
+	p {
+		font-size: 2rem;
+	}
+	body {
+		font-size: 1rem;
+	}
+	h1,
+	h2,
+	h3,
+	h4 {
+		line-height: 1;
+		margin-bottom: 0.75rem;
+	}
+}
+
+@media screen and (min-width: 1400px) {
+	h1 {
+		font-size: 4rem;
+	}
+	h2 {
+		font-size: 3.5rem;
+	}
+	h3 {
+		font-size: 3.25rem;
+	}
+	h4 {
+		font-size: 3rem;
+	}
+
+	p {
+		font-size: 2.5rem;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4 {
+		line-height: 1;
+		margin-bottom: 1rem;
+	}
+}
+
+/*  global classes */
+
+/* section */
+.section {
+	width: 90vw;
+	margin-inline: auto;
+	max-width: var(--max-width);
+}
+
+@media screen and (min-width: 992px) {
+	.section {
+		width: 95vw;
+	}
+}
+
+/* Utilities */
+.flex-center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+/* Components */
