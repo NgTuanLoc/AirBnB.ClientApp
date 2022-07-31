@@ -17,6 +17,7 @@ code {
 	--transition: all 0.5s linear;
 	--clr-background: #ffffff;
 	--clr-primary: #ff385c;
+	--clr-secondary: #ebebeb;
 
 	/* Breakpoint */
 	--breakpoint-small: 992px;
@@ -31,7 +32,7 @@ code {
 }
 
 html {
-	font-size: 0.625;
+	font-size: 62.5%;
 }
 
 *,
@@ -80,7 +81,6 @@ h4 {
 
 p {
 	font-size: 1.5rem;
-	font-weight: 400;
 }
 
 @media screen and (min-width: 992px) {
@@ -94,7 +94,10 @@ p {
 		font-size: 2.5rem;
 	}
 	h4 {
-		font-size: 2.25rem;
+		font-size: 2rem;
+	}
+	h5 {
+		font-size: 1.5rem;
 	}
 
 	p {
@@ -112,7 +115,7 @@ p {
 	}
 }
 
-@media screen and (min-width: 1400px) {
+@media screen and (min-width: 1500px) {
 	h1 {
 		font-size: 4rem;
 	}
@@ -143,15 +146,10 @@ p {
 
 /* section */
 .section {
-	width: 90vw;
-	margin-inline: auto;
-	max-width: var(--max-width);
-}
+	margin-top: 8rem;
+	/* Ignore Navbar */
 
-@media screen and (min-width: 992px) {
-	.section {
-		width: 95vw;
-	}
+	padding-inline: 8rem;
 }
 
 /* Utilities */
@@ -162,3 +160,8 @@ p {
 }
 
 /* Components */
+button {
+	cursor: pointer;
+	background-color: transparent;
+	border: transparent;
+}
