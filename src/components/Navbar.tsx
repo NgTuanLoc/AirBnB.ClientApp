@@ -1,19 +1,64 @@
+import { FormEvent, useEffect, useState, useRef, ChangeEvent } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { HiOutlineSearch } from 'react-icons/hi';
 import { AiOutlineGlobal, AiOutlineMenu, AiOutlineUser } from 'react-icons/ai';
 
 import logo from '../images/logo.svg';
+import { useAppSelector } from '../hooks/hooks';
+import { useOnClickOutside } from '../hooks/useClickOutsideHook';
+import { transformLanguage } from '../utils/util';
+import { Modal } from '../components';
+
+interface InputProps {
+	disableInput: boolean;
+}
 
 const Navbar = () => {
+	const [toggleInput, setToggleInput] = useState(false);
+	const [inputLocation, setInputLocation] = useState('');
+	const [filteredLocation, setFilteredLocation] = useState<string[]>([]);
+	const { locationList } = useAppSelector((store) => store.location);
+	const ref = useRef(null);
+	useOnClickOutside(ref, () => setToggleInput(false));
+
+	const onSubmitHandler = (e: FormEvent) => {
+		e.preventDefault();
+	};
+
+	const onFilterLocationHandler = (e: ChangeEvent<HTMLInputElement>) => {
+		setInputLocation(transformLanguage(e.target.value.toLowerCase()));
+	};
+
+	useEffect(() => {
+		let transformedLocation = locationList.map((location) => {
+			return `${location.province}, ${location.name}`;
+		});
+
+		setFilteredLocation(
+			transformedLocation.filter((item) => {
+				const temp = transformLanguage(item.toLowerCase());
+				return temp.startsWith(inputLocation);
+			})
+		);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [inputLocation]);
+
 	return (
 		<Container>
 			<Link to='/'>
 				<img src={logo} alt='airbnb logo' />
 			</Link>
-			<Search>
-				<button>
-					<h5>Anywhere</h5>
+			<Search onSubmit={onSubmitHandler}>
+				<button ref={ref} style={{ position: 'relative' }}>
+					<h5 onClick={() => setToggleInput(true)}>Anywhere</h5>
+					<Input
+						placeholder='Enter Location'
+						disableInput={toggleInput}
+						onChange={onFilterLocationHandler}
+						value={inputLocation}
+					/>
+					<Modal disableInput={toggleInput} locationList={filteredLocation} />
 				</button>
 				<div className='vertical-stripe'></div>
 				<button>
@@ -23,7 +68,7 @@ const Navbar = () => {
 				<button>
 					<h5 className='gray'>Add guests</h5>
 				</button>
-				<button className='btn-search flex-center'>
+				<button type='submit' className='btn-search flex-center'>
 					<HiOutlineSearch />
 				</button>
 			</Search>
@@ -58,7 +103,7 @@ const Container = styled.header`
 	}
 `;
 
-const Search = styled.div`
+const Search = styled.form`
 	display: flex;
 	justify-content: space-evenly;
 	align-items: center;
@@ -69,7 +114,7 @@ const Search = styled.div`
 	cursor: pointer;
 
 	h5 {
-		font-weight: 350;
+		font-weight: 400;
 	}
 
 	.btn-search {
@@ -133,6 +178,15 @@ const Nav = styled.nav`
 			box-shadow: var(--dark-shadow);
 		}
 	}
+`;
+
+const Input = styled.input<InputProps>`
+	display: ${(p) => (p.disableInput ? 'block' : 'none')};
+	background-color: transparent;
+	border: transparent;
+	font-size: 1.5rem;
+	outline-style: none;
+	padding-inline: 0.5rem;
 `;
 
 export default Navbar;

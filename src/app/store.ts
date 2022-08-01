@@ -1,8 +1,8 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import testReducer from '../features/testSlice';
+import locationReducer from '../features/Location/locationSlice';
 export const store = configureStore({
 	reducer: {
-		test: testReducer,
+		location: locationReducer,
 	},
 });
 

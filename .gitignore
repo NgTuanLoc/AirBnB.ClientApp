@@ -23,4 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 
 .env
-.text.txt
+text.txt
+dummyData.ts

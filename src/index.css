@@ -24,7 +24,7 @@ code {
 	--breakpoint-medium: 1400px;
 
 	--spacing: 0.1rem;
-	--radius: 0.25rem;
+	--radius: 0.75rem;
 	--light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 	--dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 	--max-width: 1400px;
@@ -127,6 +127,10 @@ p {
 	}
 	h4 {
 		font-size: 3rem;
+	}
+
+	h5 {
+		font-size: 2.5rem;
 	}
 
 	p {
