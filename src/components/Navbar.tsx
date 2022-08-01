@@ -1,6 +1,6 @@
 import { FormEvent, useEffect, useState, useRef, ChangeEvent } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { HiOutlineSearch } from 'react-icons/hi';
 import { AiOutlineGlobal, AiOutlineMenu, AiOutlineUser } from 'react-icons/ai';
 
@@ -14,31 +14,56 @@ interface InputProps {
 	disableInput: boolean;
 }
 
+export interface IFilteredLocation {
+	location: string;
+	id: string;
+}
+
 const Navbar = () => {
 	const [toggleInput, setToggleInput] = useState(false);
-	const [inputLocation, setInputLocation] = useState('');
-	const [filteredLocation, setFilteredLocation] = useState<string[]>([]);
+	const [inputLocation, setInputLocation] = useState<IFilteredLocation>({
+		location: '',
+		id: '',
+	});
+	const [filteredLocation, setFilteredLocation] = useState<IFilteredLocation[]>(
+		[]
+	);
 	const { locationList } = useAppSelector((store) => store.location);
 	const ref = useRef(null);
 	useOnClickOutside(ref, () => setToggleInput(false));
+	const navigate = useNavigate();
 
 	const onSubmitHandler = (e: FormEvent) => {
 		e.preventDefault();
+
+		if (!inputLocation) return;
+
+		navigate(`/room-list/${inputLocation.id}`);
 	};
 
 	const onFilterLocationHandler = (e: ChangeEvent<HTMLInputElement>) => {
-		setInputLocation(transformLanguage(e.target.value));
+		const temp = transformLanguage(e.target.value);
+		setInputLocation({ ...inputLocation, location: temp });
+	};
+
+	const setInputLocationHandler = (location: string, id: string) => {
+		setInputLocation({ location, id });
 	};
 
 	useEffect(() => {
-		let transformedLocation = locationList.map((location) => {
-			return `${location.province}, ${location.name}`;
+		let transformedLocation = locationList.map((item) => {
+			const { _id, province, name } = item;
+			const temp = {
+				location: `${province}, ${name}`,
+				id: _id,
+			};
+			return temp;
 		});
 
 		setFilteredLocation(
 			transformedLocation.filter((item) => {
-				const temp = transformLanguage(item);
-				return temp.startsWith(inputLocation);
+				const temp = transformLanguage(item.location);
+				return temp.startsWith(inputLocation.location);
 			})
 		);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -50,18 +75,24 @@ const Navbar = () => {
 				<img src={logo} alt='airbnb logo' />
 			</Link>
 			<Search onSubmit={onSubmitHandler}>
-				<button ref={ref} style={{ position: 'relative' }}>
-					<h5 onClick={() => setToggleInput(true)}>Anywhere</h5>
+				<button type='button' ref={ref} style={{ position: 'relative' }}>
+					<h5 onClick={() => setToggleInput(true)}>
+						{inputLocation.location ? inputLocation.location : 'Anywhere'}
+					</h5>
 					<Input
 						placeholder='Enter Location'
 						disableInput={toggleInput}
 						onChange={onFilterLocationHandler}
-						value={inputLocation}
+						value={inputLocation.location}
 					/>
-					<Modal disableInput={toggleInput} locationList={filteredLocation} />
+					<Modal
+						setInputLocation={setInputLocationHandler}
+						disableInput={toggleInput}
+						locationList={filteredLocation}
+					/>
 				</button>
 				<div className='vertical-stripe'></div>
-				<button>
+				<button type='button'>
 					<h5>Any week</h5>
 				</button>
 				<div className='vertical-stripe'></div>
@@ -88,12 +119,14 @@ const Navbar = () => {
 
 const Container = styled.header`
 	display: flex;
+	background-color: white;
 	justify-content: space-between;
 	align-items: center;
 	position: fixed;
 	width: 100%;
 	top: 0;
 	left: 0;
+	z-index: 100;
 	height: 8rem;
 	border: 2px solid var(--clr-secondary);
 	padding-inline: 8rem;

@@ -1,8 +1,11 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import locationReducer from '../features/Location/locationSlice';
+import roomReducer from '../features/Room/roomSlice';
+
 export const store = configureStore({
 	reducer: {
 		location: locationReducer,
+		room: roomReducer,
 	},
 });
 

@@ -3,14 +3,16 @@ import { createSlice } from '@reduxjs/toolkit';
 import { ILocation } from '../../@types/Location';
 import { getLocationList } from './locationThunk';
 
-export interface IState {
+export interface ILocationState {
 	locationList: ILocation[];
+	selectedCity: string;
 	isLoading: boolean;
 	error: string;
 }
 
-const initialState: IState = {
+const initialState: ILocationState = {
 	locationList: [],
+	selectedCity: 'Hoi An',
 	isLoading: false,
 	error: '',
 };

@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { getLocationList } from './features/Location/locationThunk';
 import { useAppDispatch } from './hooks/hooks';
 import { Home, RoomListPage, SingleRoomPage, NotFound } from './pages';
-import { Navbar } from './components';
+import { Navbar, Footer } from './components';
 
 const App = () => {
 	const dispatch = useAppDispatch();
@@ -23,6 +23,7 @@ const App = () => {
 				<Route path='/room/:id' element={<SingleRoomPage />} />
 				<Route path='*' element={<NotFound />} />
 			</Routes>
+			<Footer />
 		</Router>
 	);
 };

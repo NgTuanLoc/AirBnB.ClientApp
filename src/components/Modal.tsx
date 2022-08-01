@@ -1,24 +1,27 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import { GoLocation } from 'react-icons/go';
 
+import { IFilteredLocation } from './Navbar';
+
 export interface IProps {
-	locationList: string[];
+	locationList: IFilteredLocation[];
 	disableInput: boolean;
+	setInputLocation: (location: string, id: string) => void;
 }
 
 interface InputProps {
 	disableInput: boolean;
 }
 
-const Modal = ({ locationList, disableInput }: IProps) => {
+const Modal = ({ locationList, disableInput, setInputLocation }: IProps) => {
 	return (
 		<Container disableInput={disableInput}>
-			{locationList.map((item, id) => {
+			{locationList.map((item) => {
+				const { id, location } = item;
 				return (
-					<Button key={id} to='/'>
+					<Button onClick={() => setInputLocation(location, id)} key={id}>
 						<GoLocation />
-						{item}
+						{location}
 					</Button>
 				);
 			})}
@@ -58,7 +61,7 @@ const Container = styled.article<InputProps>`
 	}
 `;
 
-const Button = styled(Link)`
+const Button = styled.div`
 	text-align: left;
 	padding-inline: 0.5rem;
 	width: 100%;

@@ -5,10 +5,12 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import { Navigation } from 'swiper';
 
-import { useAppSelector } from '../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../hooks/hooks';
+import { selectLocation } from '../features/Room/roomSlice';
 
 const Categories = () => {
 	const { locationList } = useAppSelector((store) => store.location);
+	const dispatch = useAppDispatch();
 
 	return (
 		<Container
@@ -18,8 +20,9 @@ const Categories = () => {
 			modules={[Navigation]}>
 			{locationList.map((location) => {
 				const { _id, image, province } = location;
+
 				return (
-					<SwiperSlide key={_id}>
+					<SwiperSlide key={_id} onClick={() => dispatch(selectLocation(_id))}>
 						<Item>
 							<div>
 								<img src={image} alt={province} />
@@ -34,18 +37,12 @@ const Categories = () => {
 };
 
 const Container = styled(Swiper)`
-	width: 90%;
+	width: 100%;
 
 	.swiper-button-next,
 	.swiper-button-prev {
-		position: fixed;
-	}
-
-	.swiper-button-next {
-		right: 9rem;
-	}
-	.swiper-button-prev {
-		left: 9rem;
+		top: 35%;
+		color: black;
 	}
 `;
 
@@ -54,6 +51,7 @@ const Item = styled.div`
 	flex-direction: column;
 	min-height: 12.5rem;
 	text-align: center;
+	cursor: pointer;
 
 	img {
 		border-radius: var(--radius);

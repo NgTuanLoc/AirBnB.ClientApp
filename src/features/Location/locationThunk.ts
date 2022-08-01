@@ -17,8 +17,6 @@ const getLocationList = createAsyncThunk<ILocation[]>(
 			const response = await axiosInstance.request(params);
 			return response.data;
 		} catch (error: any) {
-			console.log(error);
-
 			return thunkAPI.rejectWithValue(error);
 		}
 	}

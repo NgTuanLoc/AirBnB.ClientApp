@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 
-import { Categories } from '../components';
+import { Categories, RoomList } from '../components';
 
 const Home = () => {
 	return (
 		<Container className='section'>
 			<Categories />
+			<RoomList />
 		</Container>
 	);
 };
