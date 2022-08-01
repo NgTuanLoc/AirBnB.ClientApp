@@ -19,7 +19,7 @@ const App = () => {
 			<Navbar />
 			<Routes>
 				<Route path='/' element={<Home />} />
-				<Route path='/room-list' element={<RoomListPage />} />
+				<Route path='/room-list/:locationId' element={<RoomListPage />} />
 				<Route path='/room/:id' element={<SingleRoomPage />} />
 				<Route path='*' element={<NotFound />} />
 			</Routes>

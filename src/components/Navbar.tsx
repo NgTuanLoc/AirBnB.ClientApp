@@ -89,6 +89,7 @@ const Navbar = () => {
 						setInputLocation={setInputLocationHandler}
 						disableInput={toggleInput}
 						locationList={filteredLocation}
+						setToggleInput={setToggleInput}
 					/>
 				</button>
 				<div className='vertical-stripe'></div>
@@ -217,9 +218,11 @@ const Input = styled.input<InputProps>`
 	display: ${(p) => (p.disableInput ? 'block' : 'none')};
 	background-color: transparent;
 	border: transparent;
-	font-size: 1.5rem;
+	font-size: 1rem;
+	color: #858585;
 	outline-style: none;
 	padding-inline: 0.5rem;
+	margin-top: 0.5rem;
 `;
 
 export default Navbar;

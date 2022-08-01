@@ -11,6 +11,8 @@ const Home = () => {
 	);
 };
 
-const Container = styled.main``;
+const Container = styled.main`
+	margin-bottom: var(--footer-height);
+`;
 
 export default Home;

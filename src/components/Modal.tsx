@@ -7,19 +7,30 @@ export interface IProps {
 	locationList: IFilteredLocation[];
 	disableInput: boolean;
 	setInputLocation: (location: string, id: string) => void;
+	setToggleInput: (value: boolean) => void;
 }
 
 interface InputProps {
 	disableInput: boolean;
 }
 
-const Modal = ({ locationList, disableInput, setInputLocation }: IProps) => {
+const Modal = ({
+	locationList,
+	disableInput,
+	setInputLocation,
+	setToggleInput,
+}: IProps) => {
+	const onClickHandler = (location: string, id: string) => {
+		setInputLocation(location, id);
+		setToggleInput(false);
+	};
+
 	return (
 		<Container disableInput={disableInput}>
 			{locationList.map((item) => {
 				const { id, location } = item;
 				return (
-					<Button onClick={() => setInputLocation(location, id)} key={id}>
+					<Button onClick={() => onClickHandler(location, id)} key={id}>
 						<GoLocation />
 						{location}
 					</Button>
