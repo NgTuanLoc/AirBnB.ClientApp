@@ -12,8 +12,6 @@ interface InputProps {
 }
 
 const Modal = ({ locationList, disableInput }: IProps) => {
-	console.log(locationList);
-
 	return (
 		<Container disableInput={disableInput}>
 			{locationList.map((item, id) => {

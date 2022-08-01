@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 
+import { Categories } from '../components';
+
 const Home = () => {
 	return (
 		<Container className='section'>
-			<h1>Home</h1>
+			<Categories />
 		</Container>
 	);
 };

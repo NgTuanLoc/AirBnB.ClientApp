@@ -27,7 +27,7 @@ const Navbar = () => {
 	};
 
 	const onFilterLocationHandler = (e: ChangeEvent<HTMLInputElement>) => {
-		setInputLocation(transformLanguage(e.target.value.toLowerCase()));
+		setInputLocation(transformLanguage(e.target.value));
 	};
 
 	useEffect(() => {
@@ -37,7 +37,7 @@ const Navbar = () => {
 
 		setFilteredLocation(
 			transformedLocation.filter((item) => {
-				const temp = transformLanguage(item.toLowerCase());
+				const temp = transformLanguage(item);
 				return temp.startsWith(inputLocation);
 			})
 		);
