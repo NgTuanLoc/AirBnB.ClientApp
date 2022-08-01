@@ -20,7 +20,8 @@ export interface IFilteredLocation {
 }
 
 const Navbar = () => {
-	const [toggleInput, setToggleInput] = useState(false);
+	const [title, setTitle] = useState('Anywhere');
+	const [disableInput, setDisableInput] = useState(true);
 	const [inputLocation, setInputLocation] = useState<IFilteredLocation>({
 		location: '',
 		id: '',
@@ -30,7 +31,7 @@ const Navbar = () => {
 	);
 	const { locationList } = useAppSelector((store) => store.location);
 	const ref = useRef(null);
-	useOnClickOutside(ref, () => setToggleInput(false));
+	useOnClickOutside(ref, () => setDisableInput(true));
 	const navigate = useNavigate();
 
 	const onSubmitHandler = (e: FormEvent) => {
@@ -38,6 +39,7 @@ const Navbar = () => {
 
 		if (!inputLocation) return;
 
+		setTitle(inputLocation.location);
 		navigate(`/room-list/${inputLocation.id}`);
 	};
 
@@ -60,12 +62,12 @@ const Navbar = () => {
 			return temp;
 		});
 
-		setFilteredLocation(
-			transformedLocation.filter((item) => {
-				const temp = transformLanguage(item.location);
-				return temp.startsWith(inputLocation.location);
-			})
-		);
+		const tempFilteredLocation = transformedLocation.filter((item) => {
+			const temp = transformLanguage(item.location);
+			return temp.startsWith(inputLocation.location);
+		});
+
+		setFilteredLocation(tempFilteredLocation);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [inputLocation]);
 
@@ -76,20 +78,18 @@ const Navbar = () => {
 			</Link>
 			<Search onSubmit={onSubmitHandler}>
 				<button type='button' ref={ref} style={{ position: 'relative' }}>
-					<h5 onClick={() => setToggleInput(true)}>
-						{inputLocation.location ? inputLocation.location : 'Anywhere'}
-					</h5>
+					<h5 onClick={() => setDisableInput(false)}>{title}</h5>
 					<Input
 						placeholder='Enter Location'
-						disableInput={toggleInput}
+						disableInput={disableInput}
 						onChange={onFilterLocationHandler}
 						value={inputLocation.location}
 					/>
 					<Modal
 						setInputLocation={setInputLocationHandler}
-						disableInput={toggleInput}
+						disableInput={disableInput}
 						locationList={filteredLocation}
-						setToggleInput={setToggleInput}
+						setDisableInput={setDisableInput}
 					/>
 				</button>
 				<div className='vertical-stripe'></div>
@@ -215,7 +215,7 @@ const Nav = styled.nav`
 `;
 
 const Input = styled.input<InputProps>`
-	display: ${(p) => (p.disableInput ? 'block' : 'none')};
+	display: ${(p) => (p.disableInput ? 'none' : 'block')};
 	background-color: transparent;
 	border: transparent;
 	font-size: 1rem;

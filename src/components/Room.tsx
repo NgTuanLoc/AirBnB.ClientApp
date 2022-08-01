@@ -28,7 +28,8 @@ const Container = styled.article`
 	}
 
 	img {
-		border-radius: var(--radius);
+		border-top-right-radius: var(--radius);
+		border-top-left-radius: var(--radius);
 	}
 
 	:hover {

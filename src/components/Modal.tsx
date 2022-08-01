@@ -7,7 +7,7 @@ export interface IProps {
 	locationList: IFilteredLocation[];
 	disableInput: boolean;
 	setInputLocation: (location: string, id: string) => void;
-	setToggleInput: (value: boolean) => void;
+	setDisableInput: (value: boolean) => void;
 }
 
 interface InputProps {
@@ -18,15 +18,15 @@ const Modal = ({
 	locationList,
 	disableInput,
 	setInputLocation,
-	setToggleInput,
+	setDisableInput,
 }: IProps) => {
 	const onClickHandler = (location: string, id: string) => {
 		setInputLocation(location, id);
-		setToggleInput(false);
+		setDisableInput(false);
 	};
 
 	return (
-		<Container disableInput={disableInput}>
+		<Container disableInput={locationList.length === 0 || disableInput}>
 			{locationList.map((item) => {
 				const { id, location } = item;
 				return (
@@ -41,7 +41,7 @@ const Modal = ({
 };
 
 const Container = styled.article<InputProps>`
-	display: ${(p) => (p.disableInput ? 'flex' : 'none')};
+	display: ${(p) => (p.disableInput ? 'none' : 'true')};
 	position: absolute;
 	background-color: var(--clr-secondary);
 	top: 5rem;
