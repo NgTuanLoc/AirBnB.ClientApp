@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { getRoomListByLocationID } from '../features/Room/roomThunk';
 import { selectLocation } from '../features/Room/roomSlice';
-import { RoomDetails, Loading } from '../components';
+import { Navbar, Footer, RoomDetails, Loading } from '../components';
 
 const RoomListPage = () => {
 	const { locationId } = useParams();
@@ -21,20 +21,24 @@ const RoomListPage = () => {
 	if (isLoading) return <Loading />;
 
 	return (
-		<Container>
-			<RoomList>
-				{roomList.map((item) => {
-					return <RoomDetails key={item._id} {...item} />;
-				})}
-			</RoomList>
-			<GoogleMap>
-				<iframe
-					title='map'
-					src='https://www.google.com/maps/d/embed?mid=1P9x70YwwVvtxthmnVQt1ikJBoKE&ehbc=2E312F'
-					width='100%'
-					height='100%'></iframe>
-			</GoogleMap>
-		</Container>
+		<>
+			<Navbar />
+			<Container>
+				<RoomList>
+					{roomList.map((item) => {
+						return <RoomDetails key={item._id} {...item} />;
+					})}
+				</RoomList>
+				<GoogleMap>
+					<iframe
+						title='map'
+						src='https://www.google.com/maps/d/embed?mid=1P9x70YwwVvtxthmnVQt1ikJBoKE&ehbc=2E312F'
+						width='100%'
+						height='100%'></iframe>
+				</GoogleMap>
+			</Container>
+			<Footer />
+		</>
 	);
 };
 

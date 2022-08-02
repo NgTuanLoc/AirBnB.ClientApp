@@ -1,13 +1,18 @@
 import styled from 'styled-components';
+import { Navbar, Footer } from '../components';
 
 import { Categories, RoomList } from '../components';
 
 const Home = () => {
 	return (
-		<Container className='section'>
-			<Categories />
-			<RoomList />
-		</Container>
+		<>
+			<Navbar />
+			<Container className='section'>
+				<Categories />
+				<RoomList />
+			</Container>
+			<Footer />
+		</>
 	);
 };
 

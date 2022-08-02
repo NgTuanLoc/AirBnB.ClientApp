@@ -3,8 +3,13 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import { getLocationList } from './features/Location/locationThunk';
 import { useAppDispatch } from './hooks/hooks';
-import { Home, RoomListPage, SingleRoomPage, NotFound } from './pages';
-import { Footer, Navbar } from './components';
+import {
+	Home,
+	RoomListPage,
+	SingleRoomPage,
+	AdminPage,
+	NotFound,
+} from './pages';
 
 const App = () => {
 	const dispatch = useAppDispatch();
@@ -16,14 +21,13 @@ const App = () => {
 
 	return (
 		<Router>
-			<Navbar />
 			<Routes>
 				<Route path='/' element={<Home />} />
 				<Route path='/room-list/:locationId' element={<RoomListPage />} />
 				<Route path='/room/:id' element={<SingleRoomPage />} />
+				<Route path='/admin' element={<AdminPage />} />
 				<Route path='*' element={<NotFound />} />
 			</Routes>
-			<Footer />
 		</Router>
 	);
 };
