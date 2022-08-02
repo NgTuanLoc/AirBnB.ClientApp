@@ -37,13 +37,16 @@ const RoomListPage = () => {
 };
 
 const Container = styled.main`
-	margin-top: 8rem;
+	margin-top: 8.2rem;
 	display: grid;
+	grid-gap: 1rem;
 	grid-template-columns: 1fr 1fr;
-	height: calc(100vh - var(--navbar-height) - var(--footer-height) + 1rem);
+	height: calc(100vh - var(--navbar-height));
 `;
 
-const GoogleMap = styled.section``;
+const GoogleMap = styled.section`
+	border: transparent;
+`;
 const RoomList = styled.section`
 	overflow-y: scroll;
 	scrollbar-width: none;
