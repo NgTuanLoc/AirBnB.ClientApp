@@ -6,17 +6,19 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { getRoomListByLocationID } from '../features/Room/roomThunk';
 import { selectLocation } from '../features/Room/roomSlice';
-import { RoomDetails } from '../components';
+import { RoomDetails, Loading } from '../components';
 
 const RoomListPage = () => {
 	const { locationId } = useParams();
 	const dispatch = useAppDispatch();
-	const { roomList } = useAppSelector((store) => store.room);
+	const { roomList, isLoading } = useAppSelector((store) => store.room);
 
 	useEffect(() => {
 		dispatch(selectLocation(locationId as string));
 		dispatch(getRoomListByLocationID());
-	}, []);
+	}, [locationId]);
+
+	if (isLoading) return <Loading />;
 
 	return (
 		<Container>
@@ -37,7 +39,7 @@ const RoomListPage = () => {
 };
 
 const Container = styled.main`
-	margin-top: 8.2rem;
+	margin-top: var(--navbar-height);
 	display: grid;
 	grid-gap: 1rem;
 	grid-template-columns: 1fr 1fr;

@@ -1,9 +1,11 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+
 import { IRoom } from '../@types/Room';
 
-const Room = ({ name, image, locationId }: IRoom) => {
+const Room = ({ _id, name, image, locationId }: IRoom) => {
 	return (
-		<Container>
+		<Container to={`/room/${_id}`}>
 			<div className='img-container'>
 				<img src={image} alt={name} />
 			</div>
@@ -17,11 +19,12 @@ const Room = ({ name, image, locationId }: IRoom) => {
 	);
 };
 
-const Container = styled.article`
+const Container = styled(Link)`
 	display: block;
 	transition: var(--transition);
 	border-radius: var(--radius);
 	cursor: pointer;
+	color: black;
 
 	.info {
 		padding-inline: 0.5rem;

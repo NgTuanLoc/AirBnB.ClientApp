@@ -216,6 +216,7 @@ const Nav = styled.nav`
 
 const Input = styled.input<InputProps>`
 	display: ${(p) => (p.disableInput ? 'none' : 'block')};
+	width: 100%;
 	background-color: transparent;
 	border: transparent;
 	font-size: 1rem;

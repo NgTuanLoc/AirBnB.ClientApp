@@ -3,6 +3,7 @@ import { AiOutlineClose } from 'react-icons/ai';
 import { TiTickOutline } from 'react-icons/ti';
 
 import { IRoom } from '../@types/Room';
+import { Link } from 'react-router-dom';
 
 const RoomDetails = ({
 	image,
@@ -29,7 +30,9 @@ const RoomDetails = ({
 		<Container>
 			<img src={image} alt={name} />
 			<div className='info'>
-				<h4>{name}</h4>
+				<Link className='action-link' to={`/room/${_id}`}>
+					{name}
+				</Link>
 				<p>
 					{province} - {locationName}
 				</p>
@@ -162,6 +165,13 @@ const Container = styled.article`
 	grid-template-columns: 25rem 1fr;
 	padding: 2rem;
 	gap: 2rem;
+
+	.action-link {
+		font-size: 2.5rem;
+		color: black;
+		font-weight: 450;
+		cursor: pointer;
+	}
 
 	p {
 		font-size: 1.5rem;

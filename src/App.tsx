@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { getLocationList } from './features/Location/locationThunk';
 import { useAppDispatch } from './hooks/hooks';
 import { Home, RoomListPage, SingleRoomPage, NotFound } from './pages';
-import { Navbar, Footer } from './components';
+import { Footer, Navbar } from './components';
 
 const App = () => {
 	const dispatch = useAppDispatch();
