@@ -30,6 +30,7 @@ code {
 	--radius: 0.75rem;
 	--light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 	--dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+	--box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
 	--max-width: 1400px;
 	--min-width: 620px;
 	--navbar-height: 8.5rem;
@@ -188,4 +189,15 @@ img {
 
 .danger {
 	color: var(--clr-danger);
+}
+
+.line {
+	height: 1px;
+	width: 100%;
+	background-color: #dddddd;
+	margin: 5rem auto;
+}
+
+svg {
+	font-size: 2.5rem;
 }
