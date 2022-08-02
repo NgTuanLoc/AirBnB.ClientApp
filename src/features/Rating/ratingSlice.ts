@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { IRoom } from '../../@types/Room';
-import { getRoomListByLocationID, getRoomDetailByID } from './roomThunk';
+import { getRoomListByLocationID, getRoomDetailByID } from './ratingThunk';
 
 export interface IRoomState {
 	roomList: IRoom[];
