@@ -5,7 +5,7 @@ import { IRoom } from '../@types/Room';
 
 const Room = ({ _id, name, image, locationId }: IRoom) => {
 	return (
-		<Link to={`/room/${_id}`}>
+		<Container to={`/room/${_id}`}>
 			<div className='img-container'>
 				<img src={image} alt={name} />
 			</div>
@@ -15,7 +15,7 @@ const Room = ({ _id, name, image, locationId }: IRoom) => {
 					{locationId.province} <span>{locationId.name}</span>
 				</p>
 			</div>
-		</Link>
+		</Container>
 	);
 };
 
