@@ -6,11 +6,19 @@ import { AiOutlineHeart, AiOutlineStar } from 'react-icons/ai';
 import { GiPoolDive } from 'react-icons/gi';
 import { MdOutlineFreeCancellation } from 'react-icons/md';
 import moment from 'moment';
+import { useMediaQuery } from 'react-responsive';
 
 import imageLogo from '../images/image1.jpg';
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { getRoomDetailByID } from '../features/Room/roomThunk';
-import { Navbar, Footer, Calendar, Card, Loading } from '../components';
+import {
+	Navbar,
+	Footer,
+	Calendar,
+	Card,
+	Loading,
+	Catalog,
+} from '../components';
 import { logo } from '../constant/logo';
 
 const dummyImageData = [
@@ -21,6 +29,9 @@ const dummyImageData = [
 ];
 
 const SingleRoomPage = () => {
+	const isMobileDevice = useMediaQuery({
+		query: '(max-width: 992px)',
+	});
 	const { id } = useParams();
 	const dispatch = useAppDispatch();
 	const { selectedRoom, isLoading } = useAppSelector((store) => store.room);
@@ -72,13 +83,18 @@ const SingleRoomPage = () => {
 						</a>
 					</div>
 				</div>
-				<div className='photos'>
-					<img className='main-image' src={image} alt={name} />
-					<img className='image-1' src={dummyImageData[0]} alt={name} />
-					<img className='image-2' src={dummyImageData[1]} alt={name} />
-					<img className='image-3' src={dummyImageData[2]} alt={name} />
-					<img className='image-4' src={dummyImageData[3]} alt={name} />
-				</div>
+				{isMobileDevice ? (
+					<Catalog images={[...dummyImageData, image]} />
+				) : (
+					<div className='photos'>
+						<img className='main-image' src={image} alt={name} />
+						<img className='image-1' src={dummyImageData[0]} alt={name} />
+						<img className='image-2' src={dummyImageData[1]} alt={name} />
+						<img className='image-3' src={dummyImageData[2]} alt={name} />
+						<img className='image-4' src={dummyImageData[3]} alt={name} />
+					</div>
+				)}
+
 				<div className='detail'>
 					<div className='detail__info'>
 						<div className='detail__title'>
@@ -385,9 +401,9 @@ const Container = styled.main`
 	}
 
 	@media only screen and (max-width: 992px) {
-		.photos {
-			/* display: none; */
-		}
+		/* .photos {
+			display: none;
+		} */
 
 		.location-name {
 			padding: 1rem;
