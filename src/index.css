@@ -22,6 +22,21 @@ code {
 	--clr-danger: #dc3545;
 	--clr-success: #198754;
 	--clr-deep-black: #222222;
+	--clr-gradient: linear-gradient(
+		to right,
+		#e61e4d 0%,
+		#e31c5f 50%,
+		#d70466 100%
+	);
+	--clr-radial: radial-gradient(
+		circle at center,
+		#ff385c 0%,
+		#e61e4d 27.5%,
+		#e31c5f 40%,
+		#d70466 57.5%,
+		#bd1e59 75%,
+		#bd1e59 100%
+	);
 
 	/* Breakpoint */
 	--breakpoint-small: 992px;
@@ -208,4 +223,10 @@ img {
 
 svg {
 	font-size: 2.5rem;
+}
+
+@media only screen and (max-width: 992px) {
+	.line {
+		margin: 2.5rem auto;
+	}
 }

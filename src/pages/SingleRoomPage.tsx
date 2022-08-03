@@ -61,7 +61,6 @@ const SingleRoomPage = () => {
 		wifi,
 		heating,
 		cableTV,
-		price,
 		description,
 	} = selectedRoom;
 
