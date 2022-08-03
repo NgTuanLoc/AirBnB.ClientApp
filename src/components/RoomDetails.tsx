@@ -225,6 +225,10 @@ const Container = styled.article`
 			}
 		}
 	}
+
+	@media only screen and (max-width: 992px) {
+		grid-template-columns: 1fr;
+	}
 `;
 
 export default RoomDetails;

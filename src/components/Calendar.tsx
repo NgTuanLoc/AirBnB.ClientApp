@@ -1,22 +1,34 @@
 import styled from 'styled-components';
 import CalenderReact from 'react-calendar';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useMediaQuery } from 'react-responsive';
 
-const Calendar = () => {
+interface ICalendar {
+	setCheckIn: any;
+}
+
+const Calendar = ({ setCheckIn }: ICalendar) => {
 	const currentDate = new Date();
 	const nextDate = new Date();
-	nextDate.setDate(currentDate.getDate());
 
-	const [checkIn, setCheckIn] = useState(currentDate);
+	nextDate.setDate(currentDate.getDate());
+	const [value, setValue] = useState(currentDate);
+	const isMobileDevice = useMediaQuery({
+		query: '(max-width: 992px)',
+	});
+	useEffect(() => {
+		setCheckIn(value);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [value]);
 
 	return (
 		<Container>
 			<CalenderReact
 				minDate={currentDate}
-				value={checkIn}
-				onChange={setCheckIn}
+				value={value}
+				onChange={setValue}
 				selectRange={true}
-				showDoubleView={true}
+				showDoubleView={!isMobileDevice}
 			/>
 		</Container>
 	);
@@ -27,13 +39,14 @@ const Container = styled.div`
 	align-items: flex-start;
 
 	.react-calendar {
-		margin-inline: 2rem;
+		margin: 2rem auto;
 		width: 350px;
 		max-width: 100%;
 		background: white;
 		font-family: Arial, Helvetica, sans-serif;
 		line-height: 1.125em;
 		border-radius: var(--radius);
+		font-size: 2rem;
 		box-shadow: var(--box-shadow);
 		transition: var(--transition);
 
@@ -114,12 +127,12 @@ const Container = styled.div`
 		padding: 2em 0.5em;
 	}
 	.react-calendar__tile {
-		max-width: 100%;
+		max-width: 4rem;
 		padding: 0.1rem;
 		background: none;
 		text-align: center;
 		line-height: 10px;
-		height: 5rem;
+		height: 4rem;
 		border-radius: 50%;
 	}
 	.react-calendar__tile:disabled {

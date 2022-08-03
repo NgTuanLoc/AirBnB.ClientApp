@@ -7,6 +7,7 @@ import RoomList from './RoomList';
 import Footer from './Footer';
 import RoomDetails from './RoomDetails';
 import Calendar from './Calendar';
+import Card from './Card';
 
 export {
 	Loading,
@@ -18,4 +19,5 @@ export {
 	Footer,
 	RoomDetails,
 	Calendar,
+	Card,
 };

@@ -1,15 +1,16 @@
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { FiShare } from 'react-icons/fi';
 import { AiOutlineHeart, AiOutlineStar } from 'react-icons/ai';
 import { GiPoolDive } from 'react-icons/gi';
 import { MdOutlineFreeCancellation } from 'react-icons/md';
+import moment from 'moment';
 
 import imageLogo from '../images/image1.jpg';
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { getRoomDetailByID } from '../features/Room/roomThunk';
-import { Navbar, Footer, Loading } from '../components';
+import { Navbar, Footer, Calendar, Card, Loading } from '../components';
 import { logo } from '../constant/logo';
 
 const dummyImageData = [
@@ -21,9 +22,10 @@ const dummyImageData = [
 
 const SingleRoomPage = () => {
 	const { id } = useParams();
-
 	const dispatch = useAppDispatch();
 	const { selectedRoom, isLoading } = useAppSelector((store) => store.room);
+
+	const [checkIn, setCheckIn] = useState<Date[]>([new Date(), new Date()]);
 
 	useEffect(() => {
 		dispatch(getRoomDetailByID(id as string));
@@ -56,7 +58,7 @@ const SingleRoomPage = () => {
 		<>
 			<Navbar />
 			<Container className='section'>
-				<h3>
+				<h3 className='location-name'>
 					{name}, {locationId.name}, {locationId.province}
 				</h3>
 				<div className='title'>
@@ -189,15 +191,30 @@ const SingleRoomPage = () => {
 								</div>
 							</div>
 						</div>
+						{/* Calendar */}
+						<div className='line'></div>
+						<div className='detail__calendar'>
+							<h3>
+								{checkIn[1]
+									? Math.round(
+											(checkIn[1].getTime() - checkIn[0].getTime()) /
+												(1000 * 3600 * 24)
+									  )
+									: 0}{' '}
+								nights in {name}
+							</h3>
+							<p>
+								{moment(checkIn[0]).format('MMMM Do YYYY')} -{' '}
+								{moment(checkIn[1]).format('MMMM Do YYYY')}
+							</p>
+							<Calendar setCheckIn={setCheckIn} />
+						</div>
 					</div>
 					<div className='detail__booking'>
-						<Card>
-							<h4 className='price'>
-								${price.toLocaleString()}VND <span>night</span>
-							</h4>
-						</Card>
+						<Card />
 					</div>
 				</div>
+				<div className='line'></div>
 			</Container>
 			<Footer />
 		</>
@@ -205,6 +222,7 @@ const SingleRoomPage = () => {
 };
 
 const Container = styled.main`
+	width: 100%;
 	.title {
 		display: flex;
 		justify-content: space-between;
@@ -306,7 +324,7 @@ const Container = styled.main`
 				display: flex;
 				align-items: center;
 				gap: 2rem;
-				margin: 1.5rem;
+				margin: 1.5rem 0;
 				h4 {
 					margin: 0;
 				}
@@ -338,6 +356,7 @@ const Container = styled.main`
 			grid-template-columns: 1fr 1fr;
 
 			.detail__offer-item {
+				margin: 0.5rem 0;
 				p {
 					display: flex;
 					align-items: center;
@@ -356,24 +375,33 @@ const Container = styled.main`
 			}
 		}
 	}
-`;
 
-const Card = styled.article`
-	position: sticky;
-	top: calc(var(--navbar-height) + 8rem);
-	width: 80%;
-	height: 30rem;
-	margin-inline: auto;
-	border-radius: var(--radius);
-	box-shadow: var(--box-shadow);
-	padding: 3rem 1.5rem;
-
-	.price {
-		font-weight: 500;
-
-		span {
-			font-weight: 200;
+	.detail__calendar {
+		p {
+			color: var(--clr-paragraph);
 			font-size: 1.5rem;
+			font-weight: 200;
+		}
+	}
+
+	@media only screen and (max-width: 992px) {
+		.photos {
+			/* display: none; */
+		}
+
+		.location-name {
+			padding: 1rem;
+		}
+
+		.detail {
+			display: grid;
+			grid-template-columns: 1fr;
+			margin: 5rem auto;
+			padding: 1rem;
+		}
+
+		.title {
+			padding: 1rem;
 		}
 	}
 `;

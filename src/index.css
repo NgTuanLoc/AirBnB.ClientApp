@@ -164,6 +164,13 @@ p {
 	padding-inline: 8rem;
 }
 
+@media only screen and (max-width: 992px) {
+	.section {
+		margin-top: 10rem;
+		padding-inline: 0rem;
+	}
+}
+
 /* Utilities */
 .flex-center {
 	display: flex;

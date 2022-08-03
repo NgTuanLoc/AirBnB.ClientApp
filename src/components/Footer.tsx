@@ -132,6 +132,20 @@ const Container = styled.footer`
 			}
 		}
 	}
+
+	@media only screen and (max-width: 992px) {
+		padding-inline: 1rem;
+		.links {
+			grid-template-columns: 1fr;
+		}
+		.social {
+			flex-direction: column;
+
+			h4 {
+				margin-bottom: 1rem;
+			}
+		}
+	}
 `;
 
 export default Footer;

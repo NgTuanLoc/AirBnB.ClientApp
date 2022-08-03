@@ -135,6 +135,13 @@ const Container = styled.header`
 	img {
 		width: 10rem;
 	}
+
+	@media only screen and (max-width: 992px) {
+		padding: 1rem;
+		display: flex;
+		flex-wrap: wrap;
+		height: auto;
+	}
 `;
 
 const Search = styled.form`
@@ -176,6 +183,11 @@ const Search = styled.form`
 	:hover {
 		box-shadow: var(--dark-shadow);
 	}
+
+	@media only screen and (max-width: 510px) {
+		order: 3;
+		margin-inline: auto;
+	}
 `;
 
 const Nav = styled.nav`
@@ -210,6 +222,11 @@ const Nav = styled.nav`
 
 		:hover {
 			box-shadow: var(--dark-shadow);
+		}
+	}
+	@media only screen and (max-width: 992px) {
+		h5 {
+			display: none;
 		}
 	}
 `;

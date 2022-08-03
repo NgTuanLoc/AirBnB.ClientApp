@@ -16,6 +16,10 @@ const Home = () => {
 	);
 };
 
-const Container = styled.main``;
+const Container = styled.main`
+	@media only screen and (max-width: 992px) {
+		padding-inline: 1rem;
+	}
+`;
 
 export default Home;

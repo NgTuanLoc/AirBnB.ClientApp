@@ -48,10 +48,19 @@ const Container = styled.main`
 	grid-gap: 1rem;
 	grid-template-columns: 1fr 1fr;
 	height: calc(100vh - var(--navbar-height));
+
+	@media only screen and (max-width: 992px) {
+		grid-template-columns: 1fr;
+		height: auto;
+	}
 `;
 
 const GoogleMap = styled.section`
+	display: block;
 	border: transparent;
+	@media only screen and (max-width: 992px) {
+		min-height: 30rem;
+	}
 `;
 const RoomList = styled.section`
 	overflow-y: scroll;
