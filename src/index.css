@@ -21,6 +21,7 @@ code {
 	--clr-paragraph: #858585;
 	--clr-danger: #dc3545;
 	--clr-success: #198754;
+	--clr-deep-black: #222222;
 
 	/* Breakpoint */
 	--breakpoint-small: 992px;
