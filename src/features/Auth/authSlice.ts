@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { loginThunk } from './authThunk';
+import { loginThunk, registerThunk } from './authThunk';
 import { IAuth } from '../../@types/Auth';
 
 export interface IAuthState {
@@ -31,6 +31,20 @@ const authSlice = createSlice({
 			state.success = true;
 		});
 		builder.addCase(loginThunk.rejected, (state, { payload }) => {
+			state.isLoading = false;
+			if (payload) {
+				state.success = false;
+				state.error = payload as string;
+			}
+		});
+		builder.addCase(registerThunk.pending, (state) => {
+			state.isLoading = true;
+		});
+		builder.addCase(registerThunk.fulfilled, (state, { payload }) => {
+			state.isLoading = false;
+			state.success = true;
+		});
+		builder.addCase(registerThunk.rejected, (state, { payload }) => {
 			state.isLoading = false;
 			if (payload) {
 				state.success = false;

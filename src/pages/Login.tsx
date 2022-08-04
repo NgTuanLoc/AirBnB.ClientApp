@@ -1,11 +1,11 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { loginThunk } from '../features/Auth/authThunk';
-import { Button, Loading } from '../components';
+import { Button, Loading, Image } from '../components';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 
 interface ILogin {
@@ -16,7 +16,7 @@ interface ILogin {
 const Login = () => {
 	const dispatch = useAppDispatch();
 	const { isLoading, success, auth } = useAppSelector((store) => store.auth);
-	const [userToken, setUserToken] = useLocalStorage('token', '');
+	const [_, setUserToken] = useLocalStorage('token', '');
 	const navigate = useNavigate();
 	const [user, setUser] = useState<ILogin>({
 		email: '',
@@ -50,11 +50,14 @@ const Login = () => {
 	return (
 		<Container>
 			<div className='login__form flex-center'>
+				<Link className='back-btn' to='/'>
+					Back
+				</Link>
 				{isLoading ? (
 					<Loading />
 				) : (
 					<form onSubmit={handleSubmit(onSubmitHandler)}>
-						<h2>Login to Airbnb</h2>
+						<h2 className='heading'>Login to Airbnb</h2>
 						<p>
 							Find vacation rentals, cabins, beach houses, unique homes and
 							experiences around the world.
@@ -64,7 +67,9 @@ const Login = () => {
 							<input
 								type='email'
 								placeholder='your-email@gmail.com'
-								{...register('email', { required: true })}
+								{...register('email', {
+									pattern: { value: /^\S+@\S+$/i, message: 'Invalid Email' },
+								})}
 								onChange={onChangeHandler}
 							/>
 						</div>
@@ -73,7 +78,16 @@ const Login = () => {
 							<input
 								type='password'
 								placeholder='Your password'
-								{...register('password', { required: true, min: 6 })}
+								{...register('password', {
+									required: {
+										value: true,
+										message: 'Password must be provided',
+									},
+									min: {
+										value: 6,
+										message: 'Password must have at least 6 letters',
+									},
+								})}
 								onChange={onChangeHandler}
 							/>
 						</div>
@@ -83,8 +97,8 @@ const Login = () => {
 				)}
 			</div>
 			<div className='login__image'>
-				<img
-					src='https://preview.colorlib.com/theme/bootstrap/login-form-01/images/xbg_1.jpg.pagespeed.ic.nj5iPvtRed.webp'
+				<Image
+					url='https://preview.colorlib.com/theme/bootstrap/login-form-01/images/xbg_1.jpg.pagespeed.ic.nj5iPvtRed.webp'
 					alt='travel'
 				/>
 			</div>
@@ -99,6 +113,12 @@ const Container = styled.main`
 	background-color: var(--clr-secondary);
 	display: grid;
 	grid-template-columns: 1fr 1fr;
+	h2 {
+		background: linear-gradient(to right, #4420d4 0%, #ff385c 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		height: 4rem;
+	}
 
 	.login__image {
 		height: 100vh;
@@ -107,6 +127,20 @@ const Container = styled.main`
 	.login__form {
 		height: 100vh;
 		position: relative;
+
+		.back-btn {
+			position: absolute;
+			top: 3rem;
+			left: 3rem;
+			font-size: 2rem;
+			color: var(--clr-primary);
+			transition: var(--transition);
+
+			:hover {
+				color: #d70466;
+			}
+		}
+
 		form {
 			display: flex;
 			flex-direction: column;
@@ -140,7 +174,7 @@ const Container = styled.main`
 					border: transparent;
 					background-color: transparent;
 					width: 100%;
-					font-size: 2.5rem;
+					font-size: 2rem;
 					:focus {
 						background-color: transparent;
 						border: transparent;
@@ -163,8 +197,18 @@ const Container = styled.main`
 		}
 	}
 
-	@media only screen and(max-width: 992px) {
-		grid-template-columns: 1fr;
+	@media only screen and (max-width: 992px) {
+		display: flex;
+		flex-direction: column;
+		.login__form {
+			order: 3;
+		}
+
+		.login__image {
+			width: 100%;
+			height: 40rem;
+			order: 1;
+		}
 	}
 `;
 

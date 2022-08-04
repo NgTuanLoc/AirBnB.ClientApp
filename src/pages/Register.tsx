@@ -1,26 +1,26 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
-import { loginThunk } from '../features/Auth/authThunk';
+import { registerThunk, IRegister } from '../features/Auth/authThunk';
 import { Button, Loading } from '../components';
 import { useLocalStorage } from '../hooks/useLocalStorage';
-
-interface ILogin {
-	email: string;
-	password: string;
-}
 
 const Register = () => {
 	const dispatch = useAppDispatch();
 	const { isLoading, success, auth } = useAppSelector((store) => store.auth);
 	const [userToken, setUserToken] = useLocalStorage('token', '');
 	const navigate = useNavigate();
-	const [user, setUser] = useState<ILogin>({
-		email: '',
-		password: '',
+	const [user, setUser] = useState<IRegister>({
+		name: 'string',
+		email: 'test123@gmail.com',
+		password: 'string',
+		phone: 'string',
+		birthday: 'string',
+		gender: true,
+		address: 'string',
 	});
 	const {
 		register,
@@ -36,7 +36,8 @@ const Register = () => {
 	};
 
 	const onSubmitHandler = () => {
-		dispatch(loginThunk(user));
+		console.log('hjghj');
+		dispatch(registerThunk(user));
 	};
 
 	useEffect(() => {
@@ -50,6 +51,9 @@ const Register = () => {
 	return (
 		<Container>
 			<div className='login__form flex-center'>
+				<Link className='back-btn' to='/'>
+					Back To Home
+				</Link>
 				{isLoading ? (
 					<Loading />
 				) : (
@@ -59,8 +63,19 @@ const Register = () => {
 							Find vacation rentals, cabins, beach houses, unique homes and
 							experiences around the world.
 						</p>
+						<div className='login__input login__input--first'>
+							<label htmlFor='name'>Username</label>
+							<input
+								type='name'
+								placeholder='name'
+								{...register('name', {
+									required: true,
+								})}
+								onChange={onChangeHandler}
+							/>
+						</div>
 						<div className='login__input'>
-							<label htmlFor='email'>Username</label>
+							<label htmlFor='email'>Email</label>
 							<input
 								type='email'
 								placeholder='email'
@@ -95,7 +110,7 @@ const Register = () => {
 						<div className='login__input'>
 							<label htmlFor='birthday'>birthday</label>
 							<input
-								type='datetime'
+								type='date'
 								placeholder='birthday'
 								{...register('birthday', { required: true })}
 								onChange={onChangeHandler}
@@ -110,7 +125,7 @@ const Register = () => {
 							</select>
 						</div>
 
-						<div className='login__input'>
+						<div className='login__input login__input--last'>
 							<label htmlFor='address'>address</label>
 							<input
 								type='text'
@@ -142,6 +157,13 @@ const Container = styled.main`
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 
+	h2 {
+		background: linear-gradient(to right, #4420d4 0%, #ff385c 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		height: 4rem;
+	}
+
 	.login__image {
 		height: 100vh;
 	}
@@ -149,6 +171,20 @@ const Container = styled.main`
 	.login__form {
 		position: relative;
 		height: 100vh;
+
+		.back-btn {
+			position: absolute;
+			top: 3rem;
+			left: 3rem;
+			font-size: 2rem;
+			color: var(--clr-primary);
+			transition: var(--transition);
+
+			:hover {
+				color: #d70466;
+			}
+		}
+
 		form {
 			display: flex;
 			flex-direction: column;
@@ -190,14 +226,14 @@ const Container = styled.main`
 				}
 			}
 
-			.login__input:nth-child(1) {
+			.login__input--first {
 				border: 1px solid #b3b3b3;
 				border-top-left-radius: var(--radius);
 				border-top-right-radius: var(--radius);
 				border-bottom: none;
 			}
 
-			.login__input:nth-child(6) {
+			.login__input--last {
 				border-bottom: 1px solid #b3b3b3;
 				border-bottom-left-radius: var(--radius);
 				border-bottom-right-radius: var(--radius);
@@ -209,8 +245,20 @@ const Container = styled.main`
 		}
 	}
 
-	@media only screen and(max-width: 992px) {
-		grid-template-columns: 1fr;
+	@media only screen and (max-width: 992px) {
+		display: flex;
+		flex-direction: column;
+		height: auto;
+
+		.login__form {
+			order: 3;
+		}
+
+		.login__image {
+			width: 100%;
+			height: 40rem;
+			order: 1;
+		}
 	}
 `;
 

@@ -10,6 +10,7 @@ import Calendar from './Calendar';
 import Card from './Card';
 import Catalog from './Catalog';
 import Button from './Button';
+import Image from './Image';
 
 export {
 	Loading,
@@ -24,4 +25,5 @@ export {
 	Card,
 	Catalog,
 	Button,
+	Image,
 };
