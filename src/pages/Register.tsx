@@ -13,7 +13,7 @@ interface ILogin {
 	password: string;
 }
 
-const Login = () => {
+const Register = () => {
 	const dispatch = useAppDispatch();
 	const { isLoading, success, auth } = useAppSelector((store) => store.auth);
 	const [userToken, setUserToken] = useLocalStorage('token', '');
@@ -54,7 +54,7 @@ const Login = () => {
 					<Loading />
 				) : (
 					<form onSubmit={handleSubmit(onSubmitHandler)}>
-						<h2>Login to Airbnb</h2>
+						<h2>Register For Airbnb</h2>
 						<p>
 							Find vacation rentals, cabins, beach houses, unique homes and
 							experiences around the world.
@@ -63,22 +63,64 @@ const Login = () => {
 							<label htmlFor='email'>Username</label>
 							<input
 								type='email'
-								placeholder='your-email@gmail.com'
-								{...register('email', { required: true })}
-								onChange={onChangeHandler}
-							/>
-						</div>
-						<div className='login__input'>
-							<label htmlFor='password'>Password</label>
-							<input
-								type='password'
-								placeholder='Your password'
-								{...register('password', { required: true, min: 6 })}
+								placeholder='email'
+								{...register('email', {
+									required: true,
+									pattern: /@gmail.com/i,
+								})}
 								onChange={onChangeHandler}
 							/>
 						</div>
 
-						<Button>Login</Button>
+						<div className='login__input'>
+							<label htmlFor='password'>Password</label>
+							<input
+								type='password'
+								placeholder='password'
+								{...register('password', { required: true })}
+								onChange={onChangeHandler}
+							/>
+						</div>
+
+						<div className='login__input'>
+							<label htmlFor='phone'>Phone</label>
+							<input
+								type='text'
+								placeholder='phone'
+								{...register('phone', { required: true })}
+								onChange={onChangeHandler}
+							/>
+						</div>
+
+						<div className='login__input'>
+							<label htmlFor='birthday'>birthday</label>
+							<input
+								type='datetime'
+								placeholder='birthday'
+								{...register('birthday', { required: true })}
+								onChange={onChangeHandler}
+							/>
+						</div>
+
+						<div className='login__input gender'>
+							<label htmlFor='gender'>gender</label>
+							<select {...register('gender', { required: true })}>
+								<option value='Man'>Man</option>
+								<option value='Woman'>Woman</option>
+							</select>
+						</div>
+
+						<div className='login__input'>
+							<label htmlFor='address'>address</label>
+							<input
+								type='text'
+								placeholder='address'
+								{...register('address', { required: true })}
+								onChange={onChangeHandler}
+							/>
+						</div>
+
+						<Button>Register</Button>
 					</form>
 				)}
 			</div>
@@ -105,8 +147,8 @@ const Container = styled.main`
 	}
 
 	.login__form {
-		height: 100vh;
 		position: relative;
+		height: 100vh;
 		form {
 			display: flex;
 			flex-direction: column;
@@ -120,14 +162,13 @@ const Container = styled.main`
 			}
 
 			.login__input {
-				border-top-left-radius: var(--radius);
-				border-top-right-radius: var(--radius);
 				width: 100%;
 				display: flex;
 				justify-content: center;
 				align-items: flex-start;
 				flex-direction: column;
 				border: 1px solid #b3b3b3;
+				border-bottom: none;
 				padding: 1.5rem;
 
 				label {
@@ -149,10 +190,15 @@ const Container = styled.main`
 				}
 			}
 
-			.login__input:nth-child(2n) {
-				border-top: none;
-				border-top-left-radius: 0;
-				border-top-right-radius: 0;
+			.login__input:nth-child(1) {
+				border: 1px solid #b3b3b3;
+				border-top-left-radius: var(--radius);
+				border-top-right-radius: var(--radius);
+				border-bottom: none;
+			}
+
+			.login__input:nth-child(6) {
+				border-bottom: 1px solid #b3b3b3;
 				border-bottom-left-radius: var(--radius);
 				border-bottom-right-radius: var(--radius);
 			}
@@ -168,4 +214,4 @@ const Container = styled.main`
 	}
 `;
 
-export default Login;
+export default Register;

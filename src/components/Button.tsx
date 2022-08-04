@@ -7,7 +7,7 @@ interface IButton {
 
 const Button = ({ children }: IButton) => {
 	return (
-		<Container>
+		<Container type='submit'>
 			<h3>{children}</h3>
 		</Container>
 	);
@@ -21,6 +21,7 @@ const Container = styled.button`
 	padding: 1rem 1rem;
 	background: var(--clr-gradient);
 	transition: var(--transition);
+	width: 100%;
 
 	h3 {
 		position: relative;

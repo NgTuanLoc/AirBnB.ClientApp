@@ -8,7 +8,7 @@ import {
 	RoomListPage,
 	SingleRoomPage,
 	AdminPage,
-	SignUp,
+	Register,
 	Login,
 	NotFound,
 } from './pages';
@@ -28,7 +28,7 @@ const App = () => {
 				<Route path='/room-list/:locationId' element={<RoomListPage />} />
 				<Route path='/room/:id' element={<SingleRoomPage />} />
 				<Route path='/admin' element={<AdminPage />} />
-				<Route path='/signup' element={<SignUp />} />
+				<Route path='/register' element={<Register />} />
 				<Route path='/login' element={<Login />} />
 				<Route path='*' element={<NotFound />} />
 			</Routes>
