@@ -7,13 +7,13 @@ export interface IAuthState {
 	isLoading: boolean;
 	error: string;
 	auth: IAuth | null;
-	success: boolean;
+	isAuthenticated: boolean;
 }
 
 const initialState: IAuthState = {
 	isLoading: false,
 	error: '',
-	success: false,
+	isAuthenticated: false,
 	auth: null,
 };
 
@@ -28,12 +28,12 @@ const authSlice = createSlice({
 		builder.addCase(loginThunk.fulfilled, (state, { payload }) => {
 			state.isLoading = false;
 			state.auth = payload;
-			state.success = true;
+			state.isAuthenticated = true;
 		});
 		builder.addCase(loginThunk.rejected, (state, { payload }) => {
 			state.isLoading = false;
 			if (payload) {
-				state.success = false;
+				state.isAuthenticated = false;
 				state.error = payload as string;
 			}
 		});
@@ -42,12 +42,12 @@ const authSlice = createSlice({
 		});
 		builder.addCase(registerThunk.fulfilled, (state, { payload }) => {
 			state.isLoading = false;
-			state.success = true;
+			state.isAuthenticated = true;
 		});
 		builder.addCase(registerThunk.rejected, (state, { payload }) => {
 			state.isLoading = false;
 			if (payload) {
-				state.success = false;
+				state.isAuthenticated = false;
 				state.error = payload as string;
 			}
 		});

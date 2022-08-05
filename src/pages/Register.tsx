@@ -6,12 +6,12 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { registerThunk, IRegister } from '../features/Auth/authThunk';
 import { Button, Loading } from '../components';
-import { useLocalStorage } from '../hooks/useLocalStorage';
 
 const Register = () => {
 	const dispatch = useAppDispatch();
-	const { isLoading, success, auth } = useAppSelector((store) => store.auth);
-	const [userToken, setUserToken] = useLocalStorage('token', '');
+	const { isLoading, isAuthenticated, auth } = useAppSelector(
+		(store) => store.auth
+	);
 	const navigate = useNavigate();
 	const [user, setUser] = useState<IRegister>({
 		name: 'string',
@@ -36,13 +36,12 @@ const Register = () => {
 	};
 
 	const onSubmitHandler = () => {
-		console.log('hjghj');
 		dispatch(registerThunk(user));
 	};
 
 	useEffect(() => {
-		if (success && auth?.token) {
-			setUserToken(auth?.token);
+		if (isAuthenticated && auth?.token) {
+			localStorage.setItem('token', auth?.token);
 			navigate('/');
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -52,7 +51,7 @@ const Register = () => {
 		<Container>
 			<div className='login__form flex-center'>
 				<Link className='back-btn' to='/'>
-					Back To Home
+					Back
 				</Link>
 				{isLoading ? (
 					<Loading />

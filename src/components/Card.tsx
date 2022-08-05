@@ -41,7 +41,7 @@ const Card = () => {
 const Container = styled.article`
 	position: sticky;
 	top: calc(var(--navbar-height) + 8rem);
-	width: 80%;
+	width: 60%;
 	margin-inline: auto;
 	border-radius: var(--radius);
 	box-shadow: var(--box-shadow);

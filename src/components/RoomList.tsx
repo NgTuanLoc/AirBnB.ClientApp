@@ -30,7 +30,7 @@ const RoomList = () => {
 const Container = styled.section`
 	margin: 4rem 0;
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
+	grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
 	grid-gap: 2rem;
 	padding-bottom: var(--footer-height);
 `;

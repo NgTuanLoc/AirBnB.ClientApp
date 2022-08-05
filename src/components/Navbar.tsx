@@ -8,7 +8,7 @@ import logo from '../images/logo.svg';
 import { useAppSelector } from '../hooks/hooks';
 import { useOnClickOutside } from '../hooks/useClickOutsideHook';
 import { transformLanguage } from '../utils/util';
-import { Modal } from '../components';
+import { Modal, UserModal } from '../components';
 
 interface InputProps {
 	disableInput: boolean;
@@ -21,6 +21,7 @@ export interface IFilteredLocation {
 
 const Navbar = () => {
 	const [title, setTitle] = useState('Anywhere');
+	const [isUserModalOpen, setIsUserModalOpen] = useState(false);
 	const [disableInput, setDisableInput] = useState(true);
 	const [inputLocation, setInputLocation] = useState<IFilteredLocation>({
 		location: '',
@@ -37,7 +38,7 @@ const Navbar = () => {
 	const onSubmitHandler = (e: FormEvent) => {
 		e.preventDefault();
 
-		if (!inputLocation) return;
+		if (!inputLocation.location) return;
 
 		setTitle(inputLocation.location);
 		navigate(`/room-list/${inputLocation.id}`);
@@ -50,6 +51,7 @@ const Navbar = () => {
 
 	const setInputLocationHandler = (location: string, id: string) => {
 		setInputLocation({ location, id });
+		setTitle(location);
 	};
 
 	useEffect(() => {
@@ -105,14 +107,21 @@ const Navbar = () => {
 				</button>
 			</Search>
 			<Nav>
-				<h5>Become A Host</h5>
-				<div className='translate flex-center'>
+				<a className='btn' href='https://github.com/NgTuanLoc/AirBnB'>
+					Become A Host
+				</a>
+				<div className='translate flex-center btn'>
 					<AiOutlineGlobal />
 				</div>
-				<button className='login flex-center'>
+				<button
+					className={`${
+						isUserModalOpen ? 'active login flex-center' : 'login flex-center'
+					}`}
+					onClick={() => setIsUserModalOpen(!isUserModalOpen)}>
 					<AiOutlineMenu />
 					<AiOutlineUser />
 				</button>
+				{isUserModalOpen && <UserModal />}
 			</Nav>
 		</Container>
 	);
@@ -129,7 +138,7 @@ const Container = styled.header`
 	left: 0;
 	z-index: 100;
 	height: 8rem;
-	border: 2px solid var(--clr-secondary);
+	border-bottom: 2px solid var(--clr-secondary);
 	padding-inline: 8rem;
 
 	img {
@@ -152,10 +161,14 @@ const Search = styled.form`
 	padding: 1rem 1.5rem;
 	border-radius: 30px;
 	transition: var(--transition);
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
 	cursor: pointer;
 
 	h5 {
 		font-weight: 400;
+		margin: 0;
 	}
 
 	.btn-search {
@@ -194,13 +207,10 @@ const Nav = styled.nav`
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
-
-	h5 {
-		margin: 0;
-	}
+	position: relative;
 
 	.translate {
-		margin-inline: 1.5rem;
+		margin-inline: 0.25rem;
 		svg {
 			color: #222222;
 			font-size: 1.75rem;
@@ -224,6 +234,11 @@ const Nav = styled.nav`
 			box-shadow: var(--dark-shadow);
 		}
 	}
+
+	.active {
+		box-shadow: var(--dark-shadow);
+	}
+
 	@media only screen and (max-width: 992px) {
 		h5 {
 			display: none;

@@ -6,7 +6,6 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { loginThunk } from '../features/Auth/authThunk';
 import { Button, Loading, Image } from '../components';
-import { useLocalStorage } from '../hooks/useLocalStorage';
 
 interface ILogin {
 	email: string;
@@ -15,8 +14,9 @@ interface ILogin {
 
 const Login = () => {
 	const dispatch = useAppDispatch();
-	const { isLoading, success, auth } = useAppSelector((store) => store.auth);
-	const [_, setUserToken] = useLocalStorage('token', '');
+	const { isLoading, isAuthenticated, auth } = useAppSelector(
+		(store) => store.auth
+	);
 	const navigate = useNavigate();
 	const [user, setUser] = useState<ILogin>({
 		email: '',
@@ -40,8 +40,8 @@ const Login = () => {
 	};
 
 	useEffect(() => {
-		if (success && auth?.token) {
-			setUserToken(auth?.token);
+		if (isAuthenticated && auth?.token) {
+			localStorage.setItem('token', auth?.token);
 			navigate('/');
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps

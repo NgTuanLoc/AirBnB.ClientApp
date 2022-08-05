@@ -11,6 +11,7 @@ import Card from './Card';
 import Catalog from './Catalog';
 import Button from './Button';
 import Image from './Image';
+import UserModal from './UserModal';
 
 export {
 	Loading,
@@ -26,4 +27,5 @@ export {
 	Catalog,
 	Button,
 	Image,
+	UserModal,
 };

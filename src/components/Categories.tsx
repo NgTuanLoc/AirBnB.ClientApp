@@ -59,7 +59,7 @@ const Item = styled.div`
 
 	img {
 		border-radius: var(--radius);
-		height: 10rem;
+		height: 15rem;
 	}
 `;
 

@@ -22,7 +22,7 @@ const Modal = ({
 }: IProps) => {
 	const onClickHandler = (location: string, id: string) => {
 		setInputLocation(location, id);
-		setDisableInput(false);
+		setDisableInput(true);
 	};
 
 	return (
