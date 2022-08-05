@@ -61,6 +61,7 @@ const Container = styled.section`
 
 		h2 {
 			color: #484848;
+			font-weight: 350;
 			margin-bottom: 1.5rem;
 		}
 
@@ -69,6 +70,7 @@ const Container = styled.section`
 		}
 
 		h4 {
+			font-weight: 300;
 			color: #767676;
 		}
 
@@ -91,7 +93,9 @@ const Container = styled.section`
 	}
 
 	@media only screen and (max-width: 992px) {
-		grid-template-columns: 1fr;
+		.not-found {
+			grid-template-columns: 1fr;
+		}
 
 		.not-found {
 			padding: 2rem;

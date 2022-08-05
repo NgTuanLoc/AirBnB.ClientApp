@@ -4,19 +4,15 @@ import styled from 'styled-components';
 
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { getRoomListByLocationID } from '../features/Room/roomThunk';
-import { Room, Loading } from './';
+import { Room } from './';
 
 const RoomList = () => {
-	const { locationID, roomList, isLoading } = useAppSelector(
-		(store) => store.room
-	);
+	const { locationID, roomList } = useAppSelector((store) => store.room);
 	const dispatch = useAppDispatch();
 
 	useEffect(() => {
 		dispatch(getRoomListByLocationID());
 	}, [locationID]);
-
-	if (isLoading) return <Loading />;
 
 	return (
 		<Container>

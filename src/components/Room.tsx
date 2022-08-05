@@ -1,22 +1,34 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import Skeleton from 'react-loading-skeleton';
 
 import { IRoom } from '../@types/Room';
+import { useAppSelector } from '../hooks/hooks';
 
 const Room = ({ _id, name, image, locationId, price }: IRoom) => {
+	const { isLoading } = useAppSelector((store) => store.room);
+
 	return (
 		<Container to={`/room/${_id}`}>
 			<div className='img-container'>
-				<img src={image} alt={name} />
+				{isLoading ? <Skeleton /> : <img src={image} alt={name} />}
 			</div>
 			<div className='info'>
-				<h5>{name}</h5>
-				<p>
-					{locationId.province} <span>{locationId.name}</span>
-				</p>
-				<p>
-					<span className='bold'>${price.toLocaleString()}</span> night
-				</p>
+				{isLoading ? <Skeleton /> : <h5>{name}</h5>}
+				{isLoading ? (
+					<Skeleton />
+				) : (
+					<p>
+						{locationId.province} <span>{locationId.name}</span>
+					</p>
+				)}
+				{isLoading ? (
+					<Skeleton />
+				) : (
+					<p>
+						<span className='bold'>${price.toLocaleString()}</span> night
+					</p>
+				)}
 			</div>
 		</Container>
 	);
@@ -29,12 +41,12 @@ const Container = styled(Link)`
 	cursor: pointer;
 	color: black;
 
-	.info {
-		padding: 0.5rem;
-	}
-
-	img {
-		border-radius: var(--radius);
+	.img-container {
+		height: 20rem;
+		margin-bottom: 1rem;
+		img {
+			border-radius: var(--radius);
+		}
 	}
 
 	p {

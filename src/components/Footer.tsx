@@ -3,6 +3,7 @@ import {
 	AiOutlineFacebook,
 	AiOutlineInstagram,
 	AiOutlineTwitter,
+	AiOutlineSkype,
 } from 'react-icons/ai';
 
 const Footer = () => {
@@ -68,6 +69,9 @@ const Footer = () => {
 					<a href='https://github.com/NgTuanLoc'>
 						<AiOutlineInstagram />
 					</a>
+					<a href='https://github.com/NgTuanLoc'>
+						<AiOutlineSkype />
+					</a>
 				</h4>
 			</div>
 		</Container>
@@ -129,6 +133,9 @@ const Container = styled.footer`
 			}
 			:hover:nth-child(3) {
 				color: #e4405f;
+			}
+			:hover:nth-child(4) {
+				color: #0a66c2;
 			}
 		}
 	}
