@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { ChangeEvent, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
@@ -5,28 +6,40 @@ import { useNavigate, Link } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { registerThunk, IRegister } from '../features/Auth/authThunk';
-import { Button, Loading } from '../components';
+import { Button, Loading, Error } from '../components';
+
+type FormInputs = {
+	name: string;
+	email: string;
+	password: string;
+	phone: string;
+	birthday: string;
+	gender: string;
+	address: string;
+};
 
 const Register = () => {
 	const dispatch = useAppDispatch();
-	const { isLoading, isAuthenticated, auth } = useAppSelector(
+	const { isLoading, isAuthenticated, auth, error } = useAppSelector(
 		(store) => store.auth
 	);
+	const [errorState, setErrorState] = useState('');
+
 	const navigate = useNavigate();
 	const [user, setUser] = useState<IRegister>({
-		name: 'string',
+		name: '',
 		email: 'test123@gmail.com',
-		password: 'string',
-		phone: 'string',
-		birthday: 'string',
+		password: '',
+		phone: '',
+		birthday: '',
 		gender: true,
-		address: 'string',
+		address: '',
 	});
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
-	} = useForm();
+	} = useForm<FormInputs>();
 
 	const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
 		const name = e.target.name;
@@ -46,6 +59,22 @@ const Register = () => {
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [auth]);
+
+	useEffect(() => {
+		if (!error) {
+			setErrorState('');
+			return;
+		}
+		if (error) {
+			if (error === 'Không tìm thấy email phù hợp') {
+				setErrorState('Your email is not exist');
+			} else {
+				setErrorState('Your email or password is not valid');
+			}
+		}
+
+		return;
+	}, [error, errorState, errors]);
 
 	return (
 		<Container>
@@ -68,10 +97,11 @@ const Register = () => {
 								type='name'
 								placeholder='name'
 								{...register('name', {
-									required: true,
+									required: { value: true, message: 'Name must be provided' },
 								})}
 								onChange={onChangeHandler}
 							/>
+							{errors.name && <h5 className='danger'>{errors.name.message}</h5>}
 						</div>
 						<div className='login__input'>
 							<label htmlFor='email'>Email</label>
@@ -79,11 +109,14 @@ const Register = () => {
 								type='email'
 								placeholder='email'
 								{...register('email', {
-									required: true,
-									pattern: /@gmail.com/i,
+									required: { value: true, message: 'Email must be provided' },
+									pattern: { value: /@gmail.com/i, message: 'Invalid Email' },
 								})}
 								onChange={onChangeHandler}
 							/>
+							{errors.email && (
+								<h5 className='danger'>{errors.email.message}</h5>
+							)}
 						</div>
 
 						<div className='login__input'>
@@ -91,9 +124,17 @@ const Register = () => {
 							<input
 								type='password'
 								placeholder='password'
-								{...register('password', { required: true })}
+								{...register('password', {
+									required: {
+										value: true,
+										message: 'Password must be provided',
+									},
+								})}
 								onChange={onChangeHandler}
 							/>
+							{errors.password && (
+								<h5 className='danger'>{errors.password.message}</h5>
+							)}
 						</div>
 
 						<div className='login__input'>
@@ -101,9 +142,14 @@ const Register = () => {
 							<input
 								type='text'
 								placeholder='phone'
-								{...register('phone', { required: true })}
+								{...register('phone', {
+									required: { value: true, message: 'phone must be provided' },
+								})}
 								onChange={onChangeHandler}
 							/>
+							{errors.phone && (
+								<h5 className='danger'>{errors.phone.message}</h5>
+							)}
 						</div>
 
 						<div className='login__input'>
@@ -111,17 +157,31 @@ const Register = () => {
 							<input
 								type='date'
 								placeholder='birthday'
-								{...register('birthday', { required: true })}
+								{...register('birthday', {
+									required: {
+										value: true,
+										message: 'Birthday must be provided',
+									},
+								})}
 								onChange={onChangeHandler}
 							/>
+							{errors.phone && (
+								<h5 className='danger'>{errors.phone.message}</h5>
+							)}
 						</div>
 
 						<div className='login__input gender'>
 							<label htmlFor='gender'>gender</label>
-							<select {...register('gender', { required: true })}>
+							<select
+								{...register('gender', {
+									required: { value: true, message: 'Gender must be provided' },
+								})}>
 								<option value='Man'>Man</option>
 								<option value='Woman'>Woman</option>
 							</select>
+							{errors.gender && (
+								<h5 className='danger'>{errors.gender.message}</h5>
+							)}
 						</div>
 
 						<div className='login__input login__input--last'>
@@ -129,11 +189,19 @@ const Register = () => {
 							<input
 								type='text'
 								placeholder='address'
-								{...register('address', { required: true })}
+								{...register('address', {
+									required: {
+										value: true,
+										message: 'Address must be provided',
+									},
+								})}
 								onChange={onChangeHandler}
 							/>
+							{errors.address && (
+								<h5 className='danger'>{errors.address.message}</h5>
+							)}
 						</div>
-
+						<Error>{errorState}</Error>
 						<Button>Register</Button>
 					</form>
 				)}
@@ -222,6 +290,10 @@ const Container = styled.main`
 						border: transparent;
 						outline: none;
 					}
+				}
+
+				select {
+					margin-top: 1rem;
 				}
 			}
 

@@ -35,8 +35,18 @@ const SingleRoomPage = () => {
 	const { id } = useParams();
 	const dispatch = useAppDispatch();
 	const { selectedRoom, isLoading } = useAppSelector((store) => store.room);
+	const [numberOfVisitNights, setNumberOfVisitNights] = useState(0);
 
 	const [checkIn, setCheckIn] = useState<Date[]>([new Date(), new Date()]);
+
+	useEffect(() => {
+		const temp = checkIn[1]
+			? Math.round(
+					(checkIn[1].getTime() - checkIn[0].getTime()) / (1000 * 3600 * 24)
+			  )
+			: 0;
+		setNumberOfVisitNights(temp);
+	}, [checkIn]);
 
 	useEffect(() => {
 		dispatch(getRoomDetailByID(id as string));
@@ -61,6 +71,7 @@ const SingleRoomPage = () => {
 		wifi,
 		heating,
 		cableTV,
+		price,
 		description,
 	} = selectedRoom;
 
@@ -210,13 +221,9 @@ const SingleRoomPage = () => {
 						<div className='line'></div>
 						<div className='detail__calendar'>
 							<h3>
-								{checkIn[1]
-									? Math.round(
-											(checkIn[1].getTime() - checkIn[0].getTime()) /
-												(1000 * 3600 * 24)
-									  )
-									: 0}{' '}
-								nights in {name}
+								{numberOfVisitNights}{' '}
+								<span style={{ textTransform: 'lowercase' }}>nights in</span>{' '}
+								{name}
 							</h3>
 							<p>
 								{moment(checkIn[0]).format('MMMM Do YYYY')} -{' '}
@@ -226,7 +233,11 @@ const SingleRoomPage = () => {
 						</div>
 					</div>
 					<div className='detail__booking'>
-						<Card />
+						<Card
+							pricePerNight={price}
+							checkIn={checkIn}
+							numberOfVisitNights={numberOfVisitNights}
+						/>
 					</div>
 				</div>
 				<div className='line'></div>

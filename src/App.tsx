@@ -8,6 +8,7 @@ import {
 	RoomListPage,
 	SingleRoomPage,
 	AdminPage,
+	UserPage,
 	Register,
 	Login,
 	NotFound,
@@ -28,6 +29,7 @@ const App = () => {
 				<Route path='/room-list/:locationId' element={<RoomListPage />} />
 				<Route path='/room/:id' element={<SingleRoomPage />} />
 				<Route path='/admin' element={<AdminPage />} />
+				<Route path='/user/:id' element={<UserPage />} />
 				<Route path='/register' element={<Register />} />
 				<Route path='/login' element={<Login />} />
 				<Route path='*' element={<NotFound />} />

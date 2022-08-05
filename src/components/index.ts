@@ -12,6 +12,7 @@ import Catalog from './Catalog';
 import Button from './Button';
 import Image from './Image';
 import UserModal from './UserModal';
+import Error from './Error';
 
 export {
 	Loading,
@@ -28,4 +29,5 @@ export {
 	Button,
 	Image,
 	UserModal,
+	Error,
 };

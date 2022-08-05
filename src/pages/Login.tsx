@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { ChangeEvent, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
@@ -5,16 +6,22 @@ import { useNavigate, Link } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { loginThunk } from '../features/Auth/authThunk';
-import { Button, Loading, Image } from '../components';
+import { Button, Loading, Image, Error } from '../components';
 
 interface ILogin {
 	email: string;
 	password: string;
 }
 
+type FormInputs = {
+	email: string;
+	password: string;
+};
+
 const Login = () => {
 	const dispatch = useAppDispatch();
-	const { isLoading, isAuthenticated, auth } = useAppSelector(
+	const [errorState, setErrorState] = useState('');
+	const { isLoading, isAuthenticated, auth, error } = useAppSelector(
 		(store) => store.auth
 	);
 	const navigate = useNavigate();
@@ -26,14 +33,14 @@ const Login = () => {
 		register,
 		handleSubmit,
 		formState: { errors },
-	} = useForm();
+	} = useForm<FormInputs>({ mode: 'onBlur' });
 
 	const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
 		const name = e.target.name;
 		const value = e.target.value;
-
 		setUser({ ...user, [name]: value });
 	};
+	console.log(errors);
 
 	const onSubmitHandler = () => {
 		dispatch(loginThunk(user));
@@ -46,6 +53,22 @@ const Login = () => {
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [auth]);
+
+	useEffect(() => {
+		if (!error) {
+			setErrorState('');
+			return;
+		}
+		if (error) {
+			if (error === 'Không tìm thấy email phù hợp') {
+				setErrorState('Your email is not exist');
+			} else {
+				setErrorState('Your email or password is not valid');
+			}
+		}
+
+		return;
+	}, [error, errorState, errors]);
 
 	return (
 		<Container>
@@ -68,10 +91,14 @@ const Login = () => {
 								type='email'
 								placeholder='your-email@gmail.com'
 								{...register('email', {
+									required: { value: true, message: 'Email must be provided' },
 									pattern: { value: /^\S+@\S+$/i, message: 'Invalid Email' },
 								})}
 								onChange={onChangeHandler}
 							/>
+							{errors.email && (
+								<h5 className='danger'>{errors.email.message}</h5>
+							)}
 						</div>
 						<div className='login__input'>
 							<label htmlFor='password'>Password</label>
@@ -90,8 +117,11 @@ const Login = () => {
 								})}
 								onChange={onChangeHandler}
 							/>
+							{errors.password && (
+								<h5 className='danger'>{errors.password.message}</h5>
+							)}
 						</div>
-
+						<Error>{errorState}</Error>
 						<Button>Login</Button>
 					</form>
 				)}
@@ -113,6 +143,7 @@ const Container = styled.main`
 	background-color: var(--clr-secondary);
 	display: grid;
 	grid-template-columns: 1fr 1fr;
+
 	h2 {
 		background: linear-gradient(to right, #4420d4 0%, #ff385c 100%);
 		-webkit-background-clip: text;
@@ -163,6 +194,7 @@ const Container = styled.main`
 				flex-direction: column;
 				border: 1px solid #b3b3b3;
 				padding: 1.5rem;
+				height: auto;
 
 				label {
 					font-size: 1.2rem;

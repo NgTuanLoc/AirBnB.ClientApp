@@ -23,6 +23,7 @@ const Navbar = () => {
 	const [title, setTitle] = useState('Anywhere');
 	const [isUserModalOpen, setIsUserModalOpen] = useState(false);
 	const [disableInput, setDisableInput] = useState(true);
+
 	const [inputLocation, setInputLocation] = useState<IFilteredLocation>({
 		location: '',
 		id: '',
@@ -31,8 +32,13 @@ const Navbar = () => {
 		[]
 	);
 	const { locationList } = useAppSelector((store) => store.location);
+
+	const userModalRef = useRef(null);
+	useOnClickOutside(userModalRef, () => setIsUserModalOpen(false));
+
 	const ref = useRef(null);
 	useOnClickOutside(ref, () => setDisableInput(true));
+
 	const navigate = useNavigate();
 
 	const onSubmitHandler = (e: FormEvent) => {
@@ -106,7 +112,7 @@ const Navbar = () => {
 					<HiOutlineSearch />
 				</button>
 			</Search>
-			<Nav>
+			<Nav ref={userModalRef}>
 				<a className='btn' href='https://github.com/NgTuanLoc/AirBnB'>
 					Become A Host
 				</a>
@@ -161,9 +167,13 @@ const Search = styled.form`
 	padding: 1rem 1.5rem;
 	border-radius: 30px;
 	transition: var(--transition);
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
+
+	@media only screen and (min-width: 992px) {
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+
 	cursor: pointer;
 
 	h5 {
@@ -197,7 +207,7 @@ const Search = styled.form`
 		box-shadow: var(--dark-shadow);
 	}
 
-	@media only screen and (max-width: 510px) {
+	@media only screen and (max-width: 992px) {
 		order: 3;
 		margin-inline: auto;
 	}
