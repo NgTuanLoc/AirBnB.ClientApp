@@ -19,6 +19,15 @@ const UserModal = () => {
 	if (isAuthenticated) {
 		return (
 			<Container>
+				{auth?.user.type === 'ADMIN' ? (
+					<Link className='btn-link bold' to='/admin'>
+						Admin
+					</Link>
+				) : (
+					<Link className='btn-link bold' to={`/user/${auth?.user._id}`}>
+						User
+					</Link>
+				)}
 				<a href='https://github.com/NgTuanLoc/AirBnB' className='btn-link bold'>
 					Messages
 				</a>

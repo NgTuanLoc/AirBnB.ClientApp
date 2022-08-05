@@ -68,8 +68,6 @@ const Register = () => {
 		if (error) {
 			if (error === 'Không tìm thấy email phù hợp') {
 				setErrorState('Your email is not exist');
-			} else {
-				setErrorState('Your email or password is not valid');
 			}
 		}
 
@@ -226,7 +224,7 @@ const Container = styled.main`
 
 	h2 {
 		background: linear-gradient(to right, #4420d4 0%, #ff385c 100%);
-		-webkit-background-clip: text;
+		background-clip: text;
 		-webkit-text-fill-color: transparent;
 		height: 4rem;
 	}

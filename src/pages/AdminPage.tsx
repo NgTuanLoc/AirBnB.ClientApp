@@ -1,9 +1,7 @@
 import styled from 'styled-components';
 
-import { Calendar } from '../components';
-
 const AdminPage = () => {
-	return <Container className='section'>{/* <Calendar /> */}</Container>;
+	return <Container>Admin Page</Container>;
 };
 
 const Container = styled.main``;
