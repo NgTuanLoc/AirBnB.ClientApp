@@ -81,9 +81,9 @@ const Navbar = () => {
 
 	return (
 		<Container>
-			<Link to='/'>
+			<Logo to='/'>
 				<img src={logo} alt='airbnb logo' />
-			</Link>
+			</Logo>
 			<Search onSubmit={onSubmitHandler}>
 				<button type='button' ref={ref} style={{ position: 'relative' }}>
 					<h5 onClick={() => setDisableInput(false)}>{title}</h5>
@@ -153,9 +153,11 @@ const Container = styled.header`
 
 	@media only screen and (max-width: 992px) {
 		padding: 1rem;
-		display: flex;
-		flex-wrap: wrap;
+		display: grid;
 		height: auto;
+		grid-template-areas:
+			'logo nav'
+			'search search';
 	}
 `;
 
@@ -208,9 +210,14 @@ const Search = styled.form`
 	}
 
 	@media only screen and (max-width: 992px) {
-		order: 3;
+		grid-area: search;
+		width: 80%;
 		margin-inline: auto;
 	}
+`;
+
+const Logo = styled(Link)`
+	grid-area: logo;
 `;
 
 const Nav = styled.nav`
@@ -250,6 +257,8 @@ const Nav = styled.nav`
 	}
 
 	@media only screen and (max-width: 992px) {
+		grid-area: nav;
+
 		h5 {
 			display: none;
 		}

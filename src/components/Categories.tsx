@@ -5,12 +5,14 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import { Navigation } from 'swiper';
 import { useMediaQuery } from 'react-responsive';
+import Skeleton from 'react-loading-skeleton';
 
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { selectLocation } from '../features/Room/roomSlice';
+import Image from './Image';
 
 const Categories = () => {
-	const { locationList } = useAppSelector((store) => store.location);
+	const { locationList, isLoading } = useAppSelector((store) => store.location);
 	const dispatch = useAppDispatch();
 	const isMobileDevice = useMediaQuery({
 		query: '(max-width: 992px)',
@@ -28,10 +30,10 @@ const Categories = () => {
 				return (
 					<SwiperSlide key={_id} onClick={() => dispatch(selectLocation(_id))}>
 						<Item>
-							<div>
-								<img src={image} alt={province} />
+							<div className='image-container'>
+								<Image url={image} alt={province} />
 							</div>
-							<h5>{province}</h5>
+							{isLoading ? <Skeleton /> : <h5>{province}</h5>}
 						</Item>
 					</SwiperSlide>
 				);
@@ -57,9 +59,13 @@ const Item = styled.div`
 	text-align: center;
 	cursor: pointer;
 
-	img {
+	.image-container {
 		border-radius: var(--radius);
-		height: 15rem;
+		height: 12rem;
+
+		img {
+			border-radius: var(--radius);
+		}
 	}
 `;
 

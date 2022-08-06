@@ -1,5 +1,9 @@
+import styled from 'styled-components';
+
 const UserPage = () => {
-	return <div>UserPage</div>;
+	return <Container className='section'>UserPage</Container>;
 };
+
+const Container = styled.section``;
 
 export default UserPage;

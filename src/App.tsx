@@ -13,6 +13,8 @@ import {
 	Register,
 	Login,
 	NotFound,
+	AuthWrapper,
+	PrivateRoute,
 } from './pages';
 
 const App = () => {
@@ -24,25 +26,43 @@ const App = () => {
 	}, []);
 
 	return (
-		<SkeletonTheme
-			width={`100%`}
-			height={`100%`}
-			baseColor='#d9d7d9'
-			highlightColor='#f5f5f5'
-			duration={2}>
-			<Router>
-				<Routes>
-					<Route path='/' element={<Home />} />
-					<Route path='/room-list/:locationId' element={<RoomListPage />} />
-					<Route path='/room/:id' element={<SingleRoomPage />} />
-					<Route path='/admin' element={<AdminPage />} />
-					<Route path='/user/:id' element={<UserPage />} />
-					<Route path='/register' element={<Register />} />
-					<Route path='/login' element={<Login />} />
-					<Route path='*' element={<NotFound />} />
-				</Routes>
-			</Router>
-		</SkeletonTheme>
+		<AuthWrapper>
+			<SkeletonTheme
+				width={`100%`}
+				height={`100%`}
+				baseColor='#d9d7d9'
+				highlightColor='#f5f5f5'
+				duration={2}>
+				<Router>
+					<Routes>
+						<Route path='/' element={<Home />} />
+						<Route path='/room-list/:locationId' element={<RoomListPage />} />
+						<Route path='/room/:id' element={<SingleRoomPage />} />
+						<Route path='/admin' element={<AdminPage />} />
+						<Route
+							path='/user/:id'
+							element={
+								<PrivateRoute>
+									<UserPage />
+								</PrivateRoute>
+							}
+						/>
+						<Route path='/register' element={<Register />} />
+						<Route path='/login' element={<Login />} />
+						<Route
+							path='/user-not-found'
+							element={<NotFound error='User not existed' />}
+						/>
+						<Route
+							path='*'
+							element={
+								<NotFound error="We can't seem to find the page you're looking for." />
+							}
+						/>
+					</Routes>
+				</Router>
+			</SkeletonTheme>
+		</AuthWrapper>
 	);
 };
 

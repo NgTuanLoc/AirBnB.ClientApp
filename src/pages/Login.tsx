@@ -46,8 +46,7 @@ const Login = () => {
 	};
 
 	useEffect(() => {
-		if (isAuthenticated && auth?.token) {
-			localStorage.setItem('token', auth?.token);
+		if (isAuthenticated) {
 			navigate('/');
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps

@@ -24,7 +24,7 @@ const authSlice = createSlice({
 		logout: (state: IAuthState) => {
 			state.isAuthenticated = false;
 			state.auth = null;
-			localStorage.removeItem('token');
+			localStorage.removeItem('userLogin');
 		},
 	},
 	extraReducers(builder) {
@@ -33,9 +33,9 @@ const authSlice = createSlice({
 		});
 		builder.addCase(loginThunk.fulfilled, (state, { payload }) => {
 			state.isLoading = false;
+			state.isAuthenticated = true;
 			state.auth = payload;
 			state.error = '';
-			state.isAuthenticated = true;
 		});
 		builder.addCase(loginThunk.rejected, (state, { payload }) => {
 			state.isLoading = false;

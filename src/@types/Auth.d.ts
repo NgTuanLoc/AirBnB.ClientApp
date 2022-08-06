@@ -11,7 +11,7 @@ export interface IAuth {
 		birthday: string;
 		gender: boolean;
 		address: string;
-		type: 'ADMIN' | 'USER';
+		type: 'ADMIN' | 'CLIENT';
 		__v: number;
 	};
 	token: string;

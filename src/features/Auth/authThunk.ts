@@ -17,7 +17,15 @@ const loginThunk = createAsyncThunk<IAuth, { email: string; password: string }>(
 					password: user.password,
 				},
 			};
+
 			const response = await axiosInstance.request(params);
+			const token = {
+				email: user.email,
+				password: user.password,
+				token: response.data.token,
+			};
+
+			localStorage.setItem('userLogin', JSON.stringify(token));
 			return response.data;
 		} catch (error: any) {
 			return thunkAPI.rejectWithValue(error.response.data.message);

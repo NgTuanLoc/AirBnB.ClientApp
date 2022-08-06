@@ -4,6 +4,7 @@ import Skeleton from 'react-loading-skeleton';
 
 import { IRoom } from '../@types/Room';
 import { useAppSelector } from '../hooks/hooks';
+import Image from './Image';
 
 const Room = ({ _id, name, image, locationId, price }: IRoom) => {
 	const { isLoading } = useAppSelector((store) => store.room);
@@ -11,7 +12,7 @@ const Room = ({ _id, name, image, locationId, price }: IRoom) => {
 	return (
 		<Container to={`/room/${_id}`}>
 			<div className='img-container'>
-				{isLoading ? <Skeleton /> : <img src={image} alt={name} />}
+				{isLoading ? <Skeleton /> : <Image url={image} alt={name} />}
 			</div>
 			<div className='info'>
 				{isLoading ? <Skeleton /> : <h5>{name}</h5>}

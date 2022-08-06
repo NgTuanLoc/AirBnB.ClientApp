@@ -3,13 +3,17 @@ import { Link } from 'react-router-dom';
 
 import { Footer } from '../components';
 
-const NotFound = () => {
+interface INotFound {
+	error: string;
+}
+
+const NotFound = ({ error }: INotFound) => {
 	return (
 		<Container>
 			<div className='not-found'>
 				<div className='not-found__info '>
 					<h1>Oops!</h1>
-					<h2>We can't seem to find the page you're looking for.</h2>
+					<h2>{error}</h2>
 					<h4>Error code: 404</h4>
 					<p>Here are some helpful links instead :</p>
 					<div className='not-found__links'>
