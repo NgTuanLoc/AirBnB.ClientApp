@@ -1,25 +1,26 @@
 import styled from 'styled-components';
-import { Navbar, Footer } from '../components';
 
-import { Categories, RoomList } from '../components';
+import { Navbar, Footer, Categories, RoomList } from '../components';
 
 const Home = () => {
 	return (
-		<>
+		<Container>
 			<Navbar />
-			<Container className='section'>
+			<RoomContainer className='section'>
 				<Categories />
 				<RoomList />
-			</Container>
+			</RoomContainer>
 			<Footer />
-		</>
+		</Container>
 	);
 };
 
-const Container = styled.main`
+const RoomContainer = styled.section`
 	@media only screen and (max-width: 992px) {
 		padding-inline: 1rem;
 	}
 `;
+
+const Container = styled.main``;
 
 export default Home;

@@ -14,6 +14,14 @@ const RoomList = () => {
 		dispatch(getRoomListByLocationID());
 	}, [locationID]);
 
+	if (roomList.length === 0) {
+		return (
+			<h1 style={{ marginInline: 'auto', textAlign: 'center' }}>
+				Sorry, there are no room available!
+			</h1>
+		);
+	}
+
 	return (
 		<Container>
 			{roomList.map((item) => {

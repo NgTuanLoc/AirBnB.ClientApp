@@ -20,7 +20,7 @@ const AuthWrapper = ({ children }: IAuthWrapper) => {
 	const dispatch = useAppDispatch();
 
 	useEffect(() => {
-		if (token) {
+		if (token.token) {
 			dispatch(
 				loginThunk({
 					email: token.email as string,

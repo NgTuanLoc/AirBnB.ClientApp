@@ -87,6 +87,7 @@ const Login = () => {
 							<label htmlFor='email'>Username</label>
 							<input
 								type='email'
+								value={user.email}
 								placeholder='your-email@gmail.com'
 								{...register('email', {
 									required: { value: true, message: 'Email must be provided' },
@@ -102,6 +103,7 @@ const Login = () => {
 							<label htmlFor='password'>Password</label>
 							<input
 								type='password'
+								value={user.password}
 								placeholder='Your password'
 								{...register('password', {
 									required: {
@@ -119,7 +121,7 @@ const Login = () => {
 								<h5 className='danger'>{errors.password.message}</h5>
 							)}
 						</div>
-						<Error>{errorState}</Error>
+						{errorState && <Error>{errorState}</Error>}
 						<Button>Login</Button>
 					</form>
 				)}

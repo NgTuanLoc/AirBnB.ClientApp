@@ -6,8 +6,13 @@ import { IRoom } from '../@types/Room';
 import { useAppSelector } from '../hooks/hooks';
 import Image from './Image';
 
+const DEFAULT_IMAGE =
+	'https://images.unsplash.com/photo-1659731062334-b6fa83d7de90?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=900&q=60';
+
 const Room = ({ _id, name, image, locationId, price }: IRoom) => {
 	const { isLoading } = useAppSelector((store) => store.room);
+
+	console.log(image);
 
 	return (
 		<Container to={`/room/${_id}`}>
@@ -20,7 +25,7 @@ const Room = ({ _id, name, image, locationId, price }: IRoom) => {
 					<Skeleton />
 				) : (
 					<p>
-						{locationId.province} <span>{locationId.name}</span>
+						{locationId?.province} <span>{locationId?.name}</span>
 					</p>
 				)}
 				{isLoading ? (

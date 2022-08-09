@@ -76,7 +76,7 @@ const Card = ({ pricePerNight, checkIn, numberOfVisitNights }: ICard) => {
 const Container = styled.article`
 	position: sticky;
 	top: calc(var(--navbar-height) + 8rem);
-	width: 90%;
+	width: 75%;
 	margin-inline: auto;
 	border-radius: var(--radius);
 	box-shadow: var(--box-shadow);
@@ -146,6 +146,10 @@ const Container = styled.article`
 			align-items: center;
 			justify-content: space-between;
 
+			p {
+				font-size: 1.5rem;
+			}
+
 			.text-underline {
 				text-decoration: underline;
 			}
@@ -156,6 +160,10 @@ const Container = styled.article`
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+
+		h4 {
+			font-size: 1.5rem;
+		}
 	}
 
 	.line {
