@@ -237,6 +237,7 @@ const SingleRoomPage = () => {
 							pricePerNight={price}
 							checkIn={checkIn}
 							numberOfVisitNights={numberOfVisitNights}
+							setCheckInHandler={setCheckIn}
 						/>
 					</div>
 				</div>

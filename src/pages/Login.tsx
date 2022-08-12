@@ -8,11 +8,6 @@ import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { loginThunk } from '../features/Auth/authThunk';
 import { Button, Loading, Image, Error } from '../components';
 
-interface ILogin {
-	email: string;
-	password: string;
-}
-
 type FormInputs = {
 	email: string;
 	password: string;
@@ -25,23 +20,14 @@ const Login = () => {
 		(store) => store.auth
 	);
 	const navigate = useNavigate();
-	const [user, setUser] = useState<ILogin>({
-		email: '',
-		password: '',
-	});
+
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
-	} = useForm<FormInputs>({ mode: 'onBlur' });
+	} = useForm<FormInputs>({ mode: 'onChange' });
 
-	const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-		const name = e.target.name;
-		const value = e.target.value;
-		setUser({ ...user, [name]: value });
-	};
-
-	const onSubmitHandler = () => {
+	const onSubmitHandler = (user: FormInputs) => {
 		dispatch(loginThunk(user));
 	};
 
@@ -87,13 +73,11 @@ const Login = () => {
 							<label htmlFor='email'>Username</label>
 							<input
 								type='email'
-								value={user.email}
 								placeholder='your-email@gmail.com'
 								{...register('email', {
 									required: { value: true, message: 'Email must be provided' },
 									pattern: { value: /^\S+@\S+$/i, message: 'Invalid Email' },
 								})}
-								onChange={onChangeHandler}
 							/>
 							{errors.email && (
 								<h5 className='danger'>{errors.email.message}</h5>
@@ -103,7 +87,6 @@ const Login = () => {
 							<label htmlFor='password'>Password</label>
 							<input
 								type='password'
-								value={user.password}
 								placeholder='Your password'
 								{...register('password', {
 									required: {
@@ -115,7 +98,6 @@ const Login = () => {
 										message: 'Password must have at least 6 letters',
 									},
 								})}
-								onChange={onChangeHandler}
 							/>
 							{errors.password && (
 								<h5 className='danger'>{errors.password.message}</h5>

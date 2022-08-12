@@ -1,11 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { ChangeEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { useNavigate, Link } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
-import { registerThunk, IRegister } from '../features/Auth/authThunk';
+import { registerThunk } from '../features/Auth/authThunk';
 import { Button, Loading, Error } from '../components';
 
 type FormInputs = {
@@ -14,7 +14,7 @@ type FormInputs = {
 	password: string;
 	phone: string;
 	birthday: string;
-	gender: string;
+	gender: boolean;
 	address: string;
 };
 
@@ -26,29 +26,14 @@ const Register = () => {
 	const [errorState, setErrorState] = useState('');
 
 	const navigate = useNavigate();
-	const [user, setUser] = useState<IRegister>({
-		name: '',
-		email: 'test123@gmail.com',
-		password: '',
-		phone: '',
-		birthday: '',
-		gender: true,
-		address: '',
-	});
+
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 	} = useForm<FormInputs>();
 
-	const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-		const name = e.target.name;
-		const value = e.target.value;
-
-		setUser({ ...user, [name]: value });
-	};
-
-	const onSubmitHandler = () => {
+	const onSubmitHandler = (user: FormInputs) => {
 		dispatch(registerThunk(user));
 	};
 
@@ -96,7 +81,6 @@ const Register = () => {
 								{...register('name', {
 									required: { value: true, message: 'Name must be provided' },
 								})}
-								onChange={onChangeHandler}
 							/>
 							{errors.name && <h5 className='danger'>{errors.name.message}</h5>}
 						</div>
@@ -109,7 +93,6 @@ const Register = () => {
 									required: { value: true, message: 'Email must be provided' },
 									pattern: { value: /@gmail.com/i, message: 'Invalid Email' },
 								})}
-								onChange={onChangeHandler}
 							/>
 							{errors.email && (
 								<h5 className='danger'>{errors.email.message}</h5>
@@ -127,7 +110,6 @@ const Register = () => {
 										message: 'Password must be provided',
 									},
 								})}
-								onChange={onChangeHandler}
 							/>
 							{errors.password && (
 								<h5 className='danger'>{errors.password.message}</h5>
@@ -142,7 +124,6 @@ const Register = () => {
 								{...register('phone', {
 									required: { value: true, message: 'phone must be provided' },
 								})}
-								onChange={onChangeHandler}
 							/>
 							{errors.phone && (
 								<h5 className='danger'>{errors.phone.message}</h5>
@@ -160,7 +141,6 @@ const Register = () => {
 										message: 'Birthday must be provided',
 									},
 								})}
-								onChange={onChangeHandler}
 							/>
 							{errors.phone && (
 								<h5 className='danger'>{errors.phone.message}</h5>
@@ -192,7 +172,6 @@ const Register = () => {
 										message: 'Address must be provided',
 									},
 								})}
-								onChange={onChangeHandler}
 							/>
 							{errors.address && (
 								<h5 className='danger'>{errors.address.message}</h5>

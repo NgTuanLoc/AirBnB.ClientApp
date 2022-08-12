@@ -1,32 +1,79 @@
 import styled from 'styled-components';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import moment from 'moment';
+import { ChangeEvent, useState } from 'react';
 
-import { useAppDispatch, useAppSelector } from '../hooks/hooks';
+// import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import Button from './Button';
 
 interface ICard {
 	pricePerNight: number;
 	checkIn: Date[];
 	numberOfVisitNights: number;
+	setCheckInHandler: any;
 }
 
-const Card = ({ pricePerNight, checkIn, numberOfVisitNights }: ICard) => {
+const Card = ({
+	pricePerNight,
+	checkIn,
+	numberOfVisitNights,
+	setCheckInHandler,
+}: ICard) => {
+	const [checkInDate, setCheckInDate] = useState(
+		moment(checkIn[0]).format('l')
+	);
+	const [checkOutDate, setCheckoutDate] = useState(
+		moment(checkIn[1]).format('l')
+	);
+
+	const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+		const name = e.target.name;
+		const value = e.target.value;
+		if (name === 'check-in') {
+			setCheckInDate(value);
+			let newCheckIn = new Date(checkInDate);
+
+			if (newCheckIn instanceof Date && !isNaN(newCheckIn.valueOf())) {
+			}
+		} else {
+			setCheckoutDate(value);
+			let newCheckout = new Date(checkOutDate);
+			if (newCheckout instanceof Date && !isNaN(newCheckout.valueOf())) {
+			}
+		}
+	};
+
 	return (
 		<Container>
 			<h3>
 				${pricePerNight.toLocaleString()} VND
 				<span className='light'> night</span>
 			</h3>
-			<div className='card__schedule'>
+			<form className='card__schedule'>
 				<div className='schedule__checkIn'>
-					<button className='btn-checkIn'>
-						<h5>CHECK-IN</h5>
-						<p>{moment(checkIn[0]).format('l')}</p>
+					<button type='button' className='btn-checkIn'>
+						<label htmlFor='check-in'>
+							<h5>CHECK-IN</h5>
+						</label>
+						<input
+							value={checkInDate}
+							type='text'
+							name='check-in'
+							id='check-in'
+							onChange={onChangeHandler}
+						/>
 					</button>
-					<button className='btn-checkOut'>
-						<h5>CHECK-OUT</h5>
-						<p>{moment(checkIn[1]).format('l')}</p>
+					<button type='button' className='btn-checkOut'>
+						<label htmlFor='check-in'>
+							<h5>CHECK-OUT</h5>
+						</label>
+						<input
+							value={checkOutDate}
+							type='text'
+							name='check-out'
+							id='check-out'
+							onChange={onChangeHandler}
+						/>
 					</button>
 				</div>
 				<div className='schedule__guest'>
@@ -34,11 +81,11 @@ const Card = ({ pricePerNight, checkIn, numberOfVisitNights }: ICard) => {
 						<h5>GUESTS</h5>
 						<p>2 guests</p>
 					</div>
-					<button>
+					<button type='submit'>
 						<MdOutlineKeyboardArrowDown />
 					</button>
 				</div>
-			</div>
+			</form>
 			<Button>Check Availability</Button>
 			<div className='card__detail'>
 				<div className='card__detail--item'>
@@ -108,7 +155,7 @@ const Container = styled.article`
 		border-radius: var(--radius);
 
 		h5 {
-			font-size: 1rem;
+			font-size: 1.5rem;
 			margin-bottom: 0.5rem;
 		}
 
@@ -119,15 +166,22 @@ const Container = styled.article`
 		.schedule__checkIn {
 			display: grid;
 			grid-template-columns: 1fr 1fr;
+			position: relative;
 
 			button {
 				text-align: left;
 				border-bottom: 1px solid #b0b0b0;
-				padding: 0.5rem;
+				padding: 1rem;
 			}
 
 			.btn-checkIn {
 				border-right: 1px solid #b0b0b0;
+			}
+
+			input {
+				border: transparent;
+				outline: none;
+				width: 100%;
 			}
 		}
 

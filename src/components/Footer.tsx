@@ -56,7 +56,7 @@ const Footer = () => {
 			<div className='line'></div>
 			<div className='social'>
 				<h4>
-					&copy; {new Date().getFullYear()}Airbnb,Inc &middot; Privacy &middot;
+					&copy; {new Date().getFullYear()} Airbnb,Inc &middot; Privacy &middot;
 					Terms &middot; Sitemap
 				</h4>
 				<h4>
