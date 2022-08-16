@@ -1,7 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { IRoom } from '../../@types/Room';
-import { getRoomListByLocationID, getRoomDetailByID } from './roomThunk';
+import {
+	getRoomListByLocationID,
+	getRoomDetailByID,
+	bookRoomById,
+} from './roomThunk';
 
 export interface IRoomState {
 	roomList: IRoom[];
@@ -49,6 +53,18 @@ const locationSlice = createSlice({
 		builder.addCase(getRoomDetailByID.rejected, (state, { payload }) => {
 			state.isLoading = false;
 			state.error = payload as string;
+		});
+		builder.addCase(bookRoomById.pending, (state) => {
+			state.isLoading = true;
+		});
+		builder.addCase(bookRoomById.fulfilled, (state, { payload }) => {
+			state.isLoading = false;
+		});
+		builder.addCase(bookRoomById.rejected, (state, { payload }) => {
+			console.log(payload);
+
+			state.isLoading = false;
+			// state.error = payload as string;
 		});
 	},
 });

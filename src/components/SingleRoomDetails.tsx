@@ -37,7 +37,8 @@ const SingleRoomDetails = () => {
 			<Card
 				numberOfVisitNights={numberOfVisitNights}
 				bookDate={bookDate}
-				pricePerNight={100}
+				pricePerNight={selectedRoom.price}
+				roomId={selectedRoom._id}
 			/>
 		</Container>
 	);

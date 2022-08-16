@@ -1,9 +1,12 @@
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import moment from 'moment';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 
+import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import Button from './Button';
+import { bookRoomById } from '../features/Room/roomThunk';
 
 interface ICard {
 	pricePerNight: number;
@@ -13,15 +16,24 @@ interface ICard {
 	};
 	numberOfVisitNights: number;
 	setCheckInHandler?: any;
+	roomId: string;
 }
 
-const Card = ({ pricePerNight, bookDate, numberOfVisitNights }: ICard) => {
+const Card = ({
+	pricePerNight,
+	bookDate,
+	numberOfVisitNights,
+	roomId,
+}: ICard) => {
 	const [checkInDate, setCheckInDate] = useState(
 		moment(bookDate.checkIn).format('l')
 	);
 	const [checkOutDate, setCheckoutDate] = useState(
 		moment(bookDate.checkOut).format('l')
 	);
+	const { isAuthenticated } = useAppSelector((store) => store.auth);
+	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
 
 	const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
 		const name = e.target.name;
@@ -32,6 +44,20 @@ const Card = ({ pricePerNight, bookDate, numberOfVisitNights }: ICard) => {
 		} else {
 			setCheckoutDate(value);
 		}
+	};
+
+	const onSubmitHandler = (e: FormEvent) => {
+		e.preventDefault();
+		if (!isAuthenticated) {
+			navigate('/login');
+		}
+		dispatch(
+			bookRoomById({
+				roomId: roomId,
+				checkIn: checkInDate,
+				checkOut: checkOutDate,
+			})
+		);
 	};
 
 	useEffect(() => {
@@ -45,44 +71,46 @@ const Card = ({ pricePerNight, bookDate, numberOfVisitNights }: ICard) => {
 				${pricePerNight.toLocaleString()} VND
 				<span className='light'> night</span>
 			</h3>
-			<form className='card__schedule'>
-				<div className='schedule__checkIn'>
-					<button type='button' className='btn-checkIn'>
-						<label htmlFor='check-in'>
-							<h5>CHECK-IN</h5>
-						</label>
-						<input
-							value={checkInDate}
-							type='text'
-							name='check-in'
-							id='check-in'
-							onChange={onChangeHandler}
-						/>
-					</button>
-					<button type='button' className='btn-checkOut'>
-						<label htmlFor='check-in'>
-							<h5>CHECK-OUT</h5>
-						</label>
-						<input
-							value={checkOutDate}
-							type='text'
-							name='check-out'
-							id='check-out'
-							onChange={onChangeHandler}
-						/>
-					</button>
-				</div>
-				<div className='schedule__guest'>
-					<div>
-						<h5>GUESTS</h5>
-						<p>2 guests</p>
+			<form onSubmit={onSubmitHandler}>
+				<div className='card__schedule'>
+					<div className='schedule__checkIn'>
+						<button type='button' className='btn-checkIn'>
+							<label htmlFor='check-in'>
+								<h5>CHECK-IN</h5>
+							</label>
+							<input
+								value={checkInDate}
+								type='text'
+								name='check-in'
+								id='check-in'
+								onChange={onChangeHandler}
+							/>
+						</button>
+						<button type='button' className='btn-checkOut'>
+							<label htmlFor='check-in'>
+								<h5>CHECK-OUT</h5>
+							</label>
+							<input
+								value={checkOutDate}
+								type='text'
+								name='check-out'
+								id='check-out'
+								onChange={onChangeHandler}
+							/>
+						</button>
 					</div>
-					<button type='submit'>
-						<MdOutlineKeyboardArrowDown />
-					</button>
+					<div className='schedule__guest'>
+						<div>
+							<h5>GUESTS</h5>
+							<p>2 guests</p>
+						</div>
+						<button type='submit'>
+							<MdOutlineKeyboardArrowDown />
+						</button>
+					</div>
 				</div>
+				<Button>Check Availability</Button>
 			</form>
-			<Button>Check Availability</Button>
 			<div className='card__detail'>
 				<div className='card__detail--item'>
 					<p className='text-underline'>

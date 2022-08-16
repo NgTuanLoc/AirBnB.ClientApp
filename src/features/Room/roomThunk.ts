@@ -3,6 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { axiosInstance } from '../../utils/axios';
 import { IRoom } from '../../@types/Room';
 import { RootState } from '../../app/store';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 const URL = '/api/rooms';
 
@@ -48,4 +49,36 @@ const getRoomDetailByID = createAsyncThunk<
 	}
 });
 
-export { getRoomListByLocationID, getRoomDetailByID };
+const bookRoomById = createAsyncThunk<
+	IRoom,
+	{ roomId: string; checkIn: string; checkOut: string },
+	{
+		state: RootState;
+	}
+>('room/bookRoomById', async (bookInfo, thunkAPI) => {
+	try {
+		const userInfo = localStorage.getItem('userLogin');
+
+		if (!userInfo) {
+			return thunkAPI.rejectWithValue('You must login to book room');
+		}
+
+		const { token } = JSON.parse(userInfo);
+
+		const params = {
+			method: 'POST',
+			url: `${URL}/booking`,
+			headers: {
+				token: token,
+			},
+			data: bookInfo,
+		};
+
+		const response = await axiosInstance.request(params);
+		return response.data;
+	} catch (error: any) {
+		return thunkAPI.rejectWithValue(error);
+	}
+});
+
+export { getRoomListByLocationID, getRoomDetailByID, bookRoomById };

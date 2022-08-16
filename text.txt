@@ -1,0 +1,7 @@
+ADMIN
+"email": "thang3ngay25123@gmail.com",
+"password": "0971719023"
+
+CLIENT
+"email": "thaiduy123456@gmail.com",
+"password": "123456"
