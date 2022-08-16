@@ -1,7 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { IBooking } from '../../@types/Booking';
-import { getBookingList } from './bookingThunk';
+import {
+	getBookingList,
+	getBookingListByTicketId,
+	updateBookingListByTicketId,
+} from './bookingThunk';
 
 export interface IBookingState {
 	bookingList: IBooking[];
@@ -37,6 +41,37 @@ const bookingSlice = createSlice({
 			state.isLoading = false;
 			state.error = payload as string;
 		});
+		builder.addCase(getBookingListByTicketId.pending, (state) => {
+			state.isLoading = true;
+		});
+		builder.addCase(
+			getBookingListByTicketId.fulfilled,
+			(state, { payload }) => {
+				state.isLoading = false;
+				state.bookedRoom = payload;
+			}
+		);
+		builder.addCase(getBookingListByTicketId.rejected, (state, { payload }) => {
+			state.isLoading = false;
+			state.error = payload as string;
+		});
+		builder.addCase(updateBookingListByTicketId.pending, (state) => {
+			state.isLoading = true;
+		});
+		builder.addCase(
+			updateBookingListByTicketId.fulfilled,
+			(state, { payload }) => {
+				state.isLoading = false;
+				state.bookedRoom = payload;
+			}
+		);
+		builder.addCase(
+			updateBookingListByTicketId.rejected,
+			(state, { payload }) => {
+				state.isLoading = false;
+				state.error = payload as string;
+			}
+		);
 	},
 });
 

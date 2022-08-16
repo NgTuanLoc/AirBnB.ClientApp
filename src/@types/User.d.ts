@@ -1,5 +1,5 @@
 export interface IUser {
-	tickets: string[];
+	tickets: string[] | null;
 	deleteAt: boolean;
 	_id: string;
 	name: string;
@@ -11,5 +11,5 @@ export interface IUser {
 	address: string;
 	type: 'ADMIN' | 'CLIENT';
 	__v: number;
-	avatar: string;
+	avatar?: string | null;
 }

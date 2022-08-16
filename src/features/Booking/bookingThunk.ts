@@ -22,7 +22,7 @@ const getBookingList = createAsyncThunk<IBooking[]>(
 	}
 );
 
-const getBookingListByTicketId = createAsyncThunk<IBooking[], string>(
+const getBookingListByTicketId = createAsyncThunk<IBooking, string>(
 	'booking/getBookingListByTicketId',
 	async (ticketId, thunkAPI) => {
 		try {
@@ -39,21 +39,39 @@ const getBookingListByTicketId = createAsyncThunk<IBooking[], string>(
 	}
 );
 
-// const updateBookingListByTicketId = createAsyncThunk<IBooking[], string>(
-// 	'booking/getBookingListByTicketId',
-// 	async (ticketId, thunkAPI) => {
-// 		try {
-// 			const params = {
-// 				method: 'PUT',
-// 				url: `${URL}/${ticketId}`,
-// 			};
+const updateBookingListByTicketId = createAsyncThunk<IBooking, IBooking>(
+	'booking/updateBookingListByTicketId',
+	async (booking, thunkAPI) => {
+		const {
+			_id,
+			checkIn,
+			checkOut,
+			userId,
+			roomId: { _id: roomId },
+		} = booking;
 
-// 			const response = await axiosInstance.request(params);
-// 			return response.data;
-// 		} catch (error: any) {
-// 			return thunkAPI.rejectWithValue(error);
-// 		}
-// 	}
-// );
+		try {
+			const params = {
+				method: 'PUT',
+				url: `${URL}/${_id}`,
+				data: {
+					checkIn,
+					checkOut,
+					userId,
+					roomId,
+				},
+			};
 
-export { getBookingList, getBookingListByTicketId };
+			const response = await axiosInstance.request(params);
+			return response.data;
+		} catch (error: any) {
+			return thunkAPI.rejectWithValue(error);
+		}
+	}
+);
+
+export {
+	getBookingList,
+	getBookingListByTicketId,
+	updateBookingListByTicketId,
+};

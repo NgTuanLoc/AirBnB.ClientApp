@@ -1,9 +1,11 @@
+import { IUser } from './User';
+
 interface IBooking {
 	deleteAt: boolean;
 	_id: string;
 	checkIn: string;
 	checkOut: string;
-	userId: { tickets: string[] } | null;
+	userId: IUser | null;
 	roomId: {
 		deleteAt: boolean;
 		_id: string;

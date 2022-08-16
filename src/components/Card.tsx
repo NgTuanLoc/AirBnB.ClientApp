@@ -13,12 +13,7 @@ interface ICard {
 	setCheckInHandler: any;
 }
 
-const Card = ({
-	pricePerNight,
-	checkIn,
-	numberOfVisitNights,
-	setCheckInHandler,
-}: ICard) => {
+const Card = ({ pricePerNight, checkIn, numberOfVisitNights }: ICard) => {
 	const [checkInDate, setCheckInDate] = useState(
 		moment(checkIn[0]).format('l')
 	);
