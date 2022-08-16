@@ -1,4 +1,6 @@
-export const transformLanguage = (str: string) => {
+import moment from 'moment';
+
+const transformLanguage = (str: string) => {
 	str = str.toLowerCase();
 	str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, 'a');
 	str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, 'e');
@@ -16,3 +18,9 @@ export const transformLanguage = (str: string) => {
 	str = str.replace(/Đ/g, 'D');
 	return str;
 };
+
+const transformDate = (date: Date) => {
+	return moment(date).format('Do MMMM YYYY');
+};
+
+export { transformLanguage, transformDate };

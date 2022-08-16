@@ -1,42 +1,43 @@
 import styled from 'styled-components';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import moment from 'moment';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 
-// import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import Button from './Button';
 
 interface ICard {
 	pricePerNight: number;
-	checkIn: Date[];
+	bookDate: {
+		checkIn: Date;
+		checkOut: Date;
+	};
 	numberOfVisitNights: number;
-	setCheckInHandler: any;
+	setCheckInHandler?: any;
 }
 
-const Card = ({ pricePerNight, checkIn, numberOfVisitNights }: ICard) => {
+const Card = ({ pricePerNight, bookDate, numberOfVisitNights }: ICard) => {
 	const [checkInDate, setCheckInDate] = useState(
-		moment(checkIn[0]).format('l')
+		moment(bookDate.checkIn).format('l')
 	);
 	const [checkOutDate, setCheckoutDate] = useState(
-		moment(checkIn[1]).format('l')
+		moment(bookDate.checkOut).format('l')
 	);
 
 	const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
 		const name = e.target.name;
 		const value = e.target.value;
+
 		if (name === 'check-in') {
 			setCheckInDate(value);
-			let newCheckIn = new Date(checkInDate);
-
-			if (newCheckIn instanceof Date && !isNaN(newCheckIn.valueOf())) {
-			}
 		} else {
 			setCheckoutDate(value);
-			let newCheckout = new Date(checkOutDate);
-			if (newCheckout instanceof Date && !isNaN(newCheckout.valueOf())) {
-			}
 		}
 	};
+
+	useEffect(() => {
+		setCheckInDate(moment(bookDate.checkIn).format('L'));
+		setCheckoutDate(moment(bookDate.checkOut).format('L'));
+	}, [bookDate]);
 
 	return (
 		<Container>
@@ -119,6 +120,7 @@ const Container = styled.article`
 	position: sticky;
 	top: calc(var(--navbar-height) + 8rem);
 	width: 75%;
+	height: 50rem;
 	margin-inline: auto;
 	border-radius: var(--radius);
 	box-shadow: var(--box-shadow);

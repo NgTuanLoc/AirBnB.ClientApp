@@ -12,6 +12,9 @@ import Catalog from './Catalog';
 import Button from './Button';
 import Image from './Image';
 import UserModal from './UserModal';
+import SingleRoomDetails from './SingleRoomDetails';
+import SingleRoomCatalog from './SingleRoomCatalog';
+import SingleRoomInfo from './SingleRoomInfo';
 import Error from './Error';
 
 export {
@@ -30,4 +33,7 @@ export {
 	Image,
 	UserModal,
 	Error,
+	SingleRoomDetails,
+	SingleRoomCatalog,
+	SingleRoomInfo,
 };

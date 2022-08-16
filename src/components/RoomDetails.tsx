@@ -25,7 +25,6 @@ const RoomDetails = ({
 	price,
 	_id,
 }: IRoom) => {
-	const { province, name: locationName } = locationId;
 	return (
 		<Container>
 			<img src={image} alt={name} />
@@ -34,7 +33,8 @@ const RoomDetails = ({
 					{name}
 				</Link>
 				<p>
-					{province} - {locationName}
+					{locationId ? locationId.province : 'not provided'} -{' '}
+					{locationId ? locationId.name : 'not provided'}
 				</p>
 				<div className='line'></div>
 				<p className='detail'>

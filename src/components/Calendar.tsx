@@ -4,20 +4,26 @@ import { useState, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
 interface ICalendar {
-	setCheckIn: any;
+	setBookDate?: any;
 }
 
-const Calendar = ({ setCheckIn }: ICalendar) => {
+const Calendar = ({ setBookDate }: ICalendar) => {
 	const currentDate = new Date();
 	const nextDate = new Date();
 
 	nextDate.setDate(currentDate.getDate());
-	const [value, setValue] = useState(currentDate);
+	const [value, setValue] = useState<any>(currentDate);
 	const isMobileDevice = useMediaQuery({
 		query: '(max-width: 992px)',
 	});
 	useEffect(() => {
-		setCheckIn(value);
+		if (value.length === 2) {
+			setBookDate({
+				checkIn: value[0],
+				checkOut: value[1],
+			});
+		}
+
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [value]);
 

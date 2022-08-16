@@ -23,6 +23,7 @@ const loginThunk = createAsyncThunk<IAuth, { email: string; password: string }>(
 				email: user.email,
 				password: user.password,
 				token: response.data.token,
+				type: response.data.user.type,
 			};
 
 			localStorage.setItem('userLogin', JSON.stringify(token));
@@ -63,7 +64,10 @@ const registerThunk = createAsyncThunk<IAuth, IRegister>(
 
 			const response = await axiosInstance.request(params);
 			thunkAPI.dispatch(
-				loginThunk({ email: user.email, password: user.password })
+				loginThunk({
+					email: user.email,
+					password: user.password,
+				})
 			);
 			return response.data;
 		} catch (error: any) {

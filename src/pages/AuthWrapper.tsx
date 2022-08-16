@@ -23,8 +23,8 @@ const AuthWrapper = ({ children }: IAuthWrapper) => {
 		if (token.token) {
 			dispatch(
 				loginThunk({
-					email: token.email as string,
-					password: token.password as string,
+					email: token.email,
+					password: token.password,
 				})
 			);
 		}
