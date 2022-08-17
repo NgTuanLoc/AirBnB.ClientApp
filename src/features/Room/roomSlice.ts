@@ -64,7 +64,7 @@ const locationSlice = createSlice({
 			console.log(payload);
 
 			state.isLoading = false;
-			// state.error = payload as string;
+			state.error = payload as string;
 		});
 	},
 });

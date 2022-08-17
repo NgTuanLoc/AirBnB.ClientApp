@@ -3,7 +3,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { axiosInstance } from '../../utils/axios';
 import { IRoom } from '../../@types/Room';
 import { RootState } from '../../app/store';
-import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 const URL = '/api/rooms';
 

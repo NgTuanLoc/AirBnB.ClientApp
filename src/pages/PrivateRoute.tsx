@@ -9,8 +9,6 @@ interface IPrivateRoute {
 }
 
 const PrivateRoute = ({ children }: IPrivateRoute) => {
-	// const [token, _] = useLocalStorage('userLogin', '');
-
 	const { isAuthenticated } = useAppSelector((store) => store.auth);
 
 	if (!isAuthenticated) {

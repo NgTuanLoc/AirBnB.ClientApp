@@ -11,5 +11,5 @@ export interface IUser {
 	address: string;
 	type: 'ADMIN' | 'CLIENT';
 	__v: number;
-	avatar?: string | null;
+	avatar?: string;
 }
