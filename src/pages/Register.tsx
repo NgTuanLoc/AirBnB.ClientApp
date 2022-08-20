@@ -195,7 +195,7 @@ const Register = () => {
 const Container = styled.main`
 	width: 100vw;
 	height: 100vh;
-	overflow: hidden;
+	overflow: scroll;
 	background-color: var(--clr-secondary);
 	display: grid;
 	grid-template-columns: 1fr 1fr;
@@ -208,12 +208,12 @@ const Container = styled.main`
 	}
 
 	.login__image {
-		height: 100vh;
+		height: 100%;
 	}
 
 	.login__form {
 		position: relative;
-		height: 100vh;
+		height: 100%;
 
 		.back-btn {
 			position: absolute;
@@ -232,6 +232,7 @@ const Container = styled.main`
 			display: flex;
 			flex-direction: column;
 			align-items: center;
+			height: 80%;
 			width: 80%;
 			max-width: 50rem;
 
@@ -298,6 +299,7 @@ const Container = styled.main`
 		height: auto;
 
 		.login__form {
+			padding: 3rem;
 			order: 3;
 		}
 
