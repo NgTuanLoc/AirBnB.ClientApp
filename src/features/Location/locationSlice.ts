@@ -20,11 +20,7 @@ const initialState: ILocationState = {
 const locationSlice = createSlice({
 	name: 'location',
 	initialState,
-	reducers: {
-		test: () => {
-			console.log('Hello');
-		},
-	},
+	reducers: {},
 	extraReducers(builder) {
 		builder.addCase(getLocationList.pending, (state) => {
 			state.isLoading = true;

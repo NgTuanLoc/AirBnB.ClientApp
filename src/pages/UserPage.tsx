@@ -28,7 +28,7 @@ const UserPage = () => {
 	} = auth?.user;
 	return (
 		<>
-			<Navbar />
+			<Navbar hideSearch />
 			<Container className='section'>
 				<div className='user__info'>
 					<img

@@ -50,4 +50,3 @@ const Container = styled.button`
 `;
 
 export default Button;
-// linear-gradient(to right, #e61e4d 0%, #e31c5f 50%, #d70466 100%)

@@ -19,7 +19,11 @@ export interface IFilteredLocation {
 	id: string;
 }
 
-const Navbar = () => {
+export interface INavbar {
+	hideSearch?: boolean;
+}
+
+const Navbar = ({ hideSearch }: INavbar) => {
 	const [title, setTitle] = useState('Anywhere');
 	const [isUserModalOpen, setIsUserModalOpen] = useState(false);
 	const [disableInput, setDisableInput] = useState(true);
@@ -84,7 +88,7 @@ const Navbar = () => {
 			<Logo to='/'>
 				<img src={logo} alt='airbnb logo' />
 			</Logo>
-			<Search onSubmit={onSubmitHandler}>
+			<Search onSubmit={onSubmitHandler} hide={hideSearch}>
 				<button type='button' ref={ref} style={{ position: 'relative' }}>
 					<h5 onClick={() => setDisableInput(false)}>{title}</h5>
 					<Input
@@ -161,8 +165,12 @@ const Container = styled.header`
 	}
 `;
 
-const Search = styled.form`
-	display: flex;
+interface ISearch {
+	hide?: boolean;
+}
+
+const Search = styled.form<ISearch>`
+	display: ${(props) => (props.hide ? 'none' : 'flex')};
 	justify-content: space-evenly;
 	align-items: center;
 	box-shadow: var(--light-shadow);

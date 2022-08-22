@@ -47,7 +47,8 @@ const Container = styled(Swiper)`
 
 	.swiper-button-next,
 	.swiper-button-prev {
-		top: 40%;
+		top: 50%;
+		transform: translateY(-50%);
 		color: black;
 	}
 `;

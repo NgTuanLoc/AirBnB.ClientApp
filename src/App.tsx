@@ -38,7 +38,14 @@ const App = () => {
 						<Route path='/' element={<Home />} />
 						<Route path='/room-list/:locationId' element={<RoomListPage />} />
 						<Route path='/room/:id' element={<SingleRoomPage />} />
-						<Route path='/admin' element={<AdminPage />} />
+						<Route
+							path='/admin'
+							element={
+								<PrivateRoute>
+									<AdminPage />
+								</PrivateRoute>
+							}
+						/>
 						<Route
 							path='/user/:id'
 							element={
