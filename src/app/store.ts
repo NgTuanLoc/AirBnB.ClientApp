@@ -3,7 +3,7 @@ import locationReducer from '../features/Location/locationSlice';
 import roomReducer from '../features/Room/roomSlice';
 import bookReducer from '../features/Booking/bookingSlice';
 import ratingReducer from '../features/Rating/ratingSlice';
-import adminReducer from '../features/Admin/adminSlice';
+import userReducer from '../features/User/userSlice';
 import authReducer from '../features/Auth/authSlice';
 
 export const store = configureStore({
@@ -12,7 +12,7 @@ export const store = configureStore({
 		room: roomReducer,
 		book: bookReducer,
 		rating: ratingReducer,
-		admin: adminReducer,
+		user: userReducer,
 		auth: authReducer,
 	},
 });

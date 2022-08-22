@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { loginThunk, registerThunk } from './authThunk';
 import { IAuth } from '../../@types/Auth';
@@ -8,6 +8,7 @@ export interface IAuthState {
 	error: string;
 	auth: IAuth | null;
 	isAuthenticated: boolean;
+	userType: 'ADMIN' | 'CLIENT' | '';
 }
 
 const initialState: IAuthState = {
@@ -15,6 +16,7 @@ const initialState: IAuthState = {
 	error: '',
 	isAuthenticated: false,
 	auth: null,
+	userType: '',
 };
 
 const authSlice = createSlice({
@@ -23,6 +25,7 @@ const authSlice = createSlice({
 	reducers: {
 		logout: (state: IAuthState) => {
 			state.isAuthenticated = false;
+			state.userType = '';
 			state.auth = null;
 			localStorage.removeItem('userLogin');
 		},
@@ -34,6 +37,7 @@ const authSlice = createSlice({
 		builder.addCase(loginThunk.fulfilled, (state, { payload }) => {
 			state.isLoading = false;
 			state.isAuthenticated = true;
+			state.userType = payload.user.type;
 			state.auth = payload;
 			state.error = '';
 		});

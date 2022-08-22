@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
-import { Navbar } from '../components';
+import { Navbar, Dashboard } from '../components';
 
 const AdminPage = () => {
 	const dispatch = useAppDispatch();
@@ -22,7 +22,7 @@ const AdminPage = () => {
 					<Button>Rooms</Button>
 					<Button>Locations</Button>
 				</Sidebar>
-				<Dashboard>Dashboard</Dashboard>
+				<Dashboard />
 			</Container>
 		</>
 	);
@@ -38,9 +38,6 @@ const Sidebar = styled.aside`
 	background-color: blue;
 	display: flex;
 	flex-direction: column;
-`;
-const Dashboard = styled.section`
-	background-color: red;
 `;
 
 const Button = styled.button`

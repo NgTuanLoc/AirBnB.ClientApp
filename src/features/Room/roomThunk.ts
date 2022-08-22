@@ -48,8 +48,34 @@ const getRoomDetailByID = createAsyncThunk<
 	}
 });
 
+const createNewRoom = createAsyncThunk<string, IRoom, { state: RootState }>(
+	'room/createNewRoom',
+	async (newRoom, thunkAPI) => {
+		const adminToken = thunkAPI.getState().auth.auth?.token;
+
+		if (!adminToken) {
+			return thunkAPI.rejectWithValue('create room failed, admin required');
+		}
+
+		try {
+			const params = {
+				method: 'POST',
+				url: `${URL}`,
+				headers: {
+					token: adminToken,
+				},
+				data: newRoom,
+			};
+			await axiosInstance.request(params);
+			return 'success';
+		} catch (error) {
+			return thunkAPI.rejectWithValue('create room failed');
+		}
+	}
+);
+
 const bookRoomById = createAsyncThunk<
-	IRoom,
+	string,
 	{ roomId: string; checkIn: string; checkOut: string },
 	{
 		state: RootState;
@@ -73,11 +99,16 @@ const bookRoomById = createAsyncThunk<
 			data: bookInfo,
 		};
 
-		const response = await axiosInstance.request(params);
-		return response.data;
+		await axiosInstance.request(params);
+		return `Room ${bookInfo.roomId} booked successfully`;
 	} catch (error: any) {
 		return thunkAPI.rejectWithValue(error);
 	}
 });
 
-export { getRoomListByLocationID, getRoomDetailByID, bookRoomById };
+export {
+	getRoomListByLocationID,
+	getRoomDetailByID,
+	createNewRoom,
+	bookRoomById,
+};

@@ -16,6 +16,8 @@ import SingleRoomDetails from './SingleRoomDetails';
 import SingleRoomCatalog from './SingleRoomCatalog';
 import SingleRoomInfo from './SingleRoomInfo';
 import Error from './Error';
+import Form from './Form';
+import Dashboard from './Dashboard';
 
 export {
 	Loading,
@@ -36,4 +38,6 @@ export {
 	SingleRoomDetails,
 	SingleRoomCatalog,
 	SingleRoomInfo,
+	Form,
+	Dashboard,
 };
