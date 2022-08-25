@@ -18,10 +18,9 @@ const Container = styled.button`
 	color: white;
 	font-size: 2rem;
 	border-radius: var(--radius);
-	padding: 1rem 1rem;
+	padding: 1rem;
 	background: var(--clr-gradient);
 	transition: var(--transition);
-	width: 100%;
 
 	h4 {
 		position: relative;

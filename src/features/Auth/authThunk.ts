@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { axiosInstance } from '../../utils/axios';
-import { IAuth } from '../../@types/Auth';
+import { IAuth, IRegister } from '../../@types/Auth';
 
 const URL = '/api/auth';
 
@@ -33,16 +33,6 @@ const loginThunk = createAsyncThunk<IAuth, { email: string; password: string }>(
 		}
 	}
 );
-
-export interface IRegister {
-	name: string;
-	email: string;
-	password: string;
-	phone: string;
-	birthday: string;
-	gender: boolean;
-	address: string;
-}
 
 const registerThunk = createAsyncThunk<IAuth, IRegister>(
 	'auth/register',

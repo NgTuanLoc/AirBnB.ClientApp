@@ -104,7 +104,9 @@ const Login = () => {
 							)}
 						</div>
 						{errorState && <Error>{errorState}</Error>}
-						<Button>Login</Button>
+						<ButtonContainer>
+							<Button>Login</Button>
+						</ButtonContainer>
 					</form>
 				)}
 			</div>
@@ -224,6 +226,10 @@ const Container = styled.main`
 			order: 1;
 		}
 	}
+`;
+
+const ButtonContainer = styled.div`
+	width: 100%;
 `;
 
 export default Login;

@@ -8,6 +8,7 @@ export interface IAuthState {
 	error: string;
 	auth: IAuth | null;
 	isAuthenticated: boolean;
+	token: string;
 	userType: 'ADMIN' | 'CLIENT' | '';
 }
 
@@ -16,6 +17,7 @@ const initialState: IAuthState = {
 	error: '',
 	isAuthenticated: false,
 	auth: null,
+	token: '',
 	userType: '',
 };
 
@@ -26,6 +28,7 @@ const authSlice = createSlice({
 		logout: (state: IAuthState) => {
 			state.isAuthenticated = false;
 			state.userType = '';
+			state.token = '';
 			state.auth = null;
 			localStorage.removeItem('userLogin');
 		},
@@ -38,6 +41,7 @@ const authSlice = createSlice({
 			state.isLoading = false;
 			state.isAuthenticated = true;
 			state.userType = payload.user.type;
+			state.token = payload.token;
 			state.auth = payload;
 			state.error = '';
 		});
@@ -54,6 +58,8 @@ const authSlice = createSlice({
 		builder.addCase(registerThunk.fulfilled, (state, { payload }) => {
 			state.isLoading = false;
 			state.isAuthenticated = true;
+			state.userType = payload.user.type;
+			state.token = payload.token;
 			state.auth = payload;
 			state.error = '';
 		});

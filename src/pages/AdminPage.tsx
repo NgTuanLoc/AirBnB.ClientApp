@@ -1,17 +1,24 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
+import { getAllUsersPagination } from '../features/User/userThunk';
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { Navbar, Dashboard } from '../components';
 
 const AdminPage = () => {
 	const dispatch = useAppDispatch();
 	const { auth } = useAppSelector((store) => store.auth);
+	const { userList } = useAppSelector((store) => store.user);
 	const navigate = useNavigate();
 
 	if (auth?.user.type !== 'ADMIN') {
 		navigate('/');
 	}
+
+	useEffect(() => {
+		dispatch(getAllUsersPagination({ skip: 0, limit: 10 }));
+	}, []);
 
 	return (
 		<>
@@ -22,7 +29,7 @@ const AdminPage = () => {
 					<Button>Rooms</Button>
 					<Button>Locations</Button>
 				</Sidebar>
-				<Dashboard />
+				<Dashboard data={userList} />
 			</Container>
 		</>
 	);

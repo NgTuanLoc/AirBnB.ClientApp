@@ -5,3 +5,7 @@ ADMIN
 CLIENT
 "email": "thaiduy123456@gmail.com",
 "password": "123456"
+
+Test Room
+63032faefee2fc001c0a1798
+

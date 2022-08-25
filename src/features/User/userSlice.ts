@@ -1,16 +1,22 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 import { IUser } from '../../@types/User';
+import {
+	getAllUsers,
+	getAllUsersPagination,
+	createUser,
+	deleteUserById,
+} from './userThunk';
 
 export interface IUserState {
-	UserList: IUser[];
+	userList: IUser[];
 	successMsg: string;
 	error: string;
 	isLoading: boolean;
 }
 
 const initialState: IUserState = {
-	UserList: [],
+	userList: [],
 	successMsg: '',
 	error: '',
 	isLoading: false,
@@ -22,7 +28,69 @@ const userSlice = createSlice({
 	reducers: {
 		bookingRoom: () => {},
 	},
-	extraReducers(builder) {},
+	extraReducers(builder) {
+		// Get All Users
+		builder.addCase(getAllUsers.pending, (state) => {
+			state.isLoading = true;
+		});
+		builder.addCase(getAllUsers.fulfilled, (state, { payload }) => {
+			state.isLoading = false;
+			state.successMsg = 'get all user Success';
+			state.userList = payload;
+		});
+		builder.addCase(getAllUsers.rejected, (state, { payload }) => {
+			state.isLoading = true;
+			if (payload) {
+				state.error = payload as string;
+			}
+		});
+
+		// Get All Users Pagination
+		builder.addCase(getAllUsersPagination.pending, (state) => {
+			state.isLoading = true;
+		});
+		builder.addCase(getAllUsersPagination.fulfilled, (state, { payload }) => {
+			state.isLoading = false;
+			state.successMsg = 'get all user paginate Success';
+			state.userList = payload;
+		});
+		builder.addCase(getAllUsersPagination.rejected, (state, { payload }) => {
+			state.isLoading = true;
+			if (payload) {
+				state.error = payload as string;
+			}
+		});
+
+		// Create User
+		builder.addCase(createUser.pending, (state) => {
+			state.isLoading = true;
+		});
+		builder.addCase(createUser.fulfilled, (state, { payload }) => {
+			state.isLoading = false;
+			state.successMsg = payload;
+		});
+		builder.addCase(createUser.rejected, (state, { payload }) => {
+			state.isLoading = true;
+			if (payload) {
+				state.error = payload as string;
+			}
+		});
+
+		// Delete User By Id
+		builder.addCase(deleteUserById.pending, (state) => {
+			state.isLoading = true;
+		});
+		builder.addCase(deleteUserById.fulfilled, (state, { payload }) => {
+			state.isLoading = false;
+			state.successMsg = payload;
+		});
+		builder.addCase(deleteUserById.rejected, (state, { payload }) => {
+			state.isLoading = true;
+			if (payload) {
+				state.error = payload as string;
+			}
+		});
+	},
 });
 
 export default userSlice.reducer;
