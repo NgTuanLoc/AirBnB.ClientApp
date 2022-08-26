@@ -30,7 +30,7 @@ const Login = () => {
 	};
 
 	useEffect(() => {
-		if (!auth) {
+		if (auth) {
 			navigate('/');
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -103,7 +103,7 @@ const Login = () => {
 						</div>
 						{errorState && <Error>{errorState}</Error>}
 						<ButtonContainer>
-							<Button>Login</Button>
+							<Button fullWidth>Login</Button>
 						</ButtonContainer>
 					</form>
 				)}

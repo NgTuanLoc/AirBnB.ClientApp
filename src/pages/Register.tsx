@@ -176,7 +176,7 @@ const Register = () => {
 							)}
 						</div>
 						<Error>{errorState}</Error>
-						<Button>Register</Button>
+						<Button fullWidth>Register</Button>
 					</form>
 				)}
 			</div>

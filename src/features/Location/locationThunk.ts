@@ -126,7 +126,7 @@ const deleteLocationById = createAsyncThunk<
 	{
 		state: RootState;
 	}
->('location/deleteDeleteById', async (locationId, thunkAPI) => {
+>('location/deleteLocationById', async (locationId, thunkAPI) => {
 	try {
 		const { auth } = thunkAPI.getState().auth;
 
