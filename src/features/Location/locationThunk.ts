@@ -50,7 +50,7 @@ const createLocation = createAsyncThunk<
 	{
 		state: RootState;
 	}
->('room/deleteRoomById', async (locationDetail, thunkAPI) => {
+>('location/createLocation', async (locationDetail, thunkAPI) => {
 	try {
 		const { auth } = thunkAPI.getState().auth;
 
@@ -88,7 +88,7 @@ const updateLocationById = createAsyncThunk<
 	{
 		state: RootState;
 	}
->('room/deleteRoomById', async (locationDetail, thunkAPI) => {
+>('location/updateLocationById', async (locationDetail, thunkAPI) => {
 	try {
 		const { auth } = thunkAPI.getState().auth;
 
@@ -126,7 +126,7 @@ const deleteLocationById = createAsyncThunk<
 	{
 		state: RootState;
 	}
->('room/deleteRoomById', async (locationId, thunkAPI) => {
+>('location/deleteDeleteById', async (locationId, thunkAPI) => {
 	try {
 		const { auth } = thunkAPI.getState().auth;
 
@@ -155,10 +155,13 @@ const deleteLocationById = createAsyncThunk<
 	}
 });
 
+const uploadLocationImageById = () => {};
+
 export {
 	getLocationList,
 	getLocationById,
 	createLocation,
 	updateLocationById,
 	deleteLocationById,
+	uploadLocationImageById,
 };

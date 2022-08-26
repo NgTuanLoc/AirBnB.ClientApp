@@ -224,6 +224,8 @@ const deleteRoomById = createAsyncThunk<
 	}
 });
 
+const uploadRoomImageById = () => {};
+
 export {
 	getRoomListByLocationID,
 	getRoomDetailByID,
@@ -231,4 +233,5 @@ export {
 	bookRoomById,
 	updateRoomById,
 	deleteRoomById,
+	uploadRoomImageById,
 };
