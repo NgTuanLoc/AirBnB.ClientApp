@@ -20,9 +20,7 @@ type FormInputs = {
 
 const Register = () => {
 	const dispatch = useAppDispatch();
-	const { isLoading, isAuthenticated, auth, error } = useAppSelector(
-		(store) => store.auth
-	);
+	const { isLoading, auth, error } = useAppSelector((store) => store.auth);
 	const [errorState, setErrorState] = useState('');
 
 	const navigate = useNavigate();
@@ -38,7 +36,7 @@ const Register = () => {
 	};
 
 	useEffect(() => {
-		if (isAuthenticated) {
+		if (auth) {
 			navigate('/');
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps

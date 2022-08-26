@@ -3,6 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { axiosInstance } from '../../utils/axios';
 import { IRoom } from '../../@types/Room';
 import { RootState } from '../../app/store';
+import { UNAUTHENTICATED, UNAUTHORIZED } from '../../constant/Error';
 
 const URL = '/api/rooms';
 
@@ -51,18 +52,23 @@ const getRoomDetailByID = createAsyncThunk<
 const createNewRoom = createAsyncThunk<string, IRoom, { state: RootState }>(
 	'room/createNewRoom',
 	async (newRoom, thunkAPI) => {
-		const adminToken = thunkAPI.getState().auth.auth?.token;
+		const { auth } = thunkAPI.getState().auth;
 
-		if (!adminToken) {
-			return thunkAPI.rejectWithValue('create room failed, admin required');
-		}
+		if (!auth) return thunkAPI.rejectWithValue(UNAUTHENTICATED);
+
+		const {
+			user: { type: userType },
+			token,
+		} = auth;
+
+		if (userType !== 'ADMIN') return thunkAPI.rejectWithValue(UNAUTHORIZED);
 
 		try {
 			const params = {
 				method: 'POST',
 				url: `${URL}`,
 				headers: {
-					token: adminToken,
+					token,
 				},
 				data: newRoom,
 			};
@@ -82,19 +88,22 @@ const bookRoomById = createAsyncThunk<
 	}
 >('room/bookRoomById', async (bookInfo, thunkAPI) => {
 	try {
-		const userInfo = localStorage.getItem('userLogin');
+		const { auth } = thunkAPI.getState().auth;
 
-		if (!userInfo) {
-			return thunkAPI.rejectWithValue('You must login to book room');
-		}
+		if (!auth) return thunkAPI.rejectWithValue(UNAUTHENTICATED);
 
-		const { token } = JSON.parse(userInfo);
+		const {
+			user: { type: userType },
+			token,
+		} = auth;
+
+		if (userType !== 'ADMIN') return thunkAPI.rejectWithValue(UNAUTHORIZED);
 
 		const params = {
 			method: 'POST',
 			url: `${URL}/booking`,
 			headers: {
-				token: token,
+				token,
 			},
 			data: bookInfo,
 		};
@@ -106,9 +115,120 @@ const bookRoomById = createAsyncThunk<
 	}
 });
 
+const updateRoomById = createAsyncThunk<
+	string,
+	IRoom,
+	{
+		state: RootState;
+	}
+>('room/updateRoomById', async (roomDetail, thunkAPI) => {
+	try {
+		const { auth } = thunkAPI.getState().auth;
+
+		if (!auth) return thunkAPI.rejectWithValue(UNAUTHENTICATED);
+
+		const {
+			user: { type: userType },
+			token,
+		} = auth;
+
+		if (userType !== 'ADMIN') return thunkAPI.rejectWithValue(UNAUTHORIZED);
+
+		const {
+			name,
+			guests,
+			bedRoom,
+			bath,
+			description,
+			price,
+			elevator,
+			hotTub,
+			pool,
+			indoorFireplace,
+			dryer,
+			gym,
+			kitchen,
+			wifi,
+			heating,
+			cableTV,
+			locationId,
+			_id,
+		} = roomDetail;
+
+		const params = {
+			method: 'PUT',
+			url: `${URL}/${_id}`,
+			headers: {
+				token,
+			},
+			data: {
+				name,
+				guests,
+				bedRoom,
+				bath,
+				description,
+				price,
+				elevator,
+				hotTub,
+				pool,
+				indoorFireplace,
+				dryer,
+				gym,
+				kitchen,
+				wifi,
+				heating,
+				cableTV,
+				locationId,
+			},
+		};
+
+		await axiosInstance.request(params);
+		return 'success update room';
+	} catch (error) {
+		return thunkAPI.rejectWithValue('Update Room failed');
+	}
+});
+
+const deleteRoomById = createAsyncThunk<
+	string,
+	string,
+	{
+		state: RootState;
+	}
+>('room/deleteRoomById', async (roomId, thunkAPI) => {
+	try {
+		const { auth } = thunkAPI.getState().auth;
+
+		if (!auth) return thunkAPI.rejectWithValue(UNAUTHENTICATED);
+
+		const {
+			user: { type: userType },
+			token,
+		} = auth;
+
+		if (userType !== 'ADMIN') return thunkAPI.rejectWithValue(UNAUTHORIZED);
+
+		const params = {
+			method: 'DELETE',
+			url: `${URL}/${roomId}`,
+			headers: {
+				token,
+			},
+		};
+
+		await axiosInstance.request(params);
+
+		return 'success delete room';
+	} catch (error) {
+		return thunkAPI.rejectWithValue('Delete Room failed');
+	}
+});
+
 export {
 	getRoomListByLocationID,
 	getRoomDetailByID,
 	createNewRoom,
 	bookRoomById,
+	updateRoomById,
+	deleteRoomById,
 };

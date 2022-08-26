@@ -31,7 +31,7 @@ const Card = ({
 	const [checkOutDate, setCheckoutDate] = useState(
 		moment(bookDate.checkOut).format('l')
 	);
-	const { isAuthenticated } = useAppSelector((store) => store.auth);
+	const { auth } = useAppSelector((store) => store.auth);
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 
@@ -48,7 +48,7 @@ const Card = ({
 
 	const onSubmitHandler = (e: FormEvent) => {
 		e.preventDefault();
-		if (!isAuthenticated) {
+		if (!auth) {
 			navigate('/login');
 		}
 		dispatch(
@@ -109,7 +109,7 @@ const Card = ({
 						</button>
 					</div>
 				</div>
-				<Button>Check Availability</Button>
+				<Button fullWidth>Check Availability</Button>
 			</form>
 			<div className='card__detail'>
 				<div className='card__detail--item'>

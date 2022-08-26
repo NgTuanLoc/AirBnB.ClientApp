@@ -2,18 +2,24 @@ import { ReactNode } from 'react';
 import styled from 'styled-components';
 
 interface IButton {
+	fullWidth?: boolean;
 	children: ReactNode;
 }
 
-const Button = ({ children }: IButton) => {
+const Button = ({ children, fullWidth }: IButton) => {
 	return (
-		<Container type='submit'>
+		<Container type='submit' fullWidth={fullWidth}>
 			<h4>{children}</h4>
 		</Container>
 	);
 };
 
-const Container = styled.button`
+interface Props {
+	fullWidth?: boolean;
+}
+
+const Container = styled.button<Props>`
+	width: ${(props) => (props.fullWidth ? '100%' : 'auto')};
 	position: relative;
 	color: white;
 	font-size: 2rem;

@@ -5,13 +5,13 @@ import { TiTickOutline } from 'react-icons/ti';
 
 import { Navbar } from '../components';
 import defaultImage from '../images/default-user-image.jpg';
-import { useAppDispatch, useAppSelector } from '../hooks/hooks';
+import { useAppSelector } from '../hooks/hooks';
 import { transformDate } from '../utils/util';
 
 const UserPage = () => {
-	const { auth, isAuthenticated } = useAppSelector((store) => store.auth);
+	const { auth } = useAppSelector((store) => store.auth);
 
-	if (!isAuthenticated || !auth) {
+	if (!auth) {
 		return <Navigate to='/login' />;
 	}
 

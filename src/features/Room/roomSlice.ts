@@ -6,6 +6,8 @@ import {
 	getRoomDetailByID,
 	createNewRoom,
 	bookRoomById,
+	updateRoomById,
+	deleteRoomById,
 } from './roomThunk';
 
 export interface IRoomState {
@@ -84,6 +86,32 @@ const locationSlice = createSlice({
 			state.successMsg = payload;
 		});
 		builder.addCase(createNewRoom.rejected, (state, { payload }) => {
+			state.isLoading = false;
+			state.error = payload as string;
+		});
+
+		// Update Room
+		builder.addCase(updateRoomById.pending, (state) => {
+			state.isLoading = true;
+		});
+		builder.addCase(updateRoomById.fulfilled, (state, { payload }) => {
+			state.isLoading = false;
+			state.successMsg = payload;
+		});
+		builder.addCase(updateRoomById.rejected, (state, { payload }) => {
+			state.isLoading = false;
+			state.error = payload as string;
+		});
+
+		// Delete Room
+		builder.addCase(deleteRoomById.pending, (state) => {
+			state.isLoading = true;
+		});
+		builder.addCase(deleteRoomById.fulfilled, (state, { payload }) => {
+			state.isLoading = false;
+			state.successMsg = payload;
+		});
+		builder.addCase(deleteRoomById.rejected, (state, { payload }) => {
 			state.isLoading = false;
 			state.error = payload as string;
 		});

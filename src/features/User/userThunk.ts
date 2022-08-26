@@ -4,6 +4,7 @@ import { axiosInstance } from '../../utils/axios';
 import { RootState } from '../../app/store';
 import { IUser } from '../../@types/User';
 import { IRegister } from '../../@types/Auth';
+import { UNAUTHENTICATED, UNAUTHORIZED } from '../../constant/Error';
 
 const URL = '/api/users';
 
@@ -12,13 +13,22 @@ const getAllUsers = createAsyncThunk<IUser[], void, { state: RootState }>(
 	'user/getAllUsers',
 	async (_, thunkAPI) => {
 		try {
-			const { token } = thunkAPI.getState().auth;
+			const { auth } = thunkAPI.getState().auth;
+
+			if (!auth) return thunkAPI.rejectWithValue(UNAUTHENTICATED);
+
+			const {
+				user: { type: userType },
+				token,
+			} = auth;
+
+			if (userType !== 'ADMIN') return thunkAPI.rejectWithValue(UNAUTHORIZED);
 
 			const params = {
 				method: 'GET',
 				url: `${URL}`,
 				headers: {
-					token: token,
+					token,
 				},
 			};
 			const response = await axiosInstance.request(params);
@@ -38,7 +48,16 @@ const getAllUsersPagination = createAsyncThunk<
 	{ state: RootState }
 >('user/getAllUsersPagination', async ({ limit = 0, skip = 10 }, thunkAPI) => {
 	try {
-		const { token } = thunkAPI.getState().auth;
+		const { auth } = thunkAPI.getState().auth;
+
+		if (!auth) return thunkAPI.rejectWithValue(UNAUTHENTICATED);
+
+		const {
+			user: { type: userType },
+			token,
+		} = auth;
+
+		if (userType !== 'ADMIN') return thunkAPI.rejectWithValue(UNAUTHORIZED);
 
 		const params = {
 			method: 'GET',
@@ -58,7 +77,16 @@ const createUser = createAsyncThunk<string, IRegister, { state: RootState }>(
 	'user/createUser',
 	async (user, thunkAPI) => {
 		try {
-			const { token } = thunkAPI.getState().auth;
+			const { auth } = thunkAPI.getState().auth;
+
+			if (!auth) return thunkAPI.rejectWithValue(UNAUTHENTICATED);
+
+			const {
+				user: { type: userType },
+				token,
+			} = auth;
+
+			if (userType !== 'ADMIN') return thunkAPI.rejectWithValue(UNAUTHORIZED);
 
 			const params = {
 				method: 'POST',
@@ -90,7 +118,16 @@ const deleteUserById = createAsyncThunk<string, string, { state: RootState }>(
 	'user/deleteUserById',
 	async (userId, thunkAPI) => {
 		try {
-			const { token } = thunkAPI.getState().auth;
+			const { auth } = thunkAPI.getState().auth;
+
+			if (!auth) return thunkAPI.rejectWithValue(UNAUTHENTICATED);
+
+			const {
+				user: { type: userType },
+				token,
+			} = auth;
+
+			if (userType !== 'ADMIN') return thunkAPI.rejectWithValue(UNAUTHORIZED);
 
 			const params = {
 				method: 'DELETE',
@@ -112,7 +149,16 @@ const updateUserById = createAsyncThunk<string, string, { state: RootState }>(
 	'user/updateUserById',
 	async (userId, thunkAPI) => {
 		try {
-			const { token } = thunkAPI.getState().auth;
+			const { auth } = thunkAPI.getState().auth;
+
+			if (!auth) return thunkAPI.rejectWithValue(UNAUTHENTICATED);
+
+			const {
+				user: { type: userType },
+				token,
+			} = auth;
+
+			if (userType !== 'ADMIN') return thunkAPI.rejectWithValue(UNAUTHORIZED);
 
 			const params = {
 				method: 'DELETE',

@@ -10,7 +10,7 @@ export interface IDashboard {
 const Dashboard = ({ data }: IDashboard) => {
 	return (
 		<Container>
-			<Button>Add New</Button>
+			<Button fullWidth={false}>Add New</Button>
 			<SearchContainer>
 				<Search />
 				<SearchButton>Search</SearchButton>

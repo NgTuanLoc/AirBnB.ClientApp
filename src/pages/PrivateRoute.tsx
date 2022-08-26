@@ -9,9 +9,9 @@ interface IPrivateRoute {
 }
 
 const PrivateRoute = ({ children }: IPrivateRoute) => {
-	const { isAuthenticated } = useAppSelector((store) => store.auth);
+	const { auth } = useAppSelector((store) => store.auth);
 
-	if (!isAuthenticated) {
+	if (!auth) {
 		return <Navigate to='/' />;
 	}
 

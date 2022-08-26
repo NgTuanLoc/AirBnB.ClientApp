@@ -6,7 +6,7 @@ import { useAppSelector, useAppDispatch } from '../hooks/hooks';
 import { logout } from '../features/Auth/authSlice';
 
 const UserModal = () => {
-	const { isAuthenticated, auth } = useAppSelector((store) => store.auth);
+	const { auth } = useAppSelector((store) => store.auth);
 
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
@@ -16,7 +16,7 @@ const UserModal = () => {
 		navigate('/');
 	};
 
-	if (isAuthenticated) {
+	if (auth) {
 		return (
 			<Container>
 				{auth?.user.type === 'ADMIN' ? (
