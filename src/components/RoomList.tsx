@@ -16,9 +16,11 @@ const RoomList = () => {
 
 	if (roomList.length === 0) {
 		return (
-			<h1 style={{ marginInline: 'auto', textAlign: 'center' }}>
-				Sorry, there are no room available!
-			</h1>
+			<NotFoundContainer>
+				<h1 style={{ marginInline: 'auto', textAlign: 'center' }}>
+					Sorry, there are no room available!
+				</h1>
+			</NotFoundContainer>
 		);
 	}
 
@@ -37,6 +39,13 @@ const Container = styled.section`
 	grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
 	grid-gap: 2rem;
 	padding-bottom: var(--footer-height);
+`;
+
+const NotFoundContainer = styled.section`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 30vh;
 `;
 
 export default RoomList;

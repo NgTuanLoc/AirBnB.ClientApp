@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import Skeleton from 'react-loading-skeleton';
 
 import { useProgressiveImg } from '../hooks/useProgressiveImg';
+import { DEFAULT_IMAGE } from '../constant/DefaultImage';
 
 interface IImage {
 	url: string;
@@ -10,6 +11,10 @@ interface IImage {
 
 const CustomImage = ({ url, alt }: IImage) => {
 	const isImageLoaded = useProgressiveImg(url);
+
+	if (!url) {
+		return <img alt={alt} src={DEFAULT_IMAGE} />;
+	}
 
 	return (
 		<Container>

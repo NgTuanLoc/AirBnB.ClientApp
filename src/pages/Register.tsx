@@ -37,7 +37,7 @@ const Register = () => {
 
 	useEffect(() => {
 		if (auth) {
-			navigate('/');
+			navigate('/', { replace: true });
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [auth]);
