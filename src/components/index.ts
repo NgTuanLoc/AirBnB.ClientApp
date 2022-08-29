@@ -6,7 +6,6 @@ import Room from './Room';
 import RoomList from './RoomList';
 import Footer from './Footer';
 import RoomDetails from './RoomDetails';
-import Calendar from './Calendar';
 import Card from './Card';
 import Catalog from './Catalog';
 import Button from './Button';
@@ -15,9 +14,13 @@ import UserModal from './UserModal';
 import SingleRoomDetails from './SingleRoomDetails';
 import SingleRoomCatalog from './SingleRoomCatalog';
 import SingleRoomInfo from './SingleRoomInfo';
+import Calendar from './Calendar';
 import Error from './Error';
 import Form from './Form';
-import Dashboard from './Dashboard';
+
+import UserDashboard from './Admin/UserDashboard';
+import RoomDashboard from './Admin/RoomDashboard';
+import LocationDashboard from './Admin/LocationDashboard';
 
 export {
 	Loading,
@@ -39,5 +42,7 @@ export {
 	SingleRoomCatalog,
 	SingleRoomInfo,
 	Form,
-	Dashboard,
+	UserDashboard,
+	RoomDashboard,
+	LocationDashboard,
 };

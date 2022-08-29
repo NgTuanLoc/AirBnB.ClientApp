@@ -1,35 +1,32 @@
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useState } from 'react';
 
-import { getAllUsersPagination } from '../features/User/userThunk';
-import { useAppDispatch, useAppSelector } from '../hooks/hooks';
-import { Navbar, Dashboard } from '../components';
+import {
+	Navbar,
+	UserDashboard,
+	RoomDashboard,
+	LocationDashboard,
+} from '../components';
 
 const AdminPage = () => {
-	const dispatch = useAppDispatch();
-	const { auth } = useAppSelector((store) => store.auth);
-	const { userList } = useAppSelector((store) => store.user);
-	const navigate = useNavigate();
+	const [dashboard, setDashboard] = useState('user');
 
-	if (auth?.user.type !== 'ADMIN') {
-		navigate('/');
-	}
-
-	useEffect(() => {
-		dispatch(getAllUsersPagination({ skip: 0, limit: 10 }));
-	}, []);
+	const onClickHandler = (type: string) => {
+		return () => setDashboard(type);
+	};
 
 	return (
 		<>
 			<Navbar hideSearch />
 			<Container>
 				<Sidebar>
-					<Button>Users</Button>
-					<Button>Rooms</Button>
-					<Button>Locations</Button>
+					<Button onClick={onClickHandler('user')}>User</Button>
+					<Button onClick={onClickHandler('room')}>Room</Button>
+					<Button onClick={onClickHandler('location')}>Location</Button>
 				</Sidebar>
-				<Dashboard data={userList} />
+				{dashboard === 'user' && <UserDashboard />}
+				{dashboard === 'room' && <RoomDashboard />}
+				{dashboard === 'location' && <LocationDashboard />}
 			</Container>
 		</>
 	);

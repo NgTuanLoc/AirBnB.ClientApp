@@ -79,10 +79,6 @@ const Footer = () => {
 };
 
 const Container = styled.footer`
-	/* position: absolute;
-	bottom: 0;
-	left: 0; */
-
 	display: block;
 	background-color: #f7f7f7;
 	width: 100%;

@@ -11,7 +11,7 @@ interface IAuthWrapper {
 }
 
 const AuthWrapper = ({ children }: IAuthWrapper) => {
-	const [token, _] = useLocalStorage('userLogin', {
+	const [userLogin] = useLocalStorage('userLogin', {
 		email: '',
 		password: '',
 		token: '',
@@ -20,11 +20,11 @@ const AuthWrapper = ({ children }: IAuthWrapper) => {
 	const dispatch = useAppDispatch();
 
 	useEffect(() => {
-		if (token.token) {
+		if (userLogin.token) {
 			dispatch(
 				loginThunk({
-					email: token.email,
-					password: token.password,
+					email: userLogin.email,
+					password: userLogin.password,
 				})
 			);
 		}

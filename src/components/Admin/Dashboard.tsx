@@ -1,13 +1,8 @@
 import styled from 'styled-components';
 
-import { IUser } from '../@types/User';
-import { Button } from '../components';
+import { Button } from '..';
 
-export interface IDashboard {
-	data: IUser[];
-}
-
-const Dashboard = ({ data }: IDashboard) => {
+const Dashboard = () => {
 	return (
 		<Container>
 			<Button fullWidth={false}>Add New</Button>
@@ -15,11 +10,7 @@ const Dashboard = ({ data }: IDashboard) => {
 				<Search />
 				<SearchButton>Search</SearchButton>
 			</SearchContainer>
-			<List>
-				{data.map(() => {
-					return <ListItem></ListItem>;
-				})}
-			</List>
+			<List></List>
 		</Container>
 	);
 };

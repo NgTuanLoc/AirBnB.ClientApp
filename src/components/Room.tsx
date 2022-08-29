@@ -46,7 +46,8 @@ const Container = styled(Link)`
 		height: 20rem;
 		margin-bottom: 1rem;
 		img {
-			border-radius: var(--radius);
+			border-top-right-radius: var(--radius);
+			border-top-left-radius: var(--radius);
 		}
 	}
 
