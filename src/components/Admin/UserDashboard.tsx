@@ -10,6 +10,7 @@ import { IUser } from '../../@types/User';
 import { transformDate } from '../../utils/util';
 
 const USER_PER_PAGE = 10;
+const NUMBER_OF_PAGE_BUTTON = Array.from({ length: 5 }, () => 0);
 
 const UserDashboard = () => {
 	const [page, setPage] = useState(0);
@@ -36,7 +37,9 @@ const UserDashboard = () => {
 		});
 	};
 
-	const paginate = () => {};
+	const paginate = (selectedPage: number) => {
+		return () => setPage(selectedPage);
+	};
 
 	useEffect(() => {
 		if (!userList) return;
@@ -45,18 +48,20 @@ const UserDashboard = () => {
 			{ length: USER_PER_PAGE },
 			(_, i) => userList[page * USER_PER_PAGE + i]
 		);
-
 		tempArray = tempArray.filter((item) => item !== undefined);
-
 		setDisplayUser(tempArray);
-		console.log(page);
-	}, [page]);
+	}, [page, isLoading]);
 
 	useEffect(() => {
 		dispatch(getAllUsers());
 	}, []);
 
-	if (isLoading) return <Loading />;
+	if (isLoading)
+		return (
+			<Container>
+				<Loading />
+			</Container>
+		);
 
 	return (
 		<Container>
@@ -113,12 +118,23 @@ const UserDashboard = () => {
 			</TableContainer>
 			<PaginateContainer>
 				<PrevButton onClick={prevPage}>Prev</PrevButton>
-				<Button>1</Button>
-				<Button>2</Button>
-				<Button>3</Button>
-				<Button>4</Button>
-				<Button>5</Button>
-				<Button>6</Button>
+				<PageButton active={page === 0} onClick={paginate(0)}>
+					1
+				</PageButton>
+				{NUMBER_OF_PAGE_BUTTON.map((_, index) => {
+					let tempPage = page + index + 1;
+					if (page === 0) {
+						tempPage = page + index + 2;
+					}
+					return (
+						<PageButton active={page === tempPage} onClick={paginate(tempPage)}>
+							{tempPage}
+						</PageButton>
+					);
+				})}
+				<PageButton active={page === maxPage} onClick={paginate(maxPage)}>
+					{maxPage}
+				</PageButton>
 				<NextButton onClick={nextPage}>Next</NextButton>
 			</PaginateContainer>
 		</Container>
@@ -127,6 +143,7 @@ const UserDashboard = () => {
 
 const Container = styled.section`
 	padding: 5rem;
+	position: relative;
 `;
 
 const SearchButton = styled(Button)``;
@@ -153,6 +170,7 @@ const Table = styled.table`
 	border: 1px solid black;
 	border-collapse: collapse;
 	margin-inline: auto;
+	table-layout: fixed;
 `;
 
 const TableHead = styled.thead``;
@@ -160,7 +178,7 @@ const TableBody = styled.tbody``;
 
 const Title = styled.th`
 	font-size: 2.5rem;
-	padding: 1rem;
+	padding: 0.5rem;
 	border: 1px solid black;
 	border-collapse: collapse;
 `;
@@ -169,7 +187,9 @@ const Item = styled.td`
 	border: 1px solid black;
 	border-collapse: collapse;
 	font-size: 2rem;
-	padding: 1rem;
+	padding: 0.5rem;
+	overflow: hidden;
+	white-space: nowrap;
 `;
 
 const Row = styled.tr``;
@@ -179,7 +199,7 @@ const PaginateContainer = styled.div`
 	width: 50%;
 	height: 10rem;
 	display: flex;
-	justify-content: space-evenly;
+	justify-content: space-between;
 	align-items: center;
 `;
 
@@ -190,6 +210,17 @@ const PrevButton = styled.button`
 const NextButton = styled.button`
 	font-size: 2.5rem;
 	font-weight: bold;
+`;
+
+const PageButton = styled.button<{ active?: boolean }>`
+	width: 4rem;
+	background-color: ${(props) => (props.active ? '#9d0832' : '#e41d57')};
+	font-weight: bold;
+	transition: var(--transition);
+	font-size: 2rem;
+	border-radius: var(--radius);
+	padding: 0.5rem;
+	color: ${(props) => (props.active ? 'black' : 'white')};
 `;
 
 export default UserDashboard;

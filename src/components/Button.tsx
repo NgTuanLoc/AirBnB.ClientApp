@@ -3,12 +3,13 @@ import styled from 'styled-components';
 
 interface IButton {
 	fullWidth?: boolean;
+	bgColor?: string;
 	children: ReactNode;
 }
 
-const Button = ({ children, fullWidth }: IButton) => {
+const Button = ({ children, fullWidth, bgColor }: IButton) => {
 	return (
-		<Container type='submit' fullWidth={fullWidth}>
+		<Container bgColor={bgColor} type='submit' fullWidth={fullWidth}>
 			<h4>{children}</h4>
 		</Container>
 	);
@@ -16,6 +17,7 @@ const Button = ({ children, fullWidth }: IButton) => {
 
 interface Props {
 	fullWidth?: boolean;
+	bgColor?: string;
 }
 
 const Container = styled.button<Props>`
@@ -25,7 +27,8 @@ const Container = styled.button<Props>`
 	font-size: 2rem;
 	border-radius: var(--radius);
 	padding: 1rem;
-	background: var(--clr-gradient);
+	background: ${(props) =>
+		props.bgColor ? props.bgColor : 'var(--clr-gradient)'};
 	transition: var(--transition);
 
 	h4 {
