@@ -35,8 +35,13 @@ const AdminPage = () => {
 const Container = styled.main`
 	display: grid;
 	margin-top: 8rem;
-	grid-template-columns: 40rem 1fr;
+	grid-template-columns: 20rem calc(100vw - 20rem);
 	height: calc(100vh - 8rem);
+
+	@media only screen and (max-width: 992px) {
+		margin-top: 6rem;
+		height: calc(100vh - 6rem);
+	}
 `;
 const Sidebar = styled.aside`
 	background-color: blue;

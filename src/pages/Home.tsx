@@ -1,8 +1,17 @@
+import { useEffect } from 'react';
 import styled from 'styled-components';
 
 import { Navbar, Footer, Categories, RoomList } from '../components';
+import { useAppDispatch } from '../hooks/hooks';
+import { getLocationList } from '../features/Location/locationThunk';
 
 const Home = () => {
+	const dispatch = useAppDispatch();
+
+	useEffect(() => {
+		dispatch(getLocationList());
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 	return (
 		<Container>
 			<Navbar />

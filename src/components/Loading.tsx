@@ -14,7 +14,7 @@ const Container = styled.div`
 	top: 50%;
 	left: 50%;
 	z-index: 9999999;
-	transform: translateX(-100%);
+	transform: translateX(-50%);
 `;
 
 export default Loading;

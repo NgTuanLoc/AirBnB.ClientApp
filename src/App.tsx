@@ -1,9 +1,6 @@
-import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { SkeletonTheme } from 'react-loading-skeleton';
 
-import { getLocationList } from './features/Location/locationThunk';
-import { useAppDispatch } from './hooks/hooks';
 import {
 	Home,
 	RoomListPage,
@@ -18,13 +15,6 @@ import {
 } from './pages';
 
 const App = () => {
-	const dispatch = useAppDispatch();
-
-	useEffect(() => {
-		dispatch(getLocationList());
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
-
 	return (
 		<AuthWrapper>
 			<SkeletonTheme
