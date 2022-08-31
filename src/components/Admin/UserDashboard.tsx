@@ -122,13 +122,28 @@ const UserDashboard = () => {
 					1
 				</PageButton>
 				{NUMBER_OF_PAGE_BUTTON.map((_, index) => {
-					let tempPage = page + index + 1;
+					let tempPage = page + index - 2;
+
 					if (page === 0) {
-						tempPage = page + index + 2;
+						tempPage = page + index + 1;
+					} else if (page === 1) {
+						tempPage = page + index;
+					} else if (page === 2) {
+						tempPage = page + index - 1;
+					}
+
+					if (page === maxPage) {
+						tempPage = page + index - 6;
+					} else if (page === maxPage - 1) {
+						tempPage = page + index - 5;
+					} else if (page === maxPage - 2) {
+						tempPage = page + index - 4;
+					} else if (page === maxPage - 3) {
+						tempPage = page + index - 3;
 					}
 					return (
 						<PageButton active={page === tempPage} onClick={paginate(tempPage)}>
-							{tempPage}
+							{tempPage + 1}
 						</PageButton>
 					);
 				})}
