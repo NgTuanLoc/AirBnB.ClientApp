@@ -44,9 +44,10 @@ const Container = styled.main`
 	}
 `;
 const Sidebar = styled.aside`
-	background-color: blue;
+	background-color: white;
 	display: flex;
 	flex-direction: column;
+	box-shadow: var(--dark-shadow);
 `;
 
 const Button = styled.button`

@@ -1,12 +1,30 @@
 import styled from 'styled-components';
 import { Button } from '..';
 
-const ActionButtons = () => {
+export interface IActionButtons {
+	infoHandler: any;
+	updateHandler: any;
+	deleteHandler: any;
+	id: string;
+}
+
+const ActionButtons = ({
+	infoHandler,
+	updateHandler,
+	deleteHandler,
+	id,
+}: IActionButtons) => {
 	return (
 		<Container>
-			<Button bgColor='#28a745'>Info</Button>
-			<Button bgColor='#ffc107'>Update</Button>
-			<Button bgColor='#dc3545'>Delete</Button>
+			<Button onClickHandler={infoHandler(id)} bgColor='#28a745'>
+				Info
+			</Button>
+			<Button onClickHandler={updateHandler(id)} bgColor='#ffc107'>
+				Update
+			</Button>
+			<Button onClickHandler={deleteHandler(id)} bgColor='#dc3545'>
+				Delete
+			</Button>
 		</Container>
 	);
 };

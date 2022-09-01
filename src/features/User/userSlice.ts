@@ -4,12 +4,14 @@ import { IUser } from '../../@types/User';
 import {
 	getAllUsers,
 	getAllUsersPagination,
+	getUserById,
 	createUser,
 	deleteUserById,
 } from './userThunk';
 
 export interface IUserState {
 	userList: IUser[];
+	selectedUser: IUser | null;
 	successMsg: string;
 	error: string;
 	isLoading: boolean;
@@ -17,6 +19,7 @@ export interface IUserState {
 
 const initialState: IUserState = {
 	userList: [],
+	selectedUser: null,
 	successMsg: '',
 	error: '',
 	isLoading: false,
@@ -39,6 +42,22 @@ const userSlice = createSlice({
 			state.userList = payload;
 		});
 		builder.addCase(getAllUsers.rejected, (state, { payload }) => {
+			state.isLoading = true;
+			if (payload) {
+				state.error = payload as string;
+			}
+		});
+
+		// Get User By Id
+		builder.addCase(getUserById.pending, (state) => {
+			state.isLoading = true;
+		});
+		builder.addCase(getUserById.fulfilled, (state, { payload }) => {
+			state.isLoading = false;
+			state.successMsg = 'get all user Success';
+			state.selectedUser = payload;
+		});
+		builder.addCase(getUserById.rejected, (state, { payload }) => {
 			state.isLoading = true;
 			if (payload) {
 				state.error = payload as string;

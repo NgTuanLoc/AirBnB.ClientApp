@@ -5,11 +5,16 @@ interface IButton {
 	fullWidth?: boolean;
 	bgColor?: string;
 	children: ReactNode;
+	onClickHandler?: any;
 }
 
-const Button = ({ children, fullWidth, bgColor }: IButton) => {
+const Button = ({ children, fullWidth, bgColor, onClickHandler }: IButton) => {
 	return (
-		<Container bgColor={bgColor} type='submit' fullWidth={fullWidth}>
+		<Container
+			onClick={onClickHandler}
+			bgColor={bgColor}
+			type='submit'
+			fullWidth={fullWidth}>
 			<h4>{children}</h4>
 		</Container>
 	);
@@ -33,7 +38,7 @@ const Container = styled.button<Props>`
 
 	h4 {
 		position: relative;
-		z-index: 1000;
+		z-index: 10;
 		margin: 0;
 	}
 

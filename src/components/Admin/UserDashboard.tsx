@@ -6,8 +6,10 @@ import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { getAllUsers } from '../../features/User/userThunk';
 import { Loading, Button } from '..';
 import ActionButtons from './ActionButtons';
+import Modal from './Modal';
 import { IUser } from '../../@types/User';
 import { transformDate } from '../../utils/util';
+import { deleteUserById } from '../../features/User/userThunk';
 
 const USER_PER_PAGE = 10;
 const NUMBER_OF_PAGE_BUTTON = Array.from({ length: 5 }, () => 0);
@@ -15,7 +17,9 @@ const NUMBER_OF_PAGE_BUTTON = Array.from({ length: 5 }, () => 0);
 const UserDashboard = () => {
 	const [page, setPage] = useState(0);
 	const [displayUser, setDisplayUser] = useState<IUser[]>([]);
+	const [modalTitle, setModalTitle] = useState('User Info');
 	const { userList, isLoading } = useAppSelector((store) => store.user);
+
 	const dispatch = useAppDispatch();
 	const maxPage = Math.floor(userList.length / USER_PER_PAGE);
 
@@ -28,10 +32,19 @@ const UserDashboard = () => {
 		});
 	};
 
+	const renderNewUser = () => {
+		let tempArray = Array.from(
+			{ length: USER_PER_PAGE },
+			(_, i) => userList[page * USER_PER_PAGE + i]
+		);
+
+		tempArray = tempArray.filter((item) => item !== undefined);
+		setDisplayUser(tempArray);
+	};
+
 	const prevPage = () => {
 		setPage((oldPage) => {
 			const newPage = oldPage - 1;
-
 			if (newPage < 0) return maxPage;
 			return newPage;
 		});
@@ -41,16 +54,22 @@ const UserDashboard = () => {
 		return () => setPage(selectedPage);
 	};
 
-	useEffect(() => {
-		if (!userList) return;
+	const deleteUser = (id: string) => {
+		return () => {
+			dispatch(deleteUserById(id));
+			dispatch(getAllUsers());
+		};
+	};
 
-		let tempArray = Array.from(
-			{ length: USER_PER_PAGE },
-			(_, i) => userList[page * USER_PER_PAGE + i]
-		);
-		tempArray = tempArray.filter((item) => item !== undefined);
-		setDisplayUser(tempArray);
-	}, [page, isLoading]);
+	const showUser = (id: string) => {
+		return () => {
+			setModalTitle('User Info');
+		};
+	};
+
+	useEffect(() => {
+		renderNewUser();
+	}, [page, userList]);
 
 	useEffect(() => {
 		dispatch(getAllUsers());
@@ -65,6 +84,7 @@ const UserDashboard = () => {
 
 	return (
 		<Container>
+			<Modal title={modalTitle} />
 			<Button fullWidth={false}>Add New</Button>
 			<SearchContainer>
 				<Search />
@@ -108,7 +128,12 @@ const UserDashboard = () => {
 									<Item>{address}</Item>
 									<Item>{type}</Item>
 									<Item>
-										<ActionButtons />
+										<ActionButtons
+											id={_id}
+											infoHandler={showUser}
+											updateHandler={showUser}
+											deleteHandler={deleteUser}
+										/>
 									</Item>
 								</Row>
 							);
@@ -142,7 +167,10 @@ const UserDashboard = () => {
 						tempPage = page + index - 3;
 					}
 					return (
-						<PageButton active={page === tempPage} onClick={paginate(tempPage)}>
+						<PageButton
+							key={index}
+							active={page === tempPage}
+							onClick={paginate(tempPage)}>
 							{tempPage + 1}
 						</PageButton>
 					);
@@ -159,6 +187,7 @@ const UserDashboard = () => {
 const Container = styled.section`
 	padding: 5rem;
 	position: relative;
+	background-color: #fafbfb;
 `;
 
 const SearchButton = styled(Button)``;
@@ -228,7 +257,7 @@ const NextButton = styled.button`
 `;
 
 const PageButton = styled.button<{ active?: boolean }>`
-	width: 4rem;
+	width: 5rem;
 	background-color: ${(props) => (props.active ? '#9d0832' : '#e41d57')};
 	font-weight: bold;
 	transition: var(--transition);

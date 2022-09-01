@@ -8,7 +8,6 @@ import { UNAUTHENTICATED, UNAUTHORIZED } from '../../constant/Error';
 
 const URL = '/api/users';
 
-// GetAll - GetById - Create - Delete - Update - Upload Image
 const getAllUsers = createAsyncThunk<IUser[], void, { state: RootState }>(
 	'user/getAllUsers',
 	async (_, thunkAPI) => {
@@ -27,6 +26,35 @@ const getAllUsers = createAsyncThunk<IUser[], void, { state: RootState }>(
 			const params = {
 				method: 'GET',
 				url: `${URL}`,
+				headers: {
+					token,
+				},
+			};
+			const response = await axiosInstance.request(params);
+			return response.data;
+		} catch (error) {
+			return thunkAPI.rejectWithValue(error);
+		}
+	}
+);
+const getUserById = createAsyncThunk<IUser, string, { state: RootState }>(
+	'user/getUserById',
+	async (userId, thunkAPI) => {
+		try {
+			const { auth } = thunkAPI.getState().auth;
+
+			if (!auth) return thunkAPI.rejectWithValue(UNAUTHENTICATED);
+
+			const {
+				user: { type: userType },
+				token,
+			} = auth;
+
+			if (userType !== 'ADMIN') return thunkAPI.rejectWithValue(UNAUTHORIZED);
+
+			const params = {
+				method: 'GET',
+				url: `${URL}/${userId}`,
 				headers: {
 					token,
 				},
@@ -178,8 +206,9 @@ const updateUserById = createAsyncThunk<string, string, { state: RootState }>(
 
 export {
 	getAllUsers,
-	createUser,
 	getAllUsersPagination,
+	getUserById,
+	createUser,
 	deleteUserById,
 	updateUserById,
 };
