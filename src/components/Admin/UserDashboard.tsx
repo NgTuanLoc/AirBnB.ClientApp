@@ -3,13 +3,16 @@ import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { getAllUsers } from '../../features/User/userThunk';
+import {
+	getAllUsers,
+	getUserById,
+	deleteUserById,
+} from '../../features/User/userThunk';
 import { Loading, Button } from '..';
 import ActionButtons from './ActionButtons';
 import Modal from './Modal';
 import { IUser } from '../../@types/User';
 import { transformDate } from '../../utils/util';
-import { deleteUserById } from '../../features/User/userThunk';
 
 const USER_PER_PAGE = 10;
 const NUMBER_OF_PAGE_BUTTON = Array.from({ length: 5 }, () => 0);
@@ -17,8 +20,11 @@ const NUMBER_OF_PAGE_BUTTON = Array.from({ length: 5 }, () => 0);
 const UserDashboard = () => {
 	const [page, setPage] = useState(0);
 	const [displayUser, setDisplayUser] = useState<IUser[]>([]);
+	const { userList, selectedUser, isLoading } = useAppSelector(
+		(store) => store.user
+	);
 	const [modalTitle, setModalTitle] = useState('User Info');
-	const { userList, isLoading } = useAppSelector((store) => store.user);
+	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	const dispatch = useAppDispatch();
 	const maxPage = Math.floor(userList.length / USER_PER_PAGE);
@@ -64,6 +70,8 @@ const UserDashboard = () => {
 	const showUser = (id: string) => {
 		return () => {
 			setModalTitle('User Info');
+			setIsModalOpen(true);
+			dispatch(getUserById(id));
 		};
 	};
 
@@ -84,7 +92,13 @@ const UserDashboard = () => {
 
 	return (
 		<Container>
-			<Modal title={modalTitle} />
+			<Modal<IUser>
+				title={modalTitle}
+				isModalOpen={isModalOpen}
+				setIsModalOpen={setIsModalOpen}
+				isLoading={isLoading}
+				data={selectedUser}
+			/>
 			<Button fullWidth={false}>Add New</Button>
 			<SearchContainer>
 				<Search />
