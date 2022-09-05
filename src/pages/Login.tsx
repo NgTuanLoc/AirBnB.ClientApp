@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { loginThunk } from '../features/Auth/authThunk';
@@ -17,7 +17,6 @@ const Login = () => {
 	const dispatch = useAppDispatch();
 	const [errorState, setErrorState] = useState('');
 	const { isLoading, auth, error } = useAppSelector((store) => store.auth);
-	const navigate = useNavigate();
 
 	const {
 		register,
@@ -28,13 +27,6 @@ const Login = () => {
 	const onSubmitHandler = (user: FormInputs) => {
 		dispatch(loginThunk(user));
 	};
-
-	useEffect(() => {
-		if (auth) {
-			navigate('/', { replace: true });
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [auth]);
 
 	useEffect(() => {
 		if (!error) {
@@ -51,6 +43,10 @@ const Login = () => {
 
 		return;
 	}, [error, errorState, errors]);
+
+	if (auth) {
+		return <Navigate to='/' />;
+	}
 
 	return (
 		<Container>

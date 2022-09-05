@@ -12,7 +12,7 @@ export interface IRegister {
 	password: string;
 	phone: string;
 	birthday: string;
-	gender: boolean;
+	gender: string;
 	address: string;
 	type?: 'ADMIN' | 'CLIENT';
 }

@@ -47,7 +47,7 @@ const registerThunk = createAsyncThunk<IAuth, IRegister>(
 					password: user.password,
 					phone: user.phone,
 					birthday: user.birthday,
-					gender: user.gender,
+					gender: user.gender === 'Man' ? true : false,
 					address: user.address,
 				},
 			};
