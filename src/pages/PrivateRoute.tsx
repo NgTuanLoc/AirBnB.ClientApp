@@ -5,11 +5,11 @@ import { Navigate } from 'react-router-dom';
 import { useAppSelector } from '../hooks/hooks';
 
 interface IPrivateRoute {
-	type?: 'ADMIN' | 'USER';
+	type?: 'ADMIN' | 'CLIENT';
 	children: ReactNode;
 }
 
-const PrivateRoute = ({ children, type = 'USER' }: IPrivateRoute) => {
+const PrivateRoute = ({ children, type = 'CLIENT' }: IPrivateRoute) => {
 	const { auth } = useAppSelector((store) => store.auth);
 
 	if (!auth) {
