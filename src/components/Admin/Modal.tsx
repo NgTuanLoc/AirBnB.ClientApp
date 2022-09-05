@@ -4,8 +4,9 @@ import { useForm } from 'react-hook-form';
 
 import { useAppDispatch } from '../../hooks/hooks';
 import { useOnClickOutside } from '../../hooks/useClickOutsideHook';
-import { Loading } from '..';
+import { Loading, Button } from '..';
 import { formType } from '../../constant/FormType';
+import { transformDate } from '../../utils/util';
 
 export interface IModal<T> {
 	title: string;
@@ -21,7 +22,6 @@ const Modal = <T extends { [key: string]: any }>({
 	title,
 	isModalOpen,
 	setIsModalOpen,
-	isLoading,
 	dispatchFunction,
 	disableInput,
 	data,
@@ -58,11 +58,17 @@ const Modal = <T extends { [key: string]: any }>({
 						if (info?.length === 0) info = 'null';
 						const inputType = formType[key] ? formType[key] : 'text';
 
+						if (key === 'birthday') {
+							info = new Date(data[key]).toISOString().substring(0, 10);
+						}
+
 						return (
 							<CardItem key={id}>
 								<CardItemHeader htmlFor={key}>{key}</CardItemHeader>
 								<CardItemInfo
-									disableInput={disableInput}
+									disabled={disableInput}
+									type={inputType}
+									defaultValue={info}
 									placeholder={info}
 									{...register(key, {
 										required: {
@@ -75,6 +81,11 @@ const Modal = <T extends { [key: string]: any }>({
 						);
 					})}
 				</CardBody>
+				{title === 'Update User' && (
+					<Button fullWidth bgColor='#ffc107'>
+						Update
+					</Button>
+				)}
 			</Card>
 		</Container>
 	);
@@ -116,6 +127,7 @@ const CardBody = styled.div`
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	grid-gap: 2rem;
+	margin-bottom: 2rem;
 `;
 
 const CardItem = styled.div`
@@ -125,10 +137,13 @@ const CardItem = styled.div`
 	flex-direction: column;
 `;
 
-const CardItemHeader = styled.label``;
+const CardItemHeader = styled.label`
+	font-size: 2rem;
+	text-transform: capitalize;
+`;
 
-const CardItemInfo = styled.input<{ disableInput?: boolean }>`
-	pointer-events: ${(props) => (props.disableInput ? 'none' : 'auto')};
+const CardItemInfo = styled.input`
+	width: 100%;
 	font-size: 2rem;
 	border: none;
 	padding-bottom: 1rem;

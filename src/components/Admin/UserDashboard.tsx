@@ -7,6 +7,7 @@ import {
 	getAllUsers,
 	getUserById,
 	deleteUserById,
+	updateUserById,
 } from '../../features/User/userThunk';
 import { Loading, Button } from '..';
 import ActionButtons from './ActionButtons';
@@ -75,13 +76,21 @@ const UserDashboard = () => {
 		};
 	};
 
+	const updateUser = (id: string) => {
+		return () => {
+			setModalTitle('Update User');
+			setIsModalOpen(true);
+			dispatch(getUserById(id));
+		};
+	};
+
 	useEffect(() => {
 		renderNewUser();
 	}, [page, userList]);
 
 	useEffect(() => {
 		dispatch(getAllUsers());
-	}, []);
+	}, [selectedUser]);
 
 	if (isLoading)
 		return (
@@ -98,6 +107,8 @@ const UserDashboard = () => {
 				setIsModalOpen={setIsModalOpen}
 				isLoading={isLoading}
 				data={selectedUser}
+				disableInput={modalTitle === 'Update User' ? false : true}
+				dispatchFunction={updateUserById}
 			/>
 			<Button fullWidth={false}>Add New</Button>
 			<SearchContainer>
@@ -145,7 +156,7 @@ const UserDashboard = () => {
 										<ActionButtons
 											id={_id}
 											infoHandler={showUser}
-											updateHandler={showUser}
+											updateHandler={updateUser}
 											deleteHandler={deleteUser}
 										/>
 									</Item>

@@ -40,6 +40,7 @@ const Container = styled.button<Props>`
 		position: relative;
 		z-index: 10;
 		margin: 0;
+		cursor: pointer;
 	}
 
 	::after {

@@ -7,6 +7,7 @@ import {
 	getUserById,
 	createUser,
 	deleteUserById,
+	updateUserById,
 } from './userThunk';
 
 export interface IUserState {
@@ -104,6 +105,21 @@ const userSlice = createSlice({
 			state.successMsg = payload;
 		});
 		builder.addCase(deleteUserById.rejected, (state, { payload }) => {
+			state.isLoading = true;
+			if (payload) {
+				state.error = payload as string;
+			}
+		});
+
+		// Update User By Id
+		builder.addCase(updateUserById.pending, (state) => {
+			state.isLoading = true;
+		});
+		builder.addCase(updateUserById.fulfilled, (state, { payload }) => {
+			state.isLoading = false;
+			state.selectedUser = payload;
+		});
+		builder.addCase(updateUserById.rejected, (state, { payload }) => {
 			state.isLoading = true;
 			if (payload) {
 				state.error = payload as string;

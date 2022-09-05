@@ -128,7 +128,7 @@ const createUser = createAsyncThunk<string, IRegister, { state: RootState }>(
 					password: user.password,
 					phone: user.phone,
 					birthday: user.birthday,
-					gender: user.gender,
+					gender: user.gender === 'Man' ? true : false,
 					address: user.address,
 					type: user.type,
 				},
@@ -173,9 +173,9 @@ const deleteUserById = createAsyncThunk<string, string, { state: RootState }>(
 	}
 );
 
-const updateUserById = createAsyncThunk<string, string, { state: RootState }>(
+const updateUserById = createAsyncThunk<IUser, IUser, { state: RootState }>(
 	'user/updateUserById',
-	async (userId, thunkAPI) => {
+	async (user, thunkAPI) => {
 		try {
 			const { auth } = thunkAPI.getState().auth;
 
@@ -189,15 +189,25 @@ const updateUserById = createAsyncThunk<string, string, { state: RootState }>(
 			if (userType !== 'ADMIN') return thunkAPI.rejectWithValue(UNAUTHORIZED);
 
 			const params = {
-				method: 'DELETE',
-				url: `${URL}/${userId}`,
+				method: 'PUT',
+				url: `${URL}/${user._id}`,
 				headers: {
 					token: token,
 				},
+				data: {
+					name: user.name,
+					email: user.email,
+					password: user.password,
+					phone: user.phone,
+					birthday: user.birthday,
+					gender: user.gender === 'Man' ? true : false,
+					address: user.address,
+					type: user.type,
+				},
 			};
 
-			await axiosInstance.request(params);
-			return `Delete user ${userId} successfully`;
+			const response = await axiosInstance.request(params);
+			return response.data;
 		} catch (error) {
 			return thunkAPI.rejectWithValue(error);
 		}
