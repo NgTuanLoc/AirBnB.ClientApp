@@ -6,7 +6,6 @@ import { useAppDispatch } from '../../hooks/hooks';
 import { useOnClickOutside } from '../../hooks/useClickOutsideHook';
 import { Loading, Button } from '..';
 import { formType } from '../../constant/FormType';
-import { transformDate } from '../../utils/util';
 
 export interface IModal<T> {
 	title: string;
@@ -32,10 +31,11 @@ const Modal = <T extends { [key: string]: any }>({
 	const {
 		register,
 		handleSubmit,
-		formState: { errors },
+		// formState: { errors },
 	} = useForm();
 
 	const onSubmitHandler = (data: any) => {
+		setIsModalOpen(false);
 		dispatch(dispatchFunction(data));
 	};
 
@@ -56,10 +56,14 @@ const Modal = <T extends { [key: string]: any }>({
 					{objectKeys.map((key, id) => {
 						let info = data[key] ? data[key] : 'Not Provided';
 						if (info?.length === 0) info = 'null';
-						const inputType = formType[key] ? formType[key] : 'text';
+						let inputType = formType[key] ? formType[key] : 'text';
 
 						if (key === 'birthday') {
 							info = new Date(data[key]).toISOString().substring(0, 10);
+						}
+
+						if (key === 'gender') {
+							inputType = 'checkbox';
 						}
 
 						return (
@@ -69,7 +73,7 @@ const Modal = <T extends { [key: string]: any }>({
 									disabled={disableInput}
 									type={inputType}
 									defaultValue={info}
-									placeholder={info}
+									placeholder={key}
 									{...register(key, {
 										required: {
 											value: true,

@@ -45,7 +45,7 @@ const Login = () => {
 	}, [error, errorState, errors]);
 
 	if (auth) {
-		return <Navigate to='/' />;
+		return <Navigate to='/' replace={true} />;
 	}
 
 	return (

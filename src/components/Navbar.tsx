@@ -149,7 +149,7 @@ const Container = styled.header`
 	z-index: 100;
 	height: 8rem;
 	border-bottom: 2px solid var(--clr-secondary);
-	padding-inline: 8rem;
+	padding-inline: 10rem;
 
 	img {
 		width: 10rem;

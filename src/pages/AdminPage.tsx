@@ -20,9 +20,21 @@ const AdminPage = () => {
 			<Navbar hideSearch />
 			<Container>
 				<Sidebar>
-					<Button onClick={onClickHandler('user')}>User</Button>
-					<Button onClick={onClickHandler('room')}>Room</Button>
-					<Button onClick={onClickHandler('location')}>Location</Button>
+					<Button
+						active={dashboard === 'user'}
+						onClick={onClickHandler('user')}>
+						User
+					</Button>
+					<Button
+						active={dashboard === 'room'}
+						onClick={onClickHandler('room')}>
+						Room
+					</Button>
+					<Button
+						active={dashboard === 'location'}
+						onClick={onClickHandler('location')}>
+						Location
+					</Button>
 				</Sidebar>
 				{dashboard === 'user' && <UserDashboard />}
 				{dashboard === 'room' && <RoomDashboard />}
@@ -50,10 +62,12 @@ const Sidebar = styled.aside`
 	box-shadow: var(--dark-shadow);
 `;
 
-const Button = styled.button`
+const Button = styled.button<{ active?: boolean }>`
 	padding: 2rem 0;
 	font-size: 3rem;
 	width: 100%;
+	background-color: ${(props) =>
+		props.active ? 'rgba(0, 0, 0, 0.1)' : 'transparent'};
 `;
 
 export default AdminPage;

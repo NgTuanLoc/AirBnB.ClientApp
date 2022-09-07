@@ -27,7 +27,7 @@ const Room = ({ _id, name, image, locationId, price }: IRoom) => {
 					<Skeleton />
 				) : (
 					<p>
-						<span className='bold'>${price.toLocaleString()}</span> night
+						<span className='bold'>${price?.toLocaleString()}</span> night
 					</p>
 				)}
 			</div>
