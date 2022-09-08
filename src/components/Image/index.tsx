@@ -1,8 +1,8 @@
-import styled from 'styled-components';
 import Skeleton from 'react-loading-skeleton';
 
-import { useProgressiveImg } from '../hooks/useProgressiveImg';
-import { DEFAULT_IMAGE } from '../constant/DefaultImage';
+import { useProgressiveImg } from '../../hooks/useProgressiveImg';
+import { DEFAULT_IMAGE } from '../../constant';
+import { StyledContainer } from './style';
 
 interface IImage {
 	url: string;
@@ -17,7 +17,7 @@ const CustomImage = ({ url, alt }: IImage) => {
 	}
 
 	return (
-		<Container>
+		<StyledContainer>
 			{isImageLoaded ? (
 				<img src={url} alt={alt} />
 			) : (
@@ -29,13 +29,8 @@ const CustomImage = ({ url, alt }: IImage) => {
 					duration={2}
 				/>
 			)}
-		</Container>
+		</StyledContainer>
 	);
 };
-
-const Container = styled.div`
-	width: 100%;
-	height: 100%;
-`;
 
 export default CustomImage;

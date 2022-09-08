@@ -4,13 +4,9 @@ import { useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { getRoomDetailByID } from '../features/Room/roomThunk';
-import {
-	Navbar,
-	Footer,
-	Loading,
-	SingleRoomCatalog,
-	SingleRoomDetails,
-} from '../components';
+import { Navbar, Footer, Loading, SingleRoomDetails } from '../components';
+
+import { SingleRoomCatalog } from '../containers';
 
 const SingleRoomPage = () => {
 	const { id } = useParams();

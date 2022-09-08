@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { ReactNode, useEffect, useState } from 'react';
-import styled from 'styled-components';
+
+import { StyledContainer } from './style';
 
 interface IError {
 	children: ReactNode;
@@ -20,24 +21,10 @@ const Error = ({ children }: IError) => {
 	}, []);
 
 	return (
-		<Container removeError={removeError}>
+		<StyledContainer removeError={removeError}>
 			<h5>{children}</h5>
-		</Container>
+		</StyledContainer>
 	);
 };
-
-interface Props {
-	removeError: boolean;
-}
-
-const Container = styled.div<Props>`
-	transition: var(--transition);
-	display: ${(props) => (props.removeError ? 'none' : 'block')};
-	width: 100%;
-	margin: 1rem auto;
-	h5 {
-		color: var(--clr-danger);
-	}
-`;
 
 export default Error;

@@ -1,31 +1,11 @@
-import { ReactNode } from 'react';
 import styled from 'styled-components';
-
-interface IButton {
-	fullWidth?: boolean;
-	bgColor?: string;
-	children: ReactNode;
-	onClickHandler?: any;
-}
-
-const Button = ({ children, fullWidth, bgColor, onClickHandler }: IButton) => {
-	return (
-		<Container
-			onClick={onClickHandler}
-			bgColor={bgColor}
-			type='submit'
-			fullWidth={fullWidth}>
-			<h4>{children}</h4>
-		</Container>
-	);
-};
 
 interface Props {
 	fullWidth?: boolean;
 	bgColor?: string;
 }
 
-const Container = styled.button<Props>`
+const StyledContainer = styled.button<Props>`
 	width: ${(props) => (props.fullWidth ? '100%' : 'auto')};
 	position: relative;
 	color: white;
@@ -63,4 +43,4 @@ const Container = styled.button<Props>`
 	}
 `;
 
-export default Button;
+export { StyledContainer };

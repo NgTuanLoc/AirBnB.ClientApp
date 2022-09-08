@@ -7,7 +7,7 @@ import 'swiper/css/pagination';
 
 // import required modules
 import { Pagination } from 'swiper';
-import styled from 'styled-components';
+import { StyledContainer } from './style';
 
 interface ICatalog {
 	images: string[];
@@ -15,7 +15,7 @@ interface ICatalog {
 
 const Catalog = ({ images }: ICatalog) => {
 	return (
-		<Container>
+		<StyledContainer>
 			<Swiper
 				spaceBetween={30}
 				pagination={{
@@ -28,10 +28,8 @@ const Catalog = ({ images }: ICatalog) => {
 					</SwiperSlide>
 				))}
 			</Swiper>
-		</Container>
+		</StyledContainer>
 	);
 };
-
-const Container = styled.div``;
 
 export default Catalog;

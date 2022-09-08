@@ -12,11 +12,10 @@ import Button from './Button';
 import Image from './Image';
 import UserModal from './UserModal';
 import SingleRoomDetails from './SingleRoomDetails';
-import SingleRoomCatalog from './SingleRoomCatalog';
 import SingleRoomInfo from './SingleRoomInfo';
 import Calendar from './Calendar';
 import Error from './Error';
-import Form from './Form';
+import Line from './Line';
 
 import UserDashboard from './Admin/UserDashboard';
 import RoomDashboard from './Admin/RoomDashboard';
@@ -36,12 +35,11 @@ export {
 	Catalog,
 	Button,
 	Image,
+	Line,
 	UserModal,
 	Error,
 	SingleRoomDetails,
-	SingleRoomCatalog,
 	SingleRoomInfo,
-	Form,
 	UserDashboard,
 	RoomDashboard,
 	LocationDashboard,
