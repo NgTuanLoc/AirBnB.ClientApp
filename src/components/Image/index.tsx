@@ -2,14 +2,16 @@ import Skeleton from 'react-loading-skeleton';
 
 import { useProgressiveImg } from '../../hooks/useProgressiveImg';
 import { DEFAULT_IMAGE } from '../../constant';
-import { StyledContainer } from './style';
+import { StyledContainer, StyledImage } from './style';
 
 interface IImage {
 	url: string;
 	alt: string;
+	gridArea?: string;
+	borderRadius?: string;
 }
 
-const CustomImage = ({ url, alt }: IImage) => {
+const CustomImage = ({ url, alt, gridArea, borderRadius }: IImage) => {
 	const isImageLoaded = useProgressiveImg(url);
 
 	if (!url) {
@@ -19,7 +21,7 @@ const CustomImage = ({ url, alt }: IImage) => {
 	return (
 		<StyledContainer>
 			{isImageLoaded ? (
-				<img src={url} alt={alt} />
+				<StyledImage src={url} alt={alt} />
 			) : (
 				<Skeleton
 					height={`100%`}
