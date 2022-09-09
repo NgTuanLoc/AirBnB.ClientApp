@@ -9,6 +9,7 @@ import {
 	StyledContainer,
 	StyledSwiperItem,
 	StyledImageContainer,
+	StyledHeading,
 } from './style';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { selectLocation } from '../../features/Room/roomSlice';
@@ -36,7 +37,11 @@ const Categories = () => {
 							<StyledImageContainer>
 								<Image url={image} alt={province} />
 							</StyledImageContainer>
-							{isLoading ? <Skeleton /> : <h5>{province}</h5>}
+							{isLoading ? (
+								<Skeleton />
+							) : (
+								<StyledHeading>{province}</StyledHeading>
+							)}
 						</StyledSwiperItem>
 					</SwiperSlide>
 				);

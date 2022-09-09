@@ -25,6 +25,9 @@ const StyledSubTitle = styled.div`
 `;
 
 const StyledSubTitleLink = styled.a`
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	color: black;
 	font-size: 1.5rem;
 	margin-inline: 1rem;

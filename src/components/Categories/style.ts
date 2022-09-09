@@ -25,4 +25,13 @@ const StyledImageContainer = styled.div`
 	height: 12rem;
 `;
 
-export { StyledContainer, StyledSwiperItem, StyledImageContainer };
+const StyledHeading = styled.h5`
+	margin-top: 0.5rem;
+`;
+
+export {
+	StyledContainer,
+	StyledSwiperItem,
+	StyledImageContainer,
+	StyledHeading,
+};

@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { getRoomListByLocationID } from '../features/Room/roomThunk';
 import { selectLocation } from '../features/Room/roomSlice';
 import { Navbar, Footer, RoomDetails, Loading } from '../components';
+import { MainLayout } from '../layouts';
 
 const RoomListPage = () => {
 	const { locationId } = useParams();
@@ -21,8 +22,7 @@ const RoomListPage = () => {
 	if (isLoading) return <Loading />;
 
 	return (
-		<>
-			<Navbar />
+		<MainLayout>
 			<Container>
 				<RoomList>
 					{roomList.map((item) => {
@@ -34,11 +34,11 @@ const RoomListPage = () => {
 						title='map'
 						src='https://www.google.com/maps/d/embed?mid=1P9x70YwwVvtxthmnVQt1ikJBoKE&ehbc=2E312F'
 						width='100%'
-						height='100%'></iframe>
+						height='100%'
+					/>
 				</GoogleMap>
 			</Container>
-			<Footer />
-		</>
+		</MainLayout>
 	);
 };
 

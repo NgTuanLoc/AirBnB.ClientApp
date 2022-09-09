@@ -3,7 +3,7 @@ import { GiPoolDive } from 'react-icons/gi';
 import { MdOutlineFreeCancellation } from 'react-icons/md';
 
 import { logo } from '../../constant';
-import { transformDate } from '../../utils/util';
+import { transformDate } from '../../utils';
 import { IRoom } from '../../@types/Room';
 import { Calendar, Line } from '../../components';
 import imageLogo from '../../images/image1.jpg';

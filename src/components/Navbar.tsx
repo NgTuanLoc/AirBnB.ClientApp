@@ -7,8 +7,8 @@ import { AiOutlineGlobal, AiOutlineMenu, AiOutlineUser } from 'react-icons/ai';
 import logo from '../images/logo.svg';
 import { useAppSelector } from '../hooks/hooks';
 import { useOnClickOutside } from '../hooks/useClickOutsideHook';
-import { transformLanguage } from '../utils/util';
-import { Modal, UserModal } from '../components';
+import { transformLanguage } from '../utils';
+import { Modal, UserSettings } from '../components';
 
 interface InputProps {
 	disableInput: boolean;
@@ -27,7 +27,6 @@ const Navbar = ({ hideSearch }: INavbar) => {
 	const [title, setTitle] = useState('Anywhere');
 	const [isUserModalOpen, setIsUserModalOpen] = useState(false);
 	const [disableInput, setDisableInput] = useState(true);
-
 	const [inputLocation, setInputLocation] = useState<IFilteredLocation>({
 		location: '',
 		id: '',
@@ -39,7 +38,6 @@ const Navbar = ({ hideSearch }: INavbar) => {
 
 	const userModalRef = useRef(null);
 	useOnClickOutside(userModalRef, () => setIsUserModalOpen(false));
-
 	const ref = useRef(null);
 	useOnClickOutside(ref, () => setDisableInput(true));
 
@@ -131,7 +129,7 @@ const Navbar = ({ hideSearch }: INavbar) => {
 					<AiOutlineMenu />
 					<AiOutlineUser />
 				</button>
-				{isUserModalOpen && <UserModal />}
+				{isUserModalOpen && <UserSettings />}
 			</Nav>
 		</Container>
 	);

@@ -13,7 +13,7 @@ import { Loading, Button } from '..';
 import ActionButtons from './ActionButtons';
 import Modal from './Modal';
 import { IUser } from '../../@types/User';
-import { transformDate } from '../../utils/util';
+import { transformDate } from '../../utils';
 
 const USER_PER_PAGE = 10;
 const NUMBER_OF_PAGE_BUTTON = Array.from({ length: 5 }, () => 0);

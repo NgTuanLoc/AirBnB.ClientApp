@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { axiosInstance } from '../../utils/axios';
+import { axiosInstance } from '../../utils';
 import { IRoom } from '../../@types/Room';
 import { RootState } from '../../app/store';
 import { UNAUTHENTICATED, UNAUTHORIZED } from '../../constant/Error';

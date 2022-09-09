@@ -4,9 +4,9 @@ import { useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { getRoomDetailByID } from '../features/Room/roomThunk';
-import { Navbar, Footer, Loading, SingleRoomDetails } from '../components';
+import { Navbar, Footer, Loading, Line } from '../components';
 
-import { SingleRoomCatalog } from '../containers';
+import { SingleRoomCatalog, SingleRoomDetails } from '../containers';
 
 const SingleRoomPage = () => {
 	const { id } = useParams();
@@ -25,8 +25,7 @@ const SingleRoomPage = () => {
 			<Container className='section'>
 				<SingleRoomCatalog />
 				<SingleRoomDetails />
-
-				<div className='line'></div>
+				<Line />
 			</Container>
 			<Footer />
 		</>

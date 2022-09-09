@@ -1,7 +1,11 @@
 import { StyledContainer } from './style';
 
-const Line = () => {
-	return <StyledContainer />;
+interface ILine {
+	margin?: string;
+}
+
+const Line = ({ margin }: ILine) => {
+	return <StyledContainer margin={margin} />;
 };
 
 export default Line;

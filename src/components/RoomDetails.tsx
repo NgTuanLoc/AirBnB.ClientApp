@@ -153,7 +153,7 @@ const RoomDetails = ({
 					</li>
 				</ul>
 				<h5 className='price'>
-					{price.toLocaleString()}VND<span>/night</span>
+					{price?.toLocaleString()}VND<span>/night</span>
 				</h5>
 			</div>
 		</Container>

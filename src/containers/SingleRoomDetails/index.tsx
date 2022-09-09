@@ -1,10 +1,9 @@
-import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 
-import { useAppSelector } from '../hooks/hooks';
-import { Card, Loading } from './index';
-
-import { SingleRoomInfo } from '../containers';
+import { useAppSelector } from '../../hooks/hooks';
+import { Card, Loading } from '../../components';
+import { StyledContainer } from './style';
+import { SingleRoomInfo } from '..';
 
 const SingleRoomDetails = () => {
 	const [bookDate, setBookDate] = useState({
@@ -29,7 +28,7 @@ const SingleRoomDetails = () => {
 	}
 
 	return (
-		<Container>
+		<StyledContainer>
 			<SingleRoomInfo
 				{...selectedRoom}
 				bookDate={bookDate}
@@ -42,20 +41,8 @@ const SingleRoomDetails = () => {
 				pricePerNight={selectedRoom.price}
 				roomId={selectedRoom._id}
 			/>
-		</Container>
+		</StyledContainer>
 	);
 };
-
-const Container = styled.section`
-	display: grid;
-	grid-template-columns: 3fr 2fr;
-	margin: 5rem auto;
-
-	@media only screen and (max-width: 1200px) {
-		grid-template-columns: 1fr;
-		margin: 5rem auto;
-		padding: 1rem;
-	}
-`;
 
 export default SingleRoomDetails;

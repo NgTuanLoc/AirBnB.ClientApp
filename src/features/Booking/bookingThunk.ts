@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { axiosInstance } from '../../utils/axios';
+import { axiosInstance } from '../../utils';
 import { IBooking } from '../../@types/Booking';
 
 const URL = '/api/tickets';

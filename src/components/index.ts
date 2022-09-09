@@ -10,8 +10,7 @@ import Card from './Card';
 import Catalog from './Catalog';
 import Button from './Button';
 import Image from './Image';
-import UserModal from './UserModal';
-import SingleRoomDetails from './SingleRoomDetails';
+import UserSettings from './UserSettings';
 import Calendar from './Calendar';
 import Error from './Error';
 import Line from './Line';
@@ -35,9 +34,8 @@ export {
 	Button,
 	Image,
 	Line,
-	UserModal,
+	UserSettings,
 	Error,
-	SingleRoomDetails,
 	UserDashboard,
 	RoomDashboard,
 	LocationDashboard,

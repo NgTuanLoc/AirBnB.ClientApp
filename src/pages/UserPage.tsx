@@ -6,7 +6,7 @@ import { TiTickOutline } from 'react-icons/ti';
 import { Navbar } from '../components';
 import defaultImage from '../images/default-user-image.jpg';
 import { useAppSelector } from '../hooks/hooks';
-import { transformDate } from '../utils/util';
+import { transformDate } from '../utils';
 
 const UserPage = () => {
 	const { auth } = useAppSelector((store) => store.auth);
