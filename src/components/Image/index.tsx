@@ -19,9 +19,9 @@ const CustomImage = ({ url, alt, gridArea, borderRadius }: IImage) => {
 	}
 
 	return (
-		<StyledContainer>
+		<StyledContainer gridArea={gridArea}>
 			{isImageLoaded ? (
-				<StyledImage src={url} alt={alt} />
+				<StyledImage src={url} alt={alt} borderRadius={borderRadius} />
 			) : (
 				<Skeleton
 					height={`100%`}

@@ -2,7 +2,9 @@ import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 
 import { useAppSelector } from '../hooks/hooks';
-import { Card, SingleRoomInfo, Loading } from './index';
+import { Card, Loading } from './index';
+
+import { SingleRoomInfo } from '../containers';
 
 const SingleRoomDetails = () => {
 	const [bookDate, setBookDate] = useState({

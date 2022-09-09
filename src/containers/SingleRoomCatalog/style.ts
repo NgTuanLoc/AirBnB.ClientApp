@@ -55,22 +55,7 @@ const StyledPhotoContainer = styled.div`
 		'main main image-3 image-4';
 `;
 
-const StyledMainImage = styled(Image)`
-	grid-area: main;
-`;
-
-const StyledImage1 = styled(Image)`
-	grid-area: image-1;
-`;
-const StyledImage2 = styled(Image)`
-	grid-area: image-2;
-`;
-const StyledImage3 = styled(Image)`
-	grid-area: image-3;
-`;
-const StyledImage4 = styled(Image)`
-	grid-area: image-4;
-`;
+const StyledImage = styled(Image)``;
 
 export {
 	StyledLocationTitle,
@@ -81,9 +66,5 @@ export {
 	StyledSubTitleLink,
 	StyledSubTitleLinkSpan,
 	StyledPhotoContainer,
-	StyledMainImage,
-	StyledImage1,
-	StyledImage2,
-	StyledImage3,
-	StyledImage4,
+	StyledImage,
 };

@@ -12,7 +12,6 @@ import Button from './Button';
 import Image from './Image';
 import UserModal from './UserModal';
 import SingleRoomDetails from './SingleRoomDetails';
-import SingleRoomInfo from './SingleRoomInfo';
 import Calendar from './Calendar';
 import Error from './Error';
 import Line from './Line';
@@ -39,7 +38,6 @@ export {
 	UserModal,
 	Error,
 	SingleRoomDetails,
-	SingleRoomInfo,
 	UserDashboard,
 	RoomDashboard,
 	LocationDashboard,

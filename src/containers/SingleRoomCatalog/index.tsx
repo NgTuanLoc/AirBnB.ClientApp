@@ -14,11 +14,7 @@ import {
 	StyledSubTitleLink,
 	StyledSubTitleLinkSpan,
 	StyledPhotoContainer,
-	StyledMainImage,
-	StyledImage1,
-	StyledImage2,
-	StyledImage3,
-	StyledImage4,
+	StyledImage,
 } from './style';
 
 const SingleRoomCatalog = () => {
@@ -57,11 +53,27 @@ const SingleRoomCatalog = () => {
 				<Catalog images={[...DUMMY_IMAGE_DATA, image]} />
 			) : (
 				<StyledPhotoContainer>
-					<StyledMainImage url={image} alt={name} />
-					<StyledImage1 url={DUMMY_IMAGE_DATA[0]} alt={name} />
-					<StyledImage2 url={DUMMY_IMAGE_DATA[1]} alt={name} />
-					<StyledImage3 url={DUMMY_IMAGE_DATA[2]} alt={name} />
-					<StyledImage4 url={DUMMY_IMAGE_DATA[3]} alt={name} />
+					<StyledImage gridArea='main' url={image} alt={name} />
+					<StyledImage
+						gridArea='image-1'
+						url={DUMMY_IMAGE_DATA[0]}
+						alt={name}
+					/>
+					<StyledImage
+						gridArea='image-2'
+						url={DUMMY_IMAGE_DATA[1]}
+						alt={name}
+					/>
+					<StyledImage
+						gridArea='image-3'
+						url={DUMMY_IMAGE_DATA[2]}
+						alt={name}
+					/>
+					<StyledImage
+						gridArea='image-4'
+						url={DUMMY_IMAGE_DATA[3]}
+						alt={name}
+					/>
 				</StyledPhotoContainer>
 			)}
 		</StyledContainer>

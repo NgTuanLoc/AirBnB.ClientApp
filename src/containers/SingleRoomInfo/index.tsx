@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import { AiOutlineStar } from 'react-icons/ai';
 import { GiPoolDive } from 'react-icons/gi';
 import { MdOutlineFreeCancellation } from 'react-icons/md';
@@ -6,8 +5,28 @@ import { MdOutlineFreeCancellation } from 'react-icons/md';
 import { logo } from '../../constant';
 import { transformDate } from '../../utils/util';
 import { IRoom } from '../../@types/Room';
-import { Calendar } from '../../components';
-import imageLogo from '../images/image1.jpg';
+import { Calendar, Line } from '../../components';
+import imageLogo from '../../images/image1.jpg';
+import {
+	StyledContainer,
+	StyledTitleContainer,
+	StyledTitleImage,
+	StyledHeading,
+	StyledParagraph,
+	StyledLightParagraph,
+	StyledSpan,
+	StyledDivWrapper,
+	StyledDescription,
+	StyledDescriptionItem,
+	StyledSponsor,
+	StyledSponsorImage,
+	StyledShortDescription,
+	StyledOffer,
+	StyledOfferItem,
+	StyledOfferText,
+	StyledOfferContainer,
+	StyledCalendar,
+} from './style';
 
 export interface ISingleRoomInfo extends IRoom {
 	setBookDate: any;
@@ -36,219 +55,134 @@ const SingleRoomInfo = ({
 	numberOfVisitNights,
 }: ISingleRoomInfo) => {
 	return (
-		<Container>
-			<div className='detail__title'>
-				<div>
-					<h4>{name}</h4>
-					<p>
+		<StyledContainer>
+			<StyledTitleContainer>
+				<StyledDivWrapper>
+					<StyledHeading>{name}</StyledHeading>
+					<StyledParagraph>
 						{guests} guests &middot; {bedRoom} bedroom &middot; {bath} bath
-					</p>
-				</div>
-				<img src={imageLogo} alt='logo' />
-			</div>
-			<div className='line'></div>
+					</StyledParagraph>
+				</StyledDivWrapper>
+				<StyledTitleImage src={imageLogo} alt='logo' />
+			</StyledTitleContainer>
+			<Line />
 			{/* Description */}
-			<div className='detail__description'>
-				<div className='detail__description-item'>
+			<StyledDescription>
+				<StyledDescriptionItem>
 					<GiPoolDive />
-					<div>
-						<h4>Dive right in</h4>
-						<p>This is one of the few places in the area with a pool.</p>
-					</div>
-				</div>
-				<div className='detail__description-item'>
+					<StyledDivWrapper>
+						<StyledHeading>Dive right in</StyledHeading>
+						<StyledLightParagraph>
+							This is one of the few places in the area with a pool.
+						</StyledLightParagraph>
+					</StyledDivWrapper>
+				</StyledDescriptionItem>
+				<StyledDescriptionItem>
 					<AiOutlineStar />
-					<div>
-						<h4>Experienced host</h4>
-						<p>Dorothy has 757 reviews for other places.</p>
-					</div>
-				</div>
-				<div className='detail__description-item'>
+					<StyledDivWrapper>
+						<StyledHeading>Experienced host</StyledHeading>
+						<StyledLightParagraph>
+							Dorothy has 757 reviews for other places.
+						</StyledLightParagraph>
+					</StyledDivWrapper>
+				</StyledDescriptionItem>
+				<StyledDescriptionItem>
 					<MdOutlineFreeCancellation />
-					<div>
-						<h4>Free cancellation for 48 hours.</h4>
-					</div>
-				</div>
-			</div>
-			<div className='line'></div>
+					<StyledDivWrapper>
+						<StyledHeading>Free cancellation for 48 hours.</StyledHeading>
+					</StyledDivWrapper>
+				</StyledDescriptionItem>
+			</StyledDescription>
+			<Line />
 			{/* Sponsor */}
-			<div className='detail__sponsor'>
-				<img
+			<StyledSponsor>
+				<StyledSponsorImage
 					src='https://a0.muscache.com/im/pictures/54e427bb-9cb7-4a81-94cf-78f19156faad.jpg'
 					alt='sponsor'
 				/>
-				<p>
+				<StyledLightParagraph>
 					Every booking includes free protection from Host cancellations,
 					listing inaccuracies, and other issues like trouble checking in.
-				</p>
-			</div>
-
-			<div className='line'></div>
-			{/* Comment */}
-			<div className='detail__comment'>
-				<h3>Description</h3>
-				<p>{description}</p>
-			</div>
-			<div className='line'></div>
+				</StyledLightParagraph>
+			</StyledSponsor>
+			<Line />
+			{/* Short Description */}
+			<StyledShortDescription>
+				<StyledHeading>Description</StyledHeading>
+				<StyledLightParagraph>{description}</StyledLightParagraph>
+			</StyledShortDescription>
+			<Line />
 			{/* Offer */}
-			<div className='detail__offer'>
-				<h3>What this place offers</h3>
-				<div className='detail__offer-container'>
-					<div className='detail__offer-item'>
-						<p className={`${kitchen ? '' : 'disable__offer'}`}>
+			<StyledOffer>
+				<StyledHeading>What this place offers</StyledHeading>
+				<StyledOfferContainer>
+					<StyledOfferItem>
+						<StyledOfferText disable={kitchen}>
 							{logo['kitchen']} kitchen
-						</p>
-					</div>
-					<div className='detail__offer-item'>
-						<p className={`${elevator ? '' : 'disable__offer'}`}>
+						</StyledOfferText>
+					</StyledOfferItem>
+					<StyledOfferItem>
+						<StyledOfferText disable={elevator}>
 							{logo['elevator']} elevator
-						</p>
-					</div>
-					<div className='detail__offer-item'>
-						<p className={`${hotTub ? '' : 'disable__offer'}`}>
+						</StyledOfferText>
+					</StyledOfferItem>
+					<StyledOfferItem>
+						<StyledOfferText disable={hotTub}>
 							{logo['hotTub']} hotTub
-						</p>
-					</div>
-					<div className='detail__offer-item'>
-						<p className={`${pool ? '' : 'disable__offer'}`}>
+						</StyledOfferText>
+					</StyledOfferItem>
+					<StyledOfferItem>
+						<StyledOfferText disable={pool}>
 							{logo['pool']} pool
-						</p>
-					</div>
-					<div className='detail__offer-item'>
-						<p className={`${indoorFireplace ? '' : 'disable__offer'}`}>
+						</StyledOfferText>
+					</StyledOfferItem>
+					<StyledOfferItem>
+						<StyledOfferText disable={indoorFireplace}>
 							{logo['indoorFireplace']} indoorFireplace
-						</p>
-					</div>
-					<div className='detail__offer-item'>
-						<p className={`${dryer ? '' : 'disable__offer'}`}>
+						</StyledOfferText>
+					</StyledOfferItem>
+					<StyledOfferItem>
+						<StyledOfferText disable={dryer}>
 							{logo['dryer']} dryer
-						</p>
-					</div>
-					<div className='detail__offer-item'>
-						<p className={`${gym ? '' : 'disable__offer'}`}>
-							{logo['gym']} gym
-						</p>
-					</div>
-					<div className='detail__offer-item'>
-						<p className={`${wifi ? '' : 'disable__offer'}`}>
+						</StyledOfferText>
+					</StyledOfferItem>
+					<StyledOfferItem>
+						<StyledOfferText disable={gym}>{logo['gym']} gym</StyledOfferText>
+					</StyledOfferItem>
+					<StyledOfferItem>
+						<StyledOfferText disable={wifi}>
 							{logo['wifi']} wifi
-						</p>
-					</div>
-					<div className='detail__offer-item'>
-						<p className={`${heating ? '' : 'disable__offer'}`}>
+						</StyledOfferText>
+					</StyledOfferItem>
+					<StyledOfferItem>
+						<StyledOfferText disable={heating}>
 							{logo['heating']} heating
-						</p>
-					</div>
-					<div className='detail__offer-item'>
-						<p className={`${cableTV ? '' : 'disable__offer'}`}>
+						</StyledOfferText>
+					</StyledOfferItem>
+					<StyledOfferItem>
+						<StyledOfferText disable={cableTV}>
 							{logo['cableTV']} cableTV
-						</p>
-					</div>
-				</div>
-			</div>
+						</StyledOfferText>
+					</StyledOfferItem>
+				</StyledOfferContainer>
+			</StyledOffer>
 			{/* Calendar */}
-			<div className='line'></div>
-			<div className='detail__calendar'>
-				<h3>
+			<Line />
+			<StyledCalendar>
+				<StyledHeading>
 					{numberOfVisitNights}{' '}
-					<span style={{ textTransform: 'lowercase' }}>nights in</span> {name}
-				</h3>
-				<p>
+					<StyledSpan style={{ textTransform: 'lowercase' }}>
+						nights in
+					</StyledSpan>{' '}
+					{name}
+				</StyledHeading>
+				<StyledLightParagraph>
 					{transformDate(bookDate.checkIn)} - {transformDate(bookDate.checkOut)}
-				</p>
+				</StyledLightParagraph>
 				<Calendar setBookDate={setBookDate} />
-			</div>
-		</Container>
+			</StyledCalendar>
+		</StyledContainer>
 	);
 };
-
-const Container = styled.div`
-	p {
-		font-weight: 200;
-	}
-
-	.detail__title {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-
-		p {
-			text-transform: capitalize;
-		}
-
-		img {
-			width: 10rem;
-			height: 10rem;
-		}
-	}
-	.detail__description {
-		display: flex;
-		justify-content: center;
-		align-items: flex-start;
-		flex-direction: column;
-
-		.detail__description-item {
-			display: flex;
-			align-items: center;
-			gap: 2rem;
-			margin: 1.5rem 0;
-			h4 {
-				margin: 0;
-			}
-
-			p {
-				color: rgb(113, 113, 113);
-				font-size: 300;
-				font-size: 1.4rem;
-				margin-top: 0.1rem;
-			}
-			svg {
-				font-size: 4rem;
-			}
-			div {
-				flex: 1;
-			}
-		}
-	}
-
-	.detail__sponsor {
-		img {
-			width: 20rem;
-			margin-bottom: 1rem;
-		}
-	}
-
-	.detail__offer-container {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-
-		.detail__offer-item {
-			margin: 0.5rem 0;
-			p {
-				display: flex;
-				align-items: center;
-				font-weight: 300;
-				color: rgb(34, 34, 34);
-
-				svg {
-					margin-right: 1rem;
-				}
-			}
-
-			.disable__offer {
-				text-decoration: line-through;
-				text-decoration-thickness: 3px;
-			}
-		}
-	}
-
-	.detail__calendar {
-		p {
-			color: var(--clr-paragraph);
-			font-size: 1.5rem;
-			font-weight: 200;
-		}
-	}
-`;
 
 export default SingleRoomInfo;
