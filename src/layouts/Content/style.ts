@@ -1,14 +1,18 @@
 import styled from 'styled-components';
 
-const StyledContainer = styled.section`
-	margin-top: 8rem;
+interface StyledContainerProps {
+	margin?: string;
+	padding?: string;
+}
+
+const StyledContainer = styled.section<StyledContainerProps>`
+	margin-top: ${(props) => (props.margin ? props.margin : '8rem')};
 	/* Ignore Navbar */
-	padding-top: 2rem;
-	padding-inline: 10rem;
+	padding: ${(props) => (props.padding ? props.padding : '2rem 10rem 0')};
 
 	@media only screen and (max-width: 992px) {
-		margin-top: 10rem;
-		padding-inline: 0rem;
+		margin-top: ${(props) => (props.margin ? props.margin : '10rem')};
+		padding: ${(props) => (props.padding ? props.padding : 'auto 0')};
 	}
 `;
 

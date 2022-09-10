@@ -1,9 +1,17 @@
-import styled from 'styled-components';
 import { AiOutlineClose } from 'react-icons/ai';
 import { TiTickOutline } from 'react-icons/ti';
 
-import { IRoom } from '../@types/Room';
-import { Link } from 'react-router-dom';
+import { IRoom } from '../../@types/Room';
+import { Image, Line } from '..';
+import {
+	StyledContainer,
+	StyledParagraph,
+	StyledPrice,
+	StyledSpan,
+	StyledActionLink,
+	StyledInfoContainer,
+	StyledListContainer,
+} from './style';
 
 const RoomDetails = ({
 	image,
@@ -26,209 +34,136 @@ const RoomDetails = ({
 	_id,
 }: IRoom) => {
 	return (
-		<Container>
-			<img src={image} alt={name} />
-			<div className='info'>
-				<Link className='action-link' to={`/room/${_id}`}>
-					{name}
-				</Link>
-				<p>
+		<StyledContainer>
+			<Image url={image} alt={name} />
+			<StyledInfoContainer>
+				<StyledActionLink to={`/room/${_id}`}>{name}</StyledActionLink>
+				<StyledParagraph>
 					{locationId ? locationId.province : 'not provided'} -{' '}
 					{locationId ? locationId.name : 'not provided'}
-				</p>
-				<div className='line'></div>
-				<p className='detail'>
+				</StyledParagraph>
+				<Line margin='0.8rem auto' />
+				<StyledParagraph bold>
 					{guests} guests - {bedRoom} bedrooms - {bath} bathrooms
-				</p>
-				<ul className='list'>
+				</StyledParagraph>
+				<StyledListContainer>
 					<li className='list-item'>
 						Elevator{' '}
-						<span>
+						<StyledSpan>
 							{elevator ? (
 								<TiTickOutline className='success' />
 							) : (
 								<AiOutlineClose className='danger' />
 							)}
-						</span>
+						</StyledSpan>
 					</li>
 					<li className='list-item'>
 						Hot-Tub{' '}
-						<span>
+						<StyledSpan>
 							{hotTub ? (
 								<TiTickOutline className='success' />
 							) : (
 								<AiOutlineClose className='danger' />
 							)}
-						</span>
+						</StyledSpan>
 					</li>
 					<li className='list-item'>
 						Pool{' '}
-						<span>
+						<StyledSpan>
 							{pool ? (
 								<TiTickOutline className='success' />
 							) : (
 								<AiOutlineClose className='danger' />
 							)}
-						</span>
+						</StyledSpan>
 					</li>
 					<li className='list-item'>
 						Indoor FirePlace{' '}
-						<span>
+						<StyledSpan>
 							{indoorFireplace ? (
 								<TiTickOutline className='success' />
 							) : (
 								<AiOutlineClose className='danger' />
 							)}
-						</span>
+						</StyledSpan>
 					</li>
 					<li className='list-item'>
 						Dryer{' '}
-						<span>
+						<StyledSpan>
 							{dryer ? (
 								<TiTickOutline className='success' />
 							) : (
 								<AiOutlineClose className='danger' />
 							)}
-						</span>
+						</StyledSpan>
 					</li>
 					<li className='list-item'>
 						Gym{' '}
-						<span>
+						<StyledSpan>
 							{gym ? (
 								<TiTickOutline className='success' />
 							) : (
 								<AiOutlineClose className='danger' />
 							)}
-						</span>
+						</StyledSpan>
 					</li>
 					<li className='list-item'>
 						Kitchen{' '}
-						<span>
+						<StyledSpan>
 							{kitchen ? (
 								<TiTickOutline className='success' />
 							) : (
 								<AiOutlineClose className='danger' />
 							)}
-						</span>
+						</StyledSpan>
 					</li>
 					<li className='list-item'>
 						Wifi{' '}
-						<span>
+						<StyledSpan>
 							{wifi ? (
 								<TiTickOutline className='success' />
 							) : (
 								<AiOutlineClose className='danger' />
 							)}
-						</span>
+						</StyledSpan>
 					</li>
 					<li className='list-item'>
 						Elevator{' '}
-						<span>
+						<StyledSpan>
 							{elevator ? (
 								<TiTickOutline className='success' />
 							) : (
 								<AiOutlineClose className='danger' />
 							)}
-						</span>
+						</StyledSpan>
 					</li>
 					<li className='list-item'>
 						Heating{' '}
-						<span>
+						<StyledSpan>
 							{heating ? (
 								<TiTickOutline className='success' />
 							) : (
 								<AiOutlineClose className='danger' />
 							)}
-						</span>
+						</StyledSpan>
 					</li>
 					<li className='list-item'>
 						CableTV{' '}
-						<span>
+						<StyledSpan>
 							{cableTV ? (
 								<TiTickOutline className='success' />
 							) : (
 								<AiOutlineClose className='danger' />
 							)}
-						</span>
+						</StyledSpan>
 					</li>
-				</ul>
-				<h5 className='price'>
-					{price?.toLocaleString()}VND<span>/night</span>
-				</h5>
-			</div>
-		</Container>
+				</StyledListContainer>
+				<StyledPrice>
+					{price?.toLocaleString()}VND<StyledSpan>/night</StyledSpan>
+				</StyledPrice>
+			</StyledInfoContainer>
+		</StyledContainer>
 	);
 };
-
-const Container = styled.article`
-	display: grid;
-	grid-template-columns: 25rem 1fr;
-	padding: 2rem;
-	gap: 2rem;
-
-	.action-link {
-		font-size: 2.5rem;
-		color: black;
-		font-weight: 450;
-		cursor: pointer;
-	}
-
-	p {
-		font-size: 1.5rem;
-		color: var(--clr-paragraph);
-	}
-
-	.detail {
-		font-weight: bold;
-	}
-
-	:not(:first-child) {
-		border-top: 1px solid var(--clr-secondary);
-	}
-
-	img {
-		border-radius: var(--radius);
-	}
-
-	.info {
-		display: flex;
-		flex-direction: column;
-		.price {
-			margin-top: auto;
-			text-align: right;
-
-			span {
-				color: var(--clr-paragraph);
-			}
-		}
-
-		.line {
-			width: 5rem;
-			height: 1px;
-			background-color: var(--clr-secondary);
-			margin: 1rem 0;
-		}
-
-		.list {
-			display: grid;
-			grid-template-columns: repeat(3, 1fr);
-			margin-top: 0.5rem;
-
-			li {
-				text-transform: capitalize;
-			}
-
-			li,
-			svg {
-				font-size: 1.2rem;
-				vertical-align: middle;
-			}
-		}
-	}
-
-	@media only screen and (max-width: 992px) {
-		grid-template-columns: 1fr;
-	}
-`;
 
 export default RoomDetails;

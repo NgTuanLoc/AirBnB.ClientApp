@@ -22,7 +22,7 @@ const RoomListPage = () => {
 	if (isLoading) return <Loading />;
 
 	return (
-		<MainLayout>
+		<MainLayout margin='0' padding='0 1rem'>
 			<Container>
 				<RoomList>
 					{roomList.map((item) => {

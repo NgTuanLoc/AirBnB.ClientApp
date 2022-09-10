@@ -6,13 +6,17 @@ import { Navbar, Footer } from '../../components';
 
 interface IMainLayout {
 	children?: ReactNode;
+	margin?: string;
+	padding?: string;
 }
 
-const MainLayout = ({ children }: IMainLayout) => {
+const MainLayout = ({ children, margin, padding }: IMainLayout) => {
 	return (
 		<StyledContainer>
 			<Navbar />
-			<Content>{children}</Content>
+			<Content margin={margin} padding={padding}>
+				{children}
+			</Content>
 			<Footer />
 		</StyledContainer>
 	);
