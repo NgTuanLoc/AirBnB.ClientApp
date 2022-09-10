@@ -2,7 +2,8 @@ import { ReactNode } from 'react';
 
 import { StyledContainer } from './style';
 import { Content } from '..';
-import { Navbar, Footer } from '../../components';
+import { Footer } from '../../components';
+import { Navbar } from '../../containers';
 
 interface IMainLayout {
 	children?: ReactNode;

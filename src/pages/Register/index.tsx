@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { Link, Navigate } from 'react-router-dom';
 
-import { useAppDispatch, useAppSelector } from '../hooks/hooks';
-import { registerThunk } from '../features/Auth/authThunk';
-import { Button, Loading, Error } from '../components';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { registerThunk } from '../../features/Auth/authThunk';
+import { Button, Loading, Error } from '../../components';
 
 type FormInputs = {
 	name: string;

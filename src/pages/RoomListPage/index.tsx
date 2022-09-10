@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 
-import { useAppDispatch, useAppSelector } from '../hooks/hooks';
-import { getRoomListByLocationID } from '../features/Room/roomThunk';
-import { selectLocation } from '../features/Room/roomSlice';
-import { Navbar, Footer, RoomDetails, Loading } from '../components';
-import { MainLayout } from '../layouts';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { getRoomListByLocationID } from '../../features/Room/roomThunk';
+import { selectLocation } from '../../features/Room/roomSlice';
+import { RoomDetails, Loading } from '../../components';
+import { MainLayout } from '../../layouts';
 
 const RoomListPage = () => {
 	const { locationId } = useParams();

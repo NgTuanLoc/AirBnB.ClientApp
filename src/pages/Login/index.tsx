@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { Link, Navigate } from 'react-router-dom';
 
-import { useAppDispatch, useAppSelector } from '../hooks/hooks';
-import { loginThunk } from '../features/Auth/authThunk';
-import { Button, Loading, Image, Error } from '../components';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { loginThunk } from '../../features/Auth/authThunk';
+import { Button, Loading, Image, Error } from '../../components';
 
 type FormInputs = {
 	email: string;

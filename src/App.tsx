@@ -5,7 +5,7 @@ import {
 	Home,
 	RoomListPage,
 	SingleRoomPage,
-	AdminPage,
+	Admin,
 	UserPage,
 	Register,
 	Login,
@@ -32,7 +32,7 @@ const App = () => {
 							path='/admin'
 							element={
 								<PrivateRoute type='ADMIN'>
-									<AdminPage />
+									<Admin />
 								</PrivateRoute>
 							}
 						/>

@@ -32,7 +32,7 @@ const StyledParagraph = styled.p<{ bold?: boolean }>`
 	font-size: 1.5rem;
 `;
 
-const StyledSpan = styled.p<{ bold?: boolean }>`
+const StyledSpan = styled.span<{ bold?: boolean }>`
 	color: ${(props) => (props.bold ? 'black' : 'var(--clr-paragraph)')};
 	font-weight: ${(props) => (props.bold ? 'bold' : '300')};
 	font-size: 1.5rem;

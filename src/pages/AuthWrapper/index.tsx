@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { ReactNode, useEffect } from 'react';
 
-import { useAppDispatch, useAppSelector } from '../hooks/hooks';
-import { loginThunk } from '../features/Auth/authThunk';
-import { useLocalStorage } from '../hooks/useLocalStorage';
-import { Loading } from '../components';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { loginThunk } from '../../features/Auth/authThunk';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
+import { Loading } from '../../components';
 
 interface IAuthWrapper {
 	children: ReactNode;

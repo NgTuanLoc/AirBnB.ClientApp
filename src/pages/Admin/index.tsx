@@ -2,11 +2,11 @@ import styled from 'styled-components';
 import { useState } from 'react';
 
 import {
-	Navbar,
 	UserDashboard,
 	RoomDashboard,
 	LocationDashboard,
-} from '../components';
+} from '../../components';
+import { Navbar } from '../../containers';
 
 const AdminPage = () => {
 	const [dashboard, setDashboard] = useState('user');

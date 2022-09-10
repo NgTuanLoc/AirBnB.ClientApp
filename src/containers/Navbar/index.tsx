@@ -8,7 +8,8 @@ import logo from '../../images/logo.svg';
 import { useAppSelector } from '../../hooks/hooks';
 import { useOnClickOutside } from '../../hooks/useClickOutsideHook';
 import { transformLanguage } from '../../utils';
-import { Modal, UserSettings } from '../../components';
+import { Modal, UserSettings, Image } from '../../components';
+import { StyledContainer, StyledImage } from './style';
 
 interface InputProps {
 	disableInput: boolean;
@@ -82,9 +83,9 @@ const Navbar = ({ hideSearch }: INavbar) => {
 	}, [inputLocation]);
 
 	return (
-		<Container>
+		<StyledContainer>
 			<Logo to='/'>
-				<img src={logo} alt='airbnb logo' />
+				<StyledImage src={logo} alt='airbnb logo' />
 			</Logo>
 			<Search onSubmit={onSubmitHandler} hide={hideSearch}>
 				<button type='button' ref={ref} style={{ position: 'relative' }}>
@@ -131,37 +132,9 @@ const Navbar = ({ hideSearch }: INavbar) => {
 				</button>
 				{isUserModalOpen && <UserSettings />}
 			</Nav>
-		</Container>
+		</StyledContainer>
 	);
 };
-
-const Container = styled.header`
-	display: flex;
-	background-color: white;
-	justify-content: space-between;
-	align-items: center;
-	position: fixed;
-	width: 100%;
-	top: 0;
-	left: 0;
-	z-index: 100;
-	height: 8rem;
-	border-bottom: 2px solid var(--clr-secondary);
-	padding-inline: 10rem;
-
-	img {
-		width: 10rem;
-	}
-
-	@media only screen and (max-width: 992px) {
-		padding: 1rem;
-		display: grid;
-		height: auto;
-		grid-template-areas:
-			'logo nav'
-			'search search';
-	}
-`;
 
 interface ISearch {
 	hide?: boolean;

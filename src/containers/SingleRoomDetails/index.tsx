@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 
 import { useAppSelector } from '../../hooks/hooks';
-import { Card, Loading } from '../../components';
+import { Loading } from '../../components';
 import { StyledContainer } from './style';
-import { SingleRoomInfo } from '..';
+import { SingleRoomInfo, Card } from '..';
 
 const SingleRoomDetails = () => {
 	const [bookDate, setBookDate] = useState({

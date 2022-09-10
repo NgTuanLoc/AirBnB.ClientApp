@@ -1,7 +1,7 @@
 import Home from './Home';
 import RoomListPage from './RoomListPage';
 import SingleRoomPage from './SingleRoomPage';
-import AdminPage from './AdminPage';
+import Admin from './Admin';
 import UserPage from './UserPage';
 import Register from './Register';
 import Login from './Login';
@@ -13,7 +13,7 @@ export {
 	Home,
 	RoomListPage,
 	SingleRoomPage,
-	AdminPage,
+	Admin,
 	UserPage,
 	Register,
 	Login,

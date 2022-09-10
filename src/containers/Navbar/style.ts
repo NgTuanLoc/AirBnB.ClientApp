@@ -1,5 +1,31 @@
 import styled from 'styled-components';
 
-const StyledContainer = styled.div``;
+const StyledContainer = styled.header`
+	display: flex;
+	background-color: white;
+	justify-content: space-between;
+	align-items: center;
+	position: fixed;
+	width: 100%;
+	top: 0;
+	left: 0;
+	z-index: 100;
+	height: 8rem;
+	border-bottom: 2px solid var(--clr-secondary);
+	padding-inline: 10rem;
 
-export { StyledContainer };
+	@media only screen and (max-width: 992px) {
+		padding: 1rem;
+		display: grid;
+		height: auto;
+		grid-template-areas:
+			'logo nav'
+			'search search';
+	}
+`;
+
+const StyledImage = styled.img`
+	width: 10rem;
+`;
+
+export { StyledContainer, StyledImage };
