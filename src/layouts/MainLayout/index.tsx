@@ -9,12 +9,18 @@ interface IMainLayout {
 	children?: ReactNode;
 	margin?: string;
 	padding?: string;
+	hideSearchBar?: boolean;
 }
 
-const MainLayout = ({ children, margin, padding }: IMainLayout) => {
+const MainLayout = ({
+	children,
+	margin,
+	padding,
+	hideSearchBar,
+}: IMainLayout) => {
 	return (
 		<StyledContainer>
-			<Navbar />
+			<Navbar hideSearch={hideSearchBar} />
 			<Content margin={margin} padding={padding}>
 				{children}
 			</Content>

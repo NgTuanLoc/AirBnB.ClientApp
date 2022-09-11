@@ -9,8 +9,10 @@ import Button from './Button';
 import Image from './Image';
 import UserSettings from './UserSettings';
 import Calendar from './Calendar';
+import Search from './Search';
 import Error from './Error';
 import Line from './Line';
+import UserModalNav from './UserModalNav';
 
 import UserDashboard from './Admin/UserDashboard';
 import RoomDashboard from './Admin/RoomDashboard';
@@ -26,10 +28,12 @@ export {
 	Calendar,
 	Catalog,
 	Button,
+	Search,
 	Image,
 	Line,
 	UserSettings,
 	Error,
+	UserModalNav,
 	UserDashboard,
 	RoomDashboard,
 	LocationDashboard,
