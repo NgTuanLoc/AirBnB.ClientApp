@@ -9,6 +9,7 @@ const StyledContainer = styled.div`
 	grid-template-columns: 1fr 1fr;
 
 	@media only screen and (max-width: 992px) {
+		height: auto;
 		display: flex;
 		flex-direction: column;
 	}
@@ -22,8 +23,10 @@ const StyledFormContainer = styled.div`
 	align-items: center;
 
 	@media only screen and (max-width: 992px) {
-		height: 50rem;
+		height: auto;
 		order: 3;
+		overflow-y: scroll;
+		padding: 1rem;
 	}
 `;
 

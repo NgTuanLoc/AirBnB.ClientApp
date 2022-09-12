@@ -1,12 +1,25 @@
-import styled from 'styled-components';
 import { Navigate } from 'react-router-dom';
 import { MdOutlineVerifiedUser } from 'react-icons/md';
 import { TiTickOutline } from 'react-icons/ti';
 
-import { Navbar } from '../../containers';
 import defaultImage from '../../images/default-user-image.jpg';
 import { useAppSelector } from '../../hooks/hooks';
 import { transformDate } from '../../utils';
+import { MainLayout } from '../../layouts';
+import {
+	StyledContainer,
+	StyledImageContainer,
+	StyledUserInfoContainer,
+	StyledUserDetailContainer,
+	StyledDivWrapper,
+	StyledButton,
+	StyledHeading,
+	StyledLargeHeading,
+	StyledListContainer,
+	StyledParagraph,
+	StyledListItem,
+} from './style';
+import { Line } from '../../components';
 
 const UserPage = () => {
 	const { auth } = useAppSelector((store) => store.auth);
@@ -27,101 +40,53 @@ const UserPage = () => {
 		avatar,
 	} = auth?.user;
 	return (
-		<>
-			<Navbar hideSearch />
-			<Container className='section'>
-				<div className='user__info'>
-					<img
-						className='user__image'
+		<MainLayout hideSearchBar>
+			<StyledContainer>
+				<StyledUserInfoContainer>
+					<StyledImageContainer
 						src={avatar ? avatar : defaultImage}
 						alt={name}
 					/>
-					<h5>Upload user image</h5>
-					<div>
-						<h5 className='flex-center'>
+					<StyledHeading>Upload user image</StyledHeading>
+					<StyledUserDetailContainer>
+						<StyledHeading>
 							<MdOutlineVerifiedUser className='icon' /> verified your account
-						</h5>
-						<p>Verified your account to get authorization badge</p>
-						<button>Get Badge</button>
-					</div>
-					<div className='line'></div>
-					<div>
-						<h5 className='flex-center'>
+						</StyledHeading>
+						<StyledParagraph>
+							Verified your account to get authorization badge
+						</StyledParagraph>
+						<StyledButton>Get Badge</StyledButton>
+					</StyledUserDetailContainer>
+					<Line />
+					<StyledDivWrapper>
+						<StyledHeading>
 							<TiTickOutline className='icon' /> {name} verified
-						</h5>
-					</div>
-				</div>
-				<div className='user__detail'>
-					<h5>Hello, my name is {name}</h5>
-					<p>Join in 2021</p>
-					<div className='line'></div>
-					<ul>
-						<li>Email: {email}</li>
-						<li>Phone: {phone}</li>
-						<li>Birthday: {transformDate(new Date(birthday))}</li>
-						<li>Gender: {gender ? 'male' : 'female'}</li>
-						<li>Address: {address}</li>
-						<li>Type: {type}</li>
-						<li>
+						</StyledHeading>
+					</StyledDivWrapper>
+				</StyledUserInfoContainer>
+				<StyledDivWrapper>
+					<StyledLargeHeading>Hello, my name is {name}</StyledLargeHeading>
+					<StyledParagraph>Join in 2021</StyledParagraph>
+					<Line />
+					<StyledListContainer>
+						<StyledListItem>Email: {email}</StyledListItem>
+						<StyledListItem>Phone: {phone}</StyledListItem>
+						<StyledListItem>
+							Birthday: {transformDate(new Date(birthday))}
+						</StyledListItem>
+						<StyledListItem>
+							Gender: {gender ? 'male' : 'female'}
+						</StyledListItem>
+						<StyledListItem>Address: {address}</StyledListItem>
+						<StyledListItem>Type: {type}</StyledListItem>
+						<StyledListItem>
 							tickets: {tickets?.length === 0 ? 'null' : tickets?.join(', ')}
-						</li>
-					</ul>
-				</div>
-			</Container>
-		</>
+						</StyledListItem>
+					</StyledListContainer>
+				</StyledDivWrapper>
+			</StyledContainer>
+		</MainLayout>
 	);
 };
-
-const Container = styled.section`
-	display: grid;
-	grid-template-columns: 40rem 1fr;
-	grid-gap: 5rem;
-
-	.user__info {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		border-radius: var(--radius);
-		border: 1px solid #dddddd;
-		padding: 1rem;
-
-		.user__image {
-			border-radius: 50%;
-			height: 15rem;
-			width: 15rem;
-			margin-bottom: 1rem;
-		}
-
-		div {
-			width: 100%;
-			display: flex;
-			align-items: flex-start;
-			flex-direction: column;
-
-			p {
-				font-size: 1.5rem;
-			}
-
-			button {
-				font-size: 2.5rem;
-				border: 1px solid gray;
-				padding: 0.5rem 1.5rem;
-				margin: 1rem 0;
-				border-radius: var(--radius);
-			}
-		}
-		.icon {
-			color: var(--clr-success);
-		}
-	}
-	.user__detail {
-		li {
-			font-size: 2rem;
-		}
-	}
-	.line {
-		margin: 2rem 0;
-	}
-`;
 
 export default UserPage;
