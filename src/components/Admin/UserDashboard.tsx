@@ -213,6 +213,7 @@ const Container = styled.section`
 	padding: 5rem;
 	position: relative;
 	background-color: #fafbfb;
+	height: 100%;
 `;
 
 const SearchButton = styled(Button)``;

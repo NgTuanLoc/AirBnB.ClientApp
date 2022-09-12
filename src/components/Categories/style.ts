@@ -26,7 +26,7 @@ const StyledImageContainer = styled.div`
 `;
 
 const StyledHeading = styled.h5`
-	margin-top: 0.5rem;
+	margin-top: 1rem;
 `;
 
 export {

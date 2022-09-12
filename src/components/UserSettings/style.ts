@@ -24,6 +24,7 @@ const StyledButton = styled.a<{ bold?: boolean }>`
 	transition: var(--transition);
 	text-align: left;
 	font-weight: ${(props) => (props.bold ? '450' : '300')};
+	cursor: pointer;
 
 	:hover {
 		background-color: #f7f7f7;

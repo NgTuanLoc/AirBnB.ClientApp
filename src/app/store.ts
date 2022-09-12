@@ -5,6 +5,7 @@ import bookReducer from '../features/Booking/bookingSlice';
 import ratingReducer from '../features/Rating/ratingSlice';
 import userReducer from '../features/User/userSlice';
 import authReducer from '../features/Auth/authSlice';
+import adminReducer from '../features/Admin/adminSlice';
 
 export const store = configureStore({
 	reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
 		rating: ratingReducer,
 		user: userReducer,
 		auth: authReducer,
+		admin: adminReducer,
 	},
 });
 
