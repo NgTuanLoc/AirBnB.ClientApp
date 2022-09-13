@@ -10,13 +10,11 @@ interface ICalendar {
 
 const Calendar = ({ setBookDate }: ICalendar) => {
 	const currentDate = new Date();
-	const nextDate = new Date();
-
-	nextDate.setDate(currentDate.getDate());
 	const [value, setValue] = useState<any>(currentDate);
 	const isMobileDevice = useMediaQuery({
 		query: '(max-width: 992px)',
 	});
+
 	useEffect(() => {
 		if (value.length === 2) {
 			setBookDate({
@@ -24,7 +22,6 @@ const Calendar = ({ setBookDate }: ICalendar) => {
 				checkOut: value[1],
 			});
 		}
-
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [value]);
 

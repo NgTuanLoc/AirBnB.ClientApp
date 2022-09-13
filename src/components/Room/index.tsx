@@ -32,7 +32,10 @@ const Room = ({ _id, name, image, locationId, price }: IRoom) => {
 					<Skeleton />
 				) : (
 					<StyledParagraph>
-						<StyledSpan bold>${price?.toLocaleString()}</StyledSpan> night
+						<StyledSpan bold>
+							${price ? price?.toLocaleString() : 'undefined'}
+						</StyledSpan>{' '}
+						night
 					</StyledParagraph>
 				)}
 			</StyledDivWrapper>

@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
 
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector, usePagination } from '../../hooks';
 import {
 	getAllUsers,
 	getUserById,
@@ -32,10 +32,8 @@ import {
 } from './style';
 
 const USER_PER_PAGE = 10;
-const NUMBER_OF_PAGE_BUTTON = Array.from({ length: 5 }, () => 0);
 
 const UserDashboard = () => {
-	const [page, setPage] = useState(0);
 	const [displayUser, setDisplayUser] = useState<IUser[]>([]);
 	const { userList, selectedUser, isLoading } = useAppSelector(
 		(store) => store.user
@@ -44,37 +42,18 @@ const UserDashboard = () => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	const dispatch = useAppDispatch();
-	const maxPage = Math.floor(userList.length / USER_PER_PAGE);
-
-	const nextPage = () => {
-		setPage((oldPage) => {
-			const newPage = oldPage + 1;
-
-			if (newPage > maxPage) return 0;
-			return newPage;
-		});
-	};
+	const maxPage = Math.floor(userList.length / USER_PER_PAGE) - 1;
+	const { currentPage, setCurrentPage, nextPage, prevPage, pageArray } =
+		usePagination(maxPage);
 
 	const renderNewUser = () => {
 		let tempArray = Array.from(
 			{ length: USER_PER_PAGE },
-			(_, i) => userList[page * USER_PER_PAGE + i]
+			(_, i) => userList[currentPage * USER_PER_PAGE + i]
 		);
 
 		tempArray = tempArray.filter((item) => item !== undefined);
 		setDisplayUser(tempArray);
-	};
-
-	const prevPage = () => {
-		setPage((oldPage) => {
-			const newPage = oldPage - 1;
-			if (newPage < 0) return maxPage;
-			return newPage;
-		});
-	};
-
-	const paginate = (selectedPage: number) => {
-		return () => setPage(selectedPage);
 	};
 
 	const deleteUser = (id: string) => {
@@ -102,7 +81,7 @@ const UserDashboard = () => {
 
 	useEffect(() => {
 		renderNewUser();
-	}, [page, userList]);
+	}, [currentPage, userList]);
 
 	useEffect(() => {
 		dispatch(getAllUsers());
@@ -193,41 +172,16 @@ const UserDashboard = () => {
 			</StyledTableContainer>
 			<StyledPaginateContainer>
 				<StyledPrevButton onClick={prevPage}>Prev</StyledPrevButton>
-				<StyledPageButton active={page === 0} onClick={paginate(0)}>
-					1
-				</StyledPageButton>
-				{NUMBER_OF_PAGE_BUTTON.map((_, index) => {
-					let tempPage = page + index - 2;
-
-					if (page === 0) {
-						tempPage = page + index + 1;
-					} else if (page === 1) {
-						tempPage = page + index;
-					} else if (page === 2) {
-						tempPage = page + index - 1;
-					}
-
-					if (page === maxPage) {
-						tempPage = page + index - 6;
-					} else if (page === maxPage - 1) {
-						tempPage = page + index - 5;
-					} else if (page === maxPage - 2) {
-						tempPage = page + index - 4;
-					} else if (page === maxPage - 3) {
-						tempPage = page + index - 3;
-					}
+				{pageArray.map((page, index) => {
 					return (
 						<StyledPageButton
 							key={index}
-							active={page === tempPage}
-							onClick={paginate(tempPage)}>
-							{tempPage + 1}
+							active={currentPage === page}
+							onClick={() => setCurrentPage(page)}>
+							{page + 1}
 						</StyledPageButton>
 					);
 				})}
-				<StyledPageButton active={page === maxPage} onClick={paginate(maxPage)}>
-					{maxPage}
-				</StyledPageButton>
 				<StyledNextButton onClick={nextPage}>Next</StyledNextButton>
 			</StyledPaginateContainer>
 		</StyledContainer>

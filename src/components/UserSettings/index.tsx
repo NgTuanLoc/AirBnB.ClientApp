@@ -21,24 +21,24 @@ const UserModal = () => {
 		return (
 			<StyledContainer>
 				{auth?.user.type === 'ADMIN' ? (
-					<StyledLink bold to='/admin'>
+					<StyledLink bold='450' to='/admin'>
 						Admin
 					</StyledLink>
 				) : (
-					<StyledLink bold to={`/user/${auth?.user._id}`}>
+					<StyledLink bold='450' to={`/user/${auth?.user._id}`}>
 						User
 					</StyledLink>
 				)}
-				<StyledButton href='https://github.com/NgTuanLoc/AirBnB' bold>
+				<StyledButton bold href='https://github.com/NgTuanLoc/AirBnB'>
 					Messages
 				</StyledButton>
-				<StyledButton href='https://github.com/NgTuanLoc/AirBnB' bold>
+				<StyledButton bold href='https://github.com/NgTuanLoc/AirBnB'>
 					Notifications
 				</StyledButton>
-				<StyledButton href='https://github.com/NgTuanLoc/AirBnB' bold>
+				<StyledButton bold href='https://github.com/NgTuanLoc/AirBnB'>
 					Trips
 				</StyledButton>
-				<StyledButton href='https://github.com/NgTuanLoc/AirBnB' bold>
+				<StyledButton bold href='https://github.com/NgTuanLoc/AirBnB'>
 					Wishlists
 				</StyledButton>
 				<Line margin={lineMargin} />
@@ -60,10 +60,10 @@ const UserModal = () => {
 
 	return (
 		<StyledContainer>
-			<StyledLink bold to='/login'>
+			<StyledLink bold='450' to='/login'>
 				Login
 			</StyledLink>
-			<StyledLink bold to='/register'>
+			<StyledLink bold='450' to='/register'>
 				Sign up
 			</StyledLink>
 			<Line margin={lineMargin} />

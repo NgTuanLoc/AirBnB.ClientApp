@@ -30,7 +30,7 @@ const StyledButton = styled.a<{ bold?: boolean }>`
 		background-color: #f7f7f7;
 	}
 `;
-const StyledLink = styled(Link)<{ bold?: boolean }>`
+const StyledLink = styled(Link)<{ bold?: string }>`
 	width: 100%;
 	color: black;
 	font-size: 2rem;
@@ -39,7 +39,7 @@ const StyledLink = styled(Link)<{ bold?: boolean }>`
 	padding: 0.5rem 1rem;
 	transition: var(--transition);
 	text-align: left;
-	font-weight: ${(props) => (props.bold ? '450' : '300')};
+	font-weight: ${(props) => props.bold || '300'};
 
 	:hover {
 		background-color: #f7f7f7;
