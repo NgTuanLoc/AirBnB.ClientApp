@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { IRoom } from '../../@types/Room';
 import {
+	getAllRoom,
 	getRoomListByLocationID,
 	getRoomDetailByID,
 	createNewRoom,
@@ -37,6 +38,19 @@ const locationSlice = createSlice({
 		},
 	},
 	extraReducers(builder) {
+		// Get All Room
+		builder.addCase(getAllRoom.pending, (state) => {
+			state.isLoading = true;
+		});
+		builder.addCase(getAllRoom.fulfilled, (state, { payload }) => {
+			state.isLoading = false;
+			state.roomList = payload;
+		});
+		builder.addCase(getAllRoom.rejected, (state, { payload }) => {
+			state.isLoading = false;
+			state.error = payload as string;
+		});
+
 		// Get Room By Location Id
 		builder.addCase(getRoomListByLocationID.pending, (state) => {
 			state.isLoading = true;

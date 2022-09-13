@@ -1,4 +1,7 @@
 import styled from 'styled-components';
+import { TiTickOutline } from 'react-icons/ti';
+import { AiOutlineStop } from 'react-icons/ai';
+
 import { Button } from '../../components';
 
 const StyledContainer = styled.section`
@@ -52,6 +55,8 @@ const StyledItem = styled.td`
 	padding: 0.5rem;
 	overflow: hidden;
 	white-space: nowrap;
+
+	text-align: center;
 `;
 
 const StyledRow = styled.tr``;
@@ -93,6 +98,18 @@ const StyledPageButton = styled.button<{ active?: boolean }>`
 	color: ${(props) => (props.active ? 'black' : 'white')};
 `;
 
+const StyledTickIcon = styled(TiTickOutline)`
+	color: var(--clr-success);
+	font-size: 2rem;
+	place-items: center;
+`;
+
+const StyledStopIcon = styled(AiOutlineStop)`
+	color: var(--clr-danger);
+	font-size: 2rem;
+	place-items: center;
+`;
+
 export {
 	StyledContainer,
 	StyledSearchButton,
@@ -110,4 +127,6 @@ export {
 	StyledPrevButton,
 	StyledNextButton,
 	StyledPageButton,
+	StyledTickIcon,
+	StyledStopIcon,
 };
