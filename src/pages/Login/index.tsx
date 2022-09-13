@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Navigate } from 'react-router-dom';
 
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginThunk } from '../../features/Auth/authThunk';
 import { LoginLayout } from '../../layouts';
 import { Button, Loading, Error } from '../../components';

@@ -4,10 +4,12 @@ type DashboardType = 'USER' | 'ROOM' | 'LOCATION';
 
 interface IAdminState {
 	selectedDashboard: DashboardType;
+	isFormOpen: boolean;
 }
 
 const initialState: IAdminState = {
 	selectedDashboard: 'USER',
+	isFormOpen: false,
 };
 
 const adminSlice = createSlice({

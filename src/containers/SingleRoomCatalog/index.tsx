@@ -3,7 +3,7 @@ import { AiOutlineHeart } from 'react-icons/ai';
 import { FiShare } from 'react-icons/fi';
 
 import { DUMMY_IMAGE_DATA } from '../../constant';
-import { useAppSelector } from '../../hooks/hooks';
+import { useAppSelector } from '../../hooks';
 import { Catalog, Loading } from '../../components';
 import {
 	StyledLocationTitle,

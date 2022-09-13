@@ -2,8 +2,7 @@ import styled from 'styled-components';
 import { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { useAppDispatch } from '../../hooks/hooks';
-import { useOnClickOutside } from '../../hooks/useClickOutsideHook';
+import { useOnClickOutside, useAppDispatch } from '../../hooks';
 import { Loading, Button } from '..';
 import { formType } from '../../constant/FormType';
 

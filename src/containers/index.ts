@@ -4,6 +4,9 @@ import SingleRoomDetails from './SingleRoomDetails';
 import Navbar from './Navbar';
 import RoomList from './RoomList';
 import Card from './Card';
+import UserDashboard from './UserDashboard';
+import LocationDashboard from './LocationDashboard';
+import RoomDashboard from './RoomDashboard';
 
 export {
 	SingleRoomCatalog,
@@ -12,4 +15,7 @@ export {
 	Navbar,
 	RoomList,
 	Card,
+	UserDashboard,
+	LocationDashboard,
+	RoomDashboard,
 };

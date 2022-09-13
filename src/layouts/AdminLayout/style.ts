@@ -14,6 +14,7 @@ const StyledContentContainer = styled.div`
 `;
 
 const StyledSidebar = styled.aside`
+	z-index: 2;
 	background-color: white;
 	display: flex;
 	flex-direction: column;

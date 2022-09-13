@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setSelectedDashboard } from '../../features/Admin/adminSlice';
 import {
 	StyledContainer,

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getRoomListByLocationID } from '../../features/Room/roomThunk';
 import { selectLocation } from '../../features/Room/roomSlice';
 import { RoomDetails, Loading } from '../../components';

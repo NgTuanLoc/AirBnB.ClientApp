@@ -2,7 +2,7 @@
 import { ReactNode } from 'react';
 import { Navigate } from 'react-router-dom';
 
-import { useAppSelector } from '../../hooks/hooks';
+import { useAppSelector } from '../../hooks';
 
 interface IPrivateRoute {
 	type?: 'ADMIN' | 'CLIENT';

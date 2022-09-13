@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import { AiOutlineGlobal, AiOutlineMenu, AiOutlineUser } from 'react-icons/ai';
 
-import { useOnClickOutside } from '../../hooks/useClickOutsideHook';
+import { useOnClickOutside } from '../../hooks';
 import { StyledContainer, StyledButton, StyledLoginButton } from './style';
 import { UserSettings } from '../';
 

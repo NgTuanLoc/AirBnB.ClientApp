@@ -11,8 +11,7 @@ import {
 	StyledHeading,
 } from './style';
 import { Modal } from '../';
-import { useOnClickOutside } from '../../hooks/useClickOutsideHook';
-import { useAppSelector } from '../../hooks/hooks';
+import { useAppSelector, useOnClickOutside } from '../../hooks';
 import { transformLanguage } from '../../utils';
 
 export interface ISearchLocation {

@@ -13,10 +13,7 @@ import Search from './Search';
 import Error from './Error';
 import Line from './Line';
 import UserModalNav from './UserModalNav';
-
-import UserDashboard from './Admin/UserDashboard';
-import RoomDashboard from './Admin/RoomDashboard';
-import LocationDashboard from './Admin/LocationDashboard';
+import AdminForm from './AdminForm';
 
 export {
 	Loading,
@@ -34,7 +31,5 @@ export {
 	UserSettings,
 	Error,
 	UserModalNav,
-	UserDashboard,
-	RoomDashboard,
-	LocationDashboard,
+	AdminForm,
 };

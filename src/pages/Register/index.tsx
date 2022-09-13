@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { Navigate } from 'react-router-dom';
 
 import { LoginLayout } from '../../layouts';
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { registerThunk } from '../../features/Auth/authThunk';
 import { Button, Loading, Error } from '../../components';
 import {

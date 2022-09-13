@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { useAppSelector } from '../../hooks/hooks';
+import { useAppSelector } from '../../hooks';
 import { Loading } from '../../components';
 import { StyledContainer } from './style';
 import { SingleRoomInfo, Card } from '..';

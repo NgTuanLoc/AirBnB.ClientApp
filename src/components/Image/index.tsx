@@ -1,6 +1,6 @@
 import Skeleton from 'react-loading-skeleton';
 
-import { useProgressiveImg } from '../../hooks/useProgressiveImg';
+import { useProgressiveImg } from '../../hooks';
 import { DEFAULT_IMAGE } from '../../constant';
 import { StyledContainer, StyledImage } from './style';
 

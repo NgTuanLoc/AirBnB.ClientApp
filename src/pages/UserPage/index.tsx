@@ -3,7 +3,7 @@ import { MdOutlineVerifiedUser } from 'react-icons/md';
 import { TiTickOutline } from 'react-icons/ti';
 
 import defaultImage from '../../images/default-user-image.jpg';
-import { useAppSelector } from '../../hooks/hooks';
+import { useAppSelector } from '../../hooks';
 import { transformDate } from '../../utils';
 import { MainLayout } from '../../layouts';
 import {

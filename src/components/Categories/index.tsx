@@ -11,7 +11,7 @@ import {
 	StyledImageContainer,
 	StyledHeading,
 } from './style';
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { selectLocation } from '../../features/Room/roomSlice';
 import { Image } from '..';
 

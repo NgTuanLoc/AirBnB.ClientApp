@@ -1,19 +1,35 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import {
 	getAllUsers,
 	getUserById,
 	deleteUserById,
 	updateUserById,
 } from '../../features/User/userThunk';
-import { Loading, Button } from '..';
-import ActionButtons from './ActionButtons';
-import Modal from './Modal';
+import { Loading, Button } from '../../components';
+import { AdminForm } from '../../components';
 import { IUser } from '../../@types/User';
 import { transformDate } from '../../utils';
+import {
+	StyledContainer,
+	StyledSearchButton,
+	StyledSearchContainer,
+	StyledSearch,
+	StyledTableContainer,
+	StyledTable,
+	StyledTableHead,
+	StyledTableBody,
+	StyledTitle,
+	StyledItem,
+	StyledRow,
+	StyledButtonContainer,
+	StyledPaginateContainer,
+	StyledPrevButton,
+	StyledNextButton,
+	StyledPageButton,
+} from './style';
 
 const USER_PER_PAGE = 10;
 const NUMBER_OF_PAGE_BUTTON = Array.from({ length: 5 }, () => 0);
@@ -94,14 +110,14 @@ const UserDashboard = () => {
 
 	if (isLoading)
 		return (
-			<Container>
+			<StyledContainer>
 				<Loading />
-			</Container>
+			</StyledContainer>
 		);
 
 	return (
-		<Container>
-			<Modal<IUser>
+		<StyledContainer>
+			<AdminForm<IUser>
 				title={modalTitle}
 				isModalOpen={isModalOpen}
 				setIsModalOpen={setIsModalOpen}
@@ -111,26 +127,26 @@ const UserDashboard = () => {
 				dispatchFunction={updateUserById}
 			/>
 			<Button fullWidth={false}>Add New</Button>
-			<SearchContainer>
-				<Search />
-				<SearchButton>Search</SearchButton>
-			</SearchContainer>
-			<TableContainer>
-				<Table>
-					<TableHead>
-						<Row>
-							<Title>Id</Title>
-							<Title>Name</Title>
-							<Title>Email</Title>
-							<Title>Phone</Title>
-							<Title>Birthday</Title>
-							<Title>Gender</Title>
-							<Title>Address</Title>
-							<Title>Type</Title>
-							<Title>Actions</Title>
-						</Row>
-					</TableHead>
-					<TableBody>
+			<StyledSearchContainer>
+				<StyledSearch />
+				<StyledSearchButton>Search</StyledSearchButton>
+			</StyledSearchContainer>
+			<StyledTableContainer>
+				<StyledTable>
+					<StyledTableHead>
+						<StyledRow>
+							<StyledTitle>Id</StyledTitle>
+							<StyledTitle>Name</StyledTitle>
+							<StyledTitle>Email</StyledTitle>
+							<StyledTitle>Phone</StyledTitle>
+							<StyledTitle>Birthday</StyledTitle>
+							<StyledTitle>Gender</StyledTitle>
+							<StyledTitle>Address</StyledTitle>
+							<StyledTitle>Type</StyledTitle>
+							<StyledTitle>Actions</StyledTitle>
+						</StyledRow>
+					</StyledTableHead>
+					<StyledTableBody>
 						{displayUser.map((item) => {
 							const {
 								_id,
@@ -143,34 +159,43 @@ const UserDashboard = () => {
 								type,
 							} = item;
 							return (
-								<Row key={_id}>
-									<Item>{_id}</Item>
-									<Item>{name}</Item>
-									<Item>{email}</Item>
-									<Item>{phone}</Item>
-									<Item>{transformDate(new Date(birthday))}</Item>
-									<Item>{gender ? 'Male' : 'Female'}</Item>
-									<Item>{address}</Item>
-									<Item>{type}</Item>
-									<Item>
-										<ActionButtons
-											id={_id}
-											infoHandler={showUser}
-											updateHandler={updateUser}
-											deleteHandler={deleteUser}
-										/>
-									</Item>
-								</Row>
+								<StyledRow key={_id}>
+									<StyledItem>{_id}</StyledItem>
+									<StyledItem>{name}</StyledItem>
+									<StyledItem>{email}</StyledItem>
+									<StyledItem>{phone}</StyledItem>
+									<StyledItem>{transformDate(new Date(birthday))}</StyledItem>
+									<StyledItem>{gender ? 'Male' : 'Female'}</StyledItem>
+									<StyledItem>{address}</StyledItem>
+									<StyledItem>{type}</StyledItem>
+									<StyledItem>
+										<StyledButtonContainer>
+											<Button onClickHandler={showUser(_id)} bgColor='#28a745'>
+												Info
+											</Button>
+											<Button
+												onClickHandler={updateUser(_id)}
+												bgColor='#ffc107'>
+												Update
+											</Button>
+											<Button
+												onClickHandler={deleteUser(_id)}
+												bgColor='#dc3545'>
+												Delete
+											</Button>
+										</StyledButtonContainer>
+									</StyledItem>
+								</StyledRow>
 							);
 						})}
-					</TableBody>
-				</Table>
-			</TableContainer>
-			<PaginateContainer>
-				<PrevButton onClick={prevPage}>Prev</PrevButton>
-				<PageButton active={page === 0} onClick={paginate(0)}>
+					</StyledTableBody>
+				</StyledTable>
+			</StyledTableContainer>
+			<StyledPaginateContainer>
+				<StyledPrevButton onClick={prevPage}>Prev</StyledPrevButton>
+				<StyledPageButton active={page === 0} onClick={paginate(0)}>
 					1
-				</PageButton>
+				</StyledPageButton>
 				{NUMBER_OF_PAGE_BUTTON.map((_, index) => {
 					let tempPage = page + index - 2;
 
@@ -192,105 +217,21 @@ const UserDashboard = () => {
 						tempPage = page + index - 3;
 					}
 					return (
-						<PageButton
+						<StyledPageButton
 							key={index}
 							active={page === tempPage}
 							onClick={paginate(tempPage)}>
 							{tempPage + 1}
-						</PageButton>
+						</StyledPageButton>
 					);
 				})}
-				<PageButton active={page === maxPage} onClick={paginate(maxPage)}>
+				<StyledPageButton active={page === maxPage} onClick={paginate(maxPage)}>
 					{maxPage}
-				</PageButton>
-				<NextButton onClick={nextPage}>Next</NextButton>
-			</PaginateContainer>
-		</Container>
+				</StyledPageButton>
+				<StyledNextButton onClick={nextPage}>Next</StyledNextButton>
+			</StyledPaginateContainer>
+		</StyledContainer>
 	);
 };
-
-const Container = styled.section`
-	padding: 5rem;
-	position: relative;
-	background-color: #fafbfb;
-	height: 100%;
-`;
-
-const SearchButton = styled(Button)``;
-
-const SearchContainer = styled.div`
-	display: grid;
-	grid-template-columns: 1fr 20rem;
-	gap: 1rem;
-	margin: 2rem auto;
-	width: 100%;
-`;
-
-const Search = styled.input`
-	font-size: 2rem;
-`;
-
-const TableContainer = styled.div`
-	overflow-x: scroll;
-	margin-inline: auto;
-	width: 100%;
-`;
-
-const Table = styled.table`
-	border: 1px solid black;
-	border-collapse: collapse;
-	margin-inline: auto;
-	table-layout: fixed;
-`;
-
-const TableHead = styled.thead``;
-const TableBody = styled.tbody``;
-
-const Title = styled.th`
-	font-size: 2.5rem;
-	padding: 0.5rem;
-	border: 1px solid black;
-	border-collapse: collapse;
-`;
-
-const Item = styled.td`
-	border: 1px solid black;
-	border-collapse: collapse;
-	font-size: 2rem;
-	padding: 0.5rem;
-	overflow: hidden;
-	white-space: nowrap;
-`;
-
-const Row = styled.tr``;
-
-const PaginateContainer = styled.div`
-	margin-inline: auto;
-	width: 50%;
-	height: 10rem;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-`;
-
-const PrevButton = styled.button`
-	font-size: 2.5rem;
-	font-weight: bold;
-`;
-const NextButton = styled.button`
-	font-size: 2.5rem;
-	font-weight: bold;
-`;
-
-const PageButton = styled.button<{ active?: boolean }>`
-	width: 5rem;
-	background-color: ${(props) => (props.active ? '#9d0832' : '#e41d57')};
-	font-weight: bold;
-	transition: var(--transition);
-	font-size: 2rem;
-	border-radius: var(--radius);
-	padding: 0.5rem;
-	color: ${(props) => (props.active ? 'black' : 'white')};
-`;
 
 export default UserDashboard;

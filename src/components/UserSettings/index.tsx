@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
+import { useAppSelector, useAppDispatch } from '../../hooks';
 import { logout } from '../../features/Auth/authSlice';
 import { Line } from '../';
 import { StyledContainer, StyledButton, StyledLink } from './style';

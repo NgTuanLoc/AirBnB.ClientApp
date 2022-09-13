@@ -1,7 +1,7 @@
 import Skeleton from 'react-loading-skeleton';
 
 import { IRoom } from '../../@types/Room';
-import { useAppSelector } from '../../hooks/hooks';
+import { useAppSelector } from '../../hooks';
 import Image from '../Image';
 import {
 	StyledContainer,

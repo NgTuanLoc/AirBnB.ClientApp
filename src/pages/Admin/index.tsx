@@ -2,8 +2,8 @@ import {
 	UserDashboard,
 	RoomDashboard,
 	LocationDashboard,
-} from '../../components';
-import { useAppSelector } from '../../hooks/hooks';
+} from '../../containers';
+import { useAppSelector } from '../../hooks';
 import { AdminLayout } from '../../layouts';
 
 const AdminPage = () => {

@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getRoomDetailByID } from '../../features/Room/roomThunk';
 import { Loading, Line } from '../../components';
 import { SingleRoomCatalog, SingleRoomDetails } from '../../containers';

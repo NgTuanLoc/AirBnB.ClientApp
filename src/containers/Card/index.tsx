@@ -3,7 +3,7 @@ import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import moment from 'moment';
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { Button, Line } from '../../components';
 import { bookRoomById } from '../../features/Room/roomThunk';
 import {
