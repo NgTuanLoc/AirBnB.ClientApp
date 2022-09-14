@@ -1,7 +1,4 @@
 import styled from 'styled-components';
-import { TiTickOutline } from 'react-icons/ti';
-import { AiOutlineStop } from 'react-icons/ai';
-
 import { Button } from '../../components';
 
 const StyledContainer = styled.section`
@@ -12,6 +9,27 @@ const StyledContainer = styled.section`
 `;
 
 const StyledSearchButton = styled(Button)``;
+
+const StyledRefreshButton = styled.button<{ isSpin?: boolean }>`
+	font-size: 3rem;
+	animation: ${(props) => (props.isSpin ? 'spin-animation 3s 0.5s' : 'none')};
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+
+	svg {
+		font-size: 3rem;
+		color: var(--clr-success);
+	}
+`;
+
+const StyledHeadButtonContainer = styled.div`
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+`;
 
 const StyledSearchContainer = styled.div`
 	display: grid;
@@ -28,6 +46,7 @@ const StyledSearch = styled.input`
 const StyledTableContainer = styled.div`
 	overflow-x: scroll;
 	margin-inline: auto;
+	min-height: 40rem;
 	width: 100%;
 `;
 
@@ -46,6 +65,7 @@ const StyledTitle = styled.th`
 	padding: 0.5rem;
 	border: 1px solid black;
 	border-collapse: collapse;
+	text-align: center;
 `;
 
 const StyledItem = styled.td`
@@ -54,9 +74,8 @@ const StyledItem = styled.td`
 	font-size: 2rem;
 	padding: 0.5rem;
 	overflow: hidden;
-	white-space: nowrap;
-
 	text-align: center;
+	white-space: nowrap;
 `;
 
 const StyledRow = styled.tr``;
@@ -98,22 +117,11 @@ const StyledPageButton = styled.button<{ active?: boolean }>`
 	color: ${(props) => (props.active ? 'black' : 'white')};
 `;
 
-const StyledTickIcon = styled(TiTickOutline)`
-	color: var(--clr-success);
-	font-size: 2rem;
-	place-items: center;
-`;
-
-const StyledStopIcon = styled(AiOutlineStop)`
-	color: var(--clr-danger);
-	font-size: 2rem;
-	place-items: center;
-`;
-
 export {
 	StyledContainer,
 	StyledSearchButton,
 	StyledSearchContainer,
+	StyledHeadButtonContainer,
 	StyledSearch,
 	StyledTableContainer,
 	StyledTable,
@@ -127,6 +135,5 @@ export {
 	StyledPrevButton,
 	StyledNextButton,
 	StyledPageButton,
-	StyledTickIcon,
-	StyledStopIcon,
+	StyledRefreshButton,
 };

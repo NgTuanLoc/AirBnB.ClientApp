@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
+import { HiOutlineRefresh } from 'react-icons/hi';
 
 import { useAppDispatch, useAppSelector, usePagination } from '../../hooks';
 
@@ -34,6 +35,8 @@ import {
 	StyledPageButton,
 	StyledTickIcon,
 	StyledStopIcon,
+	StyledHeadButtonContainer,
+	StyledRefreshButton,
 } from './style';
 import { ROOM_DATA } from '../../constant';
 
@@ -51,6 +54,7 @@ const RoomDashboard = () => {
 	const dispatch = useAppDispatch();
 	const { currentPage, setCurrentPage, nextPage, prevPage, pageArray } =
 		usePagination(maxPage);
+	const [rotateRefreshButton, setRotateRefreshButton] = useState(false);
 
 	const renderNewRoom = () => {
 		let tempArray = Array.from(
@@ -94,6 +98,16 @@ const RoomDashboard = () => {
 		};
 	};
 
+	const onRefreshHandler = () => {
+		setRotateRefreshButton(true);
+		dispatch(getAllRoom());
+		renderNewRoom();
+		const timeout = setTimeout(() => {
+			setRotateRefreshButton(false);
+		}, 3000);
+		clearTimeout(timeout);
+	};
+
 	useEffect(() => {
 		renderNewRoom();
 		setMaxPage(Math.floor(roomList.length / ROOM_PER_PAGE));
@@ -125,9 +139,16 @@ const RoomDashboard = () => {
 				}
 				dummyData={ROOM_DATA}
 			/>
-			<Button onClickHandler={createRoom()} fullWidth={false}>
-				Add New
-			</Button>
+			<StyledHeadButtonContainer>
+				<Button onClickHandler={createRoom()} fullWidth={false}>
+					Add New
+				</Button>
+				<StyledRefreshButton
+					isSpin={rotateRefreshButton}
+					onClick={onRefreshHandler}>
+					<HiOutlineRefresh />
+				</StyledRefreshButton>
+			</StyledHeadButtonContainer>
 			<StyledSearchContainer>
 				<StyledSearch />
 				<StyledSearchButton>Search</StyledSearchButton>

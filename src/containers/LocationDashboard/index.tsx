@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
+import { HiOutlineRefresh } from 'react-icons/hi';
 
 import { useAppDispatch, useAppSelector, usePagination } from '../../hooks';
 
@@ -8,6 +9,7 @@ import {
 	getLocationById,
 	updateLocationById,
 	deleteLocationById,
+	createLocation,
 } from '../../features/Location/locationThunk';
 import { Loading, Button, Image } from '../../components';
 import { type FormType } from '../../components/AdminForm';
@@ -30,7 +32,10 @@ import {
 	StyledPrevButton,
 	StyledNextButton,
 	StyledPageButton,
+	StyledHeadButtonContainer,
+	StyledRefreshButton,
 } from './style';
+import { LOCATION_DATA } from '../../constant';
 
 const LOCATION_PER_PAGE = 10;
 
@@ -47,6 +52,7 @@ const LocationDashboard = () => {
 	const maxPage = Math.floor(locationList.length / LOCATION_PER_PAGE);
 	const { currentPage, setCurrentPage, nextPage, prevPage, pageArray } =
 		usePagination(maxPage);
+	const [rotateRefreshButton, setRotateRefreshButton] = useState(false);
 
 	const renderNewLocation = () => {
 		let tempArray = Array.from(
@@ -56,6 +62,14 @@ const LocationDashboard = () => {
 
 		tempArray = tempArray.filter((item) => item !== undefined);
 		setDisplayLocation(tempArray);
+	};
+
+	const createNewLocation = () => {
+		return () => {
+			setModalTitle('Create Location');
+			setFormType('CREATE');
+			setIsModalOpen(true);
+		};
 	};
 
 	const deleteLocation = (id: string) => {
@@ -83,6 +97,16 @@ const LocationDashboard = () => {
 		};
 	};
 
+	const onRefreshHandler = () => {
+		setRotateRefreshButton(true);
+		dispatch(getLocationList());
+		renderNewLocation();
+		const timeout = setTimeout(() => {
+			setRotateRefreshButton(false);
+		}, 3000);
+		clearTimeout(timeout);
+	};
+
 	useEffect(() => {
 		renderNewLocation();
 	}, [currentPage, locationList, isLoading]);
@@ -107,10 +131,22 @@ const LocationDashboard = () => {
 				setIsModalOpen={setIsModalOpen}
 				isLoading={isLoading}
 				data={selectedLocation}
-				disableInput={modalTitle === 'Update location' ? false : true}
-				dispatchFunction={updateLocationById}
+				disableInput={formType === 'INFO' ? true : false}
+				dispatchFunction={
+					formType === 'UPDATE' ? updateLocationById : createLocation
+				}
+				dummyData={LOCATION_DATA}
 			/>
-			<Button fullWidth={false}>Add New</Button>
+			<StyledHeadButtonContainer>
+				<Button onClickHandler={createNewLocation()} fullWidth={false}>
+					Add New
+				</Button>
+				<StyledRefreshButton
+					isSpin={rotateRefreshButton}
+					onClick={onRefreshHandler}>
+					<HiOutlineRefresh />
+				</StyledRefreshButton>
+			</StyledHeadButtonContainer>
 			<StyledSearchContainer>
 				<StyledSearch />
 				<StyledSearchButton>Search</StyledSearchButton>
@@ -139,7 +175,7 @@ const LocationDashboard = () => {
 										{province ? province : 'Not provided'}
 									</StyledItem>
 									<StyledItem>{country ? country : 'Not provided'}</StyledItem>
-									<StyledItem>{valueate ? name : 0}</StyledItem>
+									<StyledItem>{valueate ? valueate : 0}</StyledItem>
 
 									<StyledItem>
 										<Image url={image} alt={name} />

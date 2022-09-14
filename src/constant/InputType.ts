@@ -22,4 +22,9 @@ export const inputType: any = {
 	cableTV: 'checkbox',
 	image: 'name',
 	price: 'number',
+
+	// LOCATION
+	province: 'name',
+	country: 'name',
+	valueate: 'number',
 };

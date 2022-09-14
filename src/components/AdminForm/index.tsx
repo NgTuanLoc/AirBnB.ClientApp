@@ -40,7 +40,6 @@ const AdminForm = <T extends { [key: string]: any }>({
 
 	const onSubmitHandler = (data: any) => {
 		setIsModalOpen(false);
-
 		dispatch(dispatchFunction(data));
 	};
 
@@ -61,6 +60,7 @@ const AdminForm = <T extends { [key: string]: any }>({
 							if (key === 'birthday') {
 								info = new Date(dummyData[key]).toISOString().substring(0, 10);
 							}
+							console.log(inputTypeValue);
 
 							return (
 								<CardItem key={id}>
