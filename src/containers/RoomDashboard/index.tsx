@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ChangeEvent } from 'react';
 import { HiOutlineRefresh } from 'react-icons/hi';
 
 import { useAppDispatch, useAppSelector, usePagination } from '../../hooks';
@@ -39,6 +39,7 @@ import {
 	StyledRefreshButton,
 } from './style';
 import { ROOM_DATA } from '../../constant';
+import { transformLanguage } from '../../utils';
 
 const ROOM_PER_PAGE = 10;
 
@@ -50,16 +51,25 @@ const RoomDashboard = () => {
 	);
 	const [modalTitle, setModalTitle] = useState('Room Info');
 	const [isModalOpen, setIsModalOpen] = useState(false);
-	const [maxPage, setMaxPage] = useState(2);
+
 	const dispatch = useAppDispatch();
-	const { currentPage, setCurrentPage, nextPage, prevPage, pageArray } =
-		usePagination(maxPage);
+	const {
+		currentPage,
+		setCurrentPage,
+		nextPage,
+		prevPage,
+		pageArray,
+		maxPage,
+		setMaxPage,
+	} = usePagination(roomList.length);
 	const [rotateRefreshButton, setRotateRefreshButton] = useState(false);
+	const [searchValue, setSearchValue] = useState('');
+	const [data, setData] = useState<IRoom[]>(roomList);
 
 	const renderNewRoom = () => {
 		let tempArray = Array.from(
 			{ length: ROOM_PER_PAGE },
-			(_, i) => roomList[currentPage * ROOM_PER_PAGE + i]
+			(_, i) => data[currentPage * ROOM_PER_PAGE + i]
 		);
 		tempArray = tempArray.filter((item) => item !== undefined);
 		setDisplayRoom(tempArray);
@@ -101,28 +111,35 @@ const RoomDashboard = () => {
 	const onRefreshHandler = () => {
 		setRotateRefreshButton(true);
 		dispatch(getAllRoom());
+		setData(roomList);
 		renderNewRoom();
-		const timeout = setTimeout(() => {
+		setTimeout(() => {
 			setRotateRefreshButton(false);
 		}, 3000);
-		clearTimeout(timeout);
+	};
+
+	const onSearchHandler = () => {
+		const temp = roomList.filter((item) => {
+			if (!item.name) return false;
+			const transformedName = transformLanguage(item.name);
+
+			return transformedName.includes(searchValue);
+		});
+		setData(temp);
+	};
+
+	const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+		setSearchValue(e.target.value);
 	};
 
 	useEffect(() => {
 		renderNewRoom();
-		setMaxPage(Math.floor(roomList.length / ROOM_PER_PAGE));
-	}, [currentPage, roomList, maxPage]);
+		setMaxPage(Math.floor(data.length / ROOM_PER_PAGE));
+	}, [currentPage, roomList, data, maxPage]);
 
 	useEffect(() => {
 		dispatch(getAllRoom());
 	}, [selectedRoom]);
-
-	if (isLoading)
-		return (
-			<StyledContainer>
-				<Loading />
-			</StyledContainer>
-		);
 
 	return (
 		<StyledContainer>
@@ -150,134 +167,150 @@ const RoomDashboard = () => {
 				</StyledRefreshButton>
 			</StyledHeadButtonContainer>
 			<StyledSearchContainer>
-				<StyledSearch />
-				<StyledSearchButton>Search</StyledSearchButton>
+				<StyledSearch onChange={onChangeHandler} />
+				<StyledSearchButton onClickHandler={onSearchHandler}>
+					Search
+				</StyledSearchButton>
 			</StyledSearchContainer>
+
 			<StyledTableContainer>
-				<StyledTable>
-					<StyledTableHead>
-						<StyledRow>
-							<StyledTitle>Id</StyledTitle>
-							<StyledTitle>Name</StyledTitle>
-							<StyledTitle>Guests</StyledTitle>
-							<StyledTitle>BedRoom</StyledTitle>
-							<StyledTitle>Bath</StyledTitle>
-							<StyledTitle>Elevator</StyledTitle>
-							<StyledTitle>Hot Tubs</StyledTitle>
-							<StyledTitle>Pool</StyledTitle>
-							<StyledTitle>Indoor Fireplace</StyledTitle>
-							<StyledTitle>Dryer</StyledTitle>
-							<StyledTitle>Gym</StyledTitle>
-							<StyledTitle>Kitchen</StyledTitle>
-							<StyledTitle>Wifi</StyledTitle>
-							<StyledTitle>Heating</StyledTitle>
-							<StyledTitle>CableTv</StyledTitle>
-							<StyledTitle>Image</StyledTitle>
-							<StyledTitle>Price</StyledTitle>
-							<StyledTitle>Actions</StyledTitle>
-						</StyledRow>
-					</StyledTableHead>
-					<StyledTableBody>
-						{displayRoom.map((item) => {
-							const {
-								_id,
-								name,
-								guests,
-								bedRoom,
-								bath,
-								elevator,
-								hotTub,
-								pool,
-								indoorFireplace,
-								dryer,
-								gym,
-								kitchen,
-								wifi,
-								heating,
-								cableTV,
-								image,
-								price,
-							} = item;
-							return (
-								<StyledRow key={_id}>
-									<StyledItem>{_id}</StyledItem>
-									<StyledItem>{name}</StyledItem>
-									<StyledItem>{guests ? guests : 0}</StyledItem>
-									<StyledItem>{bedRoom ? bedRoom : 0}</StyledItem>
-									<StyledItem>
-										{bath ? <StyledTickIcon /> : <StyledStopIcon />}
-									</StyledItem>
-									<StyledItem>
-										{elevator ? <StyledTickIcon /> : <StyledStopIcon />}
-									</StyledItem>
-									<StyledItem>
-										{hotTub ? <StyledTickIcon /> : <StyledStopIcon />}
-									</StyledItem>
-									<StyledItem>
-										{pool ? <StyledTickIcon /> : <StyledStopIcon />}
-									</StyledItem>
-									<StyledItem>
-										{indoorFireplace ? <StyledTickIcon /> : <StyledStopIcon />}
-									</StyledItem>
-									<StyledItem>
-										{dryer ? <StyledTickIcon /> : <StyledStopIcon />}
-									</StyledItem>
-									<StyledItem>
-										{gym ? <StyledTickIcon /> : <StyledStopIcon />}
-									</StyledItem>
-									<StyledItem>
-										{kitchen ? <StyledTickIcon /> : <StyledStopIcon />}
-									</StyledItem>
-									<StyledItem>
-										{wifi ? <StyledTickIcon /> : <StyledStopIcon />}
-									</StyledItem>
-									<StyledItem>
-										{heating ? <StyledTickIcon /> : <StyledStopIcon />}
-									</StyledItem>
-									<StyledItem>
-										{cableTV ? <StyledTickIcon /> : <StyledStopIcon />}
-									</StyledItem>
-									<StyledItem>
-										<Image url={image} alt={name} />
-									</StyledItem>
-									<StyledItem>{price ? price : 'Not Provided'}</StyledItem>
-									<StyledItem>
-										<StyledButtonContainer>
-											<Button onClickHandler={showRoom(_id)} bgColor='#28a745'>
-												Info
-											</Button>
-											<Button
-												onClickHandler={updateRoom(_id)}
-												bgColor='#ffc107'>
-												Update
-											</Button>
-											<Button
-												onClickHandler={deleteRoom(_id)}
-												bgColor='#dc3545'>
-												Delete
-											</Button>
-										</StyledButtonContainer>
-									</StyledItem>
-								</StyledRow>
-							);
-						})}
-					</StyledTableBody>
-				</StyledTable>
+				{isLoading ? (
+					<Loading />
+				) : (
+					<StyledTable>
+						<StyledTableHead>
+							<StyledRow>
+								<StyledTitle>Id</StyledTitle>
+								<StyledTitle>Name</StyledTitle>
+								<StyledTitle>Guests</StyledTitle>
+								<StyledTitle>BedRoom</StyledTitle>
+								<StyledTitle>Bath</StyledTitle>
+								<StyledTitle>Elevator</StyledTitle>
+								<StyledTitle>Hot Tubs</StyledTitle>
+								<StyledTitle>Pool</StyledTitle>
+								<StyledTitle>Indoor Fireplace</StyledTitle>
+								<StyledTitle>Dryer</StyledTitle>
+								<StyledTitle>Gym</StyledTitle>
+								<StyledTitle>Kitchen</StyledTitle>
+								<StyledTitle>Wifi</StyledTitle>
+								<StyledTitle>Heating</StyledTitle>
+								<StyledTitle>CableTv</StyledTitle>
+								<StyledTitle>Image</StyledTitle>
+								<StyledTitle>Price</StyledTitle>
+								<StyledTitle>Actions</StyledTitle>
+							</StyledRow>
+						</StyledTableHead>
+						<StyledTableBody>
+							{displayRoom.map((item) => {
+								const {
+									_id,
+									name,
+									guests,
+									bedRoom,
+									bath,
+									elevator,
+									hotTub,
+									pool,
+									indoorFireplace,
+									dryer,
+									gym,
+									kitchen,
+									wifi,
+									heating,
+									cableTV,
+									image,
+									price,
+								} = item;
+								return (
+									<StyledRow key={_id}>
+										<StyledItem>{_id}</StyledItem>
+										<StyledItem>{name}</StyledItem>
+										<StyledItem>{guests ? guests : 0}</StyledItem>
+										<StyledItem>{bedRoom ? bedRoom : 0}</StyledItem>
+										<StyledItem>
+											{bath ? <StyledTickIcon /> : <StyledStopIcon />}
+										</StyledItem>
+										<StyledItem>
+											{elevator ? <StyledTickIcon /> : <StyledStopIcon />}
+										</StyledItem>
+										<StyledItem>
+											{hotTub ? <StyledTickIcon /> : <StyledStopIcon />}
+										</StyledItem>
+										<StyledItem>
+											{pool ? <StyledTickIcon /> : <StyledStopIcon />}
+										</StyledItem>
+										<StyledItem>
+											{indoorFireplace ? (
+												<StyledTickIcon />
+											) : (
+												<StyledStopIcon />
+											)}
+										</StyledItem>
+										<StyledItem>
+											{dryer ? <StyledTickIcon /> : <StyledStopIcon />}
+										</StyledItem>
+										<StyledItem>
+											{gym ? <StyledTickIcon /> : <StyledStopIcon />}
+										</StyledItem>
+										<StyledItem>
+											{kitchen ? <StyledTickIcon /> : <StyledStopIcon />}
+										</StyledItem>
+										<StyledItem>
+											{wifi ? <StyledTickIcon /> : <StyledStopIcon />}
+										</StyledItem>
+										<StyledItem>
+											{heating ? <StyledTickIcon /> : <StyledStopIcon />}
+										</StyledItem>
+										<StyledItem>
+											{cableTV ? <StyledTickIcon /> : <StyledStopIcon />}
+										</StyledItem>
+										<StyledItem>
+											<Image url={image} alt={name} />
+										</StyledItem>
+										<StyledItem>{price ? price : 'Not Provided'}</StyledItem>
+										<StyledItem>
+											<StyledButtonContainer>
+												<Button
+													onClickHandler={showRoom(_id)}
+													bgColor='#28a745'>
+													Info
+												</Button>
+												<Button
+													onClickHandler={updateRoom(_id)}
+													bgColor='#ffc107'>
+													Update
+												</Button>
+												<Button
+													onClickHandler={deleteRoom(_id)}
+													bgColor='#dc3545'>
+													Delete
+												</Button>
+											</StyledButtonContainer>
+										</StyledItem>
+									</StyledRow>
+								);
+							})}
+						</StyledTableBody>
+					</StyledTable>
+				)}
 			</StyledTableContainer>
-			<StyledPaginateContainer>
-				<StyledPrevButton onClick={prevPage}>Prev</StyledPrevButton>
-				{pageArray.map((page, index) => {
-					return (
-						<StyledPageButton
-							key={index}
-							active={currentPage === page}
-							onClick={() => setCurrentPage(page)}>
-							{page + 1}
-						</StyledPageButton>
-					);
-				})}
-				<StyledNextButton onClick={nextPage}>Next</StyledNextButton>
-			</StyledPaginateContainer>
+
+			{maxPage !== 0 && (
+				<StyledPaginateContainer>
+					<StyledPrevButton onClick={prevPage}>Prev</StyledPrevButton>
+					{pageArray.map((page, index) => {
+						return (
+							<StyledPageButton
+								key={index}
+								active={currentPage === page}
+								onClick={() => setCurrentPage(page)}>
+								{page + 1}
+							</StyledPageButton>
+						);
+					})}
+					<StyledNextButton onClick={nextPage}>Next</StyledNextButton>
+				</StyledPaginateContainer>
+			)}
 		</StyledContainer>
 	);
 };

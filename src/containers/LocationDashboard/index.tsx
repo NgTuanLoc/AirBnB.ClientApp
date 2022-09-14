@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ChangeEvent } from 'react';
 import { HiOutlineRefresh } from 'react-icons/hi';
 
 import { useAppDispatch, useAppSelector, usePagination } from '../../hooks';
@@ -15,6 +15,7 @@ import { Loading, Button, Image } from '../../components';
 import { type FormType } from '../../components/AdminForm';
 import { AdminForm } from '../../components';
 import { ILocation } from '../../@types/Location';
+import { transformLanguage } from '../../utils';
 import {
 	StyledContainer,
 	StyledSearchButton,
@@ -49,15 +50,23 @@ const LocationDashboard = () => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	const dispatch = useAppDispatch();
-	const maxPage = Math.floor(locationList.length / LOCATION_PER_PAGE);
-	const { currentPage, setCurrentPage, nextPage, prevPage, pageArray } =
-		usePagination(maxPage);
+	const {
+		currentPage,
+		setCurrentPage,
+		nextPage,
+		prevPage,
+		pageArray,
+		maxPage,
+		setMaxPage,
+	} = usePagination(locationList.length);
 	const [rotateRefreshButton, setRotateRefreshButton] = useState(false);
+	const [searchValue, setSearchValue] = useState('');
+	const [data, setData] = useState<ILocation[]>(locationList);
 
 	const renderNewLocation = () => {
 		let tempArray = Array.from(
 			{ length: LOCATION_PER_PAGE },
-			(_, i) => locationList[currentPage * LOCATION_PER_PAGE + i]
+			(_, i) => data[currentPage * LOCATION_PER_PAGE + i]
 		);
 
 		tempArray = tempArray.filter((item) => item !== undefined);
@@ -100,27 +109,35 @@ const LocationDashboard = () => {
 	const onRefreshHandler = () => {
 		setRotateRefreshButton(true);
 		dispatch(getLocationList());
+		setData(locationList);
 		renderNewLocation();
-		const timeout = setTimeout(() => {
+		setTimeout(() => {
 			setRotateRefreshButton(false);
 		}, 3000);
-		clearTimeout(timeout);
+	};
+
+	const onSearchHandler = () => {
+		const temp = locationList.filter((item) => {
+			if (!item.name) return false;
+			const transformedName = transformLanguage(item.name);
+
+			return transformedName.includes(searchValue);
+		});
+		setData(temp);
+	};
+
+	const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+		setSearchValue(e.target.value);
 	};
 
 	useEffect(() => {
 		renderNewLocation();
-	}, [currentPage, locationList, isLoading]);
+		setMaxPage(Math.floor(data.length / LOCATION_PER_PAGE));
+	}, [currentPage, locationList, data, isLoading]);
 
 	useEffect(() => {
 		dispatch(getLocationList());
 	}, [selectedLocation]);
-
-	if (isLoading)
-		return (
-			<StyledContainer>
-				<Loading />
-			</StyledContainer>
-		);
 
 	return (
 		<StyledContainer>
@@ -148,78 +165,89 @@ const LocationDashboard = () => {
 				</StyledRefreshButton>
 			</StyledHeadButtonContainer>
 			<StyledSearchContainer>
-				<StyledSearch />
-				<StyledSearchButton>Search</StyledSearchButton>
+				<StyledSearch onChange={onChangeHandler} />
+				<StyledSearchButton onClickHandler={onSearchHandler}>
+					Search
+				</StyledSearchButton>
 			</StyledSearchContainer>
 			<StyledTableContainer>
-				<StyledTable>
-					<StyledTableHead>
-						<StyledRow>
-							<StyledTitle>Id</StyledTitle>
-							<StyledTitle>Name</StyledTitle>
-							<StyledTitle>Province</StyledTitle>
-							<StyledTitle>Country</StyledTitle>
-							<StyledTitle>Valuate</StyledTitle>
-							<StyledTitle>Image</StyledTitle>
-							<StyledTitle>Actions</StyledTitle>
-						</StyledRow>
-					</StyledTableHead>
-					<StyledTableBody>
-						{displayLocation.map((item) => {
-							const { _id, name, province, country, valueate, image } = item;
-							return (
-								<StyledRow key={_id}>
-									<StyledItem>{_id}</StyledItem>
-									<StyledItem>{name ? name : 'Not provided'}</StyledItem>
-									<StyledItem>
-										{province ? province : 'Not provided'}
-									</StyledItem>
-									<StyledItem>{country ? country : 'Not provided'}</StyledItem>
-									<StyledItem>{valueate ? valueate : 0}</StyledItem>
+				{isLoading ? (
+					<Loading />
+				) : (
+					<StyledTable>
+						<StyledTableHead>
+							<StyledRow>
+								<StyledTitle>Id</StyledTitle>
+								<StyledTitle>Name</StyledTitle>
+								<StyledTitle>Province</StyledTitle>
+								<StyledTitle>Country</StyledTitle>
+								<StyledTitle>Valuate</StyledTitle>
+								<StyledTitle>Image</StyledTitle>
+								<StyledTitle>Actions</StyledTitle>
+							</StyledRow>
+						</StyledTableHead>
+						<StyledTableBody>
+							{displayLocation.map((item) => {
+								const { _id, name, province, country, valueate, image } = item;
+								return (
+									<StyledRow key={_id}>
+										<StyledItem>{_id}</StyledItem>
+										<StyledItem>{name ? name : 'Not provided'}</StyledItem>
+										<StyledItem>
+											{province ? province : 'Not provided'}
+										</StyledItem>
+										<StyledItem>
+											{country ? country : 'Not provided'}
+										</StyledItem>
+										<StyledItem>{valueate ? valueate : 0}</StyledItem>
 
-									<StyledItem>
-										<Image url={image} alt={name} />
-									</StyledItem>
+										<StyledItem>
+											<Image url={image} alt={name} />
+										</StyledItem>
 
-									<StyledItem>
-										<StyledButtonContainer>
-											<Button
-												onClickHandler={showLocation(_id)}
-												bgColor='#28a745'>
-												Info
-											</Button>
-											<Button
-												onClickHandler={updateLocation(_id)}
-												bgColor='#ffc107'>
-												Update
-											</Button>
-											<Button
-												onClickHandler={deleteLocation(_id)}
-												bgColor='#dc3545'>
-												Delete
-											</Button>
-										</StyledButtonContainer>
-									</StyledItem>
-								</StyledRow>
-							);
-						})}
-					</StyledTableBody>
-				</StyledTable>
+										<StyledItem>
+											<StyledButtonContainer>
+												<Button
+													onClickHandler={showLocation(_id)}
+													bgColor='#28a745'>
+													Info
+												</Button>
+												<Button
+													onClickHandler={updateLocation(_id)}
+													bgColor='#ffc107'>
+													Update
+												</Button>
+												<Button
+													onClickHandler={deleteLocation(_id)}
+													bgColor='#dc3545'>
+													Delete
+												</Button>
+											</StyledButtonContainer>
+										</StyledItem>
+									</StyledRow>
+								);
+							})}
+						</StyledTableBody>
+					</StyledTable>
+				)}
 			</StyledTableContainer>
-			<StyledPaginateContainer>
-				<StyledPrevButton onClick={prevPage}>Prev</StyledPrevButton>
-				{pageArray.map((page, index) => {
-					return (
-						<StyledPageButton
-							key={index}
-							active={currentPage === page}
-							onClick={() => setCurrentPage(page)}>
-							{page + 1}
-						</StyledPageButton>
-					);
-				})}
-				<StyledNextButton onClick={nextPage}>Next</StyledNextButton>
-			</StyledPaginateContainer>
+
+			{maxPage !== 0 && (
+				<StyledPaginateContainer>
+					<StyledPrevButton onClick={prevPage}>Prev</StyledPrevButton>
+					{pageArray.map((page, index) => {
+						return (
+							<StyledPageButton
+								key={index}
+								active={currentPage === page}
+								onClick={() => setCurrentPage(page)}>
+								{page + 1}
+							</StyledPageButton>
+						);
+					})}
+					<StyledNextButton onClick={nextPage}>Next</StyledNextButton>
+				</StyledPaginateContainer>
+			)}
 		</StyledContainer>
 	);
 };

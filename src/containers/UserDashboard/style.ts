@@ -44,6 +44,7 @@ const StyledSearch = styled.input`
 `;
 
 const StyledTableContainer = styled.div`
+	position: relative;
 	overflow-x: scroll;
 	margin-inline: auto;
 	min-height: 40rem;

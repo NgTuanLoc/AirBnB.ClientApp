@@ -49,7 +49,9 @@ const StyledSearch = styled.input`
 const StyledTableContainer = styled.div`
 	overflow-x: scroll;
 	margin-inline: auto;
+	min-height: 40rem;
 	width: 100%;
+	position: relative;
 `;
 
 const StyledTable = styled.table`

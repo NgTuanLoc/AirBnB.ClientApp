@@ -43,7 +43,7 @@ code {
 	--breakpoint-medium: 1400px;
 
 	--spacing: 0.1rem;
-	--radius: 0.75rem;
+	--radius: 1rem;
 	--light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 	--dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 	--box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;

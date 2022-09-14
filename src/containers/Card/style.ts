@@ -12,6 +12,10 @@ const StyledContainer = styled.article`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+
+	@media only screen and (max-width: 992px) {
+		display: none;
+	}
 `;
 
 const StyledForm = styled.form``;

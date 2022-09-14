@@ -9,6 +9,7 @@ import {
 	StyledSpan,
 	StyledDivWrapper,
 	StyledImageContainer,
+	StyledHeading,
 } from './style';
 
 const Room = ({ _id, name, image, locationId, price }: IRoom) => {
@@ -20,7 +21,7 @@ const Room = ({ _id, name, image, locationId, price }: IRoom) => {
 				{isLoading ? <Skeleton /> : <Image url={image} alt={name} />}
 			</StyledImageContainer>
 			<StyledDivWrapper>
-				{isLoading ? <Skeleton /> : <h5>{name}</h5>}
+				{isLoading ? <Skeleton /> : <StyledHeading>{name}</StyledHeading>}
 				{isLoading ? (
 					<Skeleton />
 				) : (

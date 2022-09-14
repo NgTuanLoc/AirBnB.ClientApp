@@ -16,27 +16,24 @@ const StyledContainer = styled(Link)`
 const StyledImageContainer = styled.div`
 	height: 20rem;
 	margin-bottom: 1rem;
-
-	img {
-		border-bottom-right-radius: 0 !important;
-		border-bottom-left-radius: 0 !important;
-	}
 `;
 
 const StyledDivWrapper = styled.div``;
 
 // Typography
 const StyledParagraph = styled.p<{ bold?: boolean }>`
+	font-size: 1.5rem;
 	color: ${(props) => (props.bold ? 'black' : 'var(--clr-paragraph)')};
 	font-weight: ${(props) => (props.bold ? 'bold' : '300')};
-	font-size: 1.5rem;
 `;
 
 const StyledSpan = styled.span<{ bold?: boolean }>`
+	font-size: 1.5rem;
 	color: ${(props) => (props.bold ? 'black' : 'var(--clr-paragraph)')};
 	font-weight: ${(props) => (props.bold ? 'bold' : '300')};
-	font-size: 1.5rem;
 `;
+
+const StyledHeading = styled.h5``;
 
 export {
 	StyledContainer,
@@ -44,4 +41,5 @@ export {
 	StyledSpan,
 	StyledDivWrapper,
 	StyledImageContainer,
+	StyledHeading,
 };

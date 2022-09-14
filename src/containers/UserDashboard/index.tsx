@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ChangeEvent } from 'react';
 import { HiOutlineRefresh } from 'react-icons/hi';
 
 import { useAppDispatch, useAppSelector, usePagination } from '../../hooks';
@@ -14,7 +14,7 @@ import { Loading, Button } from '../../components';
 import { AdminForm } from '../../components';
 import { type FormType } from '../../components/AdminForm';
 import { IUser } from '../../@types/User';
-import { transformDate } from '../../utils';
+import { transformDate, transformLanguage } from '../../utils';
 import {
 	StyledContainer,
 	StyledSearchButton,
@@ -47,16 +47,24 @@ const UserDashboard = () => {
 	);
 	const [modalTitle, setModalTitle] = useState('User Info');
 	const [isModalOpen, setIsModalOpen] = useState(false);
-	const [maxPage, setMaxPage] = useState(2);
 	const dispatch = useAppDispatch();
-	const { currentPage, setCurrentPage, nextPage, prevPage, pageArray } =
-		usePagination(maxPage);
+	const {
+		currentPage,
+		setCurrentPage,
+		nextPage,
+		prevPage,
+		pageArray,
+		maxPage,
+		setMaxPage,
+	} = usePagination(userList.length);
 	const [rotateRefreshButton, setRotateRefreshButton] = useState(false);
+	const [searchValue, setSearchValue] = useState('');
+	const [data, setData] = useState<IUser[]>(userList);
 
 	const renderNewUser = () => {
 		let tempArray = Array.from(
 			{ length: USER_PER_PAGE },
-			(_, i) => userList[currentPage * USER_PER_PAGE + i]
+			(_, i) => data[currentPage * USER_PER_PAGE + i]
 		);
 
 		tempArray = tempArray.filter((item) => item !== undefined);
@@ -99,16 +107,32 @@ const UserDashboard = () => {
 	const onRefreshHandler = () => {
 		setRotateRefreshButton(true);
 		dispatch(getAllUsers());
+		setData(userList);
 		renderNewUser();
 		setTimeout(() => {
 			setRotateRefreshButton(false);
 		}, 3000);
 	};
 
+	const onSearchHandler = () => {
+		const temp = userList.filter((item) => {
+			if (!item.name) return false;
+			const transformedName = transformLanguage(item.name);
+
+			return transformedName.includes(searchValue);
+		});
+		setData(temp);
+	};
+
+	const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+		setSearchValue(e.target.value);
+	};
+
 	useEffect(() => {
 		renderNewUser();
-		setMaxPage(Math.floor(userList.length / USER_PER_PAGE));
-	}, [currentPage, userList, maxPage]);
+		setMaxPage(Math.floor(data.length / USER_PER_PAGE));
+		console.log(maxPage);
+	}, [currentPage, userList, data, maxPage]);
 
 	useEffect(() => {
 		dispatch(getAllUsers());
@@ -138,8 +162,10 @@ const UserDashboard = () => {
 				</StyledRefreshButton>
 			</StyledHeadButtonContainer>
 			<StyledSearchContainer>
-				<StyledSearch />
-				<StyledSearchButton>Search</StyledSearchButton>
+				<StyledSearch onChange={onChangeHandler} />
+				<StyledSearchButton onClickHandler={onSearchHandler}>
+					Search
+				</StyledSearchButton>
 			</StyledSearchContainer>
 			<StyledTableContainer>
 				{isLoading ? (
@@ -207,20 +233,22 @@ const UserDashboard = () => {
 					</StyledTable>
 				)}
 			</StyledTableContainer>
-			<StyledPaginateContainer>
-				<StyledPrevButton onClick={prevPage}>Prev</StyledPrevButton>
-				{pageArray.map((page, index) => {
-					return (
-						<StyledPageButton
-							key={index}
-							active={currentPage === page}
-							onClick={() => setCurrentPage(page)}>
-							{page + 1}
-						</StyledPageButton>
-					);
-				})}
-				<StyledNextButton onClick={nextPage}>Next</StyledNextButton>
-			</StyledPaginateContainer>
+			{maxPage !== 0 && (
+				<StyledPaginateContainer>
+					<StyledPrevButton onClick={prevPage}>Prev</StyledPrevButton>
+					{pageArray.map((page, index) => {
+						return (
+							<StyledPageButton
+								key={index}
+								active={currentPage === page}
+								onClick={() => setCurrentPage(page)}>
+								{page + 1}
+							</StyledPageButton>
+						);
+					})}
+					<StyledNextButton onClick={nextPage}>Next</StyledNextButton>
+				</StyledPaginateContainer>
+			)}
 		</StyledContainer>
 	);
 };

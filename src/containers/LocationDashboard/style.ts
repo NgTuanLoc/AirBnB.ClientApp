@@ -48,6 +48,7 @@ const StyledTableContainer = styled.div`
 	margin-inline: auto;
 	min-height: 40rem;
 	width: 100%;
+	position: relative;
 `;
 
 const StyledTable = styled.table`

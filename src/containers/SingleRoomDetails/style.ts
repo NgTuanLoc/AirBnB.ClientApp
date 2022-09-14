@@ -7,7 +7,7 @@ const StyledContainer = styled.section`
 
 	@media only screen and (max-width: 1200px) {
 		grid-template-columns: 1fr;
-		margin: 5rem auto;
+		margin: 0rem auto;
 		padding: 1rem;
 	}
 `;
