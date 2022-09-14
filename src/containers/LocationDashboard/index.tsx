@@ -9,8 +9,8 @@ import {
 	updateLocationById,
 	deleteLocationById,
 } from '../../features/Location/locationThunk';
-
 import { Loading, Button, Image } from '../../components';
+import { type FormType } from '../../components/AdminForm';
 import { AdminForm } from '../../components';
 import { ILocation } from '../../@types/Location';
 import {
@@ -35,6 +35,7 @@ import {
 const LOCATION_PER_PAGE = 10;
 
 const LocationDashboard = () => {
+	const [formType, setFormType] = useState<FormType>('INFO');
 	const [displayLocation, setDisplayLocation] = useState<ILocation[]>([]);
 	const { locationList, selectedLocation, isLoading } = useAppSelector(
 		(store) => store.location
@@ -43,7 +44,7 @@ const LocationDashboard = () => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	const dispatch = useAppDispatch();
-	const maxPage = Math.floor(locationList.length / LOCATION_PER_PAGE) - 1;
+	const maxPage = Math.floor(locationList.length / LOCATION_PER_PAGE);
 	const { currentPage, setCurrentPage, nextPage, prevPage, pageArray } =
 		usePagination(maxPage);
 
@@ -66,6 +67,7 @@ const LocationDashboard = () => {
 
 	const showLocation = (id: string) => {
 		return () => {
+			setFormType('INFO');
 			setModalTitle('location Info');
 			setIsModalOpen(true);
 			dispatch(getLocationById(id));
@@ -74,6 +76,7 @@ const LocationDashboard = () => {
 
 	const updateLocation = (id: string) => {
 		return () => {
+			setFormType('UPDATE');
 			setModalTitle('Update location');
 			setIsModalOpen(true);
 			dispatch(getLocationById(id));
@@ -82,7 +85,7 @@ const LocationDashboard = () => {
 
 	useEffect(() => {
 		renderNewLocation();
-	}, [currentPage, locationList]);
+	}, [currentPage, locationList, isLoading]);
 
 	useEffect(() => {
 		dispatch(getLocationList());
@@ -98,6 +101,7 @@ const LocationDashboard = () => {
 	return (
 		<StyledContainer>
 			<AdminForm<ILocation>
+				formType={formType}
 				title={modalTitle}
 				isModalOpen={isModalOpen}
 				setIsModalOpen={setIsModalOpen}

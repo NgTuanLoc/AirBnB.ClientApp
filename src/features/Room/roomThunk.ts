@@ -93,6 +93,8 @@ const createNewRoom = createAsyncThunk<string, IRoom, { state: RootState }>(
 				data: newRoom,
 			};
 			await axiosInstance.request(params);
+
+			thunkAPI.dispatch(getAllRoom());
 			return 'success';
 		} catch (error) {
 			return thunkAPI.rejectWithValue('create room failed');
@@ -232,7 +234,7 @@ const deleteRoomById = createAsyncThunk<
 			method: 'DELETE',
 			url: `${URL}/${roomId}`,
 			headers: {
-				token,
+				token: token,
 			},
 		};
 

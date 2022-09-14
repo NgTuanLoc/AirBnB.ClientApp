@@ -44,11 +44,14 @@ const locationSlice = createSlice({
 		});
 		builder.addCase(getAllRoom.fulfilled, (state, { payload }) => {
 			state.isLoading = false;
+			state.successMsg = 'get all room Success';
 			state.roomList = payload;
 		});
 		builder.addCase(getAllRoom.rejected, (state, { payload }) => {
 			state.isLoading = false;
-			state.error = payload as string;
+			if (payload) {
+				state.error = payload as string;
+			}
 		});
 
 		// Get Room By Location Id
@@ -117,7 +120,7 @@ const locationSlice = createSlice({
 			state.error = payload as string;
 		});
 
-		// Delete Room
+		// Delete Room By Id
 		builder.addCase(deleteRoomById.pending, (state) => {
 			state.isLoading = true;
 		});
@@ -127,7 +130,9 @@ const locationSlice = createSlice({
 		});
 		builder.addCase(deleteRoomById.rejected, (state, { payload }) => {
 			state.isLoading = false;
-			state.error = payload as string;
+			if (payload) {
+				state.error = payload as string;
+			}
 		});
 	},
 });

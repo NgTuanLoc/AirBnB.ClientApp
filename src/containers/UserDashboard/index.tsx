@@ -7,9 +7,11 @@ import {
 	getUserById,
 	deleteUserById,
 	updateUserById,
+	createUser,
 } from '../../features/User/userThunk';
 import { Loading, Button } from '../../components';
 import { AdminForm } from '../../components';
+import { type FormType } from '../../components/AdminForm';
 import { IUser } from '../../@types/User';
 import { transformDate } from '../../utils';
 import {
@@ -30,19 +32,20 @@ import {
 	StyledNextButton,
 	StyledPageButton,
 } from './style';
+import { USER_DATA } from '../../constant';
 
 const USER_PER_PAGE = 10;
 
 const UserDashboard = () => {
+	const [formType, setFormType] = useState<FormType>('INFO');
 	const [displayUser, setDisplayUser] = useState<IUser[]>([]);
 	const { userList, selectedUser, isLoading } = useAppSelector(
 		(store) => store.user
 	);
 	const [modalTitle, setModalTitle] = useState('User Info');
 	const [isModalOpen, setIsModalOpen] = useState(false);
-
+	const [maxPage, setMaxPage] = useState(2);
 	const dispatch = useAppDispatch();
-	const maxPage = Math.floor(userList.length / USER_PER_PAGE) - 1;
 	const { currentPage, setCurrentPage, nextPage, prevPage, pageArray } =
 		usePagination(maxPage);
 
@@ -66,13 +69,23 @@ const UserDashboard = () => {
 	const showUser = (id: string) => {
 		return () => {
 			setModalTitle('User Info');
+			setFormType('INFO');
 			setIsModalOpen(true);
 			dispatch(getUserById(id));
 		};
 	};
 
+	const createNewUser = () => {
+		return () => {
+			setModalTitle('Create User');
+			setFormType('CREATE');
+			setIsModalOpen(true);
+		};
+	};
+
 	const updateUser = (id: string) => {
 		return () => {
+			setFormType('UPDATE');
 			setModalTitle('Update User');
 			setIsModalOpen(true);
 			dispatch(getUserById(id));
@@ -81,7 +94,8 @@ const UserDashboard = () => {
 
 	useEffect(() => {
 		renderNewUser();
-	}, [currentPage, userList]);
+		setMaxPage(Math.floor(userList.length / USER_PER_PAGE));
+	}, [currentPage, userList, maxPage]);
 
 	useEffect(() => {
 		dispatch(getAllUsers());
@@ -97,15 +111,19 @@ const UserDashboard = () => {
 	return (
 		<StyledContainer>
 			<AdminForm<IUser>
+				formType={formType}
 				title={modalTitle}
 				isModalOpen={isModalOpen}
 				setIsModalOpen={setIsModalOpen}
 				isLoading={isLoading}
 				data={selectedUser}
-				disableInput={modalTitle === 'Update User' ? false : true}
-				dispatchFunction={updateUserById}
+				disableInput={formType === 'INFO' ? true : false}
+				dispatchFunction={formType === 'UPDATE' ? updateUserById : createUser}
+				dummyData={USER_DATA}
 			/>
-			<Button fullWidth={false}>Add New</Button>
+			<Button onClickHandler={createNewUser()} fullWidth={false}>
+				Add New
+			</Button>
 			<StyledSearchContainer>
 				<StyledSearch />
 				<StyledSearchButton>Search</StyledSearchButton>

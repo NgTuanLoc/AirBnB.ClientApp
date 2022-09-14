@@ -8,10 +8,12 @@ import {
 	deleteRoomById,
 	updateRoomById,
 	getAllRoom,
+	createNewRoom,
 } from '../../features/Room/roomThunk';
 
 import { Loading, Button, Image } from '../../components';
 import { AdminForm } from '../../components';
+import { type FormType } from '../../components/AdminForm';
 import { IRoom } from '../../@types/Room';
 import {
 	StyledContainer,
@@ -33,19 +35,20 @@ import {
 	StyledTickIcon,
 	StyledStopIcon,
 } from './style';
+import { ROOM_DATA } from '../../constant';
 
 const ROOM_PER_PAGE = 10;
 
 const RoomDashboard = () => {
+	const [formType, setFormType] = useState<FormType>('INFO');
 	const [displayRoom, setDisplayRoom] = useState<IRoom[]>([]);
 	const { roomList, selectedRoom, isLoading } = useAppSelector(
 		(store) => store.room
 	);
 	const [modalTitle, setModalTitle] = useState('Room Info');
 	const [isModalOpen, setIsModalOpen] = useState(false);
-
+	const [maxPage, setMaxPage] = useState(2);
 	const dispatch = useAppDispatch();
-	const maxPage = Math.floor(roomList.length / ROOM_PER_PAGE) - 1;
 	const { currentPage, setCurrentPage, nextPage, prevPage, pageArray } =
 		usePagination(maxPage);
 
@@ -54,7 +57,6 @@ const RoomDashboard = () => {
 			{ length: ROOM_PER_PAGE },
 			(_, i) => roomList[currentPage * ROOM_PER_PAGE + i]
 		);
-
 		tempArray = tempArray.filter((item) => item !== undefined);
 		setDisplayRoom(tempArray);
 	};
@@ -68,14 +70,24 @@ const RoomDashboard = () => {
 
 	const showRoom = (id: string) => {
 		return () => {
+			setFormType('INFO');
 			setModalTitle('Room Info');
 			setIsModalOpen(true);
 			dispatch(getRoomDetailByID(id));
 		};
 	};
 
+	const createRoom = () => {
+		return () => {
+			setModalTitle('Create Room');
+			setFormType('CREATE');
+			setIsModalOpen(true);
+		};
+	};
+
 	const updateRoom = (id: string) => {
 		return () => {
+			setFormType('UPDATE');
 			setModalTitle('Update Room');
 			setIsModalOpen(true);
 			dispatch(getRoomDetailByID(id));
@@ -84,7 +96,8 @@ const RoomDashboard = () => {
 
 	useEffect(() => {
 		renderNewRoom();
-	}, [currentPage, roomList]);
+		setMaxPage(Math.floor(roomList.length / ROOM_PER_PAGE));
+	}, [currentPage, roomList, maxPage]);
 
 	useEffect(() => {
 		dispatch(getAllRoom());
@@ -100,15 +113,21 @@ const RoomDashboard = () => {
 	return (
 		<StyledContainer>
 			<AdminForm<IRoom>
+				formType={formType}
 				title={modalTitle}
 				isModalOpen={isModalOpen}
 				setIsModalOpen={setIsModalOpen}
 				isLoading={isLoading}
 				data={selectedRoom}
-				disableInput={modalTitle === 'Update Room' ? false : true}
-				dispatchFunction={updateRoomById}
+				disableInput={formType === 'INFO' ? true : false}
+				dispatchFunction={
+					formType === 'UPDATE' ? updateRoomById : createNewRoom
+				}
+				dummyData={ROOM_DATA}
 			/>
-			<Button fullWidth={false}>Add New</Button>
+			<Button onClickHandler={createRoom()} fullWidth={false}>
+				Add New
+			</Button>
 			<StyledSearchContainer>
 				<StyledSearch />
 				<StyledSearchButton>Search</StyledSearchButton>
@@ -145,7 +164,6 @@ const RoomDashboard = () => {
 								guests,
 								bedRoom,
 								bath,
-								price,
 								elevator,
 								hotTub,
 								pool,
@@ -157,6 +175,7 @@ const RoomDashboard = () => {
 								heating,
 								cableTV,
 								image,
+								price,
 							} = item;
 							return (
 								<StyledRow key={_id}>

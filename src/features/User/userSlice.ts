@@ -43,7 +43,7 @@ const userSlice = createSlice({
 			state.userList = payload;
 		});
 		builder.addCase(getAllUsers.rejected, (state, { payload }) => {
-			state.isLoading = true;
+			state.isLoading = false;
 			if (payload) {
 				state.error = payload as string;
 			}
@@ -105,7 +105,7 @@ const userSlice = createSlice({
 			state.successMsg = payload;
 		});
 		builder.addCase(deleteUserById.rejected, (state, { payload }) => {
-			state.isLoading = true;
+			state.isLoading = false;
 			if (payload) {
 				state.error = payload as string;
 			}

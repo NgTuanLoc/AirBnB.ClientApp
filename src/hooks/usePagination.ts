@@ -5,15 +5,15 @@ export const usePagination = (
 	itemPerPage: number = 10,
 	numberOfPageButton: number = 7
 ) => {
-	const [currentPage, setCurrentPage] = useState<number>(1);
+	const [currentPage, setCurrentPage] = useState<number>(0);
 	const FIRST_PAGE = 0;
 	const [pageArray, setPageArray] = useState([
 		FIRST_PAGE,
+		1,
 		2,
 		3,
 		4,
 		5,
-		6,
 		maxPage,
 	]);
 
@@ -59,7 +59,13 @@ export const usePagination = (
 		});
 		setPageArray(tempPageArray);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [currentPage]);
+	}, [currentPage, maxPage]);
 
-	return { currentPage, setCurrentPage, nextPage, prevPage, pageArray };
+	return {
+		currentPage,
+		setCurrentPage,
+		nextPage,
+		prevPage,
+		pageArray,
+	};
 };

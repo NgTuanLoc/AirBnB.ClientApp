@@ -4,9 +4,11 @@ import { useForm } from 'react-hook-form';
 
 import { useOnClickOutside, useAppDispatch } from '../../hooks';
 import { Loading, Button } from '..';
-import { formType } from '../../constant/FormType';
+import { inputType } from '../../constant/InputType';
 
+export type FormType = 'INFO' | 'UPDATE' | 'CREATE';
 export interface IModal<T> {
+	formType: FormType;
 	title: string;
 	isModalOpen: boolean;
 	setIsModalOpen: any;
@@ -14,15 +16,18 @@ export interface IModal<T> {
 	disableInput?: boolean;
 	data: T | null;
 	dispatchFunction?: any;
+	dummyData?: any;
 }
 
 const AdminForm = <T extends { [key: string]: any }>({
+	formType,
 	title,
 	isModalOpen,
 	setIsModalOpen,
 	dispatchFunction,
 	disableInput,
 	data,
+	dummyData,
 }: IModal<T>) => {
 	const dispatch = useAppDispatch();
 	const ref = useRef(null);
@@ -35,8 +40,51 @@ const AdminForm = <T extends { [key: string]: any }>({
 
 	const onSubmitHandler = (data: any) => {
 		setIsModalOpen(false);
+
 		dispatch(dispatchFunction(data));
 	};
+
+	if (formType === 'CREATE') {
+		const objectKeys = Object.keys(dummyData);
+
+		return (
+			<Container isModalOpen={isModalOpen}>
+				<Card ref={ref} onSubmit={handleSubmit(onSubmitHandler)}>
+					<Title>{title}</Title>
+					<CardBody>
+						{objectKeys.map((key, id) => {
+							let info = dummyData[key] ? dummyData[key] : 'Not Provided';
+
+							if (info?.length === 0) info = 'null';
+							let inputTypeValue = inputType[key] ? inputType[key] : 'text';
+
+							if (key === 'birthday') {
+								info = new Date(dummyData[key]).toISOString().substring(0, 10);
+							}
+
+							return (
+								<CardItem key={id}>
+									<CardItemHeader htmlFor={key}>{key}</CardItemHeader>
+									<CardItemInfo
+										disabled={disableInput}
+										type={inputTypeValue}
+										defaultValue={inputTypeValue === 'checkbox' ? false : info}
+										placeholder={key}
+										marginBottom={inputTypeValue === 'checkbox'}
+										{...register(key)}
+									/>
+								</CardItem>
+							);
+						})}
+					</CardBody>
+
+					<Button fullWidth bgColor='#198754'>
+						Create
+					</Button>
+				</Card>
+			</Container>
+		);
+	}
 
 	if (!data)
 		return (
@@ -55,14 +103,14 @@ const AdminForm = <T extends { [key: string]: any }>({
 					{objectKeys.map((key, id) => {
 						let info = data[key] ? data[key] : 'Not Provided';
 						if (info?.length === 0) info = 'null';
-						let inputType = formType[key] ? formType[key] : 'text';
+						let inputTypeValue = inputType[key] ? inputType[key] : 'text';
 
 						if (key === 'birthday') {
 							info = new Date(data[key]).toISOString().substring(0, 10);
 						}
 
-						if (key === 'gender') {
-							inputType = 'checkbox';
+						if (typeof info === 'boolean') {
+							inputTypeValue = 'checkbox';
 						}
 
 						return (
@@ -70,9 +118,10 @@ const AdminForm = <T extends { [key: string]: any }>({
 								<CardItemHeader htmlFor={key}>{key}</CardItemHeader>
 								<CardItemInfo
 									disabled={disableInput}
-									type={inputType}
+									type={inputTypeValue}
 									defaultValue={info}
 									placeholder={key}
+									marginBottom={true}
 									{...register(key, {
 										required: {
 											value: true,
@@ -84,7 +133,7 @@ const AdminForm = <T extends { [key: string]: any }>({
 						);
 					})}
 				</CardBody>
-				{title === 'Update User' && (
+				{formType === 'UPDATE' && (
 					<Button fullWidth bgColor='#ffc107'>
 						Update
 					</Button>
@@ -138,6 +187,7 @@ const CardItem = styled.div`
 	justify-content: flex-start;
 	align-items: flex-start;
 	flex-direction: column;
+	border-bottom: 2px solid black;
 `;
 
 const CardItemHeader = styled.label`
@@ -145,12 +195,13 @@ const CardItemHeader = styled.label`
 	text-transform: capitalize;
 `;
 
-const CardItemInfo = styled.input`
+const CardItemInfo = styled.input<{ marginBottom: boolean }>`
 	width: 100%;
 	font-size: 2rem;
 	border: none;
 	padding-bottom: 1rem;
-	border-bottom: 2px solid black;
+	/* border-bottom: 2px solid black; */
+	margin-bottom: ${(props) => (props.marginBottom ? '1rem' : '0')};
 	outline: none;
 	cursor: pointer;
 `;

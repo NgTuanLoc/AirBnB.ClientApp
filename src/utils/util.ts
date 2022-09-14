@@ -23,4 +23,8 @@ const transformDate = (date: Date) => {
 	return moment(date).format('Do MMMM YYYY');
 };
 
-export { transformLanguage, transformDate };
+const checkNullValue = (value?: string | number) => {
+	return value ? value : 'Not Provides';
+};
+
+export { transformLanguage, transformDate, checkNullValue };
