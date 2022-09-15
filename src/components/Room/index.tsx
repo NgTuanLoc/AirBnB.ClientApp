@@ -1,8 +1,13 @@
 import Skeleton from 'react-loading-skeleton';
+// import { Swiper, SwiperSlide } from 'swiper/react';
+// import { Pagination } from 'swiper';
+// import 'swiper/css';
+// import 'swiper/css/pagination';
 
+import { DUMMY_IMAGE_DATA } from '../../constant';
 import { IRoom } from '../../@types/Room';
 import { useAppSelector } from '../../hooks';
-import Image from '../Image';
+import { Image, Catalog } from '..';
 import {
 	StyledContainer,
 	StyledParagraph,
@@ -14,11 +19,12 @@ import {
 
 const Room = ({ _id, name, image, locationId, price }: IRoom) => {
 	const { isLoading } = useAppSelector((store) => store.room);
+	const images = [image, ...DUMMY_IMAGE_DATA];
 
 	return (
 		<StyledContainer to={`/room/${_id}`}>
 			<StyledImageContainer>
-				{isLoading ? <Skeleton /> : <Image url={image} alt={name} />}
+				{isLoading ? <Skeleton /> : <Catalog images={images} />}
 			</StyledImageContainer>
 			<StyledDivWrapper>
 				{isLoading ? <Skeleton /> : <StyledHeading>{name}</StyledHeading>}

@@ -27,7 +27,7 @@ const CustomImage = ({ url, alt, gridArea, borderRadius }: IImage) => {
 					height={`100%`}
 					baseColor='#d9d7d9'
 					highlightColor='#f5f5f5'
-					borderRadius='0.5rem'
+					borderRadius={borderRadius}
 					duration={2}
 				/>
 			)}

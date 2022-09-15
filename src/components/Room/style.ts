@@ -7,15 +7,25 @@ const StyledContainer = styled(Link)`
 	border-radius: var(--radius);
 	cursor: pointer;
 	color: black;
+	height: 20rem;
 
 	:hover {
 		background-color: rgba(0, 0, 0, 0.1);
 	}
+
+	@media only screen and (max-width: 992px) {
+		height: 40rem;
+		width: 100%;
+		margin-inline: auto;
+	}
 `;
 
 const StyledImageContainer = styled.div`
-	height: 20rem;
-	margin-bottom: 1rem;
+	margin-bottom: 0.5rem;
+
+	@media only screen and (max-width: 992px) {
+		height: 30rem;
+	}
 `;
 
 const StyledDivWrapper = styled.div``;

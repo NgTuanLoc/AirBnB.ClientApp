@@ -93,11 +93,11 @@ const Card = ({
 				<StyledDivWrapper justifyContent='flex-start'>
 					<StyledPriceHeading>
 						${pricePerNight.toLocaleString()} VND
-						<StyledSpan> night</StyledSpan>
+						<StyledSpan>/night</StyledSpan>
 					</StyledPriceHeading>
 					<StyledPriceHeading style={{ marginRight: 'auto', marginTop: '5px' }}>
-						{moment(bookDate.checkIn).format('ddd D')} -{' '}
-						{moment(bookDate.checkOut).format('ddd D')}
+						{moment(bookDate.checkIn).format('MMM D')}-
+						{moment(bookDate.checkOut).format('MMM D')}
 					</StyledPriceHeading>
 				</StyledDivWrapper>
 				<StyledDivWrapper>

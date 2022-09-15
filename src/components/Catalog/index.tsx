@@ -8,15 +8,18 @@ import 'swiper/css/pagination';
 // import required modules
 import { Pagination } from 'swiper';
 import { StyledContainer } from './style';
+import { Image } from '../';
 
 interface ICatalog {
 	images: string[];
+	borderRadius?: string;
 }
 
-const Catalog = ({ images }: ICatalog) => {
+const Catalog = ({ images, borderRadius }: ICatalog) => {
 	return (
 		<StyledContainer>
 			<Swiper
+				style={{ height: '100%' }}
 				spaceBetween={30}
 				pagination={{
 					clickable: true,
@@ -24,7 +27,11 @@ const Catalog = ({ images }: ICatalog) => {
 				modules={[Pagination]}>
 				{images.map((image, id) => (
 					<SwiperSlide key={id}>
-						<img src={image} alt={`house ${id}`} />
+						<Image
+							borderRadius={borderRadius}
+							url={image}
+							alt={`house ${id}`}
+						/>
 					</SwiperSlide>
 				))}
 			</Swiper>

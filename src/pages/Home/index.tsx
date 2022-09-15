@@ -14,7 +14,7 @@ const Home = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 	return (
-		<MainLayout>
+		<MainLayout padding='0 2rem'>
 			<Categories />
 			<RoomList />
 		</MainLayout>

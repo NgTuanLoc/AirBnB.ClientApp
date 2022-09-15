@@ -102,6 +102,7 @@ const StyledHeading = styled.h4`
 const StyledPriceHeading = styled.h3`
 	font-size: 1.5rem;
 	font-weight: 500;
+	letter-spacing: 0;
 `;
 
 const StyledSpan = styled.span`

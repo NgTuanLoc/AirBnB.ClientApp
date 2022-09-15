@@ -6,6 +6,10 @@ const StyledContainer = styled.section`
 	grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
 	grid-gap: 2rem;
 	padding-bottom: var(--footer-height);
+
+	@media only screen and (max-width: 992px) {
+		margin: 0;
+	}
 `;
 
 const StyledNotFoundContainer = styled.section`
