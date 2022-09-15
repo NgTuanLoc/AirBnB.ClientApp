@@ -15,7 +15,11 @@ const CustomImage = ({ url, alt, gridArea, borderRadius }: IImage) => {
 	const isImageLoaded = useProgressiveImg(url);
 
 	if (!url) {
-		return <img alt={alt} src={DEFAULT_IMAGE} />;
+		return (
+			<StyledContainer gridArea={gridArea}>
+				<StyledImage alt={alt} src={DEFAULT_IMAGE} />;
+			</StyledContainer>
+		);
 	}
 
 	return (
@@ -24,9 +28,7 @@ const CustomImage = ({ url, alt, gridArea, borderRadius }: IImage) => {
 				<StyledImage src={url} alt={alt} borderRadius={borderRadius} />
 			) : (
 				<Skeleton
-					height={`100%`}
-					baseColor='#d9d7d9'
-					highlightColor='#f5f5f5'
+					style={{ lineHeight: 2 }}
 					borderRadius={borderRadius}
 					duration={2}
 				/>

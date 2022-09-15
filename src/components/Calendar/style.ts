@@ -5,7 +5,7 @@ const StyledContainer = styled.div`
 	align-items: flex-start;
 
 	.react-calendar {
-		margin: 2rem auto;
+		margin: 0rem auto;
 		width: 350px;
 		max-width: 100%;
 		background: white;

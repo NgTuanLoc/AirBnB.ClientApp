@@ -7,6 +7,7 @@ const StyledContainer = styled.footer`
 	padding: 2rem 8rem;
 
 	@media only screen and (max-width: 992px) {
+		margin-bottom: 6rem;
 		padding-inline: 1rem;
 	}
 `;

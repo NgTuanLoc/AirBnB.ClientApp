@@ -2,13 +2,13 @@ import styled from 'styled-components';
 
 const StyledContainer = styled.article`
 	position: sticky;
-	top: calc(var(--navbar-height) + 10rem);
+	top: calc(var(--navbar-height) + 5rem);
 	width: 80%;
 	height: 50rem;
 	margin-left: auto;
 	border-radius: var(--radius);
 	box-shadow: var(--box-shadow);
-	padding: 3rem 1.5rem;
+	padding: 2rem 1.5rem;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -78,6 +78,7 @@ const StyledCardDetailItem = styled.div`
 
 const StyledCardTotal = styled.div`
 	display: flex;
+	gap: 1rem;
 	align-items: center;
 	justify-content: space-between;
 `;

@@ -23,7 +23,9 @@ const SingleRoomPage = () => {
 	if (isLoading) return <Loading />;
 
 	return (
-		<MainLayout hideNavbar={isMobileDevice} margin='0'>
+		<MainLayout
+			hideNavbar={isMobileDevice}
+			margin={isMobileDevice ? '0' : '10rem'}>
 			<SingleRoomCatalog />
 			<SingleRoomDetails />
 		</MainLayout>

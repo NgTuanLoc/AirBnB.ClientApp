@@ -22,6 +22,7 @@ const App = () => {
 				height={`100%`}
 				baseColor='#d9d7d9'
 				highlightColor='#f5f5f5'
+				borderRadius='var(--radius)'
 				duration={2}>
 				<Router>
 					<Routes>
