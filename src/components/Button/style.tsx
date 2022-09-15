@@ -10,8 +10,8 @@ const StyledContainer = styled.button<Props>`
 	position: relative;
 	color: white;
 	font-size: 2rem;
-	border-radius: var(--radius);
-	padding: 1rem;
+	border-radius: 7px;
+	padding: 1.5rem;
 	background: ${(props) =>
 		props.bgColor ? props.bgColor : 'var(--clr-gradient)'};
 	transition: var(--transition);

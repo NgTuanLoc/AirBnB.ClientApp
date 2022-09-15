@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-const StyledContainer = styled.div``;
+const StyledContainer = styled.div`
+	padding-inline: 1rem;
+`;
 
 const StyledDivWrapper = styled.div`
 	flex: 1;

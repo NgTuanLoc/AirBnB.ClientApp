@@ -6,9 +6,10 @@ import { StyledContainer } from './style';
 import { SingleRoomInfo, Card } from '..';
 
 const SingleRoomDetails = () => {
+	const currentDay = new Date();
 	const [bookDate, setBookDate] = useState({
-		checkIn: new Date(),
-		checkOut: new Date(),
+		checkIn: currentDay,
+		checkOut: new Date(currentDay.getTime() + 86400000),
 	});
 	const { selectedRoom } = useAppSelector((store) => store.room);
 	const [numberOfVisitNights, setNumberOfVisitNights] = useState(0);

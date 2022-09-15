@@ -5,7 +5,7 @@ interface StyledContainerProps {
 	padding?: string;
 }
 
-const StyledContainer = styled.section<StyledContainerProps>`
+const StyledContainer = styled.main<StyledContainerProps>`
 	margin-top: ${(props) => (props.margin ? props.margin : '8rem')};
 	/* Ignore Navbar */
 	padding: ${(props) => (props.padding ? props.padding : '2rem 10rem 0')};

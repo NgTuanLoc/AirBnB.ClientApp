@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const StyledContainer = styled.article`
 	position: sticky;
-	top: calc(var(--navbar-height) + 8rem);
+	top: calc(var(--navbar-height) + 10rem);
 	width: 80%;
 	height: 50rem;
 	margin-left: auto;
@@ -13,8 +13,26 @@ const StyledContainer = styled.article`
 	flex-direction: column;
 	justify-content: center;
 
+	@media only screen and (max-width: 1200px) {
+		margin-inline: auto;
+	}
+
 	@media only screen and (max-width: 992px) {
-		display: none;
+		position: fixed;
+		width: 100%;
+		border-radius: 0;
+		z-index: 10000;
+		bottom: 0;
+		top: auto;
+		left: 0;
+		height: 7rem;
+		background-color: white;
+		box-shadow: var(--box-shadow);
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		padding: 1.5rem;
 	}
 `;
 
@@ -63,10 +81,15 @@ const StyledCardTotal = styled.div`
 	align-items: center;
 	justify-content: space-between;
 `;
+const StyledDivWrapper = styled.div<{ justifyContent?: string }>`
+	display: flex;
+	flex-direction: column;
+	justify-content: ${(props) =>
+		props.justifyContent ? props.justifyContent : 'center'};
+	align-items: center;
+`;
 
 // Typography
-const StyledDivWrapper = styled.div``;
-
 const StyledLabel = styled.label`
 	margin-bottom: 0.5rem;
 	font-weight: bold;
@@ -77,6 +100,7 @@ const StyledHeading = styled.h4`
 `;
 
 const StyledPriceHeading = styled.h3`
+	font-size: 1.5rem;
 	font-weight: 500;
 `;
 

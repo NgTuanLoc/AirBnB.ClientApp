@@ -1,20 +1,27 @@
 import { useMediaQuery } from 'react-responsive';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { FiShare } from 'react-icons/fi';
+import { IoIosArrowBack } from 'react-icons/io';
+import { IoShareOutline } from 'react-icons/io5';
 
 import { DUMMY_IMAGE_DATA } from '../../constant';
 import { useAppSelector } from '../../hooks';
-import { Catalog, Loading } from '../../components';
+import { Catalog, Line, Loading } from '../../components';
 import {
+	StyledNavbar,
 	StyledLocationTitle,
 	StyledContainer,
 	StyledLinkContainer,
+	StyledTitleContainer,
 	StyledHeading,
 	StyledSubTitle,
 	StyledSubTitleLink,
 	StyledSubTitleLinkSpan,
 	StyledPhotoContainer,
 	StyledImage,
+	StyledButton,
+	StyledBackHomeButton,
+	StyledDivWrapper,
 } from './style';
 
 const SingleRoomCatalog = () => {
@@ -29,26 +36,48 @@ const SingleRoomCatalog = () => {
 
 	return (
 		<StyledContainer>
-			<StyledLocationTitle className='location-name'>
-				{name}, {locationId ? locationId.name : 'not provided'},{' '}
-				{locationId ? locationId.province : 'not provided'}
-			</StyledLocationTitle>
-			<StyledLinkContainer>
-				<StyledHeading>
-					{locationId ? locationId.province : 'not provided'}
-				</StyledHeading>
-				<StyledSubTitle>
-					<StyledSubTitleLink href='https://github.com/NgTuanLoc'>
-						<FiShare /> <StyledSubTitleLinkSpan>share</StyledSubTitleLinkSpan>
-					</StyledSubTitleLink>
-					<StyledSubTitleLink
-						className='flex-center'
-						href='https://github.com/NgTuanLoc'>
-						<AiOutlineHeart />{' '}
-						<StyledSubTitleLinkSpan>save</StyledSubTitleLinkSpan>
-					</StyledSubTitleLink>
-				</StyledSubTitle>
-			</StyledLinkContainer>
+			{isMobileDevice && (
+				<StyledNavbar>
+					<StyledBackHomeButton to='/'>
+						<IoIosArrowBack />
+						Homes
+					</StyledBackHomeButton>
+					<StyledDivWrapper>
+						<StyledButton>
+							<IoShareOutline />
+						</StyledButton>
+						<StyledButton>
+							<AiOutlineHeart />
+						</StyledButton>
+					</StyledDivWrapper>
+				</StyledNavbar>
+			)}
+			{!isMobileDevice && (
+				<StyledTitleContainer>
+					<StyledLocationTitle>
+						{name}, {locationId ? locationId.name : 'not provided'},{' '}
+						{locationId ? locationId.province : 'not provided'}
+					</StyledLocationTitle>
+					<StyledLinkContainer>
+						<StyledHeading>
+							{locationId ? locationId.province : 'not provided'}
+						</StyledHeading>
+						<StyledSubTitle>
+							<StyledSubTitleLink href='https://github.com/NgTuanLoc'>
+								<FiShare />{' '}
+								<StyledSubTitleLinkSpan>share</StyledSubTitleLinkSpan>
+							</StyledSubTitleLink>
+							<StyledSubTitleLink
+								className='flex-center'
+								href='https://github.com/NgTuanLoc'>
+								<AiOutlineHeart />{' '}
+								<StyledSubTitleLinkSpan>save</StyledSubTitleLinkSpan>
+							</StyledSubTitleLink>
+						</StyledSubTitle>
+					</StyledLinkContainer>
+				</StyledTitleContainer>
+			)}
+
 			{isMobileDevice ? (
 				<Catalog images={[...DUMMY_IMAGE_DATA, image]} />
 			) : (
@@ -75,6 +104,32 @@ const SingleRoomCatalog = () => {
 						alt={name}
 					/>
 				</StyledPhotoContainer>
+			)}
+			{isMobileDevice && (
+				<StyledTitleContainer>
+					<StyledLocationTitle>
+						{name}, {locationId ? locationId.name : 'not provided'},{' '}
+						{locationId ? locationId.province : 'not provided'}
+					</StyledLocationTitle>
+					<StyledLinkContainer>
+						<StyledHeading>
+							{locationId ? locationId.province : 'not provided'}
+						</StyledHeading>
+						<StyledSubTitle>
+							<StyledSubTitleLink href='https://github.com/NgTuanLoc'>
+								<FiShare />{' '}
+								<StyledSubTitleLinkSpan>share</StyledSubTitleLinkSpan>
+							</StyledSubTitleLink>
+							<StyledSubTitleLink
+								className='flex-center'
+								href='https://github.com/NgTuanLoc'>
+								<AiOutlineHeart />{' '}
+								<StyledSubTitleLinkSpan>save</StyledSubTitleLinkSpan>
+							</StyledSubTitleLink>
+						</StyledSubTitle>
+					</StyledLinkContainer>
+					<Line />
+				</StyledTitleContainer>
 			)}
 		</StyledContainer>
 	);

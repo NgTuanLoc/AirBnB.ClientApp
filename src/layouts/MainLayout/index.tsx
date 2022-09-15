@@ -10,6 +10,7 @@ interface IMainLayout {
 	margin?: string;
 	padding?: string;
 	hideSearchBar?: boolean;
+	hideNavbar?: boolean;
 }
 
 const MainLayout = ({
@@ -17,10 +18,11 @@ const MainLayout = ({
 	margin,
 	padding,
 	hideSearchBar,
+	hideNavbar,
 }: IMainLayout) => {
 	return (
 		<StyledContainer>
-			<Navbar hideSearch={hideSearchBar} />
+			{!hideNavbar && <Navbar hideSearch={hideSearchBar} />}
 			<Content margin={margin} padding={padding}>
 				{children}
 			</Content>

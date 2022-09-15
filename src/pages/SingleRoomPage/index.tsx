@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getRoomDetailByID } from '../../features/Room/roomThunk';
-import { Loading, Line } from '../../components';
+import { Loading } from '../../components';
 import { SingleRoomCatalog, SingleRoomDetails } from '../../containers';
 import { MainLayout } from '../../layouts';
 
@@ -19,10 +19,9 @@ const SingleRoomPage = () => {
 	if (isLoading) return <Loading />;
 
 	return (
-		<MainLayout>
+		<MainLayout hideNavbar margin='0'>
 			<SingleRoomCatalog />
 			<SingleRoomDetails />
-			<Line />
 		</MainLayout>
 	);
 };
