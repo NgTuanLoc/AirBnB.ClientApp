@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getRoomListByLocationID } from '../../features/Room/roomThunk';
-import { Room } from '../../components';
+import { Room, Loading } from '../../components';
 import {
 	StyledContainer,
 	StyledNotFoundContainer,
@@ -11,12 +11,22 @@ import {
 } from './style';
 
 const RoomList = () => {
-	const { locationID, roomList } = useAppSelector((store) => store.room);
+	const { isLoading, locationID, roomList } = useAppSelector(
+		(store) => store.room
+	);
 	const dispatch = useAppDispatch();
 
 	useEffect(() => {
 		dispatch(getRoomListByLocationID());
 	}, [locationID]);
+
+	if (isLoading) {
+		return (
+			<StyledNotFoundContainer>
+				<Loading />
+			</StyledNotFoundContainer>
+		);
+	}
 
 	if (roomList.length === 0) {
 		return (

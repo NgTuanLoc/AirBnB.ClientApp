@@ -20,6 +20,11 @@ const StyledForm = styled.form`
 	align-items: center;
 	width: 80%;
 	max-width: 50rem;
+	margin: 1rem;
+
+	@media only screen and (max-width: 992px) {
+		margin-top: 25rem;
+	}
 `;
 
 interface StyledInputContainerProps {
@@ -78,6 +83,7 @@ const StyledTitle = styled.h2`
 	background-clip: text;
 	-webkit-text-fill-color: transparent;
 	height: 4rem;
+	padding-bottom: 1rem;
 `;
 
 const StyledParagraph = styled.p`

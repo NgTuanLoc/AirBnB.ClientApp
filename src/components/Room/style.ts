@@ -7,7 +7,6 @@ const StyledContainer = styled(Link)`
 	border-radius: var(--radius);
 	cursor: pointer;
 	color: black;
-	height: 20rem;
 
 	:hover {
 		background-color: rgba(0, 0, 0, 0.1);

@@ -18,6 +18,7 @@ const StyledContainer = styled.header`
 		padding: 1rem;
 		display: grid;
 		height: auto;
+		row-gap: 0.5rem;
 		grid-template-areas:
 			'logo nav'
 			'search search';

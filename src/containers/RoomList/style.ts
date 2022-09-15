@@ -8,15 +8,16 @@ const StyledContainer = styled.section`
 	padding-bottom: var(--footer-height);
 
 	@media only screen and (max-width: 992px) {
-		margin: 0;
+		margin: 1rem 0;
 	}
 `;
 
 const StyledNotFoundContainer = styled.section`
+	position: relative;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	min-height: 30vh;
+	height: 30vh;
 `;
 
 const StyledHeading = styled.h1`

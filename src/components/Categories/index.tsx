@@ -25,7 +25,7 @@ const Categories = () => {
 	return (
 		<StyledContainer
 			spaceBetween={isMobileDevice ? 5 : 10}
-			slidesPerView={isMobileDevice ? 4 : 8}
+			slidesPerView={isMobileDevice ? 3 : 8}
 			navigation={true}
 			modules={[Navigation]}>
 			{locationList.map((location) => {

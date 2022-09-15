@@ -1,13 +1,9 @@
 import Skeleton from 'react-loading-skeleton';
-// import { Swiper, SwiperSlide } from 'swiper/react';
-// import { Pagination } from 'swiper';
-// import 'swiper/css';
-// import 'swiper/css/pagination';
 
 import { DUMMY_IMAGE_DATA } from '../../constant';
 import { IRoom } from '../../@types/Room';
 import { useAppSelector } from '../../hooks';
-import { Image, Catalog } from '..';
+import { Catalog } from '..';
 import {
 	StyledContainer,
 	StyledParagraph,

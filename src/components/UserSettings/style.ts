@@ -19,7 +19,6 @@ const StyledButton = styled.a<{ bold?: boolean }>`
 	color: black;
 	font-size: 2rem;
 	font-weight: 300;
-	width: 100%;
 	padding: 0.5rem 1rem;
 	transition: var(--transition);
 	text-align: left;

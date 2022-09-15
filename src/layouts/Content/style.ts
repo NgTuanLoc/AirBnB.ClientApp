@@ -11,7 +11,7 @@ const StyledContainer = styled.main<StyledContainerProps>`
 	padding: ${(props) => (props.padding ? props.padding : '2rem 10rem 0')};
 
 	@media only screen and (max-width: 992px) {
-		margin-top: ${(props) => (props.margin ? props.margin : '12.5rem')};
+		margin-top: ${(props) => (props.margin ? props.margin : '14rem')};
 		padding: ${(props) => (props.padding ? props.padding : '0')};
 	}
 `;

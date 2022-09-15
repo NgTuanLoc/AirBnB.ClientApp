@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const StyledContainer = styled.div`
 	display: flex;
-	justify-content: space-around;
+	justify-content: flex-end;
 	align-items: center;
 	position: relative;
 
@@ -12,6 +12,17 @@ const StyledContainer = styled.div`
 		h5 {
 			display: none;
 		}
+	}
+`;
+
+const StyledLinkContainer = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
+
+	@media only screen and (max-width: 992px) {
+		display: none;
 	}
 `;
 
@@ -53,4 +64,9 @@ const StyledLoginButton = styled.button`
 	}
 `;
 
-export { StyledContainer, StyledButton, StyledLoginButton };
+export {
+	StyledContainer,
+	StyledLinkContainer,
+	StyledButton,
+	StyledLoginButton,
+};

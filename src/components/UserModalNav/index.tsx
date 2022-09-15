@@ -2,7 +2,12 @@ import { useRef, useState } from 'react';
 import { AiOutlineGlobal, AiOutlineMenu, AiOutlineUser } from 'react-icons/ai';
 
 import { useOnClickOutside } from '../../hooks';
-import { StyledContainer, StyledButton, StyledLoginButton } from './style';
+import {
+	StyledContainer,
+	StyledLinkContainer,
+	StyledButton,
+	StyledLoginButton,
+} from './style';
 import { UserSettings } from '../';
 
 const UserModalNav = () => {
@@ -12,10 +17,12 @@ const UserModalNav = () => {
 
 	return (
 		<StyledContainer ref={ref}>
-			<StyledButton>Become A Host</StyledButton>
-			<StyledButton>
-				<AiOutlineGlobal />
-			</StyledButton>
+			<StyledLinkContainer>
+				<StyledButton>Become A Host</StyledButton>
+				<StyledButton>
+					<AiOutlineGlobal />
+				</StyledButton>
+			</StyledLinkContainer>
 
 			<StyledLoginButton
 				className={`${

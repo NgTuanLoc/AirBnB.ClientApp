@@ -9,7 +9,6 @@ const StyledContainer = styled.div`
 	grid-template-columns: 1fr 1fr;
 
 	@media only screen and (max-width: 992px) {
-		height: auto;
 		display: flex;
 		flex-direction: column;
 	}

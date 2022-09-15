@@ -27,6 +27,12 @@ const StyledImageContainer = styled.div`
 
 const StyledHeading = styled.h5`
 	margin-top: 1rem;
+
+	@media only screen and (max-width: 992px) {
+		margin-top: 0.1rem;
+		font-size: 1.4rem;
+		font-size: 500;
+	}
 `;
 
 export {
