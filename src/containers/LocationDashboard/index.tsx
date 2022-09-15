@@ -123,6 +123,7 @@ const LocationDashboard = () => {
 
 			return transformedName.includes(searchValue);
 		});
+		setCurrentPage(0);
 		setData(temp);
 	};
 

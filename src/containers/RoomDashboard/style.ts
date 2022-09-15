@@ -43,7 +43,8 @@ const StyledSearchContainer = styled.div`
 `;
 
 const StyledSearch = styled.input`
-	font-size: 2rem;
+	font-size: 2.5rem;
+	padding-left: 1rem;
 `;
 
 const StyledTableContainer = styled.div`

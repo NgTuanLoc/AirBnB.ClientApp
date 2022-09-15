@@ -39,7 +39,6 @@ export const usePagination = (
 	useEffect(() => {
 		if (maxPage < numberOfPageButton - 1) {
 			setPageArray(Array.from({ length: maxPage + 1 }, (_, i) => i));
-			setCurrentPage(FIRST_PAGE);
 		} else {
 			const tempPageArray = [FIRST_PAGE, 1, 2, 3, 4, 5, maxPage].map(
 				(page, index) => {

@@ -125,12 +125,17 @@ const RoomDashboard = () => {
 
 			return transformedName.includes(searchValue);
 		});
+		setCurrentPage(0);
 		setData(temp);
 	};
 
 	const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
 		setSearchValue(e.target.value);
 	};
+
+	useEffect(() => {
+		setData(roomList);
+	}, []);
 
 	useEffect(() => {
 		renderNewRoom();

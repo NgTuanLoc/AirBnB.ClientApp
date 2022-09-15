@@ -80,8 +80,8 @@ const UserDashboard = () => {
 
 	const showUser = (id: string) => {
 		return () => {
-			setModalTitle('User Info');
 			setFormType('INFO');
+			setModalTitle('User Info');
 			setIsModalOpen(true);
 			dispatch(getUserById(id));
 		};
@@ -121,6 +121,7 @@ const UserDashboard = () => {
 
 			return transformedName.includes(searchValue);
 		});
+		setCurrentPage(0);
 		setData(temp);
 	};
 
@@ -129,7 +130,12 @@ const UserDashboard = () => {
 	};
 
 	useEffect(() => {
+		setData(userList);
+	}, []);
+
+	useEffect(() => {
 		renderNewUser();
+
 		setMaxPage(Math.floor(data.length / USER_PER_PAGE));
 	}, [currentPage, userList, data, maxPage]);
 
