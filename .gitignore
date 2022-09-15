@@ -24,6 +24,5 @@ yarn-error.log*
 
 .env
 text.txt
-dummyData.ts
 .vscode
 
