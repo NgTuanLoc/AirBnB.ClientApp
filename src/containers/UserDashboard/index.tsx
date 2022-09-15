@@ -131,7 +131,6 @@ const UserDashboard = () => {
 	useEffect(() => {
 		renderNewUser();
 		setMaxPage(Math.floor(data.length / USER_PER_PAGE));
-		console.log(maxPage);
 	}, [currentPage, userList, data, maxPage]);
 
 	useEffect(() => {

@@ -67,7 +67,6 @@ export const usePagination = (
 					return tempPage;
 				}
 			);
-			console.log(pageArray);
 
 			setPageArray(tempPageArray);
 		}
