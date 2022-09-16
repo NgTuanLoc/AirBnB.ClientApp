@@ -35,7 +35,6 @@ const AdminForm = <T extends { [key: string]: any }>({
 	dispatchUploadImageFunction,
 	disableInput,
 	data,
-	isLoading,
 	dummyData,
 	imageName,
 }: IModal<T>) => {
@@ -67,6 +66,7 @@ const AdminForm = <T extends { [key: string]: any }>({
 			const imageData = { id: data._id, image: formData };
 			dispatch(dispatchUploadImageFunction(imageData));
 		}
+
 		setFormData(null);
 	};
 
@@ -77,7 +77,13 @@ const AdminForm = <T extends { [key: string]: any }>({
 			</StyledContainer>
 		);
 
-	const objectKeys = Object.keys(data);
+	const objectKeys = Object.keys(data).filter((key) => {
+		if (key === 'deleteAt') return false;
+		if (key === '__v') return false;
+		if (key === 'image') return false;
+
+		return true;
+	});
 
 	return (
 		<StyledContainer isModalOpen={isModalOpen}>
@@ -103,6 +109,13 @@ const AdminForm = <T extends { [key: string]: any }>({
 							/>
 						);
 					})}
+					<AdminFormInput
+						disableInput={disableInput}
+						id='uploadImage'
+						inputName='uploadImage'
+						inputType='file'
+						onChangeHandler={onUploadImageHandler}
+					/>
 				</StyledFormBody>
 				{formType === 'UPDATE' && (
 					<Button fullWidth bgColor='#ffc107'>

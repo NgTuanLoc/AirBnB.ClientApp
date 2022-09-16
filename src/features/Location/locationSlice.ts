@@ -7,6 +7,7 @@ import {
 	createLocation,
 	updateLocationById,
 	deleteLocationById,
+	uploadLocationImageById,
 } from './locationThunk';
 
 export interface ILocationState {
@@ -90,6 +91,21 @@ const locationSlice = createSlice({
 		builder.addCase(deleteLocationById.rejected, (state, { payload }) => {
 			state.isLoading = false;
 			state.error = payload as string;
+		});
+
+		// Upload Room Image By Id
+		builder.addCase(uploadLocationImageById.pending, (state) => {
+			state.isLoading = true;
+		});
+		builder.addCase(uploadLocationImageById.fulfilled, (state, { payload }) => {
+			state.isLoading = false;
+			state.successMsg = payload;
+		});
+		builder.addCase(uploadLocationImageById.rejected, (state, { payload }) => {
+			state.isLoading = false;
+			if (payload) {
+				state.error = payload as string;
+			}
 		});
 	},
 });

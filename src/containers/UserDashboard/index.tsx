@@ -9,9 +9,10 @@ import {
 	deleteUserById,
 	updateUserById,
 	createUser,
+	uploadUserAvatarById,
 } from '../../features/User/userThunk';
 import { searchUser } from '../../features/User/userSlice';
-import { Loading, Button } from '../../components';
+import { Loading, Button, Image } from '../../components';
 import { AdminForm } from '../../components';
 import { type FormType } from '../../components/AdminForm';
 import { IUser } from '../../@types/User';
@@ -150,7 +151,9 @@ const UserDashboard = () => {
 				data={selectedUser}
 				disableInput={formType === 'INFO' ? true : false}
 				dispatchFunction={formType === 'UPDATE' ? updateUserById : createUser}
+				dispatchUploadImageFunction={uploadUserAvatarById}
 				dummyData={USER_DATA}
+				imageName='avatar'
 			/>
 			<StyledHeadButtonContainer>
 				<Button onClickHandler={createNewUser()} fullWidth={false}>
@@ -180,6 +183,7 @@ const UserDashboard = () => {
 							<StyledTitle>Gender</StyledTitle>
 							<StyledTitle>Address</StyledTitle>
 							<StyledTitle>Type</StyledTitle>
+							<StyledTitle>Image</StyledTitle>
 							<StyledTitle>Actions</StyledTitle>
 						</StyledRow>
 					</StyledTableHead>
@@ -194,6 +198,7 @@ const UserDashboard = () => {
 								gender,
 								address,
 								type,
+								avatar,
 							} = item;
 							return (
 								<StyledRow key={_id}>
@@ -205,6 +210,9 @@ const UserDashboard = () => {
 									<StyledItem>{gender ? 'Male' : 'Female'}</StyledItem>
 									<StyledItem>{address}</StyledItem>
 									<StyledItem>{type}</StyledItem>
+									<StyledItem>
+										<Image url={avatar as string} alt={name} />
+									</StyledItem>
 									<StyledItem>
 										<StyledButtonContainer>
 											<Button onClickHandler={showUser(_id)} bgColor='#28a745'>

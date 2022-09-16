@@ -12,6 +12,7 @@ import {
 	createNewRoom,
 	uploadRoomImageById,
 } from '../../features/Room/roomThunk';
+import { searchRoom } from '../../features/Room/roomSlice';
 
 import { Loading, Button, Image } from '../../components';
 import { AdminForm } from '../../components';
@@ -40,14 +41,13 @@ import {
 	StyledRefreshButton,
 } from './style';
 import { ROOM_DATA } from '../../constant';
-import { transformLanguage } from '../../utils';
 
 const ROOM_PER_PAGE = 10;
 
 const RoomDashboard = () => {
 	const [formType, setFormType] = useState<FormType>('INFO');
 	const [displayRoom, setDisplayRoom] = useState<IRoom[]>([]);
-	const { roomList, selectedRoom, isLoading } = useAppSelector(
+	const { roomList, selectedRoom, searchedRoom, isLoading } = useAppSelector(
 		(store) => store.room
 	);
 	const [modalTitle, setModalTitle] = useState('Room Info');
@@ -65,12 +65,11 @@ const RoomDashboard = () => {
 	} = usePagination(roomList.length);
 	const [rotateRefreshButton, setRotateRefreshButton] = useState(false);
 	const [searchValue, setSearchValue] = useState('');
-	const [data, setData] = useState<IRoom[]>(roomList);
 
 	const renderNewRoom = () => {
 		let tempArray = Array.from(
 			{ length: ROOM_PER_PAGE },
-			(_, i) => data[currentPage * ROOM_PER_PAGE + i]
+			(_, i) => searchedRoom[currentPage * ROOM_PER_PAGE + i]
 		);
 		tempArray = tempArray.filter((item) => item !== undefined);
 		setDisplayRoom(tempArray);
@@ -112,7 +111,6 @@ const RoomDashboard = () => {
 	const onRefreshHandler = () => {
 		setRotateRefreshButton(true);
 		dispatch(getAllRoom());
-		setData(roomList);
 		renderNewRoom();
 		setTimeout(() => {
 			setRotateRefreshButton(false);
@@ -120,14 +118,8 @@ const RoomDashboard = () => {
 	};
 
 	const onSearchHandler = () => {
-		const temp = roomList.filter((item) => {
-			if (!item.name) return false;
-			const transformedName = transformLanguage(item.name);
-
-			return transformedName.includes(searchValue);
-		});
+		dispatch(searchRoom(searchValue));
 		setCurrentPage(0);
-		setData(temp);
 	};
 
 	const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -136,9 +128,8 @@ const RoomDashboard = () => {
 
 	useEffect(() => {
 		renderNewRoom();
-		setData(roomList);
-		setMaxPage(Math.floor(data.length / ROOM_PER_PAGE));
-	}, [currentPage, roomList, data, maxPage]);
+		setMaxPage(Math.floor(searchedRoom.length / ROOM_PER_PAGE));
+	}, [currentPage, roomList, searchedRoom, maxPage]);
 
 	useEffect(() => {
 		dispatch(getAllRoom());

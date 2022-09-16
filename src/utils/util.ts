@@ -34,7 +34,7 @@ const mapOriginValueToFormInput = (key: string, originValue: string) => {
 		value = new Date(originValue).toISOString().substring(0, 10);
 		inputType = 'date';
 	} else if (typeof originValue === 'number') {
-		value = 0;
+		value = originValue ? originValue : 0;
 		inputType = 'number';
 	} else if (typeof originValue === 'string') {
 		value = originValue ? originValue : 'Not Provided';

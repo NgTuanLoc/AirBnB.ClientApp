@@ -10,6 +10,7 @@ import {
 	updateLocationById,
 	deleteLocationById,
 	createLocation,
+	uploadLocationImageById,
 } from '../../features/Location/locationThunk';
 import { Loading, Button, Image } from '../../components';
 import { type FormType } from '../../components/AdminForm';
@@ -161,7 +162,9 @@ const LocationDashboard = () => {
 				dispatchFunction={
 					formType === 'UPDATE' ? updateLocationById : createLocation
 				}
+				dispatchUploadImageFunction={uploadLocationImageById}
 				dummyData={LOCATION_DATA}
+				imageName='location'
 			/>
 			<StyledHeadButtonContainer>
 				<Button onClickHandler={createNewLocation()} fullWidth={false}>

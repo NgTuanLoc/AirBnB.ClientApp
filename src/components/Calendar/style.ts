@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 const StyledContainer = styled.div`
+	margin-top: 2rem;
 	display: flex;
 	align-items: flex-start;
 

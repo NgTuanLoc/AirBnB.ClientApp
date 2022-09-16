@@ -214,6 +214,44 @@ const updateUserById = createAsyncThunk<IUser, IUser, { state: RootState }>(
 	}
 );
 
+const uploadUserAvatarById = createAsyncThunk<
+	string,
+	{ id: string; image: FormData },
+	{
+		state: RootState;
+	}
+>('user/uploadUserAvatarById', async (user, thunkAPI) => {
+	try {
+		const { auth } = thunkAPI.getState().auth;
+		const { id, image } = user;
+
+		if (!auth) return thunkAPI.rejectWithValue(UNAUTHENTICATED);
+
+		const {
+			user: { type: userType },
+			token,
+		} = auth;
+
+		if (userType !== 'ADMIN') return thunkAPI.rejectWithValue(UNAUTHORIZED);
+
+		const params = {
+			method: 'POST',
+			url: `${URL}/upload-avatar/${id}`,
+			headers: {
+				token: token,
+				'Content-Type': 'multipart/form-data',
+			},
+			data: image,
+		};
+
+		await axiosInstance.request(params);
+
+		return 'Upload User Avatar Successful';
+	} catch (error) {
+		return thunkAPI.rejectWithValue('Upload User Avatar failed');
+	}
+});
+
 export {
 	getAllUsers,
 	getAllUsersPagination,
@@ -221,4 +259,5 @@ export {
 	createUser,
 	deleteUserById,
 	updateUserById,
+	uploadUserAvatarById,
 };

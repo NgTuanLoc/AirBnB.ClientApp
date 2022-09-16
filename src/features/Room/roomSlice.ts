@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { IRoom } from '../../@types/Room';
+import { transformLanguage } from '../../utils';
 import {
 	getAllRoom,
 	getRoomListByLocationID,
@@ -18,6 +19,7 @@ export interface IRoomState {
 	locationID: string;
 	isLoading: boolean;
 	successMsg: string;
+	searchedRoom: IRoom[];
 	error: string;
 }
 
@@ -28,6 +30,7 @@ const initialState: IRoomState = {
 	successMsg: '',
 	error: '',
 	selectedRoom: null,
+	searchedRoom: [],
 };
 
 const locationSlice = createSlice({
@@ -36,6 +39,15 @@ const locationSlice = createSlice({
 	reducers: {
 		selectLocation: (state: IRoomState, action: PayloadAction<string>) => {
 			state.locationID = action.payload;
+		},
+		searchRoom: (state: IRoomState, action: PayloadAction<string>) => {
+			const temp = state.roomList.filter((room) => {
+				if (!room.name) return false;
+				const tempRoomName = transformLanguage(room.name);
+				return tempRoomName.includes(action.payload);
+			});
+
+			state.searchedRoom = temp;
 		},
 	},
 	extraReducers(builder) {
@@ -47,6 +59,7 @@ const locationSlice = createSlice({
 			state.isLoading = false;
 			state.successMsg = 'get all room Success';
 			state.roomList = payload;
+			state.searchedRoom = payload;
 		});
 		builder.addCase(getAllRoom.rejected, (state, { payload }) => {
 			state.isLoading = false;
@@ -153,6 +166,6 @@ const locationSlice = createSlice({
 	},
 });
 
-export const { selectLocation } = locationSlice.actions;
+export const { selectLocation, searchRoom } = locationSlice.actions;
 
 export default locationSlice.reducer;

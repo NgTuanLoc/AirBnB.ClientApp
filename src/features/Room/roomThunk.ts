@@ -280,7 +280,7 @@ const uploadRoomImageById = createAsyncThunk<
 
 		return 'Upload Room Image Successful';
 	} catch (error) {
-		return thunkAPI.rejectWithValue('Delete Room failed');
+		return thunkAPI.rejectWithValue('Upload Room Image failed');
 	}
 });
 

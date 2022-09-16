@@ -9,6 +9,7 @@ interface IAdminFormInput {
 	marginBottom?: boolean;
 	isChecked?: boolean;
 	register?: any;
+	onChangeHandler?: any;
 }
 
 const AdminFormInput = ({
@@ -20,7 +21,22 @@ const AdminFormInput = ({
 	marginBottom,
 	isChecked,
 	register,
+	onChangeHandler,
 }: IAdminFormInput) => {
+	if (inputType === 'checkbox')
+		return (
+			<StyledContainer>
+				<StyledLabel htmlFor={inputName}>{inputName}</StyledLabel>
+				<StyledInput
+					defaultChecked={isChecked}
+					type={inputType}
+					placeholder={inputName}
+					marginBottom={marginBottom}
+					{...register}
+				/>
+			</StyledContainer>
+		);
+
 	return (
 		<StyledContainer key={id}>
 			<StyledLabel htmlFor={inputName}>{inputName}</StyledLabel>
@@ -28,9 +44,8 @@ const AdminFormInput = ({
 				type={inputType}
 				disabled={disableInput}
 				defaultValue={defaultValue}
-				marginBottom={marginBottom}
 				placeholder={inputName}
-				checked={isChecked}
+				onChange={onChangeHandler}
 				{...register}
 			/>
 		</StyledContainer>
