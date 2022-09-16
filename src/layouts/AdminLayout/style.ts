@@ -22,7 +22,8 @@ const StyledSidebar = styled.aside`
 `;
 
 const StyledButton = styled.button<{ active?: boolean }>`
-	padding: 2rem 0;
+	text-align: left;
+	padding: 2rem 2rem;
 	font-size: 3rem;
 	width: 100%;
 	cursor: pointer;

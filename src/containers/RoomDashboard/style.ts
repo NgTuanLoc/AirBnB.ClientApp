@@ -78,9 +78,8 @@ const StyledItem = styled.td`
 	font-size: 2rem;
 	padding: 0.5rem;
 	overflow: hidden;
-	white-space: nowrap;
-
 	text-align: center;
+	white-space: nowrap;
 `;
 
 const StyledRow = styled.tr``;

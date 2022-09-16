@@ -10,6 +10,7 @@ import {
 	updateRoomById,
 	getAllRoom,
 	createNewRoom,
+	uploadRoomImageById,
 } from '../../features/Room/roomThunk';
 
 import { Loading, Button, Image } from '../../components';
@@ -134,11 +135,8 @@ const RoomDashboard = () => {
 	};
 
 	useEffect(() => {
-		setData(roomList);
-	}, []);
-
-	useEffect(() => {
 		renderNewRoom();
+		setData(roomList);
 		setMaxPage(Math.floor(data.length / ROOM_PER_PAGE));
 	}, [currentPage, roomList, data, maxPage]);
 
@@ -159,7 +157,9 @@ const RoomDashboard = () => {
 				dispatchFunction={
 					formType === 'UPDATE' ? updateRoomById : createNewRoom
 				}
+				dispatchUploadImageFunction={uploadRoomImageById}
 				dummyData={ROOM_DATA}
+				imageName='room'
 			/>
 			<StyledHeadButtonContainer>
 				<Button onClickHandler={createRoom()} fullWidth={false}>
@@ -200,6 +200,7 @@ const RoomDashboard = () => {
 								<StyledTitle>Wifi</StyledTitle>
 								<StyledTitle>Heating</StyledTitle>
 								<StyledTitle>CableTv</StyledTitle>
+								{/* <StyledTitle>Description</StyledTitle> */}
 								<StyledTitle>Image</StyledTitle>
 								<StyledTitle>Price</StyledTitle>
 								<StyledTitle>Actions</StyledTitle>
@@ -223,6 +224,7 @@ const RoomDashboard = () => {
 									wifi,
 									heating,
 									cableTV,
+									// description,
 									image,
 									price,
 								} = item;
@@ -269,6 +271,9 @@ const RoomDashboard = () => {
 										<StyledItem>
 											{cableTV ? <StyledTickIcon /> : <StyledStopIcon />}
 										</StyledItem>
+										{/* <StyledItem>
+											{description ? description : 'Empty'}
+										</StyledItem> */}
 										<StyledItem>
 											<Image url={image} alt={name} />
 										</StyledItem>

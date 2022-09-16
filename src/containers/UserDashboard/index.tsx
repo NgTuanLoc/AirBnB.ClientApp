@@ -130,12 +130,8 @@ const UserDashboard = () => {
 	};
 
 	useEffect(() => {
-		setData(userList);
-	}, []);
-
-	useEffect(() => {
 		renderNewUser();
-
+		setData(userList);
 		setMaxPage(Math.floor(data.length / USER_PER_PAGE));
 	}, [currentPage, userList, data, maxPage]);
 

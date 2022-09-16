@@ -246,7 +246,43 @@ const deleteRoomById = createAsyncThunk<
 	}
 });
 
-const uploadRoomImageById = () => {};
+const uploadRoomImageById = createAsyncThunk<
+	string,
+	{ id: string; image: FormData },
+	{
+		state: RootState;
+	}
+>('room/uploadRoomImageById', async (room, thunkAPI) => {
+	try {
+		const { auth } = thunkAPI.getState().auth;
+		const { id, image } = room;
+
+		if (!auth) return thunkAPI.rejectWithValue(UNAUTHENTICATED);
+
+		const {
+			user: { type: userType },
+			token,
+		} = auth;
+
+		if (userType !== 'ADMIN') return thunkAPI.rejectWithValue(UNAUTHORIZED);
+
+		const params = {
+			method: 'POST',
+			url: `${URL}/upload-image/${id}`,
+			headers: {
+				token: token,
+				'Content-Type': 'multipart/form-data',
+			},
+			data: image,
+		};
+
+		await axiosInstance.request(params);
+
+		return 'Upload Room Image Successful';
+	} catch (error) {
+		return thunkAPI.rejectWithValue('Delete Room failed');
+	}
+});
 
 export {
 	getAllRoom,

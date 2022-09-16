@@ -9,6 +9,7 @@ import {
 	bookRoomById,
 	updateRoomById,
 	deleteRoomById,
+	uploadRoomImageById,
 } from './roomThunk';
 
 export interface IRoomState {
@@ -129,6 +130,21 @@ const locationSlice = createSlice({
 			state.successMsg = payload;
 		});
 		builder.addCase(deleteRoomById.rejected, (state, { payload }) => {
+			state.isLoading = false;
+			if (payload) {
+				state.error = payload as string;
+			}
+		});
+
+		// Upload Room Image By Id
+		builder.addCase(uploadRoomImageById.pending, (state) => {
+			state.isLoading = true;
+		});
+		builder.addCase(uploadRoomImageById.fulfilled, (state, { payload }) => {
+			state.isLoading = false;
+			state.successMsg = payload;
+		});
+		builder.addCase(uploadRoomImageById.rejected, (state, { payload }) => {
 			state.isLoading = false;
 			if (payload) {
 				state.error = payload as string;

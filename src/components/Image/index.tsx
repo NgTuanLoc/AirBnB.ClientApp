@@ -17,7 +17,7 @@ const CustomImage = ({ url, alt, gridArea, borderRadius }: IImage) => {
 	if (!url) {
 		return (
 			<StyledContainer gridArea={gridArea}>
-				<StyledImage alt={alt} src={DEFAULT_IMAGE} />;
+				<StyledImage alt={alt} src={DEFAULT_IMAGE} />
 			</StyledContainer>
 		);
 	}

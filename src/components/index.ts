@@ -14,6 +14,7 @@ import Error from './Error';
 import Line from './Line';
 import UserModalNav from './UserModalNav';
 import AdminForm from './AdminForm';
+import AdminFormInput from './AdminFormInput';
 
 export {
 	Loading,
@@ -32,4 +33,5 @@ export {
 	Error,
 	UserModalNav,
 	AdminForm,
+	AdminFormInput,
 };

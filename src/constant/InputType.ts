@@ -20,7 +20,6 @@ export const inputType: any = {
 	wifi: 'checkbox',
 	heating: 'checkbox',
 	cableTV: 'checkbox',
-	image: 'name',
 	price: 'number',
 
 	// LOCATION

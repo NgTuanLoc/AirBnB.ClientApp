@@ -1,4 +1,13 @@
 import { axiosInstance } from './axios';
-import { transformDate, transformLanguage, checkNullValue } from './util';
+import {
+	transformDate,
+	transformLanguage,
+	mapOriginValueToFormInput,
+} from './util';
 
-export { axiosInstance, transformDate, transformLanguage, checkNullValue };
+export {
+	axiosInstance,
+	transformDate,
+	transformLanguage,
+	mapOriginValueToFormInput,
+};

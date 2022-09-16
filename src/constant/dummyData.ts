@@ -24,7 +24,6 @@ const ROOM_DATA = {
 	wifi: false,
 	heating: false,
 	cableTV: false,
-	image: '',
 	price: 0,
 };
 
@@ -33,7 +32,6 @@ const LOCATION_DATA = {
 	province: '',
 	country: '',
 	valueate: 0,
-	image: '',
 };
 
 export { USER_DATA, ROOM_DATA, LOCATION_DATA };
