@@ -14,4 +14,6 @@ const StyledContainer = styled.div<Props>`
 	}
 `;
 
-export { StyledContainer };
+const StyledHeading = styled.h5``;
+
+export { StyledContainer, StyledHeading };

@@ -13,6 +13,23 @@ const StyledContentContainer = styled.div`
 	}
 `;
 
+const StyledImageContainer = styled.div`
+	margin-bottom: 3rem;
+`;
+
+const StyledErrorContainer = styled.div`
+	margin-top: 8rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding-inline: 10rem;
+
+	@media only screen and (max-width: 992px) {
+		padding-inline: 1rem;
+	}
+`;
+
 const StyledSidebar = styled.aside`
 	z-index: 2;
 	background-color: white;
@@ -33,10 +50,17 @@ const StyledButton = styled.button<{ active?: boolean }>`
 
 const StyledMainContainer = styled.div``;
 
+const StyledHeading = styled.h4`
+	margin-bottom: 3rem;
+`;
+
 export {
 	StyledContainer,
 	StyledContentContainer,
+	StyledImageContainer,
+	StyledErrorContainer,
 	StyledSidebar,
 	StyledButton,
 	StyledMainContainer,
+	StyledHeading,
 };

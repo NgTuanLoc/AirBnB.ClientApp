@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { ReactNode, useEffect, useState } from 'react';
 
-import { StyledContainer } from './style';
+import { StyledContainer, StyledHeading } from './style';
 
 interface IError {
 	children: ReactNode;
@@ -22,7 +22,7 @@ const Error = ({ children }: IError) => {
 
 	return (
 		<StyledContainer removeError={removeError}>
-			<h5>{children}</h5>
+			<StyledHeading>{children}</StyledHeading>
 		</StyledContainer>
 	);
 };

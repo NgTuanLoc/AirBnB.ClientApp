@@ -19,7 +19,7 @@ interface INotFound {
 
 const NotFound = ({ error }: INotFound) => {
 	return (
-		<MainLayout padding='0 10rem'>
+		<MainLayout>
 			<StyledContainer>
 				<StyledInfoContainer>
 					<StyledLargerHeading>Oops!</StyledLargerHeading>

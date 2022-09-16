@@ -4,18 +4,10 @@ import styled from 'styled-components';
 const StyledContainer = styled.div`
 	display: grid;
 	grid-template-columns: 1fr 1fr;
+	padding: 5rem 0;
 
 	@media only screen and (max-width: 992px) {
-		.not-found {
-			grid-template-columns: 1fr;
-		}
-
-		.not-found {
-			padding: 2rem;
-		}
-		.not-found__image {
-			display: none;
-		}
+		grid-template-columns: 1fr;
 	}
 `;
 
@@ -30,6 +22,10 @@ const StyledImageContainer = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
+	@media only screen and (max-width: 992px) {
+		display: none;
+	}
 `;
 
 const StyledLinkContainer = styled.div`
