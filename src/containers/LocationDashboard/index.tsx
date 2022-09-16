@@ -140,6 +140,14 @@ const LocationDashboard = () => {
 		dispatch(getLocationList());
 	}, [selectedLocation]);
 
+	if (isLoading) {
+		return (
+			<StyledContainer>
+				<Loading />
+			</StyledContainer>
+		);
+	}
+
 	return (
 		<StyledContainer>
 			<AdminForm<ILocation>
@@ -172,65 +180,59 @@ const LocationDashboard = () => {
 				</StyledSearchButton>
 			</StyledSearchContainer>
 			<StyledTableContainer>
-				{isLoading ? (
-					<Loading />
-				) : (
-					<StyledTable>
-						<StyledTableHead>
-							<StyledRow>
-								<StyledTitle>Id</StyledTitle>
-								<StyledTitle>Name</StyledTitle>
-								<StyledTitle>Province</StyledTitle>
-								<StyledTitle>Country</StyledTitle>
-								<StyledTitle>Valuate</StyledTitle>
-								<StyledTitle>Image</StyledTitle>
-								<StyledTitle>Actions</StyledTitle>
-							</StyledRow>
-						</StyledTableHead>
-						<StyledTableBody>
-							{displayLocation.map((item) => {
-								const { _id, name, province, country, valueate, image } = item;
-								return (
-									<StyledRow key={_id}>
-										<StyledItem>{_id}</StyledItem>
-										<StyledItem>{name ? name : 'Not provided'}</StyledItem>
-										<StyledItem>
-											{province ? province : 'Not provided'}
-										</StyledItem>
-										<StyledItem>
-											{country ? country : 'Not provided'}
-										</StyledItem>
-										<StyledItem>{valueate ? valueate : 0}</StyledItem>
+				<StyledTable>
+					<StyledTableHead>
+						<StyledRow>
+							<StyledTitle>Id</StyledTitle>
+							<StyledTitle>Name</StyledTitle>
+							<StyledTitle>Province</StyledTitle>
+							<StyledTitle>Country</StyledTitle>
+							<StyledTitle>Valuate</StyledTitle>
+							<StyledTitle>Image</StyledTitle>
+							<StyledTitle>Actions</StyledTitle>
+						</StyledRow>
+					</StyledTableHead>
+					<StyledTableBody>
+						{displayLocation.map((item) => {
+							const { _id, name, province, country, valueate, image } = item;
+							return (
+								<StyledRow key={_id}>
+									<StyledItem>{_id}</StyledItem>
+									<StyledItem>{name ? name : 'Not provided'}</StyledItem>
+									<StyledItem>
+										{province ? province : 'Not provided'}
+									</StyledItem>
+									<StyledItem>{country ? country : 'Not provided'}</StyledItem>
+									<StyledItem>{valueate ? valueate : 0}</StyledItem>
 
-										<StyledItem>
-											<Image url={image} alt={name} />
-										</StyledItem>
+									<StyledItem>
+										<Image url={image} alt={name} />
+									</StyledItem>
 
-										<StyledItem>
-											<StyledButtonContainer>
-												<Button
-													onClickHandler={showLocation(_id)}
-													bgColor='#28a745'>
-													Info
-												</Button>
-												<Button
-													onClickHandler={updateLocation(_id)}
-													bgColor='#ffc107'>
-													Update
-												</Button>
-												<Button
-													onClickHandler={deleteLocation(_id)}
-													bgColor='#dc3545'>
-													Delete
-												</Button>
-											</StyledButtonContainer>
-										</StyledItem>
-									</StyledRow>
-								);
-							})}
-						</StyledTableBody>
-					</StyledTable>
-				)}
+									<StyledItem>
+										<StyledButtonContainer>
+											<Button
+												onClickHandler={showLocation(_id)}
+												bgColor='#28a745'>
+												Info
+											</Button>
+											<Button
+												onClickHandler={updateLocation(_id)}
+												bgColor='#ffc107'>
+												Update
+											</Button>
+											<Button
+												onClickHandler={deleteLocation(_id)}
+												bgColor='#dc3545'>
+												Delete
+											</Button>
+										</StyledButtonContainer>
+									</StyledItem>
+								</StyledRow>
+							);
+						})}
+					</StyledTableBody>
+				</StyledTable>
 			</StyledTableContainer>
 
 			{maxPage !== 0 && (

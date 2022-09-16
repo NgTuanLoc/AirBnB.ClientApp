@@ -10,11 +10,12 @@ import {
 	updateUserById,
 	createUser,
 } from '../../features/User/userThunk';
+import { searchUser } from '../../features/User/userSlice';
 import { Loading, Button } from '../../components';
 import { AdminForm } from '../../components';
 import { type FormType } from '../../components/AdminForm';
 import { IUser } from '../../@types/User';
-import { transformDate, transformLanguage } from '../../utils';
+import { transformDate } from '../../utils';
 import {
 	StyledContainer,
 	StyledSearchButton,
@@ -42,7 +43,7 @@ const USER_PER_PAGE = 10;
 const UserDashboard = () => {
 	const [formType, setFormType] = useState<FormType>('INFO');
 	const [displayUser, setDisplayUser] = useState<IUser[]>([]);
-	const { userList, selectedUser, isLoading } = useAppSelector(
+	const { userList, searchedUser, selectedUser, isLoading } = useAppSelector(
 		(store) => store.user
 	);
 	const [modalTitle, setModalTitle] = useState('User Info');
@@ -59,12 +60,11 @@ const UserDashboard = () => {
 	} = usePagination(userList.length);
 	const [rotateRefreshButton, setRotateRefreshButton] = useState(false);
 	const [searchValue, setSearchValue] = useState('');
-	const [data, setData] = useState<IUser[]>(userList);
 
 	const renderNewUser = () => {
 		let tempArray = Array.from(
 			{ length: USER_PER_PAGE },
-			(_, i) => data[currentPage * USER_PER_PAGE + i]
+			(_, i) => searchedUser[currentPage * USER_PER_PAGE + i]
 		);
 
 		tempArray = tempArray.filter((item) => item !== undefined);
@@ -107,7 +107,6 @@ const UserDashboard = () => {
 	const onRefreshHandler = () => {
 		setRotateRefreshButton(true);
 		dispatch(getAllUsers());
-		setData(userList);
 		renderNewUser();
 		setTimeout(() => {
 			setRotateRefreshButton(false);
@@ -115,14 +114,8 @@ const UserDashboard = () => {
 	};
 
 	const onSearchHandler = () => {
-		const temp = userList.filter((item) => {
-			if (!item.name) return false;
-			const transformedName = transformLanguage(item.name);
-
-			return transformedName.includes(searchValue);
-		});
 		setCurrentPage(0);
-		setData(temp);
+		dispatch(searchUser(searchValue));
 	};
 
 	const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -131,13 +124,20 @@ const UserDashboard = () => {
 
 	useEffect(() => {
 		renderNewUser();
-		setData(userList);
-		setMaxPage(Math.floor(data.length / USER_PER_PAGE));
-	}, [currentPage, userList, data, maxPage]);
+		setMaxPage(Math.floor(searchedUser.length / USER_PER_PAGE));
+	}, [currentPage, userList, searchedUser, maxPage]);
 
 	useEffect(() => {
 		dispatch(getAllUsers());
-	}, [selectedUser]);
+	}, []);
+
+	if (isLoading) {
+		return (
+			<StyledContainer>
+				<Loading />
+			</StyledContainer>
+		);
+	}
 
 	return (
 		<StyledContainer>
@@ -169,70 +169,64 @@ const UserDashboard = () => {
 				</StyledSearchButton>
 			</StyledSearchContainer>
 			<StyledTableContainer>
-				{isLoading ? (
-					<Loading />
-				) : (
-					<StyledTable>
-						<StyledTableHead>
-							<StyledRow>
-								<StyledTitle>Id</StyledTitle>
-								<StyledTitle>Name</StyledTitle>
-								<StyledTitle>Email</StyledTitle>
-								<StyledTitle>Phone</StyledTitle>
-								<StyledTitle>Birthday</StyledTitle>
-								<StyledTitle>Gender</StyledTitle>
-								<StyledTitle>Address</StyledTitle>
-								<StyledTitle>Type</StyledTitle>
-								<StyledTitle>Actions</StyledTitle>
-							</StyledRow>
-						</StyledTableHead>
-						<StyledTableBody>
-							{displayUser.map((item) => {
-								const {
-									_id,
-									name,
-									email,
-									phone,
-									birthday,
-									gender,
-									address,
-									type,
-								} = item;
-								return (
-									<StyledRow key={_id}>
-										<StyledItem>{_id}</StyledItem>
-										<StyledItem>{name}</StyledItem>
-										<StyledItem>{email}</StyledItem>
-										<StyledItem>{phone}</StyledItem>
-										<StyledItem>{transformDate(new Date(birthday))}</StyledItem>
-										<StyledItem>{gender ? 'Male' : 'Female'}</StyledItem>
-										<StyledItem>{address}</StyledItem>
-										<StyledItem>{type}</StyledItem>
-										<StyledItem>
-											<StyledButtonContainer>
-												<Button
-													onClickHandler={showUser(_id)}
-													bgColor='#28a745'>
-													Info
-												</Button>
-												<Button
-													onClickHandler={updateUser(_id)}
-													bgColor='#ffc107'>
-													Update
-												</Button>
-												<Button
-													onClickHandler={deleteUser(_id)}
-													bgColor='#dc3545'>
-													Delete
-												</Button>
-											</StyledButtonContainer>
-										</StyledItem>
-									</StyledRow>
-								);
-							})}
-						</StyledTableBody>
-					</StyledTable>
-				)}
+				<StyledTable>
+					<StyledTableHead>
+						<StyledRow>
+							<StyledTitle>Id</StyledTitle>
+							<StyledTitle>Name</StyledTitle>
+							<StyledTitle>Email</StyledTitle>
+							<StyledTitle>Phone</StyledTitle>
+							<StyledTitle>Birthday</StyledTitle>
+							<StyledTitle>Gender</StyledTitle>
+							<StyledTitle>Address</StyledTitle>
+							<StyledTitle>Type</StyledTitle>
+							<StyledTitle>Actions</StyledTitle>
+						</StyledRow>
+					</StyledTableHead>
+					<StyledTableBody>
+						{displayUser.map((item) => {
+							const {
+								_id,
+								name,
+								email,
+								phone,
+								birthday,
+								gender,
+								address,
+								type,
+							} = item;
+							return (
+								<StyledRow key={_id}>
+									<StyledItem>{_id}</StyledItem>
+									<StyledItem>{name}</StyledItem>
+									<StyledItem>{email}</StyledItem>
+									<StyledItem>{phone}</StyledItem>
+									<StyledItem>{transformDate(new Date(birthday))}</StyledItem>
+									<StyledItem>{gender ? 'Male' : 'Female'}</StyledItem>
+									<StyledItem>{address}</StyledItem>
+									<StyledItem>{type}</StyledItem>
+									<StyledItem>
+										<StyledButtonContainer>
+											<Button onClickHandler={showUser(_id)} bgColor='#28a745'>
+												Info
+											</Button>
+											<Button
+												onClickHandler={updateUser(_id)}
+												bgColor='#ffc107'>
+												Update
+											</Button>
+											<Button
+												onClickHandler={deleteUser(_id)}
+												bgColor='#dc3545'>
+												Delete
+											</Button>
+										</StyledButtonContainer>
+									</StyledItem>
+								</StyledRow>
+							);
+						})}
+					</StyledTableBody>
+				</StyledTable>
 			</StyledTableContainer>
 			{maxPage !== 0 && (
 				<StyledPaginateContainer>

@@ -37,12 +37,6 @@ const mapOriginValueToFormInput = (key: string, originValue: string) => {
 		value = 0;
 		inputType = 'number';
 	} else if (typeof originValue === 'string') {
-		console.log(
-			'🚀 ~ file: util.ts ~ line 37 ~ mapOriginValueToFormInput ~ originValue',
-			originValue
-		);
-		console.log(key);
-
 		value = originValue ? originValue : 'Not Provided';
 	}
 
@@ -50,22 +44,3 @@ const mapOriginValueToFormInput = (key: string, originValue: string) => {
 };
 
 export { transformLanguage, transformDate, mapOriginValueToFormInput };
-
-// let value;
-// 						let inputType = '';
-
-// 						if (typeof data[key] === 'boolean') {
-// 							value = data[key];
-// 							inputType = 'checkbox';
-// 						} else if (typeof data[key] === 'number') {
-// 							value = data[key] ? data[key] : 0;
-// 							inputType = 'number';
-// 						} else if (typeof data[key] === 'string') {
-// 							value = data[key] ? data[key] : 'Not Provided';
-// 							inputType = 'text';
-// 						}
-
-// 						if (key === 'birthday') {
-// 							value = new Date(data[key]).toISOString().substring(0, 10);
-// 							inputType = 'date';
-// 						}

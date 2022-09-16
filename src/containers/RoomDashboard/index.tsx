@@ -144,6 +144,14 @@ const RoomDashboard = () => {
 		dispatch(getAllRoom());
 	}, [selectedRoom]);
 
+	if (isLoading) {
+		return (
+			<StyledContainer>
+				<Loading />
+			</StyledContainer>
+		);
+	}
+
 	return (
 		<StyledContainer>
 			<AdminForm<IRoom>
@@ -179,130 +187,120 @@ const RoomDashboard = () => {
 			</StyledSearchContainer>
 
 			<StyledTableContainer>
-				{isLoading ? (
-					<Loading />
-				) : (
-					<StyledTable>
-						<StyledTableHead>
-							<StyledRow>
-								<StyledTitle>Id</StyledTitle>
-								<StyledTitle>Name</StyledTitle>
-								<StyledTitle>Guests</StyledTitle>
-								<StyledTitle>BedRoom</StyledTitle>
-								<StyledTitle>Bath</StyledTitle>
-								<StyledTitle>Elevator</StyledTitle>
-								<StyledTitle>Hot Tubs</StyledTitle>
-								<StyledTitle>Pool</StyledTitle>
-								<StyledTitle>Indoor Fireplace</StyledTitle>
-								<StyledTitle>Dryer</StyledTitle>
-								<StyledTitle>Gym</StyledTitle>
-								<StyledTitle>Kitchen</StyledTitle>
-								<StyledTitle>Wifi</StyledTitle>
-								<StyledTitle>Heating</StyledTitle>
-								<StyledTitle>CableTv</StyledTitle>
-								{/* <StyledTitle>Description</StyledTitle> */}
-								<StyledTitle>Image</StyledTitle>
-								<StyledTitle>Price</StyledTitle>
-								<StyledTitle>Actions</StyledTitle>
-							</StyledRow>
-						</StyledTableHead>
-						<StyledTableBody>
-							{displayRoom.map((item) => {
-								const {
-									_id,
-									name,
-									guests,
-									bedRoom,
-									bath,
-									elevator,
-									hotTub,
-									pool,
-									indoorFireplace,
-									dryer,
-									gym,
-									kitchen,
-									wifi,
-									heating,
-									cableTV,
-									// description,
-									image,
-									price,
-								} = item;
-								return (
-									<StyledRow key={_id}>
-										<StyledItem>{_id}</StyledItem>
-										<StyledItem>{name}</StyledItem>
-										<StyledItem>{guests ? guests : 0}</StyledItem>
-										<StyledItem>{bedRoom ? bedRoom : 0}</StyledItem>
-										<StyledItem>
-											{bath ? <StyledTickIcon /> : <StyledStopIcon />}
-										</StyledItem>
-										<StyledItem>
-											{elevator ? <StyledTickIcon /> : <StyledStopIcon />}
-										</StyledItem>
-										<StyledItem>
-											{hotTub ? <StyledTickIcon /> : <StyledStopIcon />}
-										</StyledItem>
-										<StyledItem>
-											{pool ? <StyledTickIcon /> : <StyledStopIcon />}
-										</StyledItem>
-										<StyledItem>
-											{indoorFireplace ? (
-												<StyledTickIcon />
-											) : (
-												<StyledStopIcon />
-											)}
-										</StyledItem>
-										<StyledItem>
-											{dryer ? <StyledTickIcon /> : <StyledStopIcon />}
-										</StyledItem>
-										<StyledItem>
-											{gym ? <StyledTickIcon /> : <StyledStopIcon />}
-										</StyledItem>
-										<StyledItem>
-											{kitchen ? <StyledTickIcon /> : <StyledStopIcon />}
-										</StyledItem>
-										<StyledItem>
-											{wifi ? <StyledTickIcon /> : <StyledStopIcon />}
-										</StyledItem>
-										<StyledItem>
-											{heating ? <StyledTickIcon /> : <StyledStopIcon />}
-										</StyledItem>
-										<StyledItem>
-											{cableTV ? <StyledTickIcon /> : <StyledStopIcon />}
-										</StyledItem>
-										{/* <StyledItem>
+				<StyledTable>
+					<StyledTableHead>
+						<StyledRow>
+							<StyledTitle>Id</StyledTitle>
+							<StyledTitle>Name</StyledTitle>
+							<StyledTitle>Guests</StyledTitle>
+							<StyledTitle>BedRoom</StyledTitle>
+							<StyledTitle>Bath</StyledTitle>
+							<StyledTitle>Elevator</StyledTitle>
+							<StyledTitle>Hot Tubs</StyledTitle>
+							<StyledTitle>Pool</StyledTitle>
+							<StyledTitle>Indoor Fireplace</StyledTitle>
+							<StyledTitle>Dryer</StyledTitle>
+							<StyledTitle>Gym</StyledTitle>
+							<StyledTitle>Kitchen</StyledTitle>
+							<StyledTitle>Wifi</StyledTitle>
+							<StyledTitle>Heating</StyledTitle>
+							<StyledTitle>CableTv</StyledTitle>
+							{/* <StyledTitle>Description</StyledTitle> */}
+							<StyledTitle>Image</StyledTitle>
+							<StyledTitle>Price</StyledTitle>
+							<StyledTitle>Actions</StyledTitle>
+						</StyledRow>
+					</StyledTableHead>
+					<StyledTableBody>
+						{displayRoom.map((item) => {
+							const {
+								_id,
+								name,
+								guests,
+								bedRoom,
+								bath,
+								elevator,
+								hotTub,
+								pool,
+								indoorFireplace,
+								dryer,
+								gym,
+								kitchen,
+								wifi,
+								heating,
+								cableTV,
+								// description,
+								image,
+								price,
+							} = item;
+							return (
+								<StyledRow key={_id}>
+									<StyledItem>{_id}</StyledItem>
+									<StyledItem>{name}</StyledItem>
+									<StyledItem>{guests ? guests : 0}</StyledItem>
+									<StyledItem>{bedRoom ? bedRoom : 0}</StyledItem>
+									<StyledItem>
+										{bath ? <StyledTickIcon /> : <StyledStopIcon />}
+									</StyledItem>
+									<StyledItem>
+										{elevator ? <StyledTickIcon /> : <StyledStopIcon />}
+									</StyledItem>
+									<StyledItem>
+										{hotTub ? <StyledTickIcon /> : <StyledStopIcon />}
+									</StyledItem>
+									<StyledItem>
+										{pool ? <StyledTickIcon /> : <StyledStopIcon />}
+									</StyledItem>
+									<StyledItem>
+										{indoorFireplace ? <StyledTickIcon /> : <StyledStopIcon />}
+									</StyledItem>
+									<StyledItem>
+										{dryer ? <StyledTickIcon /> : <StyledStopIcon />}
+									</StyledItem>
+									<StyledItem>
+										{gym ? <StyledTickIcon /> : <StyledStopIcon />}
+									</StyledItem>
+									<StyledItem>
+										{kitchen ? <StyledTickIcon /> : <StyledStopIcon />}
+									</StyledItem>
+									<StyledItem>
+										{wifi ? <StyledTickIcon /> : <StyledStopIcon />}
+									</StyledItem>
+									<StyledItem>
+										{heating ? <StyledTickIcon /> : <StyledStopIcon />}
+									</StyledItem>
+									<StyledItem>
+										{cableTV ? <StyledTickIcon /> : <StyledStopIcon />}
+									</StyledItem>
+									{/* <StyledItem>
 											{description ? description : 'Empty'}
 										</StyledItem> */}
-										<StyledItem>
-											<Image url={image} alt={name} />
-										</StyledItem>
-										<StyledItem>{price ? price : 'Not Provided'}</StyledItem>
-										<StyledItem>
-											<StyledButtonContainer>
-												<Button
-													onClickHandler={showRoom(_id)}
-													bgColor='#28a745'>
-													Info
-												</Button>
-												<Button
-													onClickHandler={updateRoom(_id)}
-													bgColor='#ffc107'>
-													Update
-												</Button>
-												<Button
-													onClickHandler={deleteRoom(_id)}
-													bgColor='#dc3545'>
-													Delete
-												</Button>
-											</StyledButtonContainer>
-										</StyledItem>
-									</StyledRow>
-								);
-							})}
-						</StyledTableBody>
-					</StyledTable>
-				)}
+									<StyledItem>
+										<Image url={image} alt={name} />
+									</StyledItem>
+									<StyledItem>{price ? price : 'Not Provided'}</StyledItem>
+									<StyledItem>
+										<StyledButtonContainer>
+											<Button onClickHandler={showRoom(_id)} bgColor='#28a745'>
+												Info
+											</Button>
+											<Button
+												onClickHandler={updateRoom(_id)}
+												bgColor='#ffc107'>
+												Update
+											</Button>
+											<Button
+												onClickHandler={deleteRoom(_id)}
+												bgColor='#dc3545'>
+												Delete
+											</Button>
+										</StyledButtonContainer>
+									</StyledItem>
+								</StyledRow>
+							);
+						})}
+					</StyledTableBody>
+				</StyledTable>
 			</StyledTableContainer>
 
 			{maxPage !== 0 && (

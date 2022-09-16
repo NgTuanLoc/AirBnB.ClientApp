@@ -35,6 +35,7 @@ const AdminForm = <T extends { [key: string]: any }>({
 	dispatchUploadImageFunction,
 	disableInput,
 	data,
+	isLoading,
 	dummyData,
 	imageName,
 }: IModal<T>) => {
