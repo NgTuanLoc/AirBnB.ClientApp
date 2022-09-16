@@ -9,7 +9,6 @@ import {
 	deleteUserById,
 	updateUserById,
 	createUser,
-	uploadUserAvatarById,
 } from '../../features/User/userThunk';
 import { searchUser } from '../../features/User/userSlice';
 import { Loading, Button, Image } from '../../components';
@@ -151,7 +150,7 @@ const UserDashboard = () => {
 				data={selectedUser}
 				disableInput={formType === 'INFO' ? true : false}
 				dispatchFunction={formType === 'UPDATE' ? updateUserById : createUser}
-				dispatchUploadImageFunction={uploadUserAvatarById}
+				dispatchUploadImageFunction={null}
 				dummyData={USER_DATA}
 				imageName='avatar'
 			/>

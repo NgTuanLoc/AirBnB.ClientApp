@@ -8,7 +8,7 @@ import {
 	createUser,
 	deleteUserById,
 	updateUserById,
-	uploadUserAvatarById,
+	uploadUserAvatar,
 } from './userThunk';
 import { transformLanguage } from '../../utils';
 
@@ -140,14 +140,14 @@ const userSlice = createSlice({
 		});
 
 		// Upload Room Image By Id
-		builder.addCase(uploadUserAvatarById.pending, (state) => {
+		builder.addCase(uploadUserAvatar.pending, (state) => {
 			state.isLoading = true;
 		});
-		builder.addCase(uploadUserAvatarById.fulfilled, (state, { payload }) => {
+		builder.addCase(uploadUserAvatar.fulfilled, (state, { payload }) => {
 			state.isLoading = false;
 			state.successMsg = payload;
 		});
-		builder.addCase(uploadUserAvatarById.rejected, (state, { payload }) => {
+		builder.addCase(uploadUserAvatar.rejected, (state, { payload }) => {
 			state.isLoading = false;
 			if (payload) {
 				state.error = payload as string;

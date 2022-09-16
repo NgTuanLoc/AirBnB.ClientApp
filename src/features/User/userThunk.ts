@@ -200,7 +200,7 @@ const updateUserById = createAsyncThunk<IUser, IUser, { state: RootState }>(
 					password: user.password,
 					phone: user.phone,
 					birthday: user.birthday,
-					gender: user.gender === 'Man' ? true : false,
+					gender: user.gender,
 					address: user.address,
 					type: user.type,
 				},
@@ -214,16 +214,16 @@ const updateUserById = createAsyncThunk<IUser, IUser, { state: RootState }>(
 	}
 );
 
-const uploadUserAvatarById = createAsyncThunk<
+const uploadUserAvatar = createAsyncThunk<
 	string,
-	{ id: string; image: FormData },
+	{ image: FormData },
 	{
 		state: RootState;
 	}
 >('user/uploadUserAvatarById', async (user, thunkAPI) => {
 	try {
 		const { auth } = thunkAPI.getState().auth;
-		const { id, image } = user;
+		const { image } = user;
 
 		if (!auth) return thunkAPI.rejectWithValue(UNAUTHENTICATED);
 
@@ -236,7 +236,7 @@ const uploadUserAvatarById = createAsyncThunk<
 
 		const params = {
 			method: 'POST',
-			url: `${URL}/upload-avatar/${id}`,
+			url: `${URL}/upload-avatar`,
 			headers: {
 				token: token,
 				'Content-Type': 'multipart/form-data',
@@ -259,5 +259,5 @@ export {
 	createUser,
 	deleteUserById,
 	updateUserById,
-	uploadUserAvatarById,
+	uploadUserAvatar,
 };
