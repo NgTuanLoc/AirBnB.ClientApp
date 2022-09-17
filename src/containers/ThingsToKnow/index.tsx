@@ -22,7 +22,7 @@ import {
 } from './style';
 
 const ThingsToKnow = () => {
-	const [isModalOpen, setIsModalOpen] = useState(true);
+	const [isModalOpen, setIsModalOpen] = useState(false);
 	const isMobileDevice = useMediaQuery({
 		query: '(max-width: 992px)',
 	});

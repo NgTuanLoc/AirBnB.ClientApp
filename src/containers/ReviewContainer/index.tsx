@@ -1,4 +1,5 @@
 import { AiFillStar } from 'react-icons/ai';
+import { useMediaQuery } from 'react-responsive';
 
 import { Line, ProgressBar, Review } from '../../components';
 import { USER_REVIEW } from '../../constant';
@@ -12,6 +13,9 @@ import {
 } from './style';
 
 const ReviewContainer = () => {
+	const isMobileDevice = useMediaQuery({
+		query: '(max-width: 992px)',
+	});
 	return (
 		<StyledContainer>
 			<Line />
@@ -19,7 +23,7 @@ const ReviewContainer = () => {
 				<AiFillStar />
 				5.0 - 10 reviews
 			</StyledHeading>
-			<StyledEvaluateContainer>
+			<StyledEvaluateContainer hide={isMobileDevice}>
 				<StyledEvaluateItem>
 					<StyledLightHeading>Cleanliness</StyledLightHeading>
 					<ProgressBar bgColor='black' completed={0.95} />

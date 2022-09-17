@@ -6,8 +6,8 @@ const StyledContainer = styled.div`
 	}
 `;
 
-const StyledEvaluateContainer = styled.div`
-	display: grid;
+const StyledEvaluateContainer = styled.div<{ hide?: boolean }>`
+	display: ${(props) => (props.hide ? 'none' : 'grid')};
 	column-gap: 2rem;
 	grid-template-columns: 1fr 1fr;
 	margin-bottom: 3rem;
@@ -36,6 +36,7 @@ const StyledHeading = styled.h4`
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
+	margin-bottom: 1rem;
 `;
 
 const StyledLightHeading = styled.h5`
