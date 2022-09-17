@@ -11,6 +11,7 @@ import {
 	StyledDivWrapper,
 	StyledImageContainer,
 	StyledHeading,
+	StyledLightHeading,
 } from './style';
 
 const Room = ({ _id, name, image, locationId, price }: IRoom) => {
@@ -34,12 +35,12 @@ const Room = ({ _id, name, image, locationId, price }: IRoom) => {
 				{isLoading ? (
 					<Skeleton />
 				) : (
-					<StyledParagraph>
+					<StyledLightHeading>
 						<StyledSpan bold>
 							${price ? price?.toLocaleString() : 'undefined'}
 						</StyledSpan>{' '}
 						night
-					</StyledParagraph>
+					</StyledLightHeading>
 				)}
 			</StyledDivWrapper>
 		</StyledContainer>

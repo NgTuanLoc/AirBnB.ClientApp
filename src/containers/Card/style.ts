@@ -97,7 +97,7 @@ const StyledLabel = styled.label`
 `;
 
 const StyledHeading = styled.h4`
-	font-size: 2rem;
+	font-size: 1.8rem;
 `;
 
 const StyledPriceHeading = styled.h3`

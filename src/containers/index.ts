@@ -7,6 +7,7 @@ import Card from './Card';
 import UserDashboard from './UserDashboard';
 import LocationDashboard from './LocationDashboard';
 import RoomDashboard from './RoomDashboard';
+import ReviewContainer from './ReviewContainer';
 
 export {
 	SingleRoomCatalog,
@@ -18,4 +19,5 @@ export {
 	UserDashboard,
 	LocationDashboard,
 	RoomDashboard,
+	ReviewContainer,
 };

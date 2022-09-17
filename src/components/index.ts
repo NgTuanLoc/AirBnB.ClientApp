@@ -15,6 +15,7 @@ import Line from './Line';
 import UserModalNav from './UserModalNav';
 import AdminForm from './AdminForm';
 import AdminFormInput from './AdminFormInput';
+import Review from './Review';
 
 export {
 	Loading,
@@ -34,4 +35,5 @@ export {
 	UserModalNav,
 	AdminForm,
 	AdminFormInput,
+	Review,
 };

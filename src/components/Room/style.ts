@@ -43,6 +43,9 @@ const StyledSpan = styled.span<{ bold?: boolean }>`
 `;
 
 const StyledHeading = styled.h5``;
+const StyledLightHeading = styled.h5`
+	font-weight: 400;
+`;
 
 export {
 	StyledContainer,
@@ -51,4 +54,5 @@ export {
 	StyledDivWrapper,
 	StyledImageContainer,
 	StyledHeading,
+	StyledLightHeading,
 };
