@@ -4,11 +4,12 @@ import { useMediaQuery } from 'react-responsive';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getRoomDetailByID } from '../../features/Room/roomThunk';
-import { Line, Loading } from '../../components';
+import { Loading } from '../../components';
 import {
 	SingleRoomCatalog,
 	SingleRoomDetails,
 	ReviewContainer,
+	ThingsToKnow,
 } from '../../containers';
 import { MainLayout } from '../../layouts';
 
@@ -32,8 +33,8 @@ const SingleRoomPage = () => {
 			margin={isMobileDevice ? '0' : '10rem'}>
 			<SingleRoomCatalog />
 			<SingleRoomDetails />
-			<Line />
 			<ReviewContainer />
+			<ThingsToKnow />
 		</MainLayout>
 	);
 };

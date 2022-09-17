@@ -16,6 +16,7 @@ const StyledContainer = styled.header`
 
 	@media only screen and (max-width: 992px) {
 		padding: 1rem;
+		padding-inline: var(--padding-inline-small-device);
 		display: grid;
 		height: auto;
 		row-gap: 0.5rem;

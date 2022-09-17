@@ -47,10 +47,11 @@ code {
 	--light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 	--dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 	--box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
-	--max-width: 1400px;
+	--max-width: 1600px;
 	--min-width: 620px;
 	--navbar-height: 8.5rem;
 	--footer-height: 5rem;
+	--padding-inline-small-device: 2rem;
 }
 
 html {

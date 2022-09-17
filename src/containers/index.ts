@@ -8,6 +8,7 @@ import UserDashboard from './UserDashboard';
 import LocationDashboard from './LocationDashboard';
 import RoomDashboard from './RoomDashboard';
 import ReviewContainer from './ReviewContainer';
+import ThingsToKnow from './ThingsToKnow';
 
 export {
 	SingleRoomCatalog,
@@ -20,4 +21,5 @@ export {
 	LocationDashboard,
 	RoomDashboard,
 	ReviewContainer,
+	ThingsToKnow,
 };

@@ -16,6 +16,7 @@ import UserModalNav from './UserModalNav';
 import AdminForm from './AdminForm';
 import AdminFormInput from './AdminFormInput';
 import Review from './Review';
+import ProgressBar from './ProgressBar';
 
 export {
 	Loading,
@@ -36,4 +37,5 @@ export {
 	AdminForm,
 	AdminFormInput,
 	Review,
+	ProgressBar,
 };

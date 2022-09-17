@@ -25,7 +25,9 @@ const StyledLinkContainer = styled.div`
 `;
 
 const StyledTitleContainer = styled.div`
-	padding-inline: 1rem;
+	@media only screen and (max-width: 992px) {
+		padding-inline: var(--padding-inline-small-device);
+	}
 `;
 
 const StyledHeading = styled.h5`

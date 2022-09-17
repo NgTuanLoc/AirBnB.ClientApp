@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 
 const StyledContainer = styled.div`
-	padding-inline: 1rem;
+	@media only screen and (max-width: 992px) {
+		padding-inline: var(--padding-inline-small-device);
+	}
 `;
 
 const StyledDivWrapper = styled.div`

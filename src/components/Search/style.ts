@@ -70,7 +70,9 @@ const StyledSearchButton = styled.button`
 	}
 `;
 
-const StyledHeading = styled.h5``;
+const StyledHeading = styled.h5`
+	margin-bottom: 0;
+`;
 
 export {
 	StyledContainer,

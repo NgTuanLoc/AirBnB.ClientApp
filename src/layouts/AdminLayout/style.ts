@@ -26,7 +26,7 @@ const StyledErrorContainer = styled.div`
 	padding-inline: 10rem;
 
 	@media only screen and (max-width: 992px) {
-		padding-inline: 1rem;
+		padding-inline: var(--padding-inline-small-device);
 	}
 `;
 
