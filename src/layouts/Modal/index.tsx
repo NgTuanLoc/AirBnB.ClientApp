@@ -1,7 +1,13 @@
-import { ReactNode } from 'react';
-import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
+import { ReactNode, useRef } from 'react';
+import { MdOutlineKeyboardArrowLeft } from 'react-icons/md';
 
-import { StyledContainer, StyledContent, StyledCloseButton } from './style';
+import { useOnClickOutside } from '../../hooks';
+import {
+	StyledContainer,
+	StyledContentContainer,
+	StyledContent,
+	StyledCloseButton,
+} from './style';
 
 interface IModal {
 	children?: ReactNode;
@@ -10,12 +16,17 @@ interface IModal {
 }
 
 const Modal = ({ children, isModalOpen, setIsModalOpen }: IModal) => {
+	const ref = useRef(null);
+	useOnClickOutside(ref, () => setIsModalOpen(false));
+
 	return (
 		<StyledContainer isOpen={isModalOpen}>
-			<StyledCloseButton onClick={() => setIsModalOpen(!isModalOpen)}>
-				<MdOutlineKeyboardArrowRight />
-			</StyledCloseButton>
-			<StyledContent>{children}</StyledContent>
+			<StyledContentContainer ref={ref}>
+				<StyledCloseButton onClick={() => setIsModalOpen(!isModalOpen)}>
+					<MdOutlineKeyboardArrowLeft />
+				</StyledCloseButton>
+				<StyledContent>{children}</StyledContent>
+			</StyledContentContainer>
 		</StyledContainer>
 	);
 };

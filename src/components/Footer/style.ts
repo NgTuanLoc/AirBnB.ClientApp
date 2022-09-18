@@ -7,7 +7,7 @@ const StyledContainer = styled.footer`
 	padding: 2rem 8rem;
 
 	@media only screen and (max-width: 992px) {
-		padding-bottom: 6rem;
+		padding-bottom: 7rem;
 		padding-inline: var(--padding-inline-small-device);
 	}
 `;
