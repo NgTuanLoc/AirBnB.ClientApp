@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 const StyledContainer = styled.div`
 	@media only screen and (max-width: 1200px) {
-		min-width: 40rem;
-		height: 25rem;
+		min-width: 30rem;
+		height: 22rem;
 		border-radius: var(--radius);
 		padding: 1.6rem;
 		border: 1px solid #dddddd;
@@ -44,6 +44,11 @@ const StyledParagraph = styled.p`
 const StyledUserComment = styled.p`
 	font-size: 1.8rem;
 	color: rgb(34, 34, 34);
+
+	@media only screen and (max-width: 1200px) {
+		font-size: 1.5rem;
+		font-weight: 400;
+	}
 `;
 
 export {
