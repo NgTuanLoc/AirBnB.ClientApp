@@ -130,13 +130,71 @@ const StyledContainer = styled.div`
 		background-color: #f7f7f7;
 		color: var(--clr-deep-black);
 		border-radius: 0;
+		display: block;
+		position: relative;
 	}
 
 	.react-calendar__tile--rangeEnd,
 	.react-calendar__tile--rangeStart {
-		background-color: var(--clr-deep-black);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: transparent !important;
 		color: white;
+
+		abbr {
+			position: absolute;
+			z-index: 999;
+		}
+	}
+
+	.react-calendar__tile--rangeStart::before {
+		content: '';
+		background: var(--clr-deep-black);
+		width: 100%;
+		height: 100%;
 		border-radius: 50%;
+		top: 0;
+		right: 0;
+		display: block;
+		position: absolute;
+		z-index: 2;
+	}
+
+	.react-calendar__tile--rangeStart::after {
+		content: '';
+		background: #f7f7f7;
+		width: 50%;
+		height: 100%;
+		top: 0;
+		right: 0;
+		display: block;
+		position: absolute;
+		z-index: 1;
+	}
+	.react-calendar__tile--rangeEnd::before {
+		content: '';
+		background: var(--clr-deep-black);
+		width: 100%;
+		height: 100%;
+		border-radius: 50%;
+		top: 0;
+		right: 0;
+		display: block;
+		position: absolute;
+		z-index: 2;
+	}
+
+	.react-calendar__tile--rangeEnd::after {
+		content: '';
+		background: #f7f7f7;
+		width: 50%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		display: block;
+		position: absolute;
+		z-index: 1;
 	}
 
 	.react-calendar__tile--active:enabled:hover,

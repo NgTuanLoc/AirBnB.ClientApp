@@ -1,6 +1,14 @@
 import styled from 'styled-components';
 
-const StyledContainer = styled.div``;
+const StyledContainer = styled.div`
+	@media only screen and (max-width: 1200px) {
+		min-width: 40rem;
+		height: 25rem;
+		border-radius: var(--radius);
+		padding: 1.6rem;
+		border: 1px solid #dddddd;
+	}
+`;
 
 const StyledUserInfoContainer = styled.div`
 	display: grid;

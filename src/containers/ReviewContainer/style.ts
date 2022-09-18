@@ -24,10 +24,18 @@ const StyledUserContainer = styled.div`
 	gap: 2rem;
 	grid-template-columns: 1fr 1fr;
 	margin-bottom: 3rem;
+	scrollbar-width: none; /* Firefox */
+	-ms-overflow-style: none; /* IE 10+ */
+
+	::-webkit-scrollbar {
+		background: transparent; /* Chrome/Safari/Webkit */
+		width: 0px;
+	}
 
 	@media only screen and (max-width: 1200px) {
-		grid-template-columns: 1fr;
-		gap: 3rem;
+		display: flex;
+		align-items: center;
+		overflow-x: scroll;
 	}
 `;
 

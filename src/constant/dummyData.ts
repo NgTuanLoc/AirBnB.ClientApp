@@ -83,4 +83,13 @@ const USER_REVIEW = [
 		created_at: '2022-04-26T15:44:10.530Z',
 	},
 ];
-export { USER_DATA, ROOM_DATA, LOCATION_DATA, USER_REVIEW };
+
+const THINGS_TO_KNOW_DATA = [1, 2, 3];
+
+export {
+	USER_DATA,
+	ROOM_DATA,
+	LOCATION_DATA,
+	USER_REVIEW,
+	THINGS_TO_KNOW_DATA,
+};

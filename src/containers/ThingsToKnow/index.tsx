@@ -22,7 +22,7 @@ import {
 } from './style';
 
 const ThingsToKnow = () => {
-	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [isModalOpen, setIsModalOpen] = useState(true);
 	const isMobileDevice = useMediaQuery({
 		query: '(max-width: 992px)',
 	});
@@ -39,7 +39,7 @@ const ThingsToKnow = () => {
 						</StyledListItem>
 					</StyledList>
 					<StyledButton>
-						<MdOutlineKeyboardArrowRight />
+						<MdOutlineKeyboardArrowRight onClick={() => setIsModalOpen(true)} />
 					</StyledButton>
 				</StyledListContainer>
 				<Line />

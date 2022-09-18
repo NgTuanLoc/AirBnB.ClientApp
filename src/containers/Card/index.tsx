@@ -54,6 +54,7 @@ const Card = ({
 		query: '(max-width: 992px)',
 	});
 	const { auth } = useAppSelector((store) => store.auth);
+	const [isBooked, setIsBooked] = useState(false);
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 
@@ -80,6 +81,7 @@ const Card = ({
 				checkOut: checkOutDate,
 			})
 		);
+		setIsBooked(true);
 	};
 
 	useEffect(() => {
@@ -101,7 +103,7 @@ const Card = ({
 					</StyledPriceHeading>
 				</StyledDivWrapper>
 				<StyledDivWrapper>
-					<Button>Reserve</Button>
+					<Button>{isBooked ? 'Purchased' : 'Reserve'}</Button>
 				</StyledDivWrapper>
 			</StyledContainer>
 		);
@@ -147,7 +149,9 @@ const Card = ({
 						</StyledNormalButton>
 					</StyledCardScheduleGuest>
 				</StyledCardSchedule>
-				<Button fullWidth>Check Availability</Button>
+				<Button fullWidth>
+					{isBooked ? 'Purchased' : 'Check Availability'}
+				</Button>
 			</StyledForm>
 			<StyledCardDetail>
 				<StyledCardDetailItem>

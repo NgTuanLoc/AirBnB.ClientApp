@@ -4,7 +4,7 @@ const StyledContainer = styled.article`
 	position: sticky;
 	top: calc(var(--navbar-height) + 5rem);
 	width: 80%;
-	height: 50rem;
+	height: 40rem;
 	margin-left: auto;
 	border-radius: var(--radius);
 	box-shadow: var(--box-shadow);
