@@ -2,15 +2,19 @@ import styled from 'styled-components';
 
 const StyledContainer = styled.div`
 	margin-bottom: 3.5rem;
-
 	@media only screen and (max-width: 992px) {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: space-between;
-
 		padding-inline: var(--padding-inline-small-device);
 	}
+`;
+
+const StyledDivWrapper = styled.div`
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
 `;
 
 const StyledListContainer = styled.div`
@@ -31,13 +35,25 @@ const StyledList = styled.ul`
 	}
 `;
 
-const StyledListItem = styled.li<{ isBold?: boolean }>`
-	font-size: 1.5rem;
+const StyledListItem = styled.li<{
+	isBold?: boolean;
+	fontSize?: string;
+	flexDirection?: string;
+}>`
+	font-size: ${(props) => (props.fontSize ? props.fontSize : '1.5rem')};
 	font-weight: ${(props) => (props.isBold ? 550 : 350)};
 	display: flex;
-	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
 	margin-bottom: 0.75rem;
 	gap: 0.5rem;
+
+	@media only screen and (max-width: 992px) {
+		gap: 1rem;
+		flex-direction: ${(props) =>
+			props.flexDirection ? props.flexDirection : 'column'};
+	}
 `;
 
 const StyledButton = styled.button`
@@ -57,6 +73,7 @@ const StyledHeading = styled.h4`
 
 export {
 	StyledContainer,
+	StyledDivWrapper,
 	StyledListContainer,
 	StyledList,
 	StyledListItem,

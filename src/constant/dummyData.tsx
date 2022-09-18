@@ -1,3 +1,9 @@
+import { AiFillClockCircle, AiOutlineWarning } from 'react-icons/ai';
+import { MdOutlinePets, MdOutlineAlarm } from 'react-icons/md';
+import { BsFillDoorOpenFill } from 'react-icons/bs';
+import { IoLogoNoSmoking } from 'react-icons/io5';
+import { GiSparkles } from 'react-icons/gi';
+
 const USER_DATA = {
 	name: '',
 	email: '',
@@ -84,7 +90,35 @@ const USER_REVIEW = [
 	},
 ];
 
-const THINGS_TO_KNOW_DATA = [1, 2, 3];
+const THINGS_TO_KNOW_DATA = [
+	{
+		title: 'House rules',
+		list: [
+			[<AiFillClockCircle />, 'Check-in: 3:00 PM - 11:00 PM'],
+			[<BsFillDoorOpenFill />, 'Self check-in with building staff'],
+			[<IoLogoNoSmoking />, 'No smoking'],
+			[<MdOutlinePets />, 'Allow pets'],
+		],
+	},
+	{
+		title: 'Health & safety',
+		list: [
+			[<GiSparkles />, "Airbnb's COVID-19 safety practices apply"],
+			[<AiOutlineWarning />, 'Carbon monoxide alarm'],
+			[<MdOutlineAlarm />, 'Smoke alarm'],
+		],
+	},
+	{
+		title: 'Cancellation policy',
+		list: [
+			['This reservation is non-refundable.'],
+			[
+				`Review the Host’s full cancellation policy which applies even if you
+		cancel for illness or disruptions caused by COVID-19.`,
+			],
+		],
+	},
+];
 
 export {
 	USER_DATA,

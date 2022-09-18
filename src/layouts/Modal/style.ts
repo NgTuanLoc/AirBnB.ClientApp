@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const StyledContainer = styled.div<{ isOpen?: boolean }>`
 	position: fixed;
 	z-index: 999999;
-	background-color: blue;
+	background-color: white;
 	width: 100vw;
 	height: 100vh;
 	transition: var(--transition);
