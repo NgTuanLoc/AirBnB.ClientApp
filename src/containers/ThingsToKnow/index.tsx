@@ -59,7 +59,7 @@ const ThingsToKnow = () => {
 				<StyledListContainer>
 					<StyledList>
 						<StyledListItem isBold>House rules</StyledListItem>
-						<StyledListItem>
+						<StyledListItem flexDirection='row'>
 							<AiFillClockCircle /> Check-in: 3:00 PM - 11:00 PM
 						</StyledListItem>
 					</StyledList>
@@ -71,7 +71,7 @@ const ThingsToKnow = () => {
 				<StyledListContainer>
 					<StyledList>
 						<StyledListItem isBold>Health & safety</StyledListItem>
-						<StyledListItem>
+						<StyledListItem flexDirection='row'>
 							<GiSparkles /> Airbnb's COVID-19 safety practices apply
 						</StyledListItem>
 					</StyledList>
@@ -108,9 +108,9 @@ const ThingsToKnow = () => {
 						<StyledList key={title}>
 							<StyledListItem isBold>{title}</StyledListItem>
 							<StyledListItem>
-								{list.map((listItem, index) => {
+								{list.map((listItem) => {
 									return (
-										<StyledDivWrapper key={`${index + Math.random()}`}>
+										<StyledDivWrapper key={`${Math.random()}`}>
 											{listItem}
 										</StyledDivWrapper>
 									);

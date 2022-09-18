@@ -94,18 +94,18 @@ const THINGS_TO_KNOW_DATA = [
 	{
 		title: 'House rules',
 		list: [
-			[<AiFillClockCircle />, 'Check-in: 3:00 PM - 11:00 PM'],
-			[<BsFillDoorOpenFill />, 'Self check-in with building staff'],
-			[<IoLogoNoSmoking />, 'No smoking'],
-			[<MdOutlinePets />, 'Allow pets'],
+			[<AiFillClockCircle key={1} />, 'Check-in: 3:00 PM - 11:00 PM'],
+			[<BsFillDoorOpenFill key={2} />, 'Self check-in with building staff'],
+			[<IoLogoNoSmoking key={3} />, 'No smoking'],
+			[<MdOutlinePets key={4} />, 'Allow pets'],
 		],
 	},
 	{
 		title: 'Health & safety',
 		list: [
-			[<GiSparkles />, "Airbnb's COVID-19 safety practices apply"],
-			[<AiOutlineWarning />, 'Carbon monoxide alarm'],
-			[<MdOutlineAlarm />, 'Smoke alarm'],
+			[<GiSparkles key={5} />, "Airbnb's COVID-19 safety practices apply"],
+			[<AiOutlineWarning key={6} />, 'Carbon monoxide alarm'],
+			[<MdOutlineAlarm key={7} />, 'Smoke alarm'],
 		],
 	},
 	{

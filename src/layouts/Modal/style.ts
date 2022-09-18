@@ -8,7 +8,7 @@ const StyledContainer = styled.div<{ isOpen?: boolean }>`
 	height: 100vh;
 	transition: var(--transition);
 	left: 0;
-	bottom: ${(props) => (props.isOpen ? '0' : '-100%')};
+	top: ${(props) => (props.isOpen ? '0' : '100vh')};
 	padding: 3rem;
 `;
 
