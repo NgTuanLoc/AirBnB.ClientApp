@@ -32,7 +32,7 @@ const StyledUserContainer = styled.div`
 		width: 0px;
 	}
 
-	@media only screen and (max-width: 1200px) {
+	@media only screen and (max-width: 992px) {
 		display: flex;
 		align-items: center;
 		overflow-x: scroll;

@@ -21,27 +21,31 @@ const Room = ({ _id, name, image, locationId, price }: IRoom) => {
 	return (
 		<StyledContainer to={`/room/${_id}`}>
 			<StyledImageContainer>
-				{isLoading ? <Skeleton /> : <Catalog images={images} />}
+				{isLoading ? <Skeleton /> : <Catalog images={images} navigation />}
 			</StyledImageContainer>
 			<StyledDivWrapper>
-				{isLoading ? <Skeleton /> : <StyledHeading>{name}</StyledHeading>}
-				{isLoading ? (
-					<Skeleton />
-				) : (
-					<StyledParagraph>
-						{locationId?.province} <span>{locationId?.name}</span>
-					</StyledParagraph>
-				)}
-				{isLoading ? (
-					<Skeleton />
-				) : (
-					<StyledLightHeading>
-						<StyledSpan bold>
-							${price ? price?.toLocaleString() : 'undefined'}
-						</StyledSpan>{' '}
-						night
-					</StyledLightHeading>
-				)}
+				<StyledHeading>{isLoading ? <Skeleton /> : name}</StyledHeading>
+				<StyledDivWrapper width='60%'>
+					{isLoading ? (
+						<Skeleton />
+					) : (
+						<StyledParagraph>
+							{locationId?.province} <StyledSpan>{locationId?.name}</StyledSpan>
+						</StyledParagraph>
+					)}
+				</StyledDivWrapper>
+				<StyledDivWrapper width='50%'>
+					{isLoading ? (
+						<Skeleton />
+					) : (
+						<StyledLightHeading>
+							<StyledSpan bold>
+								${price ? price?.toLocaleString() : 'undefined'}
+							</StyledSpan>{' '}
+							night
+						</StyledLightHeading>
+					)}
+				</StyledDivWrapper>
 			</StyledDivWrapper>
 		</StyledContainer>
 	);

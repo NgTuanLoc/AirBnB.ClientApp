@@ -4,7 +4,7 @@ const StyledContainer = styled.article`
 	position: sticky;
 	top: calc(var(--navbar-height) + 5rem);
 	width: 80%;
-	height: 40rem;
+	height: 45rem;
 	margin-left: auto;
 	border-radius: var(--radius);
 	box-shadow: var(--box-shadow);
@@ -14,6 +14,8 @@ const StyledContainer = styled.article`
 	justify-content: center;
 
 	@media only screen and (max-width: 1200px) {
+		width: 100%;
+		margin-top: 2rem;
 		margin-inline: auto;
 	}
 
@@ -74,6 +76,7 @@ const StyledCardDetailItem = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	margin-bottom: 1rem;
 `;
 
 const StyledCardTotal = styled.div`
@@ -96,9 +99,7 @@ const StyledLabel = styled.label`
 	font-weight: bold;
 `;
 
-const StyledHeading = styled.h4`
-	font-size: 1.8rem;
-`;
+const StyledHeading = styled.h5``;
 
 const StyledPriceHeading = styled.h3`
 	font-size: 1.5rem;

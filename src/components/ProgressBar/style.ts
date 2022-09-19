@@ -8,7 +8,7 @@ const StyledContainer = styled.div`
 
 const StyledFillerContainer = styled.div`
 	height: 8px;
-	width: 100%;
+	width: 10rem;
 	background-color: #e0e0de;
 	border-radius: var(--radius);
 	margin: 0.5rem;

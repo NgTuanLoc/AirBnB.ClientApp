@@ -17,6 +17,10 @@ const StyledContainer = styled.div`
 		box-shadow: var(--box-shadow);
 		transition: var(--transition);
 
+		@media only screen and (max-width: 1200px) {
+			width: 100% !important;
+		}
+
 		abbr {
 			text-decoration: none;
 		}
@@ -150,12 +154,11 @@ const StyledContainer = styled.div`
 
 	.react-calendar__tile--rangeStart::before {
 		content: '';
+		display: block;
 		background: var(--clr-deep-black);
 		width: 100%;
 		height: 100%;
 		border-radius: 50%;
-		top: 0;
-		right: 0;
 		display: block;
 		position: absolute;
 		z-index: 2;
@@ -163,30 +166,27 @@ const StyledContainer = styled.div`
 
 	.react-calendar__tile--rangeStart::after {
 		content: '';
+		display: block;
 		background: #f7f7f7;
 		width: 50%;
 		height: 100%;
-		top: 0;
-		right: 0;
-		display: block;
 		position: absolute;
 		z-index: 1;
 	}
-	.react-calendar__tile--rangeEnd::before {
+	.react-calendar__tile--rangeEnd::after {
 		content: '';
+		display: block;
 		background: var(--clr-deep-black);
 		width: 100%;
 		height: 100%;
 		border-radius: 50%;
-		top: 0;
-		right: 0;
-		display: block;
 		position: absolute;
 		z-index: 2;
 	}
 
-	.react-calendar__tile--rangeEnd::after {
+	.react-calendar__tile--rangeEnd::before {
 		content: '';
+		display: block;
 		background: #f7f7f7;
 		width: 50%;
 		height: 100%;

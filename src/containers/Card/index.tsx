@@ -103,7 +103,9 @@ const Card = ({
 					</StyledPriceHeading>
 				</StyledDivWrapper>
 				<StyledDivWrapper>
-					<Button>{isBooked ? 'Purchased' : 'Reserve'}</Button>
+					<Button onClickHandler={onSubmitHandler}>
+						{isBooked ? 'Purchased' : 'Reserve'}
+					</Button>
 				</StyledDivWrapper>
 			</StyledContainer>
 		);

@@ -79,7 +79,7 @@ const SingleRoomCatalog = () => {
 			)}
 
 			{isMobileDevice ? (
-				<Catalog borderRadius='0' images={[...DUMMY_IMAGE_DATA, image]} />
+				<Catalog borderRadius='0' images={[image, ...DUMMY_IMAGE_DATA]} />
 			) : (
 				<StyledPhotoContainer>
 					<StyledImage gridArea='main' url={image} alt={name} />

@@ -30,15 +30,15 @@ const ReviewContainer = () => {
 				</StyledEvaluateItem>
 				<StyledEvaluateItem>
 					<StyledLightHeading>Communication</StyledLightHeading>
-					<ProgressBar bgColor='black' completed={0.9} />
+					<ProgressBar bgColor='black' completed={0.8} />
 				</StyledEvaluateItem>
 				<StyledEvaluateItem>
 					<StyledLightHeading>Check-in</StyledLightHeading>
-					<ProgressBar bgColor='black' completed={0.9} />
+					<ProgressBar bgColor='black' completed={0.75} />
 				</StyledEvaluateItem>
 				<StyledEvaluateItem>
 					<StyledLightHeading>Accuracy</StyledLightHeading>
-					<ProgressBar bgColor='black' completed={0.9} />
+					<ProgressBar bgColor='black' completed={0.8} />
 				</StyledEvaluateItem>
 				<StyledEvaluateItem>
 					<StyledLightHeading>Location</StyledLightHeading>
@@ -46,7 +46,7 @@ const ReviewContainer = () => {
 				</StyledEvaluateItem>
 				<StyledEvaluateItem>
 					<StyledLightHeading>Value</StyledLightHeading>
-					<ProgressBar bgColor='black' completed={0.9} />
+					<ProgressBar bgColor='black' completed={0.85} />
 				</StyledEvaluateItem>
 			</StyledEvaluateContainer>
 			<StyledUserContainer>

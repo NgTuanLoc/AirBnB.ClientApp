@@ -67,7 +67,7 @@ const StyledSubTitleLinkSpan = styled.span`
 const StyledPhotoContainer = styled.div`
 	margin: 3rem auto;
 	display: grid;
-	grid-gap: 2rem;
+	grid-gap: 0.75rem;
 	grid-template-columns: repeat(4, 1fr);
 	grid-template-rows: repeat(2, 20rem);
 

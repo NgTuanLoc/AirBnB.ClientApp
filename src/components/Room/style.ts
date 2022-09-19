@@ -8,10 +8,6 @@ const StyledContainer = styled(Link)`
 	cursor: pointer;
 	color: black;
 
-	:hover {
-		background-color: rgba(0, 0, 0, 0.1);
-	}
-
 	@media only screen and (max-width: 992px) {
 		height: 40rem;
 		width: 100%;
@@ -20,14 +16,19 @@ const StyledContainer = styled(Link)`
 `;
 
 const StyledImageContainer = styled.div`
-	margin-bottom: 0.5rem;
+	margin-bottom: 1.5rem;
+	border-radius: var(--radius);
+	height: 29rem;
+	overflow: hidden;
 
 	@media only screen and (max-width: 992px) {
 		height: 30rem;
 	}
 `;
 
-const StyledDivWrapper = styled.div``;
+const StyledDivWrapper = styled.div<{ width?: string }>`
+	width: ${(props) => (props.width ? props.width : '100%')};
+`;
 
 // Typography
 const StyledParagraph = styled.p<{ bold?: boolean }>`
@@ -42,7 +43,10 @@ const StyledSpan = styled.span<{ bold?: boolean }>`
 	font-weight: ${(props) => (props.bold ? 'bold' : '300')};
 `;
 
-const StyledHeading = styled.h5``;
+const StyledHeading = styled.h5`
+	width: 70%;
+	margin-bottom: 0.3rem;
+`;
 const StyledLightHeading = styled.h5`
 	font-weight: 400;
 `;

@@ -21,7 +21,7 @@ const StyledLinkContainer = styled.div`
 	align-items: center;
 	gap: 1rem;
 
-	@media only screen and (max-width: 992px) {
+	@media only screen and (max-width: 1200px) {
 		display: none;
 	}
 `;
