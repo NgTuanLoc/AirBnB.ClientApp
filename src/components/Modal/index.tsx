@@ -1,36 +1,32 @@
 import { GoLocation } from 'react-icons/go';
 
 import { StyledContainer, StyledButton } from './style';
-
-export interface IFilteredLocation {
-	location: string;
-	id: string;
-}
+import { setSearchedLocation } from '../../features/Global/globalSlice';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 
 export interface IProps {
-	locationList: IFilteredLocation[];
 	disableInput: boolean;
-	setInputLocation: (location: string, id: string) => void;
 	setDisableInput: (value: boolean) => void;
+	setTitle?: any;
 }
 
-const Modal = ({
-	locationList,
-	disableInput,
-	setInputLocation,
-	setDisableInput,
-}: IProps) => {
-	const onClickHandler = (location: string, id: string) => {
-		setInputLocation(location, id);
+const Modal = ({ setTitle, disableInput, setDisableInput }: IProps) => {
+	const { filteredLocationList } = useAppSelector((store) => store.global);
+	const dispatch = useAppDispatch();
+	const onClickHandler = (name: string, id: string) => {
+		dispatch(setSearchedLocation({ name, id }));
 		setDisableInput(true);
+		setTitle(name);
 	};
 
 	return (
-		<StyledContainer disableInput={locationList.length === 0 || disableInput}>
-			{locationList.map((item) => {
-				const { id, location } = item;
+		<StyledContainer
+			disableInput={filteredLocationList.length === 0 || disableInput}>
+			{filteredLocationList.map((item) => {
+				const { _id, name, province } = item;
+				const location = `${province}, ${name}`;
 				return (
-					<StyledButton onClick={() => onClickHandler(location, id)} key={id}>
+					<StyledButton onClick={() => onClickHandler(location, _id)} key={_id}>
 						<GoLocation />
 						{location}
 					</StyledButton>

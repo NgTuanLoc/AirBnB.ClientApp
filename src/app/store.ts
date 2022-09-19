@@ -6,6 +6,7 @@ import ratingReducer from '../features/Rating/ratingSlice';
 import userReducer from '../features/User/userSlice';
 import authReducer from '../features/Auth/authSlice';
 import adminReducer from '../features/Admin/adminSlice';
+import globalReducer from '../features/Global/globalSlice';
 
 export const store = configureStore({
 	reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
 		user: userReducer,
 		auth: authReducer,
 		admin: adminReducer,
+		global: globalReducer,
 	},
 });
 
