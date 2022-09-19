@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { ReactNode } from 'react';
 import { Navigate } from 'react-router-dom';
+import { Loading } from '../../components';
 
 import { useAppSelector } from '../../hooks';
 
@@ -10,13 +11,17 @@ interface IPrivateRoute {
 }
 
 const PrivateRoute = ({ children, type = 'CLIENT' }: IPrivateRoute) => {
-	const { auth } = useAppSelector((store) => store.auth);
+	const { auth, authStatus } = useAppSelector((store) => store.auth);
 
-	if (!auth) {
+	if (authStatus === 'PENDING') {
+		return <Loading />;
+	}
+
+	if (authStatus === 'UNAUTHORIZED') {
 		return <Navigate to='/' />;
 	}
 
-	if (auth?.user.type !== type) {
+	if (authStatus === 'SUCCESS' && auth?.user.type !== type) {
 		return <Navigate to='/' />;
 	}
 

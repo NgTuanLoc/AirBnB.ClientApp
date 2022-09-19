@@ -30,10 +30,11 @@ const StyledTitleContainer = styled.div`
 	}
 `;
 
-const StyledHeading = styled.h5`
+const StyledHeading = styled.h5<{ isLoading?: boolean }>`
 	font-size: 1.5rem;
-	border-bottom: 1px solid black;
+	border-bottom: ${(props) => (props.isLoading ? '0' : '1px solid black')};
 	font-weight: 450;
+	min-width: 15rem;
 `;
 
 const StyledSubTitle = styled.div`
@@ -65,7 +66,7 @@ const StyledSubTitleLinkSpan = styled.span`
 `;
 
 const StyledPhotoContainer = styled.div`
-	margin: 3rem auto;
+	margin: 2rem auto;
 	display: grid;
 	grid-gap: 0.75rem;
 	grid-template-columns: repeat(4, 1fr);
@@ -107,6 +108,14 @@ const StyledDivWrapper = styled.div`
 	gap: 1rem;
 `;
 
+const StyledSkeletonLoadingWrapper = styled.div<{
+	width?: string;
+	gridArea?: string;
+}>`
+	width: ${(props) => (props.width ? props.width : '100%')};
+	grid-area: ${(props) => props.gridArea};
+`;
+
 export {
 	StyledNavbar,
 	StyledLocationTitle,
@@ -122,4 +131,5 @@ export {
 	StyledButton,
 	StyledBackHomeButton,
 	StyledDivWrapper,
+	StyledSkeletonLoadingWrapper,
 };

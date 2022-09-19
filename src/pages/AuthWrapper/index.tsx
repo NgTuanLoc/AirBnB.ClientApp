@@ -19,14 +19,12 @@ const AuthWrapper = ({ children }: IAuthWrapper) => {
 	const dispatch = useAppDispatch();
 
 	useEffect(() => {
-		if (userLogin.token) {
-			dispatch(
-				loginThunk({
-					email: userLogin.email,
-					password: userLogin.password,
-				})
-			);
-		}
+		dispatch(
+			loginThunk({
+				email: userLogin.email,
+				password: userLogin.password,
+			})
+		);
 	}, []);
 
 	if (isLoading) return <Loading />;

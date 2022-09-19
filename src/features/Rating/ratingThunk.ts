@@ -1,51 +1,26 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { axiosInstance } from '../../utils';
-import { IRoom } from '../../@types/Room';
-import { RootState } from '../../app/store';
+import { IRating } from '../../@types/Rating';
+// import { RootState } from '../../app/store';
 
-const URL = '/api/rooms';
+const URL = '/api/reviews';
 
-const getRoomListByLocationID = createAsyncThunk<
-	IRoom[],
-	void,
-	{
-		state: RootState;
+const getReviewListByRoomId = createAsyncThunk<IRating[], string>(
+	'rating/getLocationListByRoomId',
+	async (roomId, thunkAPI) => {
+		try {
+			const params = {
+				method: 'GET',
+				url: `${URL}/byRoom?roomId=${roomId}`,
+			};
+
+			const response = await axiosInstance.request(params);
+			return response.data;
+		} catch (error: any) {
+			return thunkAPI.rejectWithValue('Failed to get review list');
+		}
 	}
->('room/getRoomListByLocationID', async (_, thunkAPI) => {
-	const { room } = thunkAPI.getState();
+);
 
-	try {
-		const params = {
-			method: 'GET',
-			url: `${URL}?locationId=${room.locationID}`,
-		};
-
-		const response = await axiosInstance.request(params);
-		return response.data;
-	} catch (error: any) {
-		return thunkAPI.rejectWithValue(error);
-	}
-});
-
-const getRoomDetailByID = createAsyncThunk<
-	IRoom,
-	string,
-	{
-		state: RootState;
-	}
->('room/getRoomDetailByID', async (roomID, thunkAPI) => {
-	try {
-		const params = {
-			method: 'GET',
-			url: `${URL}/${roomID}`,
-		};
-
-		const response = await axiosInstance.request(params);
-		return response.data;
-	} catch (error: any) {
-		return thunkAPI.rejectWithValue(error);
-	}
-});
-
-export { getRoomListByLocationID, getRoomDetailByID };
+export { getReviewListByRoomId };

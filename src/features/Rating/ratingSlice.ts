@@ -1,58 +1,41 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
-import { IRoom } from '../../@types/Room';
-import { getRoomListByLocationID, getRoomDetailByID } from './ratingThunk';
+import { IRating } from '../../@types/Rating';
+import { getReviewListByRoomId } from './ratingThunk';
 
-export interface IRoomState {
-	roomList: IRoom[];
-	selectedRoom: IRoom | null;
-	locationID: string;
+export interface IRatingState {
+	ratingList: IRating[];
 	isLoading: boolean;
 	error: string;
 }
 
-const initialState: IRoomState = {
-	roomList: [],
-	locationID: '61697f97efe193001c0a5b69',
+const initialState: IRatingState = {
+	ratingList: [],
 	isLoading: false,
 	error: '',
-	selectedRoom: null,
 };
 
 const locationSlice = createSlice({
-	name: 'room',
+	name: 'rating',
 	initialState,
-	reducers: {
-		selectLocation: (state: IRoomState, action: PayloadAction<string>) => {
-			state.locationID = action.payload;
-		},
-	},
+	reducers: {},
 	extraReducers(builder) {
-		builder.addCase(getRoomListByLocationID.pending, (state) => {
+		builder.addCase(getReviewListByRoomId.pending, (state) => {
 			state.isLoading = true;
 		});
-		builder.addCase(getRoomListByLocationID.fulfilled, (state, { payload }) => {
+		builder.addCase(getReviewListByRoomId.fulfilled, (state, { payload }) => {
 			state.isLoading = false;
-			state.roomList = payload;
+			state.ratingList = payload;
 		});
-		builder.addCase(getRoomListByLocationID.rejected, (state, { payload }) => {
+		builder.addCase(getReviewListByRoomId.rejected, (state, { payload }) => {
 			state.isLoading = false;
-			state.error = payload as string;
-		});
-		builder.addCase(getRoomDetailByID.pending, (state) => {
-			state.isLoading = true;
-		});
-		builder.addCase(getRoomDetailByID.fulfilled, (state, { payload }) => {
-			state.isLoading = false;
-			state.selectedRoom = payload;
-		});
-		builder.addCase(getRoomDetailByID.rejected, (state, { payload }) => {
-			state.isLoading = false;
-			state.error = payload as string;
+			if (payload) {
+				state.error = payload as string;
+			}
 		});
 	},
 });
 
-export const { selectLocation } = locationSlice.actions;
+// export const { selectLocation } = locationSlice.actions;
 
 export default locationSlice.reducer;

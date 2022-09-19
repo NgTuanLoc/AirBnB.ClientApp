@@ -9,6 +9,7 @@ import {
 	USER_REVIEW,
 	THINGS_TO_KNOW_DATA,
 } from './dummyData';
+import { DEFAULT_ROOM } from './DEFAULT_FEATURE_VALUE';
 
 export {
 	DUMMY_IMAGE_DATA,
@@ -22,4 +23,5 @@ export {
 	LOCATION_DATA,
 	USER_REVIEW,
 	THINGS_TO_KNOW_DATA,
+	DEFAULT_ROOM,
 };

@@ -29,7 +29,7 @@ const loginThunk = createAsyncThunk<IAuth, { email: string; password: string }>(
 			localStorage.setItem('userLogin', JSON.stringify(token));
 			return response.data;
 		} catch (error: any) {
-			return thunkAPI.rejectWithValue(error.response.data.message);
+			return thunkAPI.rejectWithValue('LOGIN FAILED');
 		}
 	}
 );
@@ -61,7 +61,7 @@ const registerThunk = createAsyncThunk<IAuth, IRegister>(
 			);
 			return response.data;
 		} catch (error: any) {
-			return thunkAPI.rejectWithValue(error.response.data.message);
+			return thunkAPI.rejectWithValue('REGISTER FAILED');
 		}
 	}
 );

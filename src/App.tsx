@@ -13,6 +13,7 @@ import {
 	AuthWrapper,
 	PrivateRoute,
 } from './pages';
+import TestPage from './pages/TestPage';
 
 const App = () => {
 	return (
@@ -23,7 +24,7 @@ const App = () => {
 				baseColor='#d9d7d9'
 				highlightColor='#f5f5f5'
 				borderRadius='var(--radius)'
-				duration={2}>
+				duration={3}>
 				<Router>
 					<Routes>
 						<Route path='/' element={<Home />} />
@@ -50,6 +51,14 @@ const App = () => {
 						<Route
 							path='/user-not-found'
 							element={<NotFound error='User not existed' />}
+						/>
+						<Route
+							path='/test'
+							element={
+								<PrivateRoute type='ADMIN'>
+									<TestPage />
+								</PrivateRoute>
+							}
 						/>
 						<Route
 							path='*'

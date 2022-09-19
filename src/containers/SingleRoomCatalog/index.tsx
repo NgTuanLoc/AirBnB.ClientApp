@@ -1,3 +1,4 @@
+import Skeleton from 'react-loading-skeleton';
 import { useMediaQuery } from 'react-responsive';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { FiShare } from 'react-icons/fi';
@@ -6,7 +7,7 @@ import { IoShareOutline } from 'react-icons/io5';
 
 import { DUMMY_IMAGE_DATA } from '../../constant';
 import { useAppSelector } from '../../hooks';
-import { Catalog, Line, Loading } from '../../components';
+import { Catalog, Line } from '../../components';
 import {
 	StyledNavbar,
 	StyledLocationTitle,
@@ -22,15 +23,14 @@ import {
 	StyledButton,
 	StyledBackHomeButton,
 	StyledDivWrapper,
+	StyledSkeletonLoadingWrapper,
 } from './style';
 
 const SingleRoomCatalog = () => {
-	const { selectedRoom } = useAppSelector((store) => store.room);
+	const { selectedRoom, isLoading } = useAppSelector((store) => store.room);
 	const isMobileDevice = useMediaQuery({
 		query: '(max-width: 992px)',
 	});
-
-	if (!selectedRoom) return <Loading />;
 
 	const { name, locationId, image } = selectedRoom;
 
@@ -55,25 +55,36 @@ const SingleRoomCatalog = () => {
 			{!isMobileDevice && (
 				<StyledTitleContainer>
 					<StyledLocationTitle>
-						{name}, {locationId ? locationId.name : 'not provided'},{' '}
-						{locationId ? locationId.province : 'not provided'}
+						{isLoading ? (
+							<Skeleton width='60%' />
+						) : (
+							`${name}, ${locationId.name}, ${locationId.province}`
+						)}
 					</StyledLocationTitle>
 					<StyledLinkContainer>
-						<StyledHeading>
-							{locationId ? locationId.province : 'not provided'}
+						<StyledHeading isLoading={isLoading}>
+							{isLoading ? (
+								<Skeleton />
+							) : (
+								`${
+									locationId
+										? `${locationId.province}, ${locationId.name}`
+										: 'not provided'
+								}`
+							)}
 						</StyledHeading>
-						<StyledSubTitle>
-							<StyledSubTitleLink href='https://github.com/NgTuanLoc'>
-								<FiShare />{' '}
-								<StyledSubTitleLinkSpan>share</StyledSubTitleLinkSpan>
-							</StyledSubTitleLink>
-							<StyledSubTitleLink
-								className='flex-center'
-								href='https://github.com/NgTuanLoc'>
-								<AiOutlineHeart />{' '}
-								<StyledSubTitleLinkSpan>save</StyledSubTitleLinkSpan>
-							</StyledSubTitleLink>
-						</StyledSubTitle>
+						{!isLoading && (
+							<StyledSubTitle>
+								<StyledSubTitleLink href='https://github.com/NgTuanLoc'>
+									<FiShare />{' '}
+									<StyledSubTitleLinkSpan>share</StyledSubTitleLinkSpan>
+								</StyledSubTitleLink>
+								<StyledSubTitleLink href='https://github.com/NgTuanLoc'>
+									<AiOutlineHeart />{' '}
+									<StyledSubTitleLinkSpan>save</StyledSubTitleLinkSpan>
+								</StyledSubTitleLink>
+							</StyledSubTitle>
+						)}
 					</StyledLinkContainer>
 				</StyledTitleContainer>
 			)}
@@ -82,27 +93,61 @@ const SingleRoomCatalog = () => {
 				<Catalog borderRadius='0' images={[image, ...DUMMY_IMAGE_DATA]} />
 			) : (
 				<StyledPhotoContainer>
-					<StyledImage gridArea='main' url={image} alt={name} />
-					<StyledImage
-						gridArea='image-1'
-						url={DUMMY_IMAGE_DATA[0]}
-						alt={name}
-					/>
-					<StyledImage
-						gridArea='image-2'
-						url={DUMMY_IMAGE_DATA[1]}
-						alt={name}
-					/>
-					<StyledImage
-						gridArea='image-3'
-						url={DUMMY_IMAGE_DATA[2]}
-						alt={name}
-					/>
-					<StyledImage
-						gridArea='image-4'
-						url={DUMMY_IMAGE_DATA[3]}
-						alt={name}
-					/>
+					<StyledSkeletonLoadingWrapper gridArea='main'>
+						{isLoading ? (
+							<Skeleton borderRadius='var(--radius) 0 0 var(--radius)' />
+						) : (
+							<StyledImage
+								borderRadius='var(--radius) 0 0 var(--radius)'
+								url={image}
+								alt={name}
+							/>
+						)}
+					</StyledSkeletonLoadingWrapper>
+					<StyledSkeletonLoadingWrapper gridArea='image-1'>
+						{isLoading ? (
+							<Skeleton borderRadius='0' />
+						) : (
+							<StyledImage
+								borderRadius='0'
+								url={DUMMY_IMAGE_DATA[0]}
+								alt={name}
+							/>
+						)}
+					</StyledSkeletonLoadingWrapper>
+					<StyledSkeletonLoadingWrapper gridArea='image-2'>
+						{isLoading ? (
+							<Skeleton borderRadius='0 var(--radius) 0 0' />
+						) : (
+							<StyledImage
+								borderRadius='0 var(--radius) 0 0'
+								url={DUMMY_IMAGE_DATA[1]}
+								alt={name}
+							/>
+						)}
+					</StyledSkeletonLoadingWrapper>
+					<StyledSkeletonLoadingWrapper gridArea='image-3'>
+						{isLoading ? (
+							<Skeleton borderRadius='0' />
+						) : (
+							<StyledImage
+								borderRadius='0'
+								url={DUMMY_IMAGE_DATA[2]}
+								alt={name}
+							/>
+						)}
+					</StyledSkeletonLoadingWrapper>
+					<StyledSkeletonLoadingWrapper gridArea='image-4'>
+						{isLoading ? (
+							<Skeleton borderRadius='var(--radius) 0 var(--radius) 0' />
+						) : (
+							<StyledImage
+								borderRadius='var(--radius) 0 var(--radius) 0'
+								url={DUMMY_IMAGE_DATA[3]}
+								alt={name}
+							/>
+						)}
+					</StyledSkeletonLoadingWrapper>
 				</StyledPhotoContainer>
 			)}
 			{isMobileDevice && (

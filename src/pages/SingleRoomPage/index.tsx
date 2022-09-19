@@ -2,9 +2,8 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch } from '../../hooks';
 import { getRoomDetailByID } from '../../features/Room/roomThunk';
-import { Loading } from '../../components';
 import {
 	SingleRoomCatalog,
 	SingleRoomDetails,
@@ -16,7 +15,6 @@ import { MainLayout } from '../../layouts';
 const SingleRoomPage = () => {
 	const { id } = useParams();
 	const dispatch = useAppDispatch();
-	const { isLoading } = useAppSelector((store) => store.room);
 	const isMobileDevice = useMediaQuery({
 		query: '(max-width: 992px)',
 	});
@@ -25,15 +23,13 @@ const SingleRoomPage = () => {
 		dispatch(getRoomDetailByID(id as string));
 	}, [dispatch, id]);
 
-	if (isLoading) return <Loading />;
-
 	return (
 		<MainLayout
 			hideNavbar={isMobileDevice}
 			margin={isMobileDevice ? '0' : '10rem'}>
 			<SingleRoomCatalog />
 			<SingleRoomDetails />
-			<ReviewContainer />
+			<ReviewContainer roomId={id as string} />
 			<ThingsToKnow />
 		</MainLayout>
 	);

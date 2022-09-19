@@ -7,7 +7,7 @@ import { StyledContainer, StyledButton, StyledLink } from './style';
 
 const UserModal = () => {
 	const { auth } = useAppSelector((store) => store.auth);
-	const lineMargin = '0.3rem auto';
+	const lineMargin = '0';
 
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();

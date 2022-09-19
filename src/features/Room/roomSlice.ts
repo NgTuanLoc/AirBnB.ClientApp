@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { IRoom } from '../../@types/Room';
+import { DEFAULT_ROOM } from '../../constant';
 import { transformLanguage } from '../../utils';
 import {
 	getAllRoom,
@@ -15,7 +16,7 @@ import {
 
 export interface IRoomState {
 	roomList: IRoom[];
-	selectedRoom: IRoom | null;
+	selectedRoom: IRoom;
 	locationID: string;
 	isLoading: boolean;
 	successMsg: string;
@@ -29,7 +30,7 @@ const initialState: IRoomState = {
 	isLoading: false,
 	successMsg: '',
 	error: '',
-	selectedRoom: null,
+	selectedRoom: DEFAULT_ROOM,
 	searchedRoom: [],
 };
 
