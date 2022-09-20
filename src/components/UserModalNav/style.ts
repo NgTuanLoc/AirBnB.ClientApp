@@ -5,10 +5,10 @@ const StyledContainer = styled.div`
 	justify-content: flex-end;
 	align-items: center;
 	position: relative;
+	min-width: 18rem;
 
 	@media only screen and (max-width: 992px) {
 		grid-area: nav;
-		min-width: 18rem;
 
 		h5 {
 			display: none;

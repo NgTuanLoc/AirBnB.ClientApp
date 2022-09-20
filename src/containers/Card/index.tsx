@@ -7,7 +7,6 @@ import { useMediaQuery } from 'react-responsive';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { Button, Line } from '../../components';
 import { bookRoomById } from '../../features/Room/roomThunk';
-import { transformDate } from '../../utils';
 import {
 	StyledContainer,
 	StyledLabel,
@@ -59,8 +58,8 @@ const Card = () => {
 		dispatch(
 			bookRoomById({
 				roomId: _id,
-				checkIn: transformDate(bookDate.checkIn),
-				checkOut: transformDate(bookDate.checkOut),
+				checkIn: bookDate.checkIn,
+				checkOut: bookDate.checkOut,
 			})
 		);
 		setIsBooked(true);
@@ -100,7 +99,7 @@ const Card = () => {
 						<StyledButton borderRight type='button' className='btn-checkIn'>
 							<StyledLabel htmlFor='check-in'>CHECK-IN</StyledLabel>
 							<StyledInput
-								value={transformDate(bookDate.checkIn, 'l')}
+								value={bookDate.checkIn}
 								type='text'
 								name='check-in'
 								id='check-in'
@@ -110,7 +109,7 @@ const Card = () => {
 						<StyledButton type='button' className='btn-checkOut'>
 							<StyledLabel>CHECK-OUT</StyledLabel>
 							<StyledInput
-								value={transformDate(bookDate.checkOut, 'l')}
+								value={bookDate.checkOut}
 								type='text'
 								name='check-out'
 								id='check-out'

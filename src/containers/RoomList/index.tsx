@@ -11,14 +11,16 @@ import {
 } from './style';
 
 const RoomList = () => {
-	const { locationID, roomList } = useAppSelector((store) => store.room);
+	const { locationID, roomList, isLoading } = useAppSelector(
+		(store) => store.room
+	);
 	const dispatch = useAppDispatch();
 
 	useEffect(() => {
 		dispatch(getRoomListByLocationID());
 	}, [locationID]);
 
-	if (roomList.length === 0) {
+	if (isLoading === false && roomList.length === 0) {
 		return (
 			<StyledNotFoundContainer>
 				<StyledHeading>Sorry, there are no room available!</StyledHeading>

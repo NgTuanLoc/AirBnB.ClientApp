@@ -17,6 +17,7 @@ import AdminForm from './AdminForm';
 import AdminFormInput from './AdminFormInput';
 import Review from './Review';
 import ProgressBar from './ProgressBar';
+import Meta from './Meta';
 
 export {
 	Loading,
@@ -38,4 +39,5 @@ export {
 	AdminFormInput,
 	Review,
 	ProgressBar,
+	Meta,
 };

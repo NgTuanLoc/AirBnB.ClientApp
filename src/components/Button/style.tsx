@@ -16,13 +16,6 @@ const StyledContainer = styled.button<Props>`
 		props.bgColor ? props.bgColor : 'var(--clr-gradient)'};
 	transition: var(--transition);
 
-	h4 {
-		position: relative;
-		z-index: 10;
-		margin: 0;
-		cursor: pointer;
-	}
-
 	::after {
 		content: '';
 		border-radius: var(--radius);
@@ -43,4 +36,12 @@ const StyledContainer = styled.button<Props>`
 	}
 `;
 
-export { StyledContainer };
+const StyledHeading = styled.h4`
+	color: white;
+	position: relative;
+	z-index: 10;
+	margin: 0;
+	cursor: pointer;
+`;
+
+export { StyledContainer, StyledHeading };

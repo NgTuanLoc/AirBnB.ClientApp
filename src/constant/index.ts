@@ -8,8 +8,8 @@ import {
 	LOCATION_DATA,
 	USER_REVIEW,
 	THINGS_TO_KNOW_DATA,
+	DEFAULT_ROOM,
 } from './dummyData';
-import { DEFAULT_ROOM } from './DEFAULT_FEATURE_VALUE';
 
 export {
 	DUMMY_IMAGE_DATA,

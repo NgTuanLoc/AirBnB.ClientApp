@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { transformLanguage } from '../../utils';
+import { transformLanguage, transformDate } from '../../utils';
 import { ILocation } from '../../@types/Location';
 
 export interface ISearch {
@@ -12,8 +12,8 @@ interface IGlobalState {
 	filteredLocationList: ILocation[];
 	searchedLocation: ISearch;
 	bookDate: {
-		checkIn: Date;
-		checkOut: Date;
+		checkIn: string;
+		checkOut: string;
 	};
 	numberOfVisitDay: number;
 }
@@ -22,8 +22,8 @@ const initialState: IGlobalState = {
 	filteredLocationList: [],
 	searchedLocation: { name: 'Anywhere', id: '0' },
 	bookDate: {
-		checkIn: new Date(),
-		checkOut: new Date(new Date().getTime() + 86400000),
+		checkIn: transformDate(new Date()),
+		checkOut: transformDate(new Date(new Date().getTime() + 86400000)),
 	},
 	numberOfVisitDay: 0,
 };
@@ -61,15 +61,15 @@ const globalSlice = createSlice({
 			}>
 		) => {
 			const { checkInValue, checkOutValue } = action.payload;
-			state.bookDate.checkIn = checkInValue;
-			state.bookDate.checkOut = checkOutValue;
 			const temp = state.bookDate.checkOut
 				? Math.round(
-						(state.bookDate.checkOut.getTime() -
-							state.bookDate.checkIn.getTime()) /
+						(checkInValue.getTime() - checkOutValue.getTime()) /
 							(1000 * 3600 * 24)
 				  )
 				: 0;
+
+			state.bookDate.checkIn = transformDate(checkInValue);
+			state.bookDate.checkOut = transformDate(checkOutValue);
 			state.numberOfVisitDay = temp;
 		},
 	},

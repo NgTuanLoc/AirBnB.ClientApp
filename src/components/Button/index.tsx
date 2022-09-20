@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { StyledContainer } from './style';
+import { StyledContainer, StyledHeading } from './style';
 
 interface IButton {
 	fullWidth?: boolean;
@@ -15,7 +15,7 @@ const Button = ({ children, fullWidth, bgColor, onClickHandler }: IButton) => {
 			bgColor={bgColor}
 			type='submit'
 			fullWidth={fullWidth}>
-			<h4>{children}</h4>
+			<StyledHeading>{children}</StyledHeading>
 		</StyledContainer>
 	);
 };

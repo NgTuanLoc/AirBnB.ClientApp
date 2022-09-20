@@ -4,7 +4,6 @@ import { MdOutlineFreeCancellation } from 'react-icons/md';
 
 import { useAppSelector } from '../../hooks';
 import { logo } from '../../constant';
-import { transformDate } from '../../utils';
 import { Calendar, Line } from '../../components';
 import imageLogo from '../../images/image1.jpg';
 import {
@@ -175,7 +174,7 @@ const SingleRoomInfo = () => {
 					{name}
 				</StyledHeading>
 				<StyledLightParagraph>
-					{transformDate(bookDate.checkIn)} - {transformDate(bookDate.checkOut)}
+					{bookDate.checkIn} - {bookDate.checkOut}
 				</StyledLightParagraph>
 				<Calendar />
 			</StyledCalendar>
