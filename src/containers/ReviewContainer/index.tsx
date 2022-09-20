@@ -3,7 +3,7 @@ import { useMediaQuery } from 'react-responsive';
 import { AiFillStar } from 'react-icons/ai';
 
 import { useAppSelector, useAppDispatch } from '../../hooks';
-import { Line, Loading, ProgressBar, Review } from '../../components';
+import { Line, ProgressBar, Review } from '../../components';
 import { getReviewListByRoomId } from '../../features/Rating/ratingThunk';
 import { DEFAULT_IMAGE } from '../../constant';
 import { USER_REVIEW } from '../../constant';
@@ -22,7 +22,7 @@ interface IReviewContainer {
 
 const ReviewContainer = ({ roomId }: IReviewContainer) => {
 	const dispatch = useAppDispatch();
-	const { isLoading, ratingList } = useAppSelector((store) => store.rating);
+	const { ratingList } = useAppSelector((store) => store.rating);
 	const isMobileDevice = useMediaQuery({
 		query: '(max-width: 992px)',
 	});
@@ -51,14 +51,6 @@ const ReviewContainer = ({ roomId }: IReviewContainer) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [roomId]);
 
-	if (isLoading) {
-		return (
-			<StyledContainer>
-				<Loading />
-			</StyledContainer>
-		);
-	}
-
 	return (
 		<StyledContainer>
 			<Line />
@@ -69,7 +61,7 @@ const ReviewContainer = ({ roomId }: IReviewContainer) => {
 			<StyledEvaluateContainer hide={isMobileDevice}>
 				<StyledEvaluateItem>
 					<StyledLightHeading>Cleanliness</StyledLightHeading>
-					<ProgressBar bgColor='black' completed={0.95} />
+					<ProgressBar bgColor='black' completed={0.8} />
 				</StyledEvaluateItem>
 				<StyledEvaluateItem>
 					<StyledLightHeading>Communication</StyledLightHeading>

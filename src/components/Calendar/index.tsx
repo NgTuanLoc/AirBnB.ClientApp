@@ -2,13 +2,12 @@ import CalenderReact from 'react-calendar';
 import { useState, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
+import { useAppDispatch } from '../../hooks';
+import { setBookDate } from '../../features/Global/globalSlice';
 import { StyledContainer } from './style';
 
-interface ICalendar {
-	setBookDate?: any;
-}
-
-const Calendar = ({ setBookDate }: ICalendar) => {
+const Calendar = () => {
+	const dispatch = useAppDispatch();
 	const currentDate = new Date();
 	const [value, setValue] = useState<any>(currentDate);
 	const isMobileDevice = useMediaQuery({
@@ -17,10 +16,9 @@ const Calendar = ({ setBookDate }: ICalendar) => {
 
 	useEffect(() => {
 		if (value.length === 2) {
-			setBookDate({
-				checkIn: value[0],
-				checkOut: value[1],
-			});
+			dispatch(
+				setBookDate({ checkInValue: value[0], checkOutValue: value[1] })
+			);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [value]);

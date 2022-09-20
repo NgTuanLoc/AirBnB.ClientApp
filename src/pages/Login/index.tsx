@@ -31,7 +31,7 @@ type FormInputs = {
 const Login = () => {
 	const dispatch = useAppDispatch();
 	const [errorState, setErrorState] = useState('');
-	const { isLoading, auth, error } = useAppSelector((store) => store.auth);
+	const { authStatus, auth, error } = useAppSelector((store) => store.auth);
 
 	const {
 		register,
@@ -66,7 +66,7 @@ const Login = () => {
 	return (
 		<LoginLayout image={DEFAULT_IMAGE}>
 			<StyledBackButton to='/'>Back</StyledBackButton>
-			{isLoading ? (
+			{authStatus === 'PENDING' ? (
 				<Loading />
 			) : (
 				<StyledForm onSubmit={handleSubmit(onSubmitHandler)}>

@@ -15,7 +15,7 @@ const AuthWrapper = ({ children }: IAuthWrapper) => {
 		password: '',
 		token: '',
 	});
-	const { isLoading } = useAppSelector((store) => store.auth);
+	const { authStatus } = useAppSelector((store) => store.auth);
 	const dispatch = useAppDispatch();
 
 	useEffect(() => {
@@ -27,7 +27,7 @@ const AuthWrapper = ({ children }: IAuthWrapper) => {
 		);
 	}, []);
 
-	if (isLoading) return <Loading />;
+	if (authStatus === 'PENDING') return <Loading />;
 
 	return <>{children}</>;
 };

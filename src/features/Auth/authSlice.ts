@@ -4,14 +4,12 @@ import { loginThunk, registerThunk } from './authThunk';
 import { IAuth } from '../../@types/Auth';
 
 export interface IAuthState {
-	isLoading: boolean;
 	authStatus: 'PENDING' | 'UNAUTHORIZED' | 'SUCCESS';
 	error: string;
 	auth: IAuth | null;
 }
 
 const initialState: IAuthState = {
-	isLoading: false,
 	authStatus: 'PENDING',
 	error: '',
 	auth: null,
@@ -28,32 +26,29 @@ const authSlice = createSlice({
 	},
 	extraReducers(builder) {
 		builder.addCase(loginThunk.pending, (state) => {
-			state.isLoading = true;
 			state.authStatus = 'PENDING';
 		});
 		builder.addCase(loginThunk.fulfilled, (state, { payload }) => {
-			state.isLoading = false;
 			state.authStatus = 'SUCCESS';
 			state.auth = payload;
 			state.error = '';
 		});
 		builder.addCase(loginThunk.rejected, (state, { payload }) => {
-			state.isLoading = false;
 			state.authStatus = 'UNAUTHORIZED';
 			if (payload) {
 				state.error = payload as string;
 			}
 		});
 		builder.addCase(registerThunk.pending, (state) => {
-			state.isLoading = true;
+			state.authStatus = 'PENDING';
 		});
 		builder.addCase(registerThunk.fulfilled, (state, { payload }) => {
-			state.isLoading = false;
+			state.authStatus = 'SUCCESS';
 			state.auth = payload;
 			state.error = '';
 		});
 		builder.addCase(registerThunk.rejected, (state, { payload }) => {
-			state.isLoading = false;
+			state.authStatus = 'UNAUTHORIZED';
 			if (payload) {
 				state.error = payload as string;
 			}

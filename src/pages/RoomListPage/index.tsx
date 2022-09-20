@@ -5,21 +5,19 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getRoomListByLocationID } from '../../features/Room/roomThunk';
 import { selectLocation } from '../../features/Room/roomSlice';
-import { RoomDetails, Loading } from '../../components';
+import { RoomDetails } from '../../components';
 import { MainLayout } from '../../layouts';
 import { StyledContainer, StyledGoogleMap, StyledRoomList } from './style';
 
 const RoomListPage = () => {
 	const { locationId } = useParams();
 	const dispatch = useAppDispatch();
-	const { roomList, isLoading } = useAppSelector((store) => store.room);
+	const { roomList } = useAppSelector((store) => store.room);
 
 	useEffect(() => {
 		dispatch(selectLocation(locationId as string));
 		dispatch(getRoomListByLocationID());
 	}, [locationId]);
-
-	if (isLoading) return <Loading />;
 
 	return (
 		<MainLayout margin='0' padding='0 1rem'>

@@ -64,12 +64,10 @@ const SingleRoomCatalog = () => {
 					<StyledLinkContainer>
 						<StyledHeading isLoading={isLoading}>
 							{isLoading ? (
-								<Skeleton />
+								<Skeleton width='30rem' />
 							) : (
 								`${
-									locationId
-										? `${locationId.province}, ${locationId.name}`
-										: 'not provided'
+									locationId ? `${locationId.province}, ${locationId.name}` : ''
 								}`
 							)}
 						</StyledHeading>
@@ -77,11 +75,11 @@ const SingleRoomCatalog = () => {
 							<StyledSubTitle>
 								<StyledSubTitleLink href='https://github.com/NgTuanLoc'>
 									<FiShare />{' '}
-									<StyledSubTitleLinkSpan>share</StyledSubTitleLinkSpan>
+									<StyledSubTitleLinkSpan>Share</StyledSubTitleLinkSpan>
 								</StyledSubTitleLink>
 								<StyledSubTitleLink href='https://github.com/NgTuanLoc'>
 									<AiOutlineHeart />{' '}
-									<StyledSubTitleLinkSpan>save</StyledSubTitleLinkSpan>
+									<StyledSubTitleLinkSpan>Save</StyledSubTitleLinkSpan>
 								</StyledSubTitleLink>
 							</StyledSubTitle>
 						)}
@@ -153,23 +151,23 @@ const SingleRoomCatalog = () => {
 			{isMobileDevice && (
 				<StyledTitleContainer>
 					<StyledLocationTitle>
-						{name}, {locationId ? locationId.name : 'not provided'},{' '}
-						{locationId ? locationId.province : 'not provided'}
+						{name}, {locationId ? locationId.name : ''},{' '}
+						{locationId ? locationId.province : ''}
 					</StyledLocationTitle>
 					<StyledLinkContainer>
 						<StyledHeading>
-							{locationId ? locationId.province : 'not provided'}
+							{locationId ? locationId.province : ''}
 						</StyledHeading>
 						<StyledSubTitle>
 							<StyledSubTitleLink href='https://github.com/NgTuanLoc'>
 								<FiShare />{' '}
-								<StyledSubTitleLinkSpan>share</StyledSubTitleLinkSpan>
+								<StyledSubTitleLinkSpan>Share</StyledSubTitleLinkSpan>
 							</StyledSubTitleLink>
 							<StyledSubTitleLink
 								className='flex-center'
 								href='https://github.com/NgTuanLoc'>
 								<AiOutlineHeart />{' '}
-								<StyledSubTitleLinkSpan>save</StyledSubTitleLinkSpan>
+								<StyledSubTitleLinkSpan>Save</StyledSubTitleLinkSpan>
 							</StyledSubTitleLink>
 						</StyledSubTitle>
 					</StyledLinkContainer>

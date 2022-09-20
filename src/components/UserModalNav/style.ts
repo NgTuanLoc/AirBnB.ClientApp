@@ -8,6 +8,7 @@ const StyledContainer = styled.div`
 
 	@media only screen and (max-width: 992px) {
 		grid-area: nav;
+		min-width: 18rem;
 
 		h5 {
 			display: none;
@@ -46,13 +47,16 @@ const StyledButton = styled.button`
 `;
 
 const StyledLoginButton = styled.button`
-	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	border: 1px solid #dddddd;
 	padding: 1rem;
 	border-radius: 30px;
 	transition: var(--transition);
 	box-shadow: var(--light-shadow);
 	margin-inline: 1rem;
+	cursor: pointer;
 
 	svg {
 		margin-inline: 0.5rem;

@@ -11,11 +11,21 @@ export interface ISearch {
 interface IGlobalState {
 	filteredLocationList: ILocation[];
 	searchedLocation: ISearch;
+	bookDate: {
+		checkIn: Date;
+		checkOut: Date;
+	};
+	numberOfVisitDay: number;
 }
 
 const initialState: IGlobalState = {
 	filteredLocationList: [],
 	searchedLocation: { name: 'Anywhere', id: '0' },
+	bookDate: {
+		checkIn: new Date(),
+		checkOut: new Date(new Date().getTime() + 86400000),
+	},
+	numberOfVisitDay: 0,
 };
 
 const globalSlice = createSlice({
@@ -43,8 +53,28 @@ const globalSlice = createSlice({
 		) => {
 			state.searchedLocation = action.payload;
 		},
+		setBookDate: (
+			state: IGlobalState,
+			action: PayloadAction<{
+				checkInValue: Date;
+				checkOutValue: Date;
+			}>
+		) => {
+			const { checkInValue, checkOutValue } = action.payload;
+			state.bookDate.checkIn = checkInValue;
+			state.bookDate.checkOut = checkOutValue;
+			const temp = state.bookDate.checkOut
+				? Math.round(
+						(state.bookDate.checkOut.getTime() -
+							state.bookDate.checkIn.getTime()) /
+							(1000 * 3600 * 24)
+				  )
+				: 0;
+			state.numberOfVisitDay = temp;
+		},
 	},
 });
-export const { filteredLocation, setSearchedLocation } = globalSlice.actions;
+export const { filteredLocation, setSearchedLocation, setBookDate } =
+	globalSlice.actions;
 
 export default globalSlice.reducer;

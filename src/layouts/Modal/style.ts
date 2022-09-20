@@ -15,7 +15,7 @@ const StyledContainer = styled.div<{ isOpen?: boolean }>`
 const StyledContent = styled.div``;
 
 const StyledContentContainer = styled.div`
-	margin-top: 5rem;
+	margin-top: 2.5rem;
 	background-color: white;
 	border-radius: var(--radius);
 	padding: 3rem;

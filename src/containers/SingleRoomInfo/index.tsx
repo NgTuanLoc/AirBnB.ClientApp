@@ -2,9 +2,9 @@ import { AiOutlineStar } from 'react-icons/ai';
 import { GiPoolDive } from 'react-icons/gi';
 import { MdOutlineFreeCancellation } from 'react-icons/md';
 
+import { useAppSelector } from '../../hooks';
 import { logo } from '../../constant';
 import { transformDate } from '../../utils';
-import { IRoom } from '../../@types/Room';
 import { Calendar, Line } from '../../components';
 import imageLogo from '../../images/image1.jpg';
 import {
@@ -28,32 +28,30 @@ import {
 	StyledCalendar,
 } from './style';
 
-export interface ISingleRoomInfo extends IRoom {
-	setBookDate: any;
-	numberOfVisitNights: number;
-	bookDate: any;
-}
+const SingleRoomInfo = () => {
+	const {
+		selectedRoom: {
+			name,
+			guests,
+			bedRoom,
+			bath,
+			description,
+			kitchen,
+			elevator,
+			hotTub,
+			pool,
+			indoorFireplace,
+			dryer,
+			gym,
+			wifi,
+			heating,
+			cableTV,
+		},
+	} = useAppSelector((store) => store.room);
+	const { numberOfVisitDay, bookDate } = useAppSelector(
+		(store) => store.global
+	);
 
-const SingleRoomInfo = ({
-	name,
-	guests,
-	bedRoom,
-	bath,
-	description,
-	kitchen,
-	elevator,
-	hotTub,
-	pool,
-	indoorFireplace,
-	dryer,
-	gym,
-	wifi,
-	heating,
-	cableTV,
-	bookDate,
-	setBookDate,
-	numberOfVisitNights,
-}: ISingleRoomInfo) => {
 	return (
 		<StyledContainer>
 			<StyledTitleContainer>
@@ -170,7 +168,7 @@ const SingleRoomInfo = ({
 			<Line />
 			<StyledCalendar>
 				<StyledHeading>
-					{numberOfVisitNights}{' '}
+					{numberOfVisitDay}{' '}
 					<StyledSpan style={{ textTransform: 'lowercase' }}>
 						nights in
 					</StyledSpan>{' '}
@@ -179,7 +177,7 @@ const SingleRoomInfo = ({
 				<StyledLightParagraph>
 					{transformDate(bookDate.checkIn)} - {transformDate(bookDate.checkOut)}
 				</StyledLightParagraph>
-				<Calendar setBookDate={setBookDate} />
+				<Calendar />
 			</StyledCalendar>
 		</StyledContainer>
 	);

@@ -1,12 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import moment from 'moment';
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { Button, Line } from '../../components';
 import { bookRoomById } from '../../features/Room/roomThunk';
+import { transformDate } from '../../utils';
 import {
 	StyledContainer,
 	StyledLabel,
@@ -27,33 +28,18 @@ import {
 	StyledForm,
 } from './style';
 
-interface ICard {
-	pricePerNight: number;
-	bookDate: {
-		checkIn: Date;
-		checkOut: Date;
-	};
-	numberOfVisitNights: number;
-	setCheckInHandler?: any;
-	roomId: string;
-}
+const Card = () => {
+	const { auth } = useAppSelector((store) => store.auth);
+	const { bookDate, numberOfVisitDay } = useAppSelector(
+		(store) => store.global
+	);
+	const {
+		selectedRoom: { _id, price },
+	} = useAppSelector((store) => store.room);
 
-const Card = ({
-	pricePerNight,
-	bookDate,
-	numberOfVisitNights,
-	roomId,
-}: ICard) => {
-	const [checkInDate, setCheckInDate] = useState(
-		moment(bookDate.checkIn).format('l')
-	);
-	const [checkOutDate, setCheckoutDate] = useState(
-		moment(bookDate.checkOut).format('l')
-	);
 	const isMobileDevice = useMediaQuery({
 		query: '(max-width: 992px)',
 	});
-	const { auth } = useAppSelector((store) => store.auth);
 	const [isBooked, setIsBooked] = useState(false);
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
@@ -62,11 +48,7 @@ const Card = ({
 		const name = e.target.name;
 		const value = e.target.value;
 
-		if (name === 'check-in') {
-			setCheckInDate(value);
-		} else {
-			setCheckoutDate(value);
-		}
+		console.log(name, value);
 	};
 
 	const onSubmitHandler = (e: FormEvent) => {
@@ -76,25 +58,20 @@ const Card = ({
 		}
 		dispatch(
 			bookRoomById({
-				roomId: roomId,
-				checkIn: checkInDate,
-				checkOut: checkOutDate,
+				roomId: _id,
+				checkIn: transformDate(bookDate.checkIn),
+				checkOut: transformDate(bookDate.checkOut),
 			})
 		);
 		setIsBooked(true);
 	};
-
-	useEffect(() => {
-		setCheckInDate(moment(bookDate.checkIn).format('L'));
-		setCheckoutDate(moment(bookDate.checkOut).format('L'));
-	}, [bookDate]);
 
 	if (isMobileDevice) {
 		return (
 			<StyledContainer>
 				<StyledDivWrapper justifyContent='flex-start'>
 					<StyledPriceHeading>
-						${pricePerNight.toLocaleString()} VND
+						${price.toLocaleString()} VND
 						<StyledSpan>/night</StyledSpan>
 					</StyledPriceHeading>
 					<StyledPriceHeading style={{ marginRight: 'auto', marginTop: '5px' }}>
@@ -114,7 +91,7 @@ const Card = ({
 	return (
 		<StyledContainer>
 			<StyledPriceHeading>
-				${pricePerNight.toLocaleString()} VND
+				${price.toLocaleString()} VND
 				<StyledSpan> night</StyledSpan>
 			</StyledPriceHeading>
 			<StyledForm onSubmit={onSubmitHandler}>
@@ -123,7 +100,7 @@ const Card = ({
 						<StyledButton borderRight type='button' className='btn-checkIn'>
 							<StyledLabel htmlFor='check-in'>CHECK-IN</StyledLabel>
 							<StyledInput
-								value={checkInDate}
+								value={transformDate(bookDate.checkIn, 'l')}
 								type='text'
 								name='check-in'
 								id='check-in'
@@ -133,7 +110,7 @@ const Card = ({
 						<StyledButton type='button' className='btn-checkOut'>
 							<StyledLabel>CHECK-OUT</StyledLabel>
 							<StyledInput
-								value={checkOutDate}
+								value={transformDate(bookDate.checkOut, 'l')}
 								type='text'
 								name='check-out'
 								id='check-out'
@@ -158,10 +135,10 @@ const Card = ({
 			<StyledCardDetail>
 				<StyledCardDetailItem>
 					<StyledParagraph textUnderline>
-						${pricePerNight.toLocaleString()} x {numberOfVisitNights} nights
+						${price.toLocaleString()} x {numberOfVisitDay} nights
 					</StyledParagraph>
 					<StyledParagraph>
-						${(pricePerNight * numberOfVisitNights).toLocaleString()}
+						${(price * numberOfVisitDay).toLocaleString()}
 					</StyledParagraph>
 				</StyledCardDetailItem>
 				<StyledCardDetailItem>
@@ -177,13 +154,7 @@ const Card = ({
 			<StyledCardTotal>
 				<StyledHeading>Total before taxes</StyledHeading>
 				<StyledHeading>
-					$
-					{(
-						pricePerNight * numberOfVisitNights +
-						200000 +
-						500000
-					).toLocaleString()}{' '}
-					VND
+					${(price * numberOfVisitDay + 200000 + 500000).toLocaleString()} VND
 				</StyledHeading>
 			</StyledCardTotal>
 		</StyledContainer>

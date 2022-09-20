@@ -24,11 +24,7 @@ const UserModalNav = () => {
 				</StyledButton>
 			</StyledLinkContainer>
 
-			<StyledLoginButton
-				className={`${
-					isUserModalOpen ? 'active login flex-center' : 'login flex-center'
-				}`}
-				onClick={() => setIsUserModalOpen(!isUserModalOpen)}>
+			<StyledLoginButton onClick={() => setIsUserModalOpen(!isUserModalOpen)}>
 				<AiOutlineMenu />
 				<AiOutlineUser />
 			</StyledLoginButton>

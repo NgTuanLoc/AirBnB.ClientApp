@@ -74,7 +74,7 @@ const Search = ({ hideSearch }: ISearch) => {
 			<StyledVerticalStripe />
 			<StyledButton type='button'>Any week</StyledButton>
 			<StyledVerticalStripe />
-			<StyledButton>Add guests</StyledButton>
+			<StyledButton type='button'>Add guests</StyledButton>
 			<StyledSearchButton type='submit'>
 				<HiOutlineSearch />
 			</StyledSearchButton>

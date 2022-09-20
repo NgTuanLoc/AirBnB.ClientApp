@@ -171,6 +171,7 @@ const StyledContainer = styled.div`
 		width: 50%;
 		height: 100%;
 		position: absolute;
+		right: 0;
 		z-index: 1;
 	}
 	.react-calendar__tile--rangeEnd::after {

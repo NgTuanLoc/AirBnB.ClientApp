@@ -34,7 +34,6 @@ const StyledHeading = styled.h5<{ isLoading?: boolean }>`
 	font-size: 1.5rem;
 	border-bottom: ${(props) => (props.isLoading ? '0' : '1px solid black')};
 	font-weight: 450;
-	min-width: 15rem;
 `;
 
 const StyledSubTitle = styled.div`

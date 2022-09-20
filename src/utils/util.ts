@@ -19,8 +19,8 @@ const transformLanguage = (str: string) => {
 	return str;
 };
 
-const transformDate = (date: Date) => {
-	return moment(date).format('Do MMMM YYYY');
+const transformDate = (date: Date, type = 'Do MMMM YYYY') => {
+	return moment(date).format(type);
 };
 
 const mapOriginValueToFormInput = (key: string, originValue: string) => {

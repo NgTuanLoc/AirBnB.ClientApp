@@ -9,6 +9,10 @@ const StyledContainer = styled(Swiper)`
 		top: 50%;
 		transform: translateY(-50%);
 		color: black;
+
+		@media only screen and (max-width: 992px) {
+			transform: translateY(-25%);
+		}
 	}
 `;
 
