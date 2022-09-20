@@ -20,6 +20,8 @@ const StyledImageContainer = styled.div`
 	border-radius: var(--radius);
 	height: 29rem;
 	overflow: hidden;
+	position: relative;
+	z-index: 1000;
 
 	@media only screen and (max-width: 992px) {
 		height: 30rem;
