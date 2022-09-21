@@ -27,11 +27,10 @@ const StyledSwiperItem = styled.div`
 const StyledImageContainer = styled.div`
 	border-radius: var(--radius);
 	height: 12rem;
+	margin-bottom: 1rem;
 `;
 
 const StyledHeading = styled.h5`
-	margin-top: 1rem;
-
 	@media only screen and (max-width: 992px) {
 		margin-top: 0.1rem;
 		font-size: 1.4rem;

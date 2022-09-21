@@ -1,6 +1,7 @@
 import CalenderReact from 'react-calendar';
 import { useState, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive';
+import 'react-calendar/dist/Calendar.css';
 
 import { useAppDispatch } from '../../hooks';
 import { setBookDate } from '../../features/Global/globalSlice';

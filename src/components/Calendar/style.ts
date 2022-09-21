@@ -7,8 +7,6 @@ const StyledContainer = styled.div`
 
 	.react-calendar {
 		margin: 0rem auto;
-		width: 350px;
-		max-width: 100%;
 		background: white;
 		font-family: Arial, Helvetica, sans-serif;
 		line-height: 1.125em;
@@ -16,25 +14,18 @@ const StyledContainer = styled.div`
 		font-size: 2rem;
 		box-shadow: var(--box-shadow);
 		transition: var(--transition);
-
-		@media only screen and (max-width: 1200px) {
-			width: 100% !important;
-		}
+		overflow: hidden;
 
 		abbr {
 			text-decoration: none;
 		}
 	}
 
-	.react-calendar--doubleView {
-		width: 700px;
-	}
 	.react-calendar--doubleView .react-calendar__viewContainer {
 		display: flex;
 		margin: -0.5em;
 	}
 	.react-calendar--doubleView .react-calendar__viewContainer > * {
-		width: 50%;
 		margin: 0.5em;
 	}
 	.react-calendar,
@@ -59,7 +50,6 @@ const StyledContainer = styled.div`
 		margin-bottom: 1em;
 	}
 	.react-calendar__navigation button {
-		min-width: 44px;
 		background: none;
 	}
 	.react-calendar__navigation button:disabled {
@@ -98,7 +88,7 @@ const StyledContainer = styled.div`
 		padding: 2em 0.5em;
 	}
 	.react-calendar__tile {
-		max-width: 4rem;
+		height: 49.7px !important;
 		padding: 0.1rem;
 		background: none;
 		text-align: center;
@@ -174,18 +164,19 @@ const StyledContainer = styled.div`
 		right: 0;
 		z-index: 1;
 	}
-	.react-calendar__tile--rangeEnd::after {
+
+	.react-calendar__tile--rangeEnd::before {
 		content: '';
-		display: block;
 		background: var(--clr-deep-black);
 		width: 100%;
 		height: 100%;
 		border-radius: 50%;
+		display: block;
 		position: absolute;
 		z-index: 2;
 	}
 
-	.react-calendar__tile--rangeEnd::before {
+	.react-calendar__tile--rangeEnd::after {
 		content: '';
 		display: block;
 		background: #f7f7f7;
@@ -208,4 +199,5 @@ const StyledContainer = styled.div`
 		background-color: #e6e6e6;
 	}
 `;
+
 export { StyledContainer };
