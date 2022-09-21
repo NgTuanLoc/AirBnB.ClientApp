@@ -56,21 +56,17 @@ const globalSlice = createSlice({
 		setBookDate: (
 			state: IGlobalState,
 			action: PayloadAction<{
-				checkInValue: Date;
-				checkOutValue: Date;
+				checkInValue: string;
+				checkOutValue: string;
+				numberOfVisitDayValue: number;
 			}>
 		) => {
-			const { checkInValue, checkOutValue } = action.payload;
-			const temp = state.bookDate.checkOut
-				? Math.round(
-						(checkOutValue.getTime() - checkInValue.getTime()) /
-							(1000 * 3600 * 24)
-				  )
-				: 0;
+			const { checkInValue, checkOutValue, numberOfVisitDayValue } =
+				action.payload;
 
-			state.bookDate.checkIn = transformDate(checkInValue);
-			state.bookDate.checkOut = transformDate(checkOutValue);
-			state.numberOfVisitDay = temp;
+			state.bookDate.checkIn = checkInValue;
+			state.bookDate.checkOut = checkOutValue;
+			state.numberOfVisitDay = numberOfVisitDayValue;
 		},
 	},
 });

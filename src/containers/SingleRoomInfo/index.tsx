@@ -2,6 +2,7 @@ import { AiOutlineStar } from 'react-icons/ai';
 import { GiPoolDive } from 'react-icons/gi';
 import { MdOutlineFreeCancellation } from 'react-icons/md';
 
+import { transformDate } from '../../utils';
 import { useAppSelector } from '../../hooks';
 import { logo } from '../../constant';
 import { Calendar, Line } from '../../components';
@@ -174,7 +175,8 @@ const SingleRoomInfo = () => {
 					{name}
 				</StyledHeading>
 				<StyledLightParagraph>
-					{bookDate.checkIn} - {bookDate.checkOut}
+					{transformDate(bookDate.checkIn, 'MMMM Do')} -{' '}
+					{transformDate(bookDate.checkOut, 'MMMM Do')}
 				</StyledLightParagraph>
 				<Calendar />
 			</StyledCalendar>

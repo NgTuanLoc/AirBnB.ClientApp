@@ -6,6 +6,7 @@ import 'react-calendar/dist/Calendar.css';
 import { useAppDispatch } from '../../hooks';
 import { setBookDate } from '../../features/Global/globalSlice';
 import { StyledContainer } from './style';
+import { transformDate } from '../../utils';
 
 const Calendar = () => {
 	const dispatch = useAppDispatch();
@@ -17,8 +18,17 @@ const Calendar = () => {
 
 	useEffect(() => {
 		if (value.length === 2) {
+			const [checkInValue, checkOutValue] = value;
+			const numberOfVisitDayValue = Math.round(
+				(checkOutValue.getTime() - checkInValue.getTime()) / (1000 * 3600 * 24)
+			);
+
 			dispatch(
-				setBookDate({ checkInValue: value[0], checkOutValue: value[1] })
+				setBookDate({
+					checkInValue: transformDate(checkInValue),
+					checkOutValue: transformDate(checkOutValue),
+					numberOfVisitDayValue,
+				})
 			);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps

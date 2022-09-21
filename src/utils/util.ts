@@ -19,7 +19,9 @@ const transformLanguage = (str: string) => {
 	return str;
 };
 
-const transformDate = (date: Date, type = 'Do MMMM YYYY') => {
+const transformDate = (date: Date | string, type = '') => {
+	if (!type) moment(date).format();
+	if (typeof date === 'string') return moment(new Date(date)).format(type);
 	return moment(date).format(type);
 };
 

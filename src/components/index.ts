@@ -19,6 +19,7 @@ import Review from './Review';
 import ReviewEvaluate from './ReviewEvaluate';
 import ProgressBar from './ProgressBar';
 import Meta from './Meta';
+import ScrollToTop from './ScrollToTop';
 
 export {
 	Loading,
@@ -42,4 +43,5 @@ export {
 	ReviewEvaluate,
 	ProgressBar,
 	Meta,
+	ScrollToTop,
 };

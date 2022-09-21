@@ -37,7 +37,7 @@ const SingleRoomPage = () => {
 			<Meta title={`${name}${province ? ` - ${province}` : ''}`} />
 			<SingleRoomCatalog />
 			<SingleRoomDetails />
-			<ReviewContainer roomId={id as string} />
+			<ReviewContainer roomId={id} />
 			<ThingsToKnow />
 		</MainLayout>
 	);

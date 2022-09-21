@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { SkeletonTheme } from 'react-loading-skeleton';
 
+import { ScrollToTop } from './components';
 import {
 	Home,
 	RoomListPage,
@@ -13,7 +14,6 @@ import {
 	AuthWrapper,
 	PrivateRoute,
 } from './pages';
-import TestPage from './pages/TestPage';
 
 const App = () => {
 	return (
@@ -26,6 +26,7 @@ const App = () => {
 				borderRadius='var(--radius)'
 				duration={3}>
 				<Router>
+					<ScrollToTop />
 					<Routes>
 						<Route path='/' element={<Home />} />
 						<Route path='/room-list/:locationId' element={<RoomListPage />} />
@@ -52,14 +53,7 @@ const App = () => {
 							path='/user-not-found'
 							element={<NotFound error='User not existed' />}
 						/>
-						<Route
-							path='/test'
-							element={
-								<PrivateRoute type='ADMIN'>
-									<TestPage />
-								</PrivateRoute>
-							}
-						/>
+
 						<Route
 							path='*'
 							element={

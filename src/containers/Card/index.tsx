@@ -4,6 +4,7 @@ import moment from 'moment';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
+import { transformDate } from '../../utils';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { Button, Line } from '../../components';
 import { bookRoomById } from '../../features/Room/roomThunk';
@@ -99,7 +100,7 @@ const Card = () => {
 						<StyledButton borderRight type='button' className='btn-checkIn'>
 							<StyledLabel htmlFor='check-in'>CHECK-IN</StyledLabel>
 							<StyledInput
-								value={bookDate.checkIn}
+								value={transformDate(bookDate.checkIn, 'L')}
 								type='text'
 								name='check-in'
 								id='check-in'
@@ -109,7 +110,7 @@ const Card = () => {
 						<StyledButton type='button' className='btn-checkOut'>
 							<StyledLabel>CHECK-OUT</StyledLabel>
 							<StyledInput
-								value={bookDate.checkOut}
+								value={transformDate(bookDate.checkOut, 'L')}
 								type='text'
 								name='check-out'
 								id='check-out'
