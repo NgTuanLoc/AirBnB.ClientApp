@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 const StyledContainer = styled.div`
+	margin: 1rem 0;
 	@media only screen and (max-width: 1200px) {
 		min-width: 30rem;
 		height: 22rem;
@@ -31,7 +32,7 @@ const StyledUserInfo = styled.div`
 `;
 
 // Typography
-const StyledHeading = styled.h5`
+const StyledHeading = styled.h4`
 	text-transform: capitalize;
 `;
 
@@ -44,6 +45,7 @@ const StyledParagraph = styled.p`
 const StyledUserComment = styled.p`
 	font-size: 1.8rem;
 	color: rgb(34, 34, 34);
+	margin-top: 1.5rem;
 
 	@media only screen and (max-width: 1200px) {
 		font-size: 1.5rem;

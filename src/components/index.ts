@@ -16,6 +16,7 @@ import UserModalNav from './UserModalNav';
 import AdminForm from './AdminForm';
 import AdminFormInput from './AdminFormInput';
 import Review from './Review';
+import ReviewEvaluate from './ReviewEvaluate';
 import ProgressBar from './ProgressBar';
 import Meta from './Meta';
 
@@ -38,6 +39,7 @@ export {
 	AdminForm,
 	AdminFormInput,
 	Review,
+	ReviewEvaluate,
 	ProgressBar,
 	Meta,
 };

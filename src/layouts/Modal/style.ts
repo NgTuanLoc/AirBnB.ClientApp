@@ -5,21 +5,23 @@ const StyledContainer = styled.div<{ isOpen?: boolean }>`
 	z-index: 999999;
 	background-color: ${(props) =>
 		props.isOpen ? ' rgba(0, 0, 0, 0.7)' : 'transparent'};
-	width: 100vw;
-	height: 100vh;
-	transition: top 0.3s linear;
+	width: 100%;
+	height: 100%;
+	transition: all 0.3s linear;
 	left: 0;
 	top: ${(props) => (props.isOpen ? '0' : '100vh')};
 `;
 
 const StyledContent = styled.div``;
 
-const StyledContentContainer = styled.div`
+const StyledContentContainer = styled.div<{ fullHeight?: boolean }>`
 	margin-top: 2.5rem;
 	background-color: white;
 	border-radius: var(--radius);
 	padding: 3rem;
-	height: 100%;
+	margin-inline: auto;
+	height: ${(props) => (props.fullHeight ? '100%' : 'auto')};
+	max-width: 100rem;
 `;
 
 const StyledCloseButton = styled.button`

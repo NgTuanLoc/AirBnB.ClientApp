@@ -63,7 +63,7 @@ const globalSlice = createSlice({
 			const { checkInValue, checkOutValue } = action.payload;
 			const temp = state.bookDate.checkOut
 				? Math.round(
-						(checkInValue.getTime() - checkOutValue.getTime()) /
+						(checkOutValue.getTime() - checkInValue.getTime()) /
 							(1000 * 3600 * 24)
 				  )
 				: 0;

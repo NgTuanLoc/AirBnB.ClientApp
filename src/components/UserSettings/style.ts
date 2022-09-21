@@ -11,6 +11,7 @@ const StyledContainer = styled.div`
 	box-shadow: var(--box-shadow);
 	display: flex;
 	flex-direction: column;
+	overflow: hidden;
 	margin: 0.2rem 0;
 `;
 
@@ -24,7 +25,6 @@ const StyledButton = styled.a<{ bold?: boolean }>`
 	text-align: left;
 	font-weight: ${(props) => (props.bold ? '450' : '300')};
 	cursor: pointer;
-
 	:hover {
 		background-color: #f7f7f7;
 	}

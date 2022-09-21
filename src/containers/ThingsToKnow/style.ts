@@ -15,6 +15,7 @@ const StyledDivWrapper = styled.div`
 	display: flex;
 	align-items: center;
 	gap: 0.5rem;
+	margin-bottom: 0.5rem;
 `;
 
 const StyledListContainer = styled.div`
@@ -60,7 +61,7 @@ const StyledButton = styled.button`
 	font-size: 1.7rem;
 	font-weight: 550;
 	display: flex;
-	justify-content: center;
+	justify-content: flex-end;
 	align-items: center;
 `;
 

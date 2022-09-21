@@ -7,23 +7,42 @@ import { GiSparkles } from 'react-icons/gi';
 import { IRoom } from '../@types/Room';
 import { ILocation } from '../@types/Location';
 import { DEFAULT_IMAGE } from './DefaultImage';
+import { IUser } from '../@types/User';
 
-const USER_DATA = {
+const USER_DATA: IUser = {
+	tickets: null,
+	deleteAt: false,
+	_id: '',
 	name: '',
 	email: '',
 	password: '',
 	phone: '',
-	birthday: new Date(),
-	gender: false,
+	birthday: `${new Date()}`,
+	gender: 'Man',
 	address: '',
 	type: 'CLIENT',
+	__v: 0,
 };
 
-const ROOM_DATA = {
+const LOCATION_DATA: ILocation = {
+	deleteAt: false,
+	_id: '',
+	name: '',
+	province: '',
+	country: '',
+	valueate: 0,
+	__v: 0,
+	image: '',
+};
+
+const ROOM_DATA: IRoom = {
+	deleteAt: false,
+	_id: '',
 	name: '',
 	guests: 0,
 	bedRoom: 0,
 	bath: 0,
+	description: '',
 	elevator: false,
 	hotTub: false,
 	pool: false,
@@ -34,14 +53,10 @@ const ROOM_DATA = {
 	wifi: false,
 	heating: false,
 	cableTV: false,
+	locationId: LOCATION_DATA,
 	price: 0,
-};
-
-const LOCATION_DATA = {
-	name: '',
-	province: '',
-	country: '',
-	valueate: 0,
+	__v: 0,
+	image: '',
 };
 
 const USER_REVIEW = [

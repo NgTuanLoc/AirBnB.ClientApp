@@ -21,7 +21,7 @@ const StyledImageContainer = styled.div`
 	height: 29rem;
 	overflow: hidden;
 	position: relative;
-	z-index: 1000;
+	z-index: 10;
 
 	@media only screen and (max-width: 992px) {
 		height: 30rem;

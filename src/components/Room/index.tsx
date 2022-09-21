@@ -16,35 +16,53 @@ import {
 
 const Room = ({ _id, name, image, locationId, price }: IRoom) => {
 	const { isLoading } = useAppSelector((store) => store.room);
+
 	const images = [image, ...DUMMY_IMAGE_DATA];
+
+	if (isLoading) {
+		return (
+			<StyledContainer to={''}>
+				<StyledImageContainer>
+					<Skeleton />
+				</StyledImageContainer>
+				<StyledDivWrapper>
+					<StyledHeading>
+						<Skeleton />
+					</StyledHeading>
+					<StyledDivWrapper width='60%'>
+						<StyledParagraph>
+							<Skeleton />
+						</StyledParagraph>
+					</StyledDivWrapper>
+					<StyledDivWrapper width='50%'>
+						<StyledLightHeading>
+							<Skeleton />
+						</StyledLightHeading>
+					</StyledDivWrapper>
+				</StyledDivWrapper>
+			</StyledContainer>
+		);
+	}
 
 	return (
 		<StyledContainer to={`/room/${_id}`}>
 			<StyledImageContainer>
-				{isLoading ? <Skeleton /> : <Catalog images={images} navigation />}
+				<Catalog images={images} navigation />
 			</StyledImageContainer>
 			<StyledDivWrapper>
-				<StyledHeading>{isLoading ? <Skeleton /> : name}</StyledHeading>
+				<StyledHeading>{name}</StyledHeading>
 				<StyledDivWrapper width='60%'>
-					{isLoading ? (
-						<Skeleton />
-					) : (
-						<StyledParagraph>
-							{locationId?.province} <StyledSpan>{locationId?.name}</StyledSpan>
-						</StyledParagraph>
-					)}
+					<StyledParagraph>
+						{locationId?.province} <StyledSpan>{locationId?.name}</StyledSpan>
+					</StyledParagraph>
 				</StyledDivWrapper>
 				<StyledDivWrapper width='50%'>
-					{isLoading ? (
-						<Skeleton />
-					) : (
-						<StyledLightHeading>
-							<StyledSpan bold>
-								${price ? price?.toLocaleString() : 'undefined'}
-							</StyledSpan>{' '}
-							night
-						</StyledLightHeading>
-					)}
+					<StyledLightHeading>
+						<StyledSpan bold>
+							${price ? price?.toLocaleString() : 'undefined'}
+						</StyledSpan>{' '}
+						night
+					</StyledLightHeading>
 				</StyledDivWrapper>
 			</StyledDivWrapper>
 		</StyledContainer>

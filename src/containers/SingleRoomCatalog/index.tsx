@@ -58,7 +58,9 @@ const SingleRoomCatalog = () => {
 						{isLoading ? (
 							<Skeleton width='60%' />
 						) : (
-							`${name}, ${locationId?.name}, ${locationId?.province}`
+							`${name}${locationId.name ? `, ${locationId.name}` : ''}${
+								locationId.province ? `, ${locationId.province}` : ''
+							}`
 						)}
 					</StyledLocationTitle>
 					<StyledLinkContainer>
@@ -66,10 +68,8 @@ const SingleRoomCatalog = () => {
 							{isLoading ? (
 								<Skeleton width='30rem' />
 							) : (
-								`${
-									locationId
-										? `${locationId?.province}, ${locationId?.name}`
-										: ''
+								`${name}${locationId.country ? `, ${locationId.country}` : ''}${
+									locationId.province ? `, ${locationId.province}` : ''
 								}`
 							)}
 						</StyledHeading>

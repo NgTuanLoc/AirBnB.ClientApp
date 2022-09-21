@@ -6,19 +6,6 @@ const StyledContainer = styled.div`
 	}
 `;
 
-const StyledEvaluateContainer = styled.div<{ hide?: boolean }>`
-	display: ${(props) => (props.hide ? 'none' : 'grid')};
-	column-gap: 2rem;
-	grid-template-columns: 1fr 1fr;
-	margin-bottom: 3rem;
-`;
-
-const StyledEvaluateItem = styled.div`
-	display: grid;
-	grid-template-columns: 1fr 15rem;
-	align-items: center;
-`;
-
 const StyledUserContainer = styled.div`
 	display: grid;
 	gap: 2rem;
@@ -39,6 +26,61 @@ const StyledUserContainer = styled.div`
 	}
 `;
 
+const StyledModalHeader = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 2rem;
+`;
+
+const StyledDivWrapper = styled.div``;
+
+const StyledModalContentContainer = styled.div`
+	display: grid;
+	grid-template-columns: 35rem 1fr;
+	column-gap: 2rem;
+	padding: 2rem 0;
+	height: 50rem;
+
+	@media only screen and (max-width: 992px) {
+		grid-template-columns: 1fr;
+		overflow: scroll;
+		padding: 1.5rem;
+	}
+`;
+
+const StyledReviewContainer = styled.div`
+	height: 100%;
+	overflow: scroll;
+`;
+
+const StyledShowMoreButton = styled.button`
+	border-radius: var(--radius);
+	border-width: 1px;
+	border-style: solid;
+	transition: box-shadow 0.2s ease, transform 0.1s ease;
+	border-color: #222222;
+	background: white;
+	padding: 13px 23px;
+	text-align: center;
+	font-weight: 600;
+	font-size: 1.6rem;
+	line-height: 2rem;
+	outline: none;
+	color: #222222;
+	max-width: 20rem;
+	touch-action: manipulation;
+
+	:hover {
+		border-color: black;
+		background: #f7f7f7;
+	}
+	@media only screen and (max-width: 992px) {
+		width: 100%;
+		max-width: 100%;
+	}
+`;
+
 // Typography
 const StyledHeading = styled.h4`
 	display: flex;
@@ -47,16 +89,13 @@ const StyledHeading = styled.h4`
 	margin-bottom: 1rem;
 `;
 
-const StyledLightHeading = styled.h5`
-	font-weight: 350;
-	margin: 0;
-`;
-
 export {
 	StyledContainer,
-	StyledEvaluateContainer,
-	StyledEvaluateItem,
 	StyledUserContainer,
+	StyledModalHeader,
+	StyledModalContentContainer,
+	StyledReviewContainer,
+	StyledDivWrapper,
 	StyledHeading,
-	StyledLightHeading,
+	StyledShowMoreButton,
 };

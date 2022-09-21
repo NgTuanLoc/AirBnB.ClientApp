@@ -7,7 +7,7 @@ const StyledContainer = styled.div`
 `;
 
 const StyledFillerContainer = styled.div`
-	height: 8px;
+	height: 5px;
 	width: 10rem;
 	background-color: #e0e0de;
 	border-radius: var(--radius);

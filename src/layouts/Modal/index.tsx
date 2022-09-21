@@ -13,15 +13,23 @@ interface IModal {
 	children?: ReactNode;
 	isModalOpen?: boolean;
 	setIsModalOpen?: any;
+	fullHeight?: boolean;
 }
 
-const Modal = ({ children, isModalOpen, setIsModalOpen }: IModal) => {
+const Modal = ({
+	children,
+	isModalOpen,
+	setIsModalOpen,
+	fullHeight = true,
+}: IModal) => {
 	const ref = useRef(null);
 	useOnClickOutside(ref, () => setIsModalOpen(false));
 
 	return (
-		<StyledContainer isOpen={isModalOpen}>
-			<StyledContentContainer ref={ref}>
+		<StyledContainer
+			isOpen={isModalOpen}
+			className={`${fullHeight ? '' : 'flex-center'}`}>
+			<StyledContentContainer ref={ref} fullHeight={fullHeight}>
 				<StyledCloseButton onClick={() => setIsModalOpen(!isModalOpen)}>
 					<MdOutlineKeyboardArrowLeft />
 				</StyledCloseButton>
