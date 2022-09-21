@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ChangeEvent } from 'react';
 import { useMediaQuery } from 'react-responsive';
-import { AiFillStar } from 'react-icons/ai';
+import { AiFillStar, AiOutlineSearch } from 'react-icons/ai';
 
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { Line, Review, ReviewEvaluate } from '../../components';
@@ -11,6 +11,8 @@ import {
 	StyledContainer,
 	StyledUserContainer,
 	StyledModalHeader,
+	StyledSearchContainer,
+	StyledSearch,
 	StyledModalContentContainer,
 	StyledReviewContainer,
 	StyledDivWrapper,
@@ -28,8 +30,8 @@ const ReviewContainer = ({ roomId }: IReviewContainer) => {
 	const isMobileDevice = useMediaQuery({
 		query: '(max-width: 992px)',
 	});
-	const [isModalOpen, setIsModalOpen] = useState(true);
-
+	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [search, setSearch] = useState('');
 	const mappedRatingList = ratingList.map((item) => {
 		const { _id, userId, content, created_at } = item;
 		let userAvatar = DEFAULT_IMAGE;
@@ -49,6 +51,12 @@ const ReviewContainer = ({ roomId }: IReviewContainer) => {
 		return user;
 	});
 
+	const onSearchHandler = (e: ChangeEvent<HTMLInputElement>) => {
+		const value = e.target.value;
+		setSearch(value);
+		console.log(search);
+	};
+
 	useEffect(() => {
 		dispatch(getReviewListByRoomId(roomId as string));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -67,14 +75,18 @@ const ReviewContainer = ({ roomId }: IReviewContainer) => {
 						<AiFillStar />
 						5.0 - {userReviews.length} reviews
 					</StyledHeading>
-					<StyledHeading>
-						<AiFillStar />
-						5.0 - {userReviews.length} reviews
-					</StyledHeading>
+					<StyledSearchContainer>
+						<AiOutlineSearch />
+						<StyledSearch
+							placeholder='Search reviews'
+							value={search}
+							onChange={onSearchHandler}
+						/>
+					</StyledSearchContainer>
 				</StyledModalHeader>
 				{isMobileDevice ? (
 					<StyledModalContentContainer>
-						<ReviewEvaluate />
+						<ReviewEvaluate gridColumn />
 						{userReviews.map((item) => {
 							const { id, avatar, name, review, created_at } = item;
 							const user = { avatar, name, review, created_at };

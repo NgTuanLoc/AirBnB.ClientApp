@@ -9,6 +9,14 @@ const StyledContainer = styled.div`
 		padding: 1.6rem;
 		border: 1px solid #dddddd;
 	}
+
+	@media only screen and (max-width: 992px) {
+		width: 100%;
+		height: 22rem;
+		border-radius: var(--radius);
+		padding: 1.6rem;
+		border: 1px solid #dddddd;
+	}
 `;
 
 const StyledUserInfoContainer = styled.div`

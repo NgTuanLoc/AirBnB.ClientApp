@@ -22,6 +22,11 @@ const StyledContentContainer = styled.div<{ fullHeight?: boolean }>`
 	margin-inline: auto;
 	height: ${(props) => (props.fullHeight ? '100%' : 'auto')};
 	max-width: 100rem;
+	width: 100%;
+
+	@media only screen and (max-width: 992px) {
+		padding-inline: 0.5rem;
+	}
 `;
 
 const StyledCloseButton = styled.button`

@@ -31,6 +31,11 @@ const StyledModalHeader = styled.div`
 	align-items: center;
 	justify-content: space-between;
 	margin-top: 2rem;
+
+	@media only screen and (max-width: 992px) {
+		flex-direction: column;
+		align-items: flex-start;
+	}
 `;
 
 const StyledDivWrapper = styled.div``;
@@ -45,13 +50,29 @@ const StyledModalContentContainer = styled.div`
 	@media only screen and (max-width: 992px) {
 		grid-template-columns: 1fr;
 		overflow: scroll;
-		padding: 1.5rem;
 	}
 `;
 
 const StyledReviewContainer = styled.div`
 	height: 100%;
 	overflow: scroll;
+`;
+
+const StyledSearchContainer = styled.div`
+	display: grid;
+	grid-template-columns: 3rem 1fr;
+	padding: 0.5rem 0.75rem;
+	width: 100%;
+	border-radius: 100px;
+	background-color: rgb(247, 247, 247);
+	border: 2px solid black;
+`;
+
+const StyledSearch = styled.input`
+	border: none;
+	background-color: transparent;
+	outline: none;
+	font-size: 1.8rem;
 `;
 
 const StyledShowMoreButton = styled.button`
@@ -93,6 +114,8 @@ export {
 	StyledContainer,
 	StyledUserContainer,
 	StyledModalHeader,
+	StyledSearchContainer,
+	StyledSearch,
 	StyledModalContentContainer,
 	StyledReviewContainer,
 	StyledDivWrapper,
