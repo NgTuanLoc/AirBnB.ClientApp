@@ -91,7 +91,7 @@ const StyledScore = styled.p`
 `;
 
 const StyledHeading = styled.h5`
-	width: 70%;
+	width: 75%;
 	margin: 0;
 	font-size: 1.5rem;
 	color: #222222;

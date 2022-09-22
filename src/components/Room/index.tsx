@@ -61,7 +61,7 @@ const Room = ({ _id, name, image, locationId, price }: IRoom) => {
 			<StyledDivWrapper>
 				<StyledHeadingContainer>
 					<StyledHeading>
-						{name.length > 24 ? `${name.substring(0, 24)}...` : name}
+						{name.length > 20 ? `${name.substring(0, 20)}...` : name}
 					</StyledHeading>
 					<StyledScore>
 						<AiFillStar /> {generateRandomIndex(400, 500) / 100}

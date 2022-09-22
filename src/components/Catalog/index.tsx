@@ -8,7 +8,7 @@ import 'swiper/css/pagination';
 
 // import required modules
 import { Pagination, Navigation } from 'swiper';
-import { StyledContainer, StyledHeartIcon, StyledLikeButton } from './style';
+import { StyledContainer } from './style';
 import { Image } from '../';
 
 interface ICatalog {

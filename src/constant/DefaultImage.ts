@@ -2,8 +2,8 @@ export const DEFAULT_IMAGE =
 	'https://upload.wikimedia.org/wikipedia/commons/d/d1/Image_not_available.png';
 
 export const DUMMY_IMAGE_DATA = [
-	'https://airbnb.cybersoft.edu.vn/public/images/room/1634894280363_a4.jpg',
-	'https://airbnb.cybersoft.edu.vn/public/images/room/1658146724696_put-together-a-perfect-guest-room-1976987-hero-223e3e8f697e4b13b62ad4fe898d492d.jpg',
-	'https://airbnb.cybersoft.edu.vn/public/images/room/1634310414778_lahotelsaigon.jpg',
-	'https://airbnb.cybersoft.edu.vn/public/images/room/1658166647257_NYC-1096x722.jpg',
+	'https://a0.muscache.com/im/pictures/5df4ec2d-fabd-434a-9097-257960757d06.jpg?im_w=720',
+	'https://a0.muscache.com/im/pictures/57e6f125-d5dd-4eab-a9fa-a3f60a594b90.jpg?im_w=720',
+	'https://a0.muscache.com/im/pictures/8fb5846e-bb22-43d0-97f7-8a53aa86880f.jpg?im_w=720',
+	'https://a0.muscache.com/im/pictures/miso/Hosting-51567500/original/3a424d2a-303b-4990-be57-137e64ca05d6.jpeg?im_w=720',
 ];

@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { AiFillHeart } from 'react-icons/ai';
 
 const StyledContainer = styled.div`
 	width: 100%;
@@ -43,30 +42,4 @@ const StyledContainer = styled.div`
 	}
 `;
 
-const StyledHeartIcon = styled(AiFillHeart)`
-	display: block;
-	fill: rgba(0, 0, 0, 0.5);
-	height: 24px;
-	width: 24px;
-	stroke: white !important;
-	stroke-width: 7rem !important;
-	overflow: visible;
-`;
-
-const StyledLikeButton = styled.button`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	position: absolute;
-	z-index: 1;
-	top: 1.5rem;
-	right: 1.5rem;
-	color: white;
-	background-color: transparent;
-	border-radius: 50%;
-	transition: transform 0.25s ease 0s;
-	margin: -2px 0px 0px;
-	padding: 2px 0px 0px;
-`;
-
-export { StyledContainer, StyledHeartIcon, StyledLikeButton };
+export { StyledContainer };
