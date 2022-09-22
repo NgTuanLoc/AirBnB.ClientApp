@@ -7,12 +7,8 @@ const StyledContainer = styled.div`
 	position: relative;
 	min-width: 18rem;
 
-	@media only screen and (max-width: 992px) {
-		grid-area: nav;
-
-		h5 {
-			display: none;
-		}
+	@media only screen and (max-width: 1200px) {
+		display: none;
 	}
 `;
 

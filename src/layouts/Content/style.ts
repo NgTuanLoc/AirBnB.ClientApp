@@ -13,7 +13,7 @@ const StyledContainer = styled.main<StyledContainerProps>`
 	margin-inline: auto;
 
 	@media only screen and (max-width: 992px) {
-		margin-top: ${(props) => (props.margin ? props.margin : '14rem')};
+		margin-top: ${(props) => (props.margin ? props.margin : '8rem')};
 		padding: ${(props) => (props.padding ? props.padding : '0')};
 	}
 `;
