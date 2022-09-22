@@ -1,9 +1,11 @@
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-
 import logo from '../../images/logo.svg';
 import { Search, UserModalNav } from '../../components';
-import { StyledContainer, StyledImage } from './style';
+import {
+	StyledContainer,
+	StyledImage,
+	StyledLogo,
+	StyledNavbar,
+} from './style';
 
 export interface INavbar {
 	hideSearch?: boolean;
@@ -12,17 +14,15 @@ export interface INavbar {
 const Navbar = ({ hideSearch }: INavbar) => {
 	return (
 		<StyledContainer>
-			<Logo to='/'>
-				<StyledImage src={logo} alt='airbnb logo' />
-			</Logo>
-			<Search hideSearch={hideSearch} />
-			<UserModalNav />
+			<StyledNavbar>
+				<StyledLogo to='/'>
+					<StyledImage src={logo} alt='airbnb logo' />
+				</StyledLogo>
+				<Search hideSearch={hideSearch} />
+				<UserModalNav />
+			</StyledNavbar>
 		</StyledContainer>
 	);
 };
-
-const Logo = styled(Link)`
-	grid-area: logo;
-`;
 
 export default Navbar;

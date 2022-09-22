@@ -8,7 +8,7 @@ import 'swiper/css/pagination';
 
 // import required modules
 import { Pagination, Navigation } from 'swiper';
-import { StyledContainer } from './style';
+import { StyledContainer, StyledHeartIcon, StyledLikeButton } from './style';
 import { Image } from '../';
 
 interface ICatalog {
@@ -30,7 +30,7 @@ const Catalog = ({ images, borderRadius, navigation }: ICatalog) => {
 				navigation={navigation ? navigation : false}
 				modules={[Pagination, Navigation]}>
 				{images.map((image, id) => (
-					<SwiperSlide key={id}>
+					<SwiperSlide key={id} style={{ position: 'relative' }}>
 						<Image
 							borderRadius={borderRadius}
 							url={image}

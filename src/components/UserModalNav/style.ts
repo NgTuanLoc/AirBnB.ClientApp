@@ -55,7 +55,7 @@ const StyledLoginButton = styled.button`
 	border-radius: 30px;
 	transition: var(--transition);
 	box-shadow: var(--light-shadow);
-	margin-inline: 1rem;
+	margin-left: 1rem;
 	cursor: pointer;
 
 	svg {

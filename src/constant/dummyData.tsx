@@ -4,6 +4,7 @@ import { BsFillDoorOpenFill } from 'react-icons/bs';
 import { IoLogoNoSmoking } from 'react-icons/io5';
 import { GiSparkles } from 'react-icons/gi';
 
+import { generateRandomDate } from '../utils';
 import { IRoom } from '../@types/Room';
 import { ILocation } from '../@types/Location';
 import { DEFAULT_IMAGE } from './DefaultImage';
@@ -174,7 +175,10 @@ const DEFAULT_ROOM: IRoom = {
 	image: DEFAULT_IMAGE,
 };
 
-export { DEFAULT_ROOM };
+// const START_DATE = {
+// 	from: generateRandomDate(new Date('1/09/2022'), new Date('30/09/2022')),
+// };
+// const END_DATE = { from: new Date() };
 
 export {
 	USER_DATA,
@@ -182,4 +186,5 @@ export {
 	LOCATION_DATA,
 	USER_REVIEW,
 	THINGS_TO_KNOW_DATA,
+	DEFAULT_ROOM,
 };

@@ -9,9 +9,16 @@ interface IImage {
 	alt: string;
 	gridArea?: string;
 	borderRadius?: string;
+	heartIcon?: boolean;
 }
 
-const CustomImage = ({ url, alt, gridArea, borderRadius }: IImage) => {
+const CustomImage = ({
+	url,
+	alt,
+	gridArea,
+	borderRadius,
+	heartIcon = false,
+}: IImage) => {
 	const isImageLoaded = useProgressiveImg(url);
 
 	if (!url) {

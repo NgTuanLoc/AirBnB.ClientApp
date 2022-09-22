@@ -199,6 +199,11 @@ const StyledContainer = styled.div`
 	.react-calendar--selectRange .react-calendar__tile--hover {
 		background-color: #e6e6e6;
 	}
+
+	.react-calendar__navigation__label__labelText {
+		font-size: 1.5rem;
+		font-weight: 550;
+	}
 `;
 
 export { StyledContainer };

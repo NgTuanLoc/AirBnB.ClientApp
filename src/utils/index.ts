@@ -3,6 +3,8 @@ import {
 	transformDate,
 	transformLanguage,
 	mapOriginValueToFormInput,
+	generateRandomIndex,
+	generateRandomDate,
 } from './util';
 
 export {
@@ -10,4 +12,6 @@ export {
 	transformDate,
 	transformLanguage,
 	mapOriginValueToFormInput,
+	generateRandomIndex,
+	generateRandomDate,
 };

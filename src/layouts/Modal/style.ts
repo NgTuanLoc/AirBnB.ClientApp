@@ -7,9 +7,9 @@ const StyledContainer = styled.div<{ isOpen?: boolean }>`
 		props.isOpen ? ' rgba(0, 0, 0, 0.7)' : 'transparent'};
 	width: 100%;
 	height: 100%;
-	transition: all 0.3s linear;
+	transition: all 0.5s linear;
 	left: 0;
-	top: ${(props) => (props.isOpen ? '0' : '100vh')};
+	top: ${(props) => (props.isOpen ? '0' : '180vh')};
 `;
 
 const StyledContent = styled.div``;

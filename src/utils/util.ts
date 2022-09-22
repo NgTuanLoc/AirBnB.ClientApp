@@ -45,4 +45,20 @@ const mapOriginValueToFormInput = (key: string, originValue: string) => {
 	return { value, inputType };
 };
 
-export { transformLanguage, transformDate, mapOriginValueToFormInput };
+const generateRandomIndex = (min: number, max: number) => {
+	return Math.floor(Math.random() * (max - min + 1) + min);
+};
+
+const generateRandomDate = (from: Date, to: Date) => {
+	const fromTime = from.getTime();
+	const toTime = to.getTime();
+	return new Date(fromTime + Math.random() * (toTime - fromTime));
+};
+
+export {
+	transformLanguage,
+	transformDate,
+	mapOriginValueToFormInput,
+	generateRandomIndex,
+	generateRandomDate,
+};

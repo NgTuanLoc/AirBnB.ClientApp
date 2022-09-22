@@ -4,11 +4,12 @@ const StyledContainer = styled.section`
 	margin: 4rem 0;
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(27rem, 1fr));
-	grid-gap: 2rem;
+	grid-gap: 4rem;
 	padding-bottom: var(--footer-height);
 
 	@media only screen and (max-width: 992px) {
 		margin: 1rem 0;
+		grid-gap: 2rem;
 	}
 `;
 

@@ -1,13 +1,19 @@
 import Skeleton from 'react-loading-skeleton';
+import { AiFillStar } from 'react-icons/ai';
 
 import { DUMMY_IMAGE_DATA } from '../../constant';
+import { generateRandomIndex } from '../../utils';
 import { IRoom } from '../../@types/Room';
 import { useAppSelector } from '../../hooks';
 import { Catalog } from '..';
 import {
 	StyledContainer,
 	StyledParagraph,
+	StyledHeartIcon,
+	StyledLikeButton,
 	StyledSpan,
+	StyledScore,
+	StyledHeadingContainer,
 	StyledDivWrapper,
 	StyledImageContainer,
 	StyledHeading,
@@ -48,12 +54,25 @@ const Room = ({ _id, name, image, locationId, price }: IRoom) => {
 		<StyledContainer to={`/room/${_id}`}>
 			<StyledImageContainer>
 				<Catalog images={images} navigation />
+				<StyledLikeButton>
+					<StyledHeartIcon />
+				</StyledLikeButton>
 			</StyledImageContainer>
 			<StyledDivWrapper>
-				<StyledHeading>{name}</StyledHeading>
+				<StyledHeadingContainer>
+					<StyledHeading>
+						{name.length > 24 ? `${name.substring(0, 24)}...` : name}
+					</StyledHeading>
+					<StyledScore>
+						<AiFillStar /> {generateRandomIndex(400, 500) / 100}
+					</StyledScore>
+				</StyledHeadingContainer>
 				<StyledDivWrapper width='60%'>
 					<StyledParagraph>
 						{locationId?.province} <StyledSpan>{locationId?.name}</StyledSpan>
+					</StyledParagraph>
+					<StyledParagraph>
+						{generateRandomIndex(120, 500).toLocaleString()} kilometers
 					</StyledParagraph>
 				</StyledDivWrapper>
 				<StyledDivWrapper width='50%'>
