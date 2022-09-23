@@ -1,16 +1,14 @@
 import { useNavigate } from 'react-router-dom';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import moment from 'moment';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
-import { transformDate } from '../../utils';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { Button, Line } from '../../components';
+import { Button, Line, BookingDateInput } from '../../components';
 import { bookRoomById } from '../../features/Room/roomThunk';
 import {
 	StyledContainer,
-	StyledLabel,
 	StyledHeading,
 	StyledSpan,
 	StyledPriceHeading,
@@ -19,11 +17,8 @@ import {
 	StyledCardDetail,
 	StyledCardDetailItem,
 	StyledCardSchedule,
-	StyledCardScheduleCheckIn,
 	StyledCardScheduleGuest,
-	StyledButton,
 	StyledNormalButton,
-	StyledInput,
 	StyledDivWrapper,
 	StyledForm,
 } from './style';
@@ -43,13 +38,6 @@ const Card = () => {
 	const [isBooked, setIsBooked] = useState(false);
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
-
-	const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-		const name = e.target.name;
-		const value = e.target.value;
-
-		console.log(name, value);
-	};
 
 	const onSubmitHandler = (e: FormEvent) => {
 		e.preventDefault();
@@ -96,28 +84,7 @@ const Card = () => {
 			</StyledPriceHeading>
 			<StyledForm onSubmit={onSubmitHandler}>
 				<StyledCardSchedule>
-					<StyledCardScheduleCheckIn>
-						<StyledButton borderRight type='button' className='btn-checkIn'>
-							<StyledLabel htmlFor='check-in'>CHECK-IN</StyledLabel>
-							<StyledInput
-								value={transformDate(bookDate.checkIn, 'L')}
-								type='text'
-								name='check-in'
-								id='check-in'
-								onChange={onChangeHandler}
-							/>
-						</StyledButton>
-						<StyledButton type='button' className='btn-checkOut'>
-							<StyledLabel>CHECK-OUT</StyledLabel>
-							<StyledInput
-								value={transformDate(bookDate.checkOut, 'L')}
-								type='text'
-								name='check-out'
-								id='check-out'
-								onChange={onChangeHandler}
-							/>
-						</StyledButton>
-					</StyledCardScheduleCheckIn>
+					<BookingDateInput />
 					<StyledCardScheduleGuest>
 						<StyledDivWrapper>
 							<StyledHeading>GUESTS</StyledHeading>

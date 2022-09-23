@@ -5,6 +5,7 @@ import {
 	mapOriginValueToFormInput,
 	generateRandomIndex,
 	generateRandomDate,
+	isValidDate,
 } from './util';
 
 export {
@@ -14,4 +15,5 @@ export {
 	mapOriginValueToFormInput,
 	generateRandomIndex,
 	generateRandomDate,
+	isValidDate,
 };

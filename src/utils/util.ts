@@ -55,10 +55,14 @@ const generateRandomDate = (from: Date, to: Date) => {
 	return new Date(fromTime + Math.random() * (toTime - fromTime));
 };
 
+const isValidDate = (dateObject: string) =>
+	new Date(dateObject).toString() !== 'Invalid Date';
+
 export {
 	transformLanguage,
 	transformDate,
 	mapOriginValueToFormInput,
 	generateRandomIndex,
 	generateRandomDate,
+	isValidDate,
 };

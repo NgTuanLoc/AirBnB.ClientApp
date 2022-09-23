@@ -40,12 +40,6 @@ const StyledContainer = styled.article`
 
 const StyledForm = styled.form``;
 
-const StyledInput = styled.input`
-	border: transparent;
-	outline: none;
-	width: 100%;
-`;
-
 const StyledCardSchedule = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -53,12 +47,6 @@ const StyledCardSchedule = styled.div`
 	margin: 2rem 0;
 	border: 1px solid #b0b0b0;
 	border-radius: var(--radius);
-`;
-
-const StyledCardScheduleCheckIn = styled.div`
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	position: relative;
 `;
 
 const StyledCardScheduleGuest = styled.div`
@@ -94,10 +82,6 @@ const StyledDivWrapper = styled.div<{ justifyContent?: string }>`
 `;
 
 // Typography
-const StyledLabel = styled.label`
-	margin-bottom: 0.5rem;
-	font-weight: bold;
-`;
 
 const StyledHeading = styled.h5``;
 
@@ -110,6 +94,7 @@ const StyledPriceHeading = styled.h3`
 const StyledSpan = styled.span`
 	font-weight: 200;
 	font-size: 1.5rem;
+	text-transform: none;
 `;
 
 const StyledParagraph = styled.p<{ textUnderline?: boolean }>`
@@ -117,21 +102,10 @@ const StyledParagraph = styled.p<{ textUnderline?: boolean }>`
 	text-decoration: ${(props) => (props.textUnderline ? 'underline' : 'none')};
 `;
 
-const StyledButton = styled.button<{
-	borderRight?: boolean;
-}>`
-	text-align: left;
-	border-bottom: 1px solid #b0b0b0;
-	border-right: ${(props) =>
-		props.borderRight ? '1px solid #b0b0b0' : 'none'};
-	padding: 1rem;
-`;
-
 const StyledNormalButton = styled.button``;
 
 export {
 	StyledContainer,
-	StyledLabel,
 	StyledHeading,
 	StyledSpan,
 	StyledPriceHeading,
@@ -140,10 +114,7 @@ export {
 	StyledCardDetail,
 	StyledCardDetailItem,
 	StyledCardSchedule,
-	StyledCardScheduleCheckIn,
 	StyledCardScheduleGuest,
-	StyledButton,
-	StyledInput,
 	StyledDivWrapper,
 	StyledNormalButton,
 	StyledForm,

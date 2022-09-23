@@ -20,6 +20,7 @@ import ReviewEvaluate from './ReviewEvaluate';
 import ProgressBar from './ProgressBar';
 import Meta from './Meta';
 import ScrollToTop from './ScrollToTop';
+import BookingDateInput from './BookingDateInput';
 
 export {
 	Loading,
@@ -44,4 +45,5 @@ export {
 	ProgressBar,
 	Meta,
 	ScrollToTop,
+	BookingDateInput,
 };
