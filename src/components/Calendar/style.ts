@@ -88,6 +88,7 @@ const StyledContainer = styled.div`
 		padding: 2em 0.5em;
 	}
 	.react-calendar__tile {
+		position: relative;
 		height: 49.7px !important;
 		padding: 0.1rem;
 		background: none;
@@ -138,7 +139,7 @@ const StyledContainer = styled.div`
 
 		abbr {
 			position: absolute;
-			z-index: 999;
+			z-index: 10;
 		}
 	}
 

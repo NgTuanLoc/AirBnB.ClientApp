@@ -27,6 +27,12 @@ const StyledModal = styled.div<{ isModalOpen?: boolean }>`
 	transition: all 0.3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
 `;
 
+const StyledModalInfo = styled.div`
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+`;
+
 const StyledModalContent = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -67,24 +73,60 @@ const StyledModalButton = styled.button`
 	}
 `;
 
+const StyledModalContainer = styled.div`
+	padding: 2rem;
+`;
+
+const StyledImageContainer = styled.div`
+	width: 100%;
+`;
+
 // Typography
+const StyledAnchorButton = styled.button<{ fontSize?: string }>`
+	font-size: ${(props) => (props.fontSize ? props.fontSize : '1.3rem')};
+	font-weight: 600;
+	text-decoration: underline;
+`;
+
+const StyledBigParagraph = styled.p<{ textUnderline?: boolean }>`
+	color: #252525;
+	font-size: 1.6rem;
+	text-decoration: ${(props) => (props.textUnderline ? 'underline' : 'none')};
+`;
+
 const StyledParagraph = styled.p<{ textUnderline?: boolean }>`
-	font-size: 1.5rem;
+	color: #252525;
+	font-size: 1.4rem;
+	text-decoration: ${(props) => (props.textUnderline ? 'underline' : 'none')};
+`;
+
+const StyledSmallParagraph = styled.p<{ textUnderline?: boolean }>`
+	color: #252525;
+	font-size: 1.2rem;
 	text-decoration: ${(props) => (props.textUnderline ? 'underline' : 'none')};
 `;
 
 const StyledHeading = styled.h5``;
 
+const StyledBigHeading = styled.h3``;
+
 export {
 	StyledContainer,
 	StyledButton,
 	StyledDivWrapper,
+	StyledModalContainer,
+	StyledImageContainer,
 	StyledModal,
 	StyledParagraph,
 	StyledHeading,
 	StyledModalButton,
 	StyledModalContent,
 	StyledModalItem,
+	StyledModalInfo,
 	StyledModalGuest,
 	StyledButtonContainer,
+	StyledAnchorButton,
+	StyledSmallParagraph,
+	StyledBigParagraph,
+	StyledBigHeading,
 };
