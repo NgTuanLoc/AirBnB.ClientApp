@@ -3,7 +3,7 @@ import {
 	StyledContainer,
 	StyledEvaluateItem,
 	StyledLightHeading,
-} from './styled';
+} from './style';
 
 interface IReviewEvaluate {
 	hide?: boolean;

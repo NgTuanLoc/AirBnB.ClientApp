@@ -49,13 +49,6 @@ const StyledCardSchedule = styled.div`
 	border-radius: var(--radius);
 `;
 
-const StyledCardScheduleGuest = styled.div`
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 1rem;
-`;
-
 const StyledCardDetail = styled.div`
 	margin-top: 2rem;
 `;
@@ -82,7 +75,6 @@ const StyledDivWrapper = styled.div<{ justifyContent?: string }>`
 `;
 
 // Typography
-
 const StyledHeading = styled.h5``;
 
 const StyledPriceHeading = styled.h3`
@@ -102,8 +94,6 @@ const StyledParagraph = styled.p<{ textUnderline?: boolean }>`
 	text-decoration: ${(props) => (props.textUnderline ? 'underline' : 'none')};
 `;
 
-const StyledNormalButton = styled.button``;
-
 export {
 	StyledContainer,
 	StyledHeading,
@@ -114,8 +104,6 @@ export {
 	StyledCardDetail,
 	StyledCardDetailItem,
 	StyledCardSchedule,
-	StyledCardScheduleGuest,
 	StyledDivWrapper,
-	StyledNormalButton,
 	StyledForm,
 };

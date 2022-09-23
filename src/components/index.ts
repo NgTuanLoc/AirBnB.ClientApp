@@ -21,6 +21,7 @@ import ProgressBar from './ProgressBar';
 import Meta from './Meta';
 import ScrollToTop from './ScrollToTop';
 import BookingDateInput from './BookingDateInput';
+import GuestInput from './GuestInput';
 
 export {
 	Loading,
@@ -46,4 +47,5 @@ export {
 	Meta,
 	ScrollToTop,
 	BookingDateInput,
+	GuestInput,
 };

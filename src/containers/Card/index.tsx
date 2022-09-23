@@ -1,11 +1,10 @@
 import { useNavigate } from 'react-router-dom';
-import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import moment from 'moment';
 import { FormEvent, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { Button, Line, BookingDateInput } from '../../components';
+import { Button, Line, BookingDateInput, GuestInput } from '../../components';
 import { bookRoomById } from '../../features/Room/roomThunk';
 import {
 	StyledContainer,
@@ -17,8 +16,6 @@ import {
 	StyledCardDetail,
 	StyledCardDetailItem,
 	StyledCardSchedule,
-	StyledCardScheduleGuest,
-	StyledNormalButton,
 	StyledDivWrapper,
 	StyledForm,
 } from './style';
@@ -44,13 +41,13 @@ const Card = () => {
 		if (!auth) {
 			navigate('/login');
 		}
-		dispatch(
-			bookRoomById({
-				roomId: _id,
-				checkIn: bookDate.checkIn,
-				checkOut: bookDate.checkOut,
-			})
-		);
+		// dispatch(
+		// 	bookRoomById({
+		// 		roomId: _id,
+		// 		checkIn: bookDate.checkIn,
+		// 		checkOut: bookDate.checkOut,
+		// 	})
+		// );
 		setIsBooked(true);
 	};
 
@@ -85,19 +82,13 @@ const Card = () => {
 			<StyledForm onSubmit={onSubmitHandler}>
 				<StyledCardSchedule>
 					<BookingDateInput />
-					<StyledCardScheduleGuest>
-						<StyledDivWrapper>
-							<StyledHeading>GUESTS</StyledHeading>
-							<StyledParagraph>2 guests</StyledParagraph>
-						</StyledDivWrapper>
-						<StyledNormalButton type='submit'>
-							<MdOutlineKeyboardArrowDown />
-						</StyledNormalButton>
-					</StyledCardScheduleGuest>
+					<GuestInput />
 				</StyledCardSchedule>
-				<Button fullWidth>
-					{isBooked ? 'Purchased' : 'Check Availability'}
-				</Button>
+				<StyledDivWrapper style={{ paddingInline: '1px' }}>
+					<Button fullWidth>
+						{isBooked ? 'Purchased' : 'Check Availability'}
+					</Button>
+				</StyledDivWrapper>
 			</StyledForm>
 			<StyledCardDetail>
 				<StyledCardDetailItem>
