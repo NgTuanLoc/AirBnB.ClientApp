@@ -6,14 +6,21 @@ interface IButton {
 	bgColor?: string;
 	children: ReactNode;
 	onClickHandler?: any;
+	type?: 'submit' | 'button';
 }
 
-const Button = ({ children, fullWidth, bgColor, onClickHandler }: IButton) => {
+const Button = ({
+	children,
+	fullWidth,
+	bgColor,
+	onClickHandler,
+	type,
+}: IButton) => {
 	return (
 		<StyledContainer
 			onClick={onClickHandler}
 			bgColor={bgColor}
-			type='submit'
+			type={type ? type : 'button'}
 			fullWidth={fullWidth}>
 			<StyledHeading>{children}</StyledHeading>
 		</StyledContainer>

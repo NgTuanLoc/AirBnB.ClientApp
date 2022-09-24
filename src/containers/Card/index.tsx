@@ -69,7 +69,7 @@ const Card = () => {
 				</StyledDivWrapper>
 				<StyledDivWrapper>
 					<StyledButtonContainer width='15rem'>
-						<Button fullWidth onClickHandler={onSubmitHandler}>
+						<Button type='submit' fullWidth onClickHandler={onSubmitHandler}>
 							{isLoading ? (
 								<ClipLoader color='#36d7b7' size={22} />
 							) : isBooked ? (
@@ -97,7 +97,7 @@ const Card = () => {
 				</StyledCardSchedule>
 				<StyledDivWrapper style={{ paddingInline: '1px' }}>
 					<StyledButtonContainer>
-						<Button fullWidth>
+						<Button type='submit' fullWidth>
 							{isLoading ? (
 								<ClipLoader color='#36d7b7' size={22} />
 							) : isBooked ? (

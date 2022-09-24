@@ -106,11 +106,15 @@ const GuestInput = () => {
 								<StyledParagraph>Age 13+</StyledParagraph>
 							</StyledModalGuest>
 							<StyledButtonContainer>
-								<StyledModalButton onClick={onClickHandler('minus', 'guests')}>
+								<StyledModalButton
+									type='button'
+									onClick={onClickHandler('minus', 'guests')}>
 									<AiOutlineMinus />
 								</StyledModalButton>
 								<StyledParagraph>{people.guests}</StyledParagraph>
-								<StyledModalButton onClick={onClickHandler('plus', 'guests')}>
+								<StyledModalButton
+									type='button'
+									onClick={onClickHandler('plus', 'guests')}>
 									<AiOutlinePlus />
 								</StyledModalButton>
 							</StyledButtonContainer>
@@ -122,11 +126,14 @@ const GuestInput = () => {
 							</StyledModalGuest>
 							<StyledButtonContainer>
 								<StyledModalButton
+									type='button'
 									onClick={onClickHandler('minus', 'children')}>
 									<AiOutlineMinus />
 								</StyledModalButton>
 								<StyledParagraph>{people.children}</StyledParagraph>
-								<StyledModalButton onClick={onClickHandler('plus', 'children')}>
+								<StyledModalButton
+									type='button'
+									onClick={onClickHandler('plus', 'children')}>
 									<AiOutlinePlus />
 								</StyledModalButton>
 							</StyledButtonContainer>
@@ -137,11 +144,15 @@ const GuestInput = () => {
 								<StyledParagraph>Under 2</StyledParagraph>
 							</StyledModalGuest>
 							<StyledButtonContainer>
-								<StyledModalButton onClick={onClickHandler('minus', 'infants')}>
+								<StyledModalButton
+									type='button'
+									onClick={onClickHandler('minus', 'infants')}>
 									<AiOutlineMinus />
 								</StyledModalButton>
 								<StyledParagraph>{people.infants}</StyledParagraph>
-								<StyledModalButton onClick={onClickHandler('plus', 'infants')}>
+								<StyledModalButton
+									type='button'
+									onClick={onClickHandler('plus', 'infants')}>
 									<AiOutlinePlus />
 								</StyledModalButton>
 							</StyledButtonContainer>
@@ -150,16 +161,21 @@ const GuestInput = () => {
 							<StyledModalGuest>
 								<StyledHeading>Pets</StyledHeading>
 								<StyledAnchorButton
+									type='button'
 									onClick={() => dispatch(setIsAnimalServiceModalOpen(true))}>
 									Bringing a service animal?
 								</StyledAnchorButton>
 							</StyledModalGuest>
 							<StyledButtonContainer>
-								<StyledModalButton onClick={onClickHandler('minus', 'pets')}>
+								<StyledModalButton
+									type='button'
+									onClick={onClickHandler('minus', 'pets')}>
 									<AiOutlineMinus />
 								</StyledModalButton>
 								<StyledParagraph>{people.pets}</StyledParagraph>
-								<StyledModalButton onClick={onClickHandler('plus', 'pets')}>
+								<StyledModalButton
+									type='button'
+									onClick={onClickHandler('plus', 'pets')}>
 									<AiOutlinePlus />
 								</StyledModalButton>
 							</StyledButtonContainer>
