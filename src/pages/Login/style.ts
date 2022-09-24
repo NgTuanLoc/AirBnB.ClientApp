@@ -66,6 +66,7 @@ const StyledInput = styled.input`
 const StyledTitle = styled.h2`
 	background: linear-gradient(to right, #4420d4 0%, #ff385c 100%);
 	background-clip: text;
+	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	height: 4rem;
 `;

@@ -22,7 +22,7 @@ const StyledFormContainer = styled.div`
 	align-items: center;
 
 	@media only screen and (max-width: 992px) {
-		height: auto;
+		height: 100%;
 		order: 3;
 		overflow-y: scroll;
 		padding: 1rem;
@@ -33,7 +33,7 @@ const StyledImageContainer = styled.div`
 	height: 100vh;
 	@media only screen and (max-width: 992px) {
 		width: 100%;
-		height: 40rem;
+		height: 30rem;
 		order: 1;
 	}
 `;
