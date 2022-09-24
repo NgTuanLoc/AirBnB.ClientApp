@@ -70,43 +70,45 @@ const ReviewContainer = ({ roomId }: IReviewContainer) => {
 				fullHeight={false}
 				isModalOpen={isModalOpen}
 				setIsModalOpen={setIsModalOpen}>
-				<StyledModalHeader>
-					<StyledHeading>
-						<AiFillStar />
-						5.0 - {userReviews.length} reviews
-					</StyledHeading>
-					<StyledSearchContainer>
-						<AiOutlineSearch />
-						<StyledSearch
-							placeholder='Search reviews'
-							value={search}
-							onChange={onSearchHandler}
-						/>
-					</StyledSearchContainer>
-				</StyledModalHeader>
-				{isMobileDevice ? (
-					<StyledModalContentContainer>
-						<ReviewEvaluate gridColumn />
-						{userReviews.map((item) => {
-							const { id, avatar, name, review, created_at } = item;
-							const user = { avatar, name, review, created_at };
-							return <Review key={id} {...user} />;
-						})}
-					</StyledModalContentContainer>
-				) : (
-					<StyledModalContentContainer>
-						<StyledDivWrapper>
+				<StyledDivWrapper>
+					<StyledModalHeader>
+						<StyledHeading>
+							<AiFillStar />
+							5.0 - {userReviews.length} reviews
+						</StyledHeading>
+						<StyledSearchContainer>
+							<AiOutlineSearch />
+							<StyledSearch
+								placeholder='Search reviews'
+								value={search}
+								onChange={onSearchHandler}
+							/>
+						</StyledSearchContainer>
+					</StyledModalHeader>
+					{isMobileDevice ? (
+						<StyledModalContentContainer>
 							<ReviewEvaluate gridColumn />
-						</StyledDivWrapper>
-						<StyledReviewContainer>
 							{userReviews.map((item) => {
 								const { id, avatar, name, review, created_at } = item;
 								const user = { avatar, name, review, created_at };
 								return <Review key={id} {...user} />;
 							})}
-						</StyledReviewContainer>
-					</StyledModalContentContainer>
-				)}
+						</StyledModalContentContainer>
+					) : (
+						<StyledModalContentContainer>
+							<StyledDivWrapper>
+								<ReviewEvaluate gridColumn />
+							</StyledDivWrapper>
+							<StyledReviewContainer>
+								{userReviews.map((item) => {
+									const { id, avatar, name, review, created_at } = item;
+									const user = { avatar, name, review, created_at };
+									return <Review key={id} {...user} />;
+								})}
+							</StyledReviewContainer>
+						</StyledModalContentContainer>
+					)}
+				</StyledDivWrapper>
 			</Modal>
 			<Line />
 			<ReviewEvaluate hide={isMobileDevice} />

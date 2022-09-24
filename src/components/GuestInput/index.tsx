@@ -5,31 +5,26 @@ import {
 } from 'react-icons/md';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 
-import { Image } from '../../components';
-import { Modal } from '../../layouts';
-import { useOnClickOutside } from '../../hooks';
+import { setIsAnimalServiceModalOpen } from '../../features/Global/globalSlice';
+import { useAppDispatch, useOnClickOutside } from '../../hooks';
 import {
 	StyledContainer,
 	StyledButton,
 	StyledDivWrapper,
-	StyledImageContainer,
 	StyledModal,
 	StyledParagraph,
 	StyledHeading,
 	StyledModalButton,
 	StyledModalContent,
-	StyledModalInfo,
 	StyledModalItem,
 	StyledModalGuest,
-	StyledModalContainer,
 	StyledButtonContainer,
-	StyledBigParagraph,
 	StyledAnchorButton,
 	StyledSmallParagraph,
-	StyledBigHeading,
 } from './style';
 
 const GuestInput = () => {
+	const dispatch = useAppDispatch();
 	const ref = useRef(null);
 	const [people, setPeople] = useState({
 		guests: 1,
@@ -38,8 +33,9 @@ const GuestInput = () => {
 		pets: 0,
 	});
 	const [isModalOpen, setIsModalOpen] = useState(false);
-	useOnClickOutside(ref, () => setIsModalOpen(false));
-	const [animalServiceModal, setAnimalServiceModal] = useState(false);
+	useOnClickOutside(ref, () => {
+		setIsModalOpen(false);
+	});
 
 	const openModalHandler = () => {
 		setIsModalOpen(!isModalOpen);
@@ -90,32 +86,6 @@ const GuestInput = () => {
 
 	return (
 		<StyledContainer>
-			<Modal
-				fullHeight={false}
-				isModalOpen={animalServiceModal}
-				setIsModalOpen={setAnimalServiceModal}>
-				<StyledModalContainer>
-					<StyledImageContainer>
-						<Image
-							url='https://a0.muscache.com/pictures/adafb11b-41e9-49d3-908e-049dfd6934b6.jpg'
-							alt='A guest with a service animal being greeted by a host'
-						/>
-					</StyledImageContainer>
-					<StyledModalInfo>
-						<StyledBigHeading>Service animals</StyledBigHeading>
-						<StyledBigParagraph>
-							Service animals aren’t pets, so there’s no need to add them here.
-						</StyledBigParagraph>
-						<StyledBigParagraph>
-							Traveling with an emotional support animal? Check out our{' '}
-							<StyledAnchorButton fontSize='1.5rem'>
-								accessibility policy
-							</StyledAnchorButton>
-							.
-						</StyledBigParagraph>
-					</StyledModalInfo>
-				</StyledModalContainer>
-			</Modal>
 			<StyledDivWrapper>
 				<StyledHeading>GUESTS</StyledHeading>
 				<StyledParagraph>{text}</StyledParagraph>
@@ -179,7 +149,8 @@ const GuestInput = () => {
 						<StyledModalItem>
 							<StyledModalGuest>
 								<StyledHeading>Pets</StyledHeading>
-								<StyledAnchorButton onClick={() => setAnimalServiceModal(true)}>
+								<StyledAnchorButton
+									onClick={() => dispatch(setIsAnimalServiceModalOpen(true))}>
 									Bringing a service animal?
 								</StyledAnchorButton>
 							</StyledModalGuest>

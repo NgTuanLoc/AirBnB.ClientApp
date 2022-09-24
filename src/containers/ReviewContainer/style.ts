@@ -38,7 +38,9 @@ const StyledModalHeader = styled.div`
 	}
 `;
 
-const StyledDivWrapper = styled.div``;
+const StyledDivWrapper = styled.div`
+	max-width: 100rem;
+`;
 
 const StyledModalContentContainer = styled.div`
 	display: grid;
@@ -62,10 +64,14 @@ const StyledSearchContainer = styled.div`
 	display: grid;
 	grid-template-columns: 3rem 1fr;
 	padding: 0.5rem 0.75rem;
-	width: 100%;
+	width: calc(100% - 37rem);
 	border-radius: 100px;
 	background-color: rgb(247, 247, 247);
 	border: 2px solid black;
+
+	@media only screen and (max-width: 992px) {
+		width: 100%;
+	}
 `;
 
 const StyledSearch = styled.input`

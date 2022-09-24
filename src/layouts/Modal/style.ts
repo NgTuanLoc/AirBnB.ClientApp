@@ -10,7 +10,7 @@ const StyledContainer = styled.div<{ isOpen?: boolean }>`
 	left: 0;
 	top: ${(props) => (props.isOpen ? '0' : '180vh')};
 	opacity: ${(props) => (props.isOpen ? '1' : '0')};
-	transition: all 0.5s linear;
+	transition: all 0.75s linear;
 `;
 
 const StyledContent = styled.div``;

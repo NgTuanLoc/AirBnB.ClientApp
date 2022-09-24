@@ -16,6 +16,7 @@ interface IGlobalState {
 		checkOut: string;
 	};
 	numberOfVisitDay: number;
+	isAnimalServiceModalOpen: boolean;
 }
 
 const initialState: IGlobalState = {
@@ -26,6 +27,7 @@ const initialState: IGlobalState = {
 		checkOut: transformDate(new Date(new Date().getTime() + 86400000)),
 	},
 	numberOfVisitDay: 0,
+	isAnimalServiceModalOpen: false,
 };
 
 const globalSlice = createSlice({
@@ -68,9 +70,19 @@ const globalSlice = createSlice({
 			state.bookDate.checkOut = checkOutValue;
 			state.numberOfVisitDay = numberOfVisitDayValue;
 		},
+		setIsAnimalServiceModalOpen: (
+			state: IGlobalState,
+			action: PayloadAction<boolean>
+		) => {
+			state.isAnimalServiceModalOpen = action.payload;
+		},
 	},
 });
-export const { filteredLocation, setSearchedLocation, setBookDate } =
-	globalSlice.actions;
+export const {
+	filteredLocation,
+	setSearchedLocation,
+	setIsAnimalServiceModalOpen,
+	setBookDate,
+} = globalSlice.actions;
 
 export default globalSlice.reducer;

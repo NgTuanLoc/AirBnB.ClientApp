@@ -82,16 +82,10 @@ const StyledImageContainer = styled.div`
 `;
 
 // Typography
-const StyledAnchorButton = styled.button<{ fontSize?: string }>`
-	font-size: ${(props) => (props.fontSize ? props.fontSize : '1.3rem')};
+const StyledAnchorButton = styled.button`
+	font-size: 1.3rem;
 	font-weight: 600;
 	text-decoration: underline;
-`;
-
-const StyledBigParagraph = styled.p<{ textUnderline?: boolean }>`
-	color: #252525;
-	font-size: 1.6rem;
-	text-decoration: ${(props) => (props.textUnderline ? 'underline' : 'none')};
 `;
 
 const StyledParagraph = styled.p<{ textUnderline?: boolean }>`
@@ -127,6 +121,5 @@ export {
 	StyledButtonContainer,
 	StyledAnchorButton,
 	StyledSmallParagraph,
-	StyledBigParagraph,
 	StyledBigHeading,
 };
