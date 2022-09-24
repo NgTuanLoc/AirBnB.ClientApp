@@ -25,7 +25,7 @@ const StyledNavbar = styled.div`
 	padding: 1rem 10rem;
 
 	@media only screen and (max-width: 992px) {
-		padding: 1rem 10rem;
+		padding: 1rem 1rem;
 		display: grid;
 		grid-template-areas:
 			'logo . . user'
