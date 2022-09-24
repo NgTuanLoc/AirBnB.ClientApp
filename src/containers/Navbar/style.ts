@@ -7,7 +7,7 @@ const StyledContainer = styled.header`
 	align-items: center;
 	background-color: white;
 	position: fixed;
-	height: 8rem;
+	height: auto;
 	width: 100%;
 	top: 0;
 	left: 0;
@@ -24,11 +24,14 @@ const StyledNavbar = styled.div`
 	align-items: center;
 	padding: 1rem 10rem;
 
-	@media only screen and (max-width: 1200px) {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		padding-inline: 0;
+	@media only screen and (max-width: 992px) {
+		padding: 1rem 10rem;
+		display: grid;
+		grid-template-areas:
+			'logo . . user'
+			'search search search search';
+		grid-template-rows: 1fr 1fr;
+		row-gap: 0.5rem;
 	}
 `;
 
@@ -38,10 +41,6 @@ const StyledImage = styled.img`
 
 const StyledLogo = styled(Link)`
 	grid-area: logo;
-
-	@media only screen and (max-width: 1200px) {
-		display: none;
-	}
 `;
 
 export { StyledContainer, StyledImage, StyledLogo, StyledNavbar };

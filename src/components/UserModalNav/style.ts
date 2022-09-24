@@ -8,7 +8,7 @@ const StyledContainer = styled.div`
 	min-width: 18rem;
 
 	@media only screen and (max-width: 1200px) {
-		display: none;
+		grid-area: user;
 	}
 `;
 

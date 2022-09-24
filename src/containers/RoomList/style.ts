@@ -3,8 +3,8 @@ import styled from 'styled-components';
 const StyledContainer = styled.section`
 	margin: 4rem 0;
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(28rem, 1fr));
-	grid-gap: 4rem;
+	grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
+	grid-gap: 2rem;
 	padding-bottom: var(--footer-height);
 
 	@media only screen and (max-width: 992px) {

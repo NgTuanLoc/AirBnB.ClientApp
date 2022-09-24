@@ -24,11 +24,15 @@ const Categories = () => {
 		query: '(max-width: 992px)',
 	});
 
+	const isDesktopDevice = useMediaQuery({
+		query: '(min-width: 1200px)',
+	});
+
 	if (isLoading) {
 		return (
 			<StyledContainer
-				spaceBetween={isMobileDevice ? 5 : 10}
-				slidesPerView={isMobileDevice ? 3 : 8}
+				spaceBetween={isDesktopDevice ? 10 : isMobileDevice ? 3 : 5}
+				slidesPerView={isDesktopDevice ? 7 : isMobileDevice ? 2 : 5}
 				navigation={true}
 				modules={[Navigation]}>
 				{skeletonArray.map((item) => {
@@ -51,8 +55,8 @@ const Categories = () => {
 
 	return (
 		<StyledContainer
-			spaceBetween={isMobileDevice ? 5 : 10}
-			slidesPerView={isMobileDevice ? 3 : 8}
+			spaceBetween={isMobileDevice ? 5 : 15}
+			slidesPerView={isMobileDevice ? 2 : 5}
 			navigation={true}
 			modules={[Navigation]}>
 			{locationList.map((location) => {
@@ -61,7 +65,11 @@ const Categories = () => {
 					<SwiperSlide key={_id} onClick={() => dispatch(selectLocation(_id))}>
 						<StyledSwiperItem>
 							<StyledImageContainer>
-								<Image url={image} alt={province} />
+								<Image
+									borderRadius='1rem 1rem 0 0'
+									url={image}
+									alt={province}
+								/>
 							</StyledImageContainer>
 							<StyledHeading>{province}</StyledHeading>
 						</StyledSwiperItem>

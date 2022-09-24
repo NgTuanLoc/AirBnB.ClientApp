@@ -8,22 +8,20 @@ const StyledContainer = styled.form<{ hide?: boolean }>`
 	padding: 1rem 1.5rem;
 	border-radius: 30px;
 	transition: var(--transition);
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
 	cursor: pointer;
+
+	@media only screen and (min-width: 992px) {
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+	}
 
 	:hover {
 		box-shadow: var(--dark-shadow);
 	}
 
-	@media only screen and (max-width: 1200px) {
-		grid-area: search;
-		width: 80%;
-		margin-inline: auto;
-	}
-
 	@media only screen and (max-width: 992px) {
+		grid-area: search;
 		margin-inline: auto;
 		width: 90%;
 	}

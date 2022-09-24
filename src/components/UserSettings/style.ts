@@ -13,6 +13,10 @@ const StyledContainer = styled.div`
 	flex-direction: column;
 	overflow: hidden;
 	margin: 0.2rem 0;
+
+	@media only screen and (max-width: 992px) {
+		grid-area: user;
+	}
 `;
 
 const StyledButton = styled.a<{ bold?: boolean }>`
