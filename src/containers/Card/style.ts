@@ -74,6 +74,10 @@ const StyledDivWrapper = styled.div<{ justifyContent?: string }>`
 	align-items: center;
 `;
 
+const StyledButtonContainer = styled.div<{ width?: string }>`
+	width: ${(props) => (props.width ? props.width : '100%')};
+`;
+
 // Typography
 const StyledHeading = styled.h5``;
 
@@ -102,6 +106,7 @@ export {
 	StyledCardTotal,
 	StyledParagraph,
 	StyledCardDetail,
+	StyledButtonContainer,
 	StyledCardDetailItem,
 	StyledCardSchedule,
 	StyledDivWrapper,

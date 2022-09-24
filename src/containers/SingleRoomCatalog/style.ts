@@ -30,6 +30,11 @@ const StyledTitleContainer = styled.div`
 	}
 `;
 
+const StyledCatalogContainer = styled.div`
+	margin-bottom: 1.5rem;
+	height: 32rem;
+`;
+
 const StyledHeading = styled.h5<{ isLoading?: boolean }>`
 	font-size: 1.5rem;
 	border-bottom: ${(props) => (props.isLoading ? '0' : '1px solid black')};
@@ -123,6 +128,7 @@ export {
 	StyledLinkContainer,
 	StyledHeading,
 	StyledSubTitle,
+	StyledCatalogContainer,
 	StyledSubTitleLink,
 	StyledSubTitleLinkSpan,
 	StyledPhotoContainer,

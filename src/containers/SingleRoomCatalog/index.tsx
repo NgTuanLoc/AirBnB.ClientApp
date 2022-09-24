@@ -17,6 +17,7 @@ import {
 	StyledHeading,
 	StyledSubTitle,
 	StyledSubTitleLink,
+	StyledCatalogContainer,
 	StyledSubTitleLinkSpan,
 	StyledPhotoContainer,
 	StyledImage,
@@ -90,7 +91,9 @@ const SingleRoomCatalog = () => {
 			)}
 
 			{isMobileDevice ? (
-				<Catalog borderRadius='0' images={[image, ...DUMMY_IMAGE_DATA]} />
+				<StyledCatalogContainer>
+					<Catalog borderRadius='0' images={[image, ...DUMMY_IMAGE_DATA]} />
+				</StyledCatalogContainer>
 			) : (
 				<StyledPhotoContainer>
 					<StyledSkeletonLoadingWrapper gridArea='main'>

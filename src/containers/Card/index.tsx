@@ -3,6 +3,7 @@ import moment from 'moment';
 import { FormEvent, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
+import { ClipLoader } from 'react-spinners';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { Button, Line, BookingDateInput, GuestInput } from '../../components';
 import { bookRoomById } from '../../features/Room/roomThunk';
@@ -14,6 +15,7 @@ import {
 	StyledCardTotal,
 	StyledParagraph,
 	StyledCardDetail,
+	StyledButtonContainer,
 	StyledCardDetailItem,
 	StyledCardSchedule,
 	StyledDivWrapper,
@@ -22,6 +24,7 @@ import {
 
 const Card = () => {
 	const { auth } = useAppSelector((store) => store.auth);
+	const { isLoading } = useAppSelector((store) => store.room);
 	const { bookDate, numberOfVisitDay } = useAppSelector(
 		(store) => store.global
 	);
@@ -41,13 +44,13 @@ const Card = () => {
 		if (!auth) {
 			navigate('/login');
 		}
-		// dispatch(
-		// 	bookRoomById({
-		// 		roomId: _id,
-		// 		checkIn: bookDate.checkIn,
-		// 		checkOut: bookDate.checkOut,
-		// 	})
-		// );
+		dispatch(
+			bookRoomById({
+				roomId: _id,
+				checkIn: bookDate.checkIn,
+				checkOut: bookDate.checkOut,
+			})
+		);
 		setIsBooked(true);
 	};
 
@@ -65,9 +68,17 @@ const Card = () => {
 					</StyledPriceHeading>
 				</StyledDivWrapper>
 				<StyledDivWrapper>
-					<Button onClickHandler={onSubmitHandler}>
-						{isBooked ? 'Purchased' : 'Reserve'}
-					</Button>
+					<StyledButtonContainer width='15rem'>
+						<Button fullWidth onClickHandler={onSubmitHandler}>
+							{isLoading ? (
+								<ClipLoader color='#36d7b7' size={22} />
+							) : isBooked ? (
+								'Purchased'
+							) : (
+								'Reserve'
+							)}
+						</Button>
+					</StyledButtonContainer>
 				</StyledDivWrapper>
 			</StyledContainer>
 		);
@@ -85,9 +96,17 @@ const Card = () => {
 					<GuestInput />
 				</StyledCardSchedule>
 				<StyledDivWrapper style={{ paddingInline: '1px' }}>
-					<Button fullWidth>
-						{isBooked ? 'Purchased' : 'Check Availability'}
-					</Button>
+					<StyledButtonContainer>
+						<Button fullWidth>
+							{isLoading ? (
+								<ClipLoader color='#36d7b7' size={22} />
+							) : isBooked ? (
+								'Purchased'
+							) : (
+								'Reserve'
+							)}
+						</Button>
+					</StyledButtonContainer>
 				</StyledDivWrapper>
 			</StyledForm>
 			<StyledCardDetail>
