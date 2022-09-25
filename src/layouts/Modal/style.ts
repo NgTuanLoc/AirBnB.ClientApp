@@ -22,10 +22,12 @@ const StyledContentContainer = styled.div<{ fullHeight?: boolean }>`
 	padding: 3rem;
 	margin-inline: auto;
 	height: ${(props) => (props.fullHeight ? '100%' : 'auto')};
-	width: auto;
+	min-width: 110rem;
 
 	@media only screen and (max-width: 992px) {
 		padding-inline: 0.5rem;
+		min-width: auto;
+		width: auto;
 	}
 `;
 

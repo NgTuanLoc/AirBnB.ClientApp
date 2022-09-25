@@ -23,7 +23,6 @@ const StyledForm = styled.form`
 	margin: 1rem;
 
 	@media only screen and (max-width: 992px) {
-		margin-top: 25rem;
 	}
 `;
 

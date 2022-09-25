@@ -44,14 +44,15 @@ const Login = () => {
 	};
 
 	useEffect(() => {
-		if (!error) {
+		if (!error || authStatus === 'SUCCESS') {
 			setErrorState('');
 			return;
 		}
+
 		if (error) {
-			if (error === 'Không tìm thấy email phù hợp') {
+			if (error === '404') {
 				setErrorState('Your email is not exist');
-			} else {
+			} else if (error === '500') {
 				setErrorState('Your email or password is not valid');
 			}
 		}
@@ -108,7 +109,9 @@ const Login = () => {
 						)}
 					</StyledInputContainer>
 					{errorState && <Error>{errorState}</Error>}
-					<Button fullWidth>Login</Button>
+					<Button type='submit' fullWidth>
+						Login
+					</Button>
 				</StyledForm>
 			)}
 		</LoginLayout>

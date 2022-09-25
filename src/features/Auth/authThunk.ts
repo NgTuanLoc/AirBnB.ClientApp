@@ -27,9 +27,10 @@ const loginThunk = createAsyncThunk<IAuth, { email: string; password: string }>(
 			};
 
 			localStorage.setItem('userLogin', JSON.stringify(token));
+
 			return response.data;
 		} catch (error: any) {
-			return thunkAPI.rejectWithValue('LOGIN FAILED');
+			return thunkAPI.rejectWithValue(`${error.response.status}`);
 		}
 	}
 );

@@ -181,7 +181,9 @@ const Register = () => {
 						)}
 					</StyledInputContainer>
 					<Error>{errorState}</Error>
-					<Button fullWidth>Register</Button>
+					<Button type='submit' fullWidth>
+						Register
+					</Button>
 				</StyledForm>
 			)}
 		</LoginLayout>

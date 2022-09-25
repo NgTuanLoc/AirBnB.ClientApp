@@ -61,7 +61,7 @@ const ROOM_DATA: IRoom = {
 
 const USER_REVIEW = [
 	{
-		id: 1,
+		id: '1',
 		avatar: 'https://randomuser.me/api/portraits/women/79.jpg',
 		name: 'susan smith',
 		review:
@@ -69,7 +69,7 @@ const USER_REVIEW = [
 		created_at: '2022-05-20T12:29:58.194Z',
 	},
 	{
-		id: 2,
+		id: '2',
 		avatar: 'https://randomuser.me/api/portraits/men/12.jpg',
 		name: 'peter jones',
 		review:
@@ -77,7 +77,7 @@ const USER_REVIEW = [
 		created_at: '2022-05-20T12:14:46.072Z',
 	},
 	{
-		id: 3,
+		id: '3',
 		avatar: 'https://randomuser.me/api/portraits/women/14.jpg',
 		name: 'anna johnson',
 		review:
@@ -85,14 +85,14 @@ const USER_REVIEW = [
 		created_at: '2022-05-20T19:11:09.633Z',
 	},
 	{
-		id: 4,
+		id: '4',
 		avatar: 'https://randomuser.me/api/portraits/women/63.jpg',
 		name: 'Roberta Boyd',
 		review: 'Very good',
 		created_at: '2022-07-23T14:49:06.631Z',
 	},
 	{
-		id: 5,
+		id: '5',
 		avatar: 'https://randomuser.me/api/portraits/men/54.jpg',
 		name: 'bill anderson',
 		review:
@@ -100,7 +100,7 @@ const USER_REVIEW = [
 		created_at: '2022-04-26T14:59:16.018Z',
 	},
 	{
-		id: 6,
+		id: '6',
 		avatar: 'https://randomuser.me/api/portraits/men/1.jpg',
 		name: 'Henry Bell',
 		review:
@@ -173,8 +173,6 @@ const DEFAULT_ROOM: IRoom = {
 	__v: 0,
 	image: DEFAULT_IMAGE,
 };
-
-
 
 export {
 	USER_DATA,

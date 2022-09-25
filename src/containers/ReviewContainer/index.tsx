@@ -2,6 +2,7 @@ import { useState, useEffect, ChangeEvent } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { AiFillStar, AiOutlineSearch } from 'react-icons/ai';
 
+import { transformLanguage } from '../../utils';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { Line, Review, ReviewEvaluate } from '../../components';
 import { Modal } from '../../layouts';
@@ -26,6 +27,7 @@ interface IReviewContainer {
 
 const ReviewContainer = ({ roomId }: IReviewContainer) => {
 	const dispatch = useAppDispatch();
+	const [displayUserReview, setDisplayUserReview] = useState(USER_REVIEW);
 	const { ratingList } = useAppSelector((store) => store.rating);
 	const isMobileDevice = useMediaQuery({
 		query: '(max-width: 992px)',
@@ -54,7 +56,6 @@ const ReviewContainer = ({ roomId }: IReviewContainer) => {
 	const onSearchHandler = (e: ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value;
 		setSearch(value);
-		console.log(search);
 	};
 
 	useEffect(() => {
@@ -62,7 +63,17 @@ const ReviewContainer = ({ roomId }: IReviewContainer) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [roomId]);
 
-	const userReviews = [...USER_REVIEW, ...mappedRatingList];
+	useEffect(() => {
+		const userReviews = [...USER_REVIEW, ...mappedRatingList].filter((item) => {
+			if (!item.review) return false;
+			const tempReview = transformLanguage(item.review);
+			return tempReview.includes(transformLanguage(search));
+		});
+		setDisplayUserReview(userReviews);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [search]);
+
+	const staticUserReviews = [...USER_REVIEW, ...mappedRatingList];
 
 	return (
 		<StyledContainer>
@@ -74,7 +85,7 @@ const ReviewContainer = ({ roomId }: IReviewContainer) => {
 					<StyledModalHeader>
 						<StyledHeading>
 							<AiFillStar />
-							5.0 - {userReviews.length} reviews
+							5.0 - {displayUserReview.length} reviews
 						</StyledHeading>
 						<StyledSearchContainer>
 							<AiOutlineSearch />
@@ -88,7 +99,7 @@ const ReviewContainer = ({ roomId }: IReviewContainer) => {
 					{isMobileDevice ? (
 						<StyledModalContentContainer>
 							<ReviewEvaluate gridColumn />
-							{userReviews.map((item) => {
+							{displayUserReview.map((item) => {
 								const { id, avatar, name, review, created_at } = item;
 								const user = { avatar, name, review, created_at };
 								return <Review key={id} {...user} />;
@@ -100,7 +111,7 @@ const ReviewContainer = ({ roomId }: IReviewContainer) => {
 								<ReviewEvaluate gridColumn />
 							</StyledDivWrapper>
 							<StyledReviewContainer>
-								{userReviews.map((item) => {
+								{displayUserReview.map((item) => {
 									const { id, avatar, name, review, created_at } = item;
 									const user = { avatar, name, review, created_at };
 									return <Review key={id} {...user} />;
@@ -114,19 +125,19 @@ const ReviewContainer = ({ roomId }: IReviewContainer) => {
 			<ReviewEvaluate hide={isMobileDevice} />
 			<StyledHeading>
 				<AiFillStar />
-				5.0 - {userReviews.length} reviews
+				5.0 - {staticUserReviews.length} reviews
 			</StyledHeading>
 
 			<StyledUserContainer>
-				{userReviews.slice(0, 6).map((item) => {
+				{staticUserReviews.slice(0, 6).map((item) => {
 					const { id, avatar, name, review, created_at } = item;
 					const user = { avatar, name, review, created_at };
 					return <Review key={id} {...user} />;
 				})}
 			</StyledUserContainer>
-			{userReviews.length > 6 && (
+			{(staticUserReviews.length > 6 || isMobileDevice) && (
 				<StyledShowMoreButton onClick={() => setIsModalOpen(!isModalOpen)}>
-					Show all {userReviews.length} reviews
+					Show all {staticUserReviews.length} reviews
 				</StyledShowMoreButton>
 			)}
 			<Line />
