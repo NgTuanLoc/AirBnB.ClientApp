@@ -10,7 +10,7 @@ const StyledContainer = styled(Link)`
 	color: black;
 
 	@media only screen and (max-width: 992px) {
-		height: 40rem;
+		height: auto;
 		width: 100%;
 		margin-inline: auto;
 	}
