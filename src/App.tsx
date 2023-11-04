@@ -44,7 +44,7 @@ const App = () => {
 						<Route
 							path='/admin'
 							element={
-								<PrivateRoute type='ADMIN'>
+								<PrivateRoute type='Admin'>
 									<Admin />
 								</PrivateRoute>
 							}

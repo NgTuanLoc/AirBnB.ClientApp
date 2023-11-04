@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { loginThunk, registerThunk } from './authThunk';
-import { IAuth } from '../../@types/Auth';
 
 export interface IAuthState {
 	authStatus: 'PENDING' | 'UNAUTHORIZED' | 'SUCCESS';

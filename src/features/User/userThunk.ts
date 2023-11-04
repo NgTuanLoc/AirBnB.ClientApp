@@ -2,11 +2,9 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { axiosInstance } from '../../utils';
 import { RootState } from '../../app/store';
-import { IUser } from '../../@types/User';
-import { IRegister } from '../../@types/Auth';
 import { UNAUTHENTICATED, UNAUTHORIZED } from '../../constant/Error';
 
-const URL = '/api/users';
+const URL = '/api/v1/users';
 
 const getAllUsers = createAsyncThunk<IUser[], void, { state: RootState }>(
 	'user/getAllUsers',
@@ -16,19 +14,14 @@ const getAllUsers = createAsyncThunk<IUser[], void, { state: RootState }>(
 
 			if (!auth) return thunkAPI.rejectWithValue(UNAUTHENTICATED);
 
-			const {
-				user: { type: userType },
-				token,
-			} = auth;
+			const { roleList } = auth;
 
-			if (userType !== 'ADMIN') return thunkAPI.rejectWithValue(UNAUTHORIZED);
+			if (roleList.includes('Admin'))
+				return thunkAPI.rejectWithValue(UNAUTHORIZED);
 
 			const params = {
 				method: 'GET',
 				url: `${URL}`,
-				headers: {
-					token,
-				},
 			};
 			const response = await axiosInstance.request(params);
 			return response.data;
@@ -45,19 +38,14 @@ const getUserById = createAsyncThunk<IUser, string, { state: RootState }>(
 
 			if (!auth) return thunkAPI.rejectWithValue(UNAUTHENTICATED);
 
-			const {
-				user: { type: userType },
-				token,
-			} = auth;
+			const { roleList } = auth;
 
-			if (userType !== 'ADMIN') return thunkAPI.rejectWithValue(UNAUTHORIZED);
+			if (roleList.includes('Admin'))
+				return thunkAPI.rejectWithValue(UNAUTHORIZED);
 
 			const params = {
 				method: 'GET',
 				url: `${URL}/${userId}`,
-				headers: {
-					token,
-				},
 			};
 			const response = await axiosInstance.request(params);
 			return response.data;
@@ -80,19 +68,13 @@ const getAllUsersPagination = createAsyncThunk<
 
 		if (!auth) return thunkAPI.rejectWithValue(UNAUTHENTICATED);
 
-		const {
-			user: { type: userType },
-			token,
-		} = auth;
+		const { roleList } = auth;
 
-		if (userType !== 'ADMIN') return thunkAPI.rejectWithValue(UNAUTHORIZED);
-
+		if (roleList.includes('Admin'))
+			return thunkAPI.rejectWithValue(UNAUTHORIZED);
 		const params = {
 			method: 'GET',
 			url: `${URL}/pagination?skip=${skip}&limit=${limit}`,
-			headers: {
-				token: token,
-			},
 		};
 		const response = await axiosInstance.request(params);
 		return response.data;
@@ -109,33 +91,28 @@ const createUser = createAsyncThunk<string, IRegister, { state: RootState }>(
 
 			if (!auth) return thunkAPI.rejectWithValue(UNAUTHENTICATED);
 
-			const {
-				user: { type: userType },
-				token,
-			} = auth;
+			const { roleList } = auth;
 
-			if (userType !== 'ADMIN') return thunkAPI.rejectWithValue(UNAUTHORIZED);
+			if (roleList.includes('Admin'))
+				return thunkAPI.rejectWithValue(UNAUTHORIZED);
 
 			const params = {
 				method: 'POST',
 				url: `${URL}`,
-				headers: {
-					token: token,
-				},
 				data: {
-					name: user.name,
-					email: user.email,
-					password: user.password,
-					phone: user.phone,
-					birthday: user.birthday,
-					gender: user.gender === 'Man' ? true : false,
-					address: user.address,
-					type: user.type,
+					// name: user.name,
+					// email: user.email,
+					// password: user.password,
+					// phone: user.phone,
+					// birthday: user.birthday,
+					// gender: user.gender === 'Man' ? true : false,
+					// address: user.address,
+					// type: user.type,
 				},
 			};
 
 			await axiosInstance.request(params);
-			return `Create new ${user.type} successfully`;
+			return `Create new ${user.email} successfully`;
 		} catch (error) {
 			return thunkAPI.rejectWithValue(error);
 		}
@@ -150,19 +127,14 @@ const deleteUserById = createAsyncThunk<string, string, { state: RootState }>(
 
 			if (!auth) return thunkAPI.rejectWithValue(UNAUTHENTICATED);
 
-			const {
-				user: { type: userType },
-				token,
-			} = auth;
+			const { roleList } = auth;
 
-			if (userType !== 'ADMIN') return thunkAPI.rejectWithValue(UNAUTHORIZED);
+			if (roleList.includes('Admin'))
+				return thunkAPI.rejectWithValue(UNAUTHORIZED);
 
 			const params = {
 				method: 'DELETE',
 				url: `${URL}/${userId}`,
-				headers: {
-					token: token,
-				},
 			};
 
 			await axiosInstance.request(params);
@@ -181,28 +153,23 @@ const updateUserById = createAsyncThunk<IUser, IUser, { state: RootState }>(
 
 			if (!auth) return thunkAPI.rejectWithValue(UNAUTHENTICATED);
 
-			const {
-				user: { type: userType },
-				token,
-			} = auth;
+			const { roleList } = auth;
 
-			if (userType !== 'ADMIN') return thunkAPI.rejectWithValue(UNAUTHORIZED);
+			if (roleList.includes('Admin'))
+				return thunkAPI.rejectWithValue(UNAUTHORIZED);
 
 			const params = {
 				method: 'PUT',
-				url: `${URL}/${user._id}`,
-				headers: {
-					token: token,
-				},
+				url: `${URL}/${user.id}`,
 				data: {
-					name: user.name,
-					email: user.email,
-					password: user.password,
-					phone: user.phone,
-					birthday: user.birthday,
-					gender: user.gender,
-					address: user.address,
-					type: user.type,
+					// name: user.name,
+					// email: user.email,
+					// password: user.password,
+					// phone: user.phone,
+					// birthday: user.birthday,
+					// gender: user.gender,
+					// address: user.address,
+					// type: user.type,
 				},
 			};
 
@@ -227,18 +194,15 @@ const uploadUserAvatar = createAsyncThunk<
 
 		if (!auth) return thunkAPI.rejectWithValue(UNAUTHENTICATED);
 
-		const {
-			user: { type: userType },
-			token,
-		} = auth;
+		const { roleList } = auth;
 
-		if (userType !== 'ADMIN') return thunkAPI.rejectWithValue(UNAUTHORIZED);
+		if (roleList.includes('Admin'))
+			return thunkAPI.rejectWithValue(UNAUTHORIZED);
 
 		const params = {
 			method: 'POST',
 			url: `${URL}/upload-avatar`,
 			headers: {
-				token: token,
 				'Content-Type': 'multipart/form-data',
 			},
 			data: image,

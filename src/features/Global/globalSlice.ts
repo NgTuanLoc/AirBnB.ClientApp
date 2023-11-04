@@ -40,10 +40,10 @@ const globalSlice = createSlice({
 		) => {
 			const { originalData } = action.payload;
 			state.filteredLocationList = originalData.filter((item) => {
-				const { _id, province, name } = item;
+				const { id, province, name } = item;
 				const temp = {
 					name: transformLanguage(`${province}, ${name}`),
-					_id: _id,
+					id: id,
 				};
 
 				return temp.name.startsWith(state.searchedLocation.name);

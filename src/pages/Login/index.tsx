@@ -19,7 +19,7 @@ import {
 
 const DEFAULT_IMAGE = {
 	imageUrl:
-		'https://preview.colorlib.com/theme/bootstrap/login-form-01/images/xbg_1.jpg.pagespeed.ic.nj5iPvtRed.webp',
+		'https://airbnbstorage.blob.core.windows.net/airbnbimagestorage/16989773242607276_rktkn-ssOtyGE8CyE-unsplash.jpg',
 	imageAlt: 'travel',
 };
 

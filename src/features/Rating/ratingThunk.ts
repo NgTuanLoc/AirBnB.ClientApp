@@ -4,7 +4,7 @@ import { axiosInstance } from '../../utils';
 import { IRating } from '../../@types/Rating';
 // import { RootState } from '../../app/store';
 
-const URL = '/api/reviews';
+const URL = '/api/v1/reviews';
 
 const getReviewListByRoomId = createAsyncThunk<IRating[], string>(
 	'rating/getLocationListByRoomId',

@@ -5,7 +5,6 @@ import { FiShare } from 'react-icons/fi';
 import { IoIosArrowBack } from 'react-icons/io';
 import { IoShareOutline } from 'react-icons/io5';
 
-import { DUMMY_IMAGE_DATA } from '../../constant';
 import { useAppSelector } from '../../hooks';
 import { Catalog, Line } from '../../components';
 import {
@@ -33,7 +32,9 @@ const SingleRoomCatalog = () => {
 		query: '(max-width: 992px)',
 	});
 
-	const { name, locationId, image } = selectedRoom;
+	const { name, location, imageList } = selectedRoom;
+
+	const imageUrlList = imageList.map((image) => image.highQualityUrl);
 
 	return (
 		<StyledContainer>
@@ -59,8 +60,8 @@ const SingleRoomCatalog = () => {
 						{isLoading ? (
 							<Skeleton width='60%' />
 						) : (
-							`${name}${locationId.name ? `, ${locationId.name}` : ''}${
-								locationId.province ? `, ${locationId.province}` : ''
+							`${name}${location.name ? `, ${location.name}` : ''}${
+								location.province ? `, ${location.province}` : ''
 							}`
 						)}
 					</StyledLocationTitle>
@@ -69,8 +70,8 @@ const SingleRoomCatalog = () => {
 							{isLoading ? (
 								<Skeleton width='30rem' />
 							) : (
-								`${name}${locationId.country ? `, ${locationId.country}` : ''}${
-									locationId.province ? `, ${locationId.province}` : ''
+								`${name}${location.country ? `, ${location.country}` : ''}${
+									location.province ? `, ${location.province}` : ''
 								}`
 							)}
 						</StyledHeading>
@@ -92,7 +93,7 @@ const SingleRoomCatalog = () => {
 
 			{isMobileDevice ? (
 				<StyledCatalogContainer>
-					<Catalog borderRadius='0' images={[image, ...DUMMY_IMAGE_DATA]} />
+					<Catalog borderRadius='0' images={imageUrlList} />
 				</StyledCatalogContainer>
 			) : (
 				<StyledPhotoContainer>
@@ -102,7 +103,7 @@ const SingleRoomCatalog = () => {
 						) : (
 							<StyledImage
 								borderRadius='var(--radius) 0 0 var(--radius)'
-								url={image}
+								url={imageUrlList[0]}
 								alt={name}
 							/>
 						)}
@@ -111,11 +112,7 @@ const SingleRoomCatalog = () => {
 						{isLoading ? (
 							<Skeleton borderRadius='0' />
 						) : (
-							<StyledImage
-								borderRadius='0'
-								url={DUMMY_IMAGE_DATA[0]}
-								alt={name}
-							/>
+							<StyledImage borderRadius='0' url={imageUrlList[1]} alt={name} />
 						)}
 					</StyledSkeletonLoadingWrapper>
 					<StyledSkeletonLoadingWrapper gridArea='image-2'>
@@ -124,7 +121,7 @@ const SingleRoomCatalog = () => {
 						) : (
 							<StyledImage
 								borderRadius='0 var(--radius) 0 0'
-								url={DUMMY_IMAGE_DATA[1]}
+								url={imageUrlList[2]}
 								alt={name}
 							/>
 						)}
@@ -133,11 +130,7 @@ const SingleRoomCatalog = () => {
 						{isLoading ? (
 							<Skeleton borderRadius='0' />
 						) : (
-							<StyledImage
-								borderRadius='0'
-								url={DUMMY_IMAGE_DATA[2]}
-								alt={name}
-							/>
+							<StyledImage borderRadius='0' url={imageUrlList[3]} alt={name} />
 						)}
 					</StyledSkeletonLoadingWrapper>
 					<StyledSkeletonLoadingWrapper gridArea='image-4'>
@@ -146,7 +139,7 @@ const SingleRoomCatalog = () => {
 						) : (
 							<StyledImage
 								borderRadius='var(--radius) 0 var(--radius) 0'
-								url={DUMMY_IMAGE_DATA[3]}
+								url={imageUrlList[4]}
 								alt={name}
 							/>
 						)}
@@ -156,13 +149,11 @@ const SingleRoomCatalog = () => {
 			{isMobileDevice && (
 				<StyledTitleContainer>
 					<StyledLocationTitle>
-						{name}, {locationId ? locationId?.name : ''},{' '}
-						{locationId ? locationId?.province : ''}
+						{name}, {location ? location?.name : ''},{' '}
+						{location ? location?.province : ''}
 					</StyledLocationTitle>
 					<StyledLinkContainer>
-						<StyledHeading>
-							{locationId ? locationId.province : ''}
-						</StyledHeading>
+						<StyledHeading>{location ? location.province : ''}</StyledHeading>
 						<StyledSubTitle>
 							<StyledSubTitleLink href='https://github.com/NgTuanLoc'>
 								<FiShare />{' '}

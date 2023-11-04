@@ -23,10 +23,10 @@ const Modal = ({ setTitle, disableInput, setDisableInput }: IProps) => {
 		<StyledContainer
 			disableInput={filteredLocationList.length === 0 || disableInput}>
 			{filteredLocationList.map((item) => {
-				const { _id, name, province } = item;
+				const { id, name, province } = item;
 				const location = `${province}, ${name}`;
 				return (
-					<StyledButton onClick={() => onClickHandler(location, _id)} key={_id}>
+					<StyledButton onClick={() => onClickHandler(location, id)} key={id}>
 						<GoLocation />
 						{location}
 					</StyledButton>

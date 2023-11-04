@@ -3,7 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { axiosInstance } from '../../utils';
 import { IBooking } from '../../@types/Booking';
 
-const URL = '/api/tickets';
+const URL = '/api/v1/tickets';
 
 const getBookingList = createAsyncThunk<IBooking[]>(
 	'booking/getBookingList',
@@ -43,17 +43,17 @@ const updateBookingListByTicketId = createAsyncThunk<IBooking, IBooking>(
 	'booking/updateBookingListByTicketId',
 	async (booking, thunkAPI) => {
 		const {
-			_id,
+			id,
 			checkIn,
 			checkOut,
 			userId,
-			roomId: { _id: roomId },
+			roomId: { id: roomId },
 		} = booking;
 
 		try {
 			const params = {
 				method: 'PUT',
-				url: `${URL}/${_id}`,
+				url: `${URL}/${id}`,
 				data: {
 					checkIn,
 					checkOut,

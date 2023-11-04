@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { IUser } from '../../@types/User';
 import {
 	getAllUsers,
 	getAllUsersPagination,
@@ -36,8 +35,8 @@ const userSlice = createSlice({
 	reducers: {
 		searchUser: (state: IUserState, action: PayloadAction<string>) => {
 			const temp = state.userList.filter((user) => {
-				if (!user.name) return false;
-				const tempUserName = transformLanguage(user.name);
+				if (!user.personName) return false;
+				const tempUserName = transformLanguage(user.personName);
 				return tempUserName.includes(action.payload);
 			});
 

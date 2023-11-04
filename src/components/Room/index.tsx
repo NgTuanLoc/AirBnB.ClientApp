@@ -1,7 +1,6 @@
 import Skeleton from 'react-loading-skeleton';
 import { AiFillStar } from 'react-icons/ai';
 
-import { DUMMY_IMAGE_DATA } from '../../constant';
 import { generateRandomIndex } from '../../utils';
 import { IRoom } from '../../@types/Room';
 import { useAppSelector } from '../../hooks';
@@ -20,10 +19,10 @@ import {
 	StyledLightHeading,
 } from './style';
 
-const Room = ({ _id, name, image, locationId, price }: IRoom) => {
+const Room = ({ id, name, imageList, location, price }: IRoom) => {
 	const { isLoading } = useAppSelector((store) => store.room);
 
-	const images = [image, ...DUMMY_IMAGE_DATA];
+	const images = [...imageList];
 
 	if (isLoading) {
 		return (
@@ -51,9 +50,12 @@ const Room = ({ _id, name, image, locationId, price }: IRoom) => {
 	}
 
 	return (
-		<StyledContainer to={`/room/${_id}`}>
+		<StyledContainer to={`/room/${id}`}>
 			<StyledImageContainer>
-				<Catalog images={images} navigation />
+				<Catalog
+					images={images.map((image) => image.highQualityUrl)}
+					navigation
+				/>
 				<StyledLikeButton>
 					<StyledHeartIcon />
 				</StyledLikeButton>
@@ -69,7 +71,7 @@ const Room = ({ _id, name, image, locationId, price }: IRoom) => {
 				</StyledHeadingContainer>
 				<StyledDivWrapper width='60%'>
 					<StyledParagraph>
-						{locationId?.province} <StyledSpan>{locationId?.name}</StyledSpan>
+						{location?.province} <StyledSpan>{location?.name}</StyledSpan>
 					</StyledParagraph>
 					<StyledParagraph>
 						{generateRandomIndex(120, 500).toLocaleString()} kilometers

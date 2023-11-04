@@ -5,7 +5,7 @@ import { ILocation } from '../../@types/Location';
 import { UNAUTHENTICATED, UNAUTHORIZED } from '../../constant/Error';
 import { RootState } from '../../app/store';
 
-const URL = '/api/locations';
+const URL = '/api/v1/location';
 
 const getLocationList = createAsyncThunk<ILocation[]>(
 	'location/getLocationList',
@@ -56,22 +56,17 @@ const createLocation = createAsyncThunk<
 
 		if (!auth) return thunkAPI.rejectWithValue(UNAUTHENTICATED);
 
-		const {
-			user: { type: userType },
-			token,
-		} = auth;
+		const { roleList } = auth;
 
-		if (userType !== 'ADMIN') return thunkAPI.rejectWithValue(UNAUTHORIZED);
+		if (roleList.includes('Admin'))
+			return thunkAPI.rejectWithValue(UNAUTHORIZED);
 
-		const { name, province, valueate, country } = locationDetail;
+		const { name, province, country } = locationDetail;
 
 		const params = {
 			method: 'POST',
 			url: `${URL}`,
-			headers: {
-				token,
-			},
-			data: { name, province, valueate, country },
+			data: { name, province, country },
 		};
 
 		await axiosInstance.request(params);
@@ -94,22 +89,17 @@ const updateLocationById = createAsyncThunk<
 
 		if (!auth) return thunkAPI.rejectWithValue(UNAUTHENTICATED);
 
-		const {
-			user: { type: userType },
-			token,
-		} = auth;
+		const { roleList } = auth;
 
-		if (userType !== 'ADMIN') return thunkAPI.rejectWithValue(UNAUTHORIZED);
+		if (roleList.includes('Admin'))
+			return thunkAPI.rejectWithValue(UNAUTHORIZED);
 
-		const { name, province, valueate, country, _id } = locationDetail;
+		const { name, province, country, id } = locationDetail;
 
 		const params = {
 			method: 'PUT',
-			url: `${URL}/${_id}`,
-			headers: {
-				token,
-			},
-			data: { name, province, valueate, country },
+			url: `${URL}/${id}`,
+			data: { name, province, country },
 		};
 
 		await axiosInstance.request(params);
@@ -132,19 +122,14 @@ const deleteLocationById = createAsyncThunk<
 
 		if (!auth) return thunkAPI.rejectWithValue(UNAUTHENTICATED);
 
-		const {
-			user: { type: userType },
-			token,
-		} = auth;
+		const { roleList } = auth;
 
-		if (userType !== 'ADMIN') return thunkAPI.rejectWithValue(UNAUTHORIZED);
+		if (roleList.includes('Admin'))
+			return thunkAPI.rejectWithValue(UNAUTHORIZED);
 
 		const params = {
 			method: 'DELETE',
 			url: `${URL}/${locationId}`,
-			headers: {
-				token,
-			},
 		};
 
 		await axiosInstance.request(params);
@@ -168,18 +153,15 @@ const uploadLocationImageById = createAsyncThunk<
 
 		if (!auth) return thunkAPI.rejectWithValue(UNAUTHENTICATED);
 
-		const {
-			user: { type: userType },
-			token,
-		} = auth;
+		const { roleList } = auth;
 
-		if (userType !== 'ADMIN') return thunkAPI.rejectWithValue(UNAUTHORIZED);
+		if (roleList.includes('Admin'))
+			return thunkAPI.rejectWithValue(UNAUTHORIZED);
 
 		const params = {
 			method: 'POST',
 			url: `${URL}/upload-images/${id}`,
 			headers: {
-				token: token,
 				'Content-Type': 'multipart/form-data',
 			},
 			data: image,

@@ -24,12 +24,11 @@ const DEFAULT_IMAGE = {
 };
 
 type FormInputs = {
-	name: string;
+	personName: string;
 	email: string;
-	password: string;
 	phone: string;
-	birthday: string;
-	gender: string;
+	password: string;
+	confirmPassword: string;
 	address: string;
 };
 
@@ -54,9 +53,7 @@ const Register = () => {
 			return;
 		}
 		if (error) {
-			if (error === 'Không tìm thấy email phù hợp') {
-				setErrorState('Your email is not exist');
-			}
+			setErrorState(error);
 		}
 
 		return;
@@ -83,11 +80,13 @@ const Register = () => {
 						<StyledInput
 							type='name'
 							placeholder='name'
-							{...register('name', {
+							{...register('personName', {
 								required: { value: true, message: 'Name must be provided' },
 							})}
 						/>
-						{errors.name && <h5 className='danger'>{errors.name.message}</h5>}
+						{errors.personName && (
+							<h5 className='danger'>{errors.personName.message}</h5>
+						)}
 					</StyledInputContainer>
 					<StyledInputContainer>
 						<StyledLabel htmlFor='email'>Email</StyledLabel>
@@ -131,7 +130,7 @@ const Register = () => {
 						{errors.phone && <h5 className='danger'>{errors.phone.message}</h5>}
 					</StyledInputContainer>
 
-					<StyledInputContainer>
+					{/* <StyledInputContainer>
 						<StyledLabel htmlFor='birthday'>birthday</StyledLabel>
 						<StyledInput
 							type='date'
@@ -144,9 +143,9 @@ const Register = () => {
 							})}
 						/>
 						{errors.phone && <h5 className='danger'>{errors.phone.message}</h5>}
-					</StyledInputContainer>
+					</StyledInputContainer> */}
 
-					<StyledInputContainer>
+					{/* <StyledInputContainer>
 						<StyledLabel htmlFor='gender'>gender</StyledLabel>
 						<select
 							{...register('gender', {
@@ -158,7 +157,7 @@ const Register = () => {
 						{errors.gender && (
 							<h5 className='danger'>{errors.gender.message}</h5>
 						)}
-					</StyledInputContainer>
+					</StyledInputContainer> */}
 
 					<StyledInputContainer
 						marginBottom='1rem'

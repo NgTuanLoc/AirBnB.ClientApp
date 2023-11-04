@@ -3,7 +3,7 @@ import { IUser } from './User';
 
 interface IRating {
 	deleteAt: boolean;
-	_id: string;
+	id: string;
 	content: string;
 	roomId: IRoom;
 	userId: IUser;

@@ -4,7 +4,6 @@ import { TiTickOutline } from 'react-icons/ti';
 
 import defaultImage from '../../images/default-user-image.jpg';
 import { useAppSelector } from '../../hooks';
-import { transformDate } from '../../utils';
 import { MainLayout } from '../../layouts';
 import {
 	StyledContainer,
@@ -29,23 +28,23 @@ const UserPage = () => {
 	}
 
 	const {
-		tickets,
+		// id,
 		email,
-		name,
-		phone,
-		birthday,
-		gender,
+		personName,
 		address,
-		type,
-		avatar,
-	} = auth?.user;
+		profileImage,
+		// description,
+		// isMarried,
+		phoneNumber,
+		roleList,
+	} = auth;
 	return (
 		<MainLayout hideSearchBar>
 			<StyledContainer>
 				<StyledUserInfoContainer>
 					<StyledImageContainer
-						src={avatar ? avatar : defaultImage}
-						alt={name}
+						src={profileImage ? profileImage : defaultImage}
+						alt={personName}
 					/>
 					<StyledHeading>Upload user image</StyledHeading>
 					<StyledUserDetailContainer>
@@ -60,28 +59,30 @@ const UserPage = () => {
 					<Line />
 					<StyledDivWrapper>
 						<StyledHeading>
-							<TiTickOutline className='icon' /> {name} verified
+							<TiTickOutline className='icon' /> {personName} verified
 						</StyledHeading>
 					</StyledDivWrapper>
 				</StyledUserInfoContainer>
 				<StyledDivWrapper>
-					<StyledLargeHeading>Hello, my name is {name}</StyledLargeHeading>
+					<StyledLargeHeading>
+						Hello, my name is {personName}
+					</StyledLargeHeading>
 					<StyledParagraph>Join in 2021</StyledParagraph>
 					<Line />
 					<StyledListContainer>
 						<StyledListItem>Email: {email}</StyledListItem>
-						<StyledListItem>Phone: {phone}</StyledListItem>
-						<StyledListItem>
+						<StyledListItem>Phone: {phoneNumber}</StyledListItem>
+						{/* <StyledListItem>
 							Birthday: {transformDate(new Date(birthday))}
-						</StyledListItem>
-						<StyledListItem>
+						</StyledListItem> */}
+						{/* <StyledListItem>
 							Gender: {gender ? 'male' : 'female'}
-						</StyledListItem>
+						</StyledListItem> */}
 						<StyledListItem>Address: {address}</StyledListItem>
-						<StyledListItem>Type: {type}</StyledListItem>
-						<StyledListItem>
+						<StyledListItem>Type: {roleList.join('/')}</StyledListItem>
+						{/* <StyledListItem>
 							tickets: {tickets?.length === 0 ? 'null' : tickets?.join(', ')}
-						</StyledListItem>
+						</StyledListItem> */}
 					</StyledListContainer>
 				</StyledDivWrapper>
 			</StyledContainer>

@@ -29,7 +29,7 @@ const Card = () => {
 		(store) => store.global
 	);
 	const {
-		selectedRoom: { _id, price },
+		selectedRoom: { id, price },
 	} = useAppSelector((store) => store.room);
 
 	const isMobileDevice = useMediaQuery({
@@ -46,7 +46,7 @@ const Card = () => {
 		}
 		dispatch(
 			bookRoomById({
-				roomId: _id,
+				roomId: id,
 				checkIn: bookDate.checkIn,
 				checkOut: bookDate.checkOut,
 			})

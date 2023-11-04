@@ -1,18 +1,22 @@
-import { IUser } from './User';
+// import { IUser } from './User';
 
-export interface IAuth {
-	message: string;
-	user: IUser;
-	token: string;
+interface IAuth {
+	id: string;
+	email: string;
+	personName: string;
+	address: string;
+	profileImage: string;
+	description: string;
+	isMarried?: boolean;
+	phoneNumber: string;
+	roleList: RoleType[];
 }
 
-export interface IRegister {
-	name: string;
+interface IRegister {
+	personName: string;
 	email: string;
-	password: string;
 	phone: string;
-	birthday: string;
-	gender: string;
+	password: string;
+	confirmPassword: string;
 	address: string;
-	type?: 'ADMIN' | 'CLIENT';
 }

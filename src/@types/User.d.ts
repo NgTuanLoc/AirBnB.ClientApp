@@ -1,15 +1,11 @@
-export interface IUser {
-	tickets: string[] | null;
-	deleteAt: boolean;
-	_id: string;
-	name: string;
+interface IUser {
+	id: string;
 	email: string;
-	password: string;
-	phone: string;
-	birthday: string;
-	gender: string;
+	personName: string;
 	address: string;
-	type: 'ADMIN' | 'CLIENT';
-	__v: number;
-	avatar?: string;
+	profileImage: string;
+	description: string;
+	isMarried?: boolean;
+	phoneNumber: string;
+	roleList: RoleType[];
 }

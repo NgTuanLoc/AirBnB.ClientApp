@@ -24,7 +24,7 @@ const RoomListPage = () => {
 			<StyledContainer>
 				<StyledRoomList>
 					{roomList.map((item) => {
-						return <RoomDetails key={item._id} {...item} />;
+						return <RoomDetails key={item.id} {...item} />;
 					})}
 				</StyledRoomList>
 				<StyledGoogleMap>

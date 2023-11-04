@@ -6,11 +6,11 @@ import { Loading } from '../../components';
 import { useAppSelector } from '../../hooks';
 
 interface IPrivateRoute {
-	type?: 'ADMIN' | 'CLIENT';
+	type?: 'Admin' | 'Owner' | 'User';
 	children: ReactNode;
 }
 
-const PrivateRoute = ({ children, type = 'CLIENT' }: IPrivateRoute) => {
+const PrivateRoute = ({ children, type = 'User' }: IPrivateRoute) => {
 	const { auth, authStatus } = useAppSelector((store) => store.auth);
 
 	if (authStatus === 'PENDING') {
@@ -21,7 +21,7 @@ const PrivateRoute = ({ children, type = 'CLIENT' }: IPrivateRoute) => {
 		return <Navigate to='/' />;
 	}
 
-	if (authStatus === 'SUCCESS' && auth?.user.type !== type) {
+	if (authStatus === 'SUCCESS' && auth?.roleList.includes(type)) {
 		return <Navigate to='/' />;
 	}
 

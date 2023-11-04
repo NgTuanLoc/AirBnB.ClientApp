@@ -3,7 +3,7 @@ import { IRoom } from './Room';
 
 interface IBooking {
 	deleteAt: boolean;
-	_id: string;
+	id: string;
 	checkIn: string;
 	checkOut: string;
 	userId: IUser | null;

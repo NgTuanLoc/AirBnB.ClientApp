@@ -20,12 +20,12 @@ const UserModal = () => {
 	if (auth) {
 		return (
 			<StyledContainer>
-				{auth?.user.type === 'ADMIN' ? (
+				{auth.roleList.includes('Admin') ? (
 					<StyledLink bold='450' to='/admin'>
 						Admin
 					</StyledLink>
 				) : (
-					<StyledLink bold='450' to={`/user/${auth?.user._id}`}>
+					<StyledLink bold='450' to={`/user/${auth.id}`}>
 						User
 					</StyledLink>
 				)}
@@ -48,7 +48,7 @@ const UserModal = () => {
 				<StyledButton href='https://github.com/NgTuanLoc/AirBnB'>
 					Host an experience
 				</StyledButton>
-				<StyledLink to={`/user/${auth?.user._id}`}>Account</StyledLink>
+				<StyledLink to={`/user/${auth.id}`}>Account</StyledLink>
 				<Line margin={lineMargin} />
 				<StyledButton href='https://github.com/NgTuanLoc/AirBnB'>
 					Help

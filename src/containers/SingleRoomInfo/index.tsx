@@ -31,21 +31,28 @@ import {
 const SingleRoomInfo = () => {
 	const {
 		selectedRoom: {
+			// id,
 			name,
-			guests,
-			bedRoom,
-			bath,
-			description,
-			kitchen,
-			elevator,
-			hotTub,
-			pool,
-			indoorFireplace,
-			dryer,
-			gym,
-			wifi,
-			heating,
-			cableTV,
+			// homeType,
+			// roomType,
+			totalOccupancy,
+			totalBedrooms,
+			totalBathrooms,
+			// summary,
+			// address,
+			hasTV,
+			hasKitchen,
+			hasAirCon,
+			hasHeating,
+			hasInternet,
+			// price,
+			summary,
+			// publishedAt,
+			// owner,
+			// latitude,
+			// longitude,
+			// location,
+			// imageList,
 		},
 	} = useAppSelector((store) => store.room);
 	const { numberOfVisitDay, bookDate } = useAppSelector(
@@ -58,7 +65,8 @@ const SingleRoomInfo = () => {
 				<StyledDivWrapper>
 					<StyledHeading>{name}</StyledHeading>
 					<StyledParagraph>
-						{guests} guests &middot; {bedRoom} bedroom &middot; {bath} bath
+						{totalOccupancy} guests &middot; {totalBedrooms} bedroom &middot;{' '}
+						{totalBathrooms} bath
 					</StyledParagraph>
 				</StyledDivWrapper>
 				<StyledTitleImage src={imageLogo} alt='logo' />
@@ -106,8 +114,8 @@ const SingleRoomInfo = () => {
 			<Line />
 			{/* Short Description */}
 			<StyledShortDescription>
-				<StyledHeading>Description</StyledHeading>
-				<StyledLightParagraph>{description}</StyledLightParagraph>
+				<StyledHeading>Summary</StyledHeading>
+				<StyledLightParagraph>{summary}</StyledLightParagraph>
 			</StyledShortDescription>
 			<Line />
 			{/* Offer */}
@@ -115,31 +123,31 @@ const SingleRoomInfo = () => {
 				<StyledHeading>What this place offers</StyledHeading>
 				<StyledOfferContainer>
 					<StyledOfferItem>
-						<StyledOfferText disable={kitchen}>
-							{logo['kitchen']} kitchen
+						<StyledOfferText disable={hasKitchen}>
+							{logo['kitchen']} Kitchen
 						</StyledOfferText>
 					</StyledOfferItem>
 					<StyledOfferItem>
-						<StyledOfferText disable={elevator}>
-							{logo['elevator']} elevator
+						<StyledOfferText disable={hasTV}>
+							{logo['elevator']} TV
 						</StyledOfferText>
 					</StyledOfferItem>
 					<StyledOfferItem>
-						<StyledOfferText disable={hotTub}>
-							{logo['hotTub']} hotTub
+						<StyledOfferText disable={hasAirCon}>
+							{logo['hotTub']} Air Condition
 						</StyledOfferText>
 					</StyledOfferItem>
 					<StyledOfferItem>
-						<StyledOfferText disable={pool}>
-							{logo['pool']} pool
+						<StyledOfferText disable={hasHeating}>
+							{logo['pool']} Heating
 						</StyledOfferText>
 					</StyledOfferItem>
 					<StyledOfferItem>
-						<StyledOfferText disable={indoorFireplace}>
-							{logo['indoorFireplace']} indoorFireplace
+						<StyledOfferText disable={hasInternet}>
+							{logo['indoorFireplace']} Internet
 						</StyledOfferText>
 					</StyledOfferItem>
-					<StyledOfferItem>
+					{/* <StyledOfferItem>
 						<StyledOfferText disable={dryer}>
 							{logo['dryer']} dryer
 						</StyledOfferText>
@@ -161,7 +169,7 @@ const SingleRoomInfo = () => {
 						<StyledOfferText disable={cableTV}>
 							{logo['cableTV']} cableTV
 						</StyledOfferText>
-					</StyledOfferItem>
+					</StyledOfferItem> */}
 				</StyledOfferContainer>
 			</StyledOffer>
 			{/* Calendar */}

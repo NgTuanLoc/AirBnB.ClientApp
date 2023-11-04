@@ -5,7 +5,7 @@ import { IRoom } from '../../@types/Room';
 import { RootState } from '../../app/store';
 import { UNAUTHENTICATED, UNAUTHORIZED } from '../../constant/Error';
 
-const URL = '/api/rooms';
+const URL = '/api/v1/room';
 
 const getAllRoom = createAsyncThunk<
 	IRoom[],
@@ -76,20 +76,15 @@ const createNewRoom = createAsyncThunk<string, IRoom, { state: RootState }>(
 
 		if (!auth) return thunkAPI.rejectWithValue(UNAUTHENTICATED);
 
-		const {
-			user: { type: userType },
-			token,
-		} = auth;
+		const { roleList } = auth;
 
-		if (userType !== 'ADMIN') return thunkAPI.rejectWithValue(UNAUTHORIZED);
+		if (roleList.includes('Admin'))
+			return thunkAPI.rejectWithValue(UNAUTHORIZED);
 
 		try {
 			const params = {
 				method: 'POST',
 				url: `${URL}`,
-				headers: {
-					token,
-				},
 				data: newRoom,
 			};
 			await axiosInstance.request(params);
@@ -114,19 +109,9 @@ const bookRoomById = createAsyncThunk<
 
 		if (!auth) return thunkAPI.rejectWithValue(UNAUTHENTICATED);
 
-		const {
-			user: { type: userType },
-			token,
-		} = auth;
-
-		if (userType !== 'ADMIN') return thunkAPI.rejectWithValue(UNAUTHORIZED);
-
 		const params = {
 			method: 'POST',
 			url: `${URL}/booking`,
-			headers: {
-				token,
-			},
 			data: bookInfo,
 		};
 
@@ -149,62 +134,61 @@ const updateRoomById = createAsyncThunk<
 
 		if (!auth) return thunkAPI.rejectWithValue(UNAUTHENTICATED);
 
-		const {
-			user: { type: userType },
-			token,
-		} = auth;
+		const { roleList } = auth;
 
-		if (userType !== 'ADMIN') return thunkAPI.rejectWithValue(UNAUTHORIZED);
+		if (roleList.includes('Admin'))
+			return thunkAPI.rejectWithValue(UNAUTHORIZED);
+		console.log(roomDetail);
 
-		const {
-			name,
-			guests,
-			bedRoom,
-			bath,
-			description,
-			price,
-			elevator,
-			hotTub,
-			pool,
-			indoorFireplace,
-			dryer,
-			gym,
-			kitchen,
-			wifi,
-			heating,
-			cableTV,
-			locationId,
-			_id,
-		} = roomDetail;
+		// const {
+		// 	name,
+		// 	guests,
+		// 	bedRoom,
+		// 	bath,
+		// 	description,
+		// 	price,
+		// 	elevator,
+		// 	hotTub,
+		// 	pool,
+		// 	indoorFireplace,
+		// 	dryer,
+		// 	gym,
+		// 	kitchen,
+		// 	wifi,
+		// 	heating,
+		// 	cableTV,
+		// 	locationId,
+		// 	id,
+		// } = roomDetail;
 
-		const params = {
-			method: 'PUT',
-			url: `${URL}/${_id}`,
-			headers: {
-				token,
-			},
-			data: {
-				name,
-				guests,
-				bedRoom,
-				bath,
-				description,
-				price,
-				elevator,
-				hotTub,
-				pool,
-				indoorFireplace,
-				dryer,
-				gym,
-				kitchen,
-				wifi,
-				heating,
-				cableTV,
-				locationId,
-			},
-		};
+		// const params = {
+		// 	method: 'PUT',
+		// 	url: `${URL}/${id}`,
+		// 	headers: {
+		// 		token,
+		// 	},
+		// 	data: {
+		// 		name,
+		// 		guests,
+		// 		bedRoom,
+		// 		bath,
+		// 		description,
+		// 		price,
+		// 		elevator,
+		// 		hotTub,
+		// 		pool,
+		// 		indoorFireplace,
+		// 		dryer,
+		// 		gym,
+		// 		kitchen,
+		// 		wifi,
+		// 		heating,
+		// 		cableTV,
+		// 		locationId,
+		// 	},
+		// };
 
-		await axiosInstance.request(params);
+		// await axiosInstance.request(params);
 		return 'success update room';
 	} catch (error) {
 		return thunkAPI.rejectWithValue('Update Room failed');
@@ -223,19 +207,14 @@ const deleteRoomById = createAsyncThunk<
 
 		if (!auth) return thunkAPI.rejectWithValue(UNAUTHENTICATED);
 
-		const {
-			user: { type: userType },
-			token,
-		} = auth;
+		const { roleList } = auth;
 
-		if (userType !== 'ADMIN') return thunkAPI.rejectWithValue(UNAUTHORIZED);
+		if (roleList.includes('Admin'))
+			return thunkAPI.rejectWithValue(UNAUTHORIZED);
 
 		const params = {
 			method: 'DELETE',
 			url: `${URL}/${roomId}`,
-			headers: {
-				token: token,
-			},
 		};
 
 		await axiosInstance.request(params);
@@ -259,18 +238,15 @@ const uploadRoomImageById = createAsyncThunk<
 
 		if (!auth) return thunkAPI.rejectWithValue(UNAUTHENTICATED);
 
-		const {
-			user: { type: userType },
-			token,
-		} = auth;
+		const { roleList } = auth;
 
-		if (userType !== 'ADMIN') return thunkAPI.rejectWithValue(UNAUTHORIZED);
+		if (roleList.includes('Admin'))
+			return thunkAPI.rejectWithValue(UNAUTHORIZED);
 
 		const params = {
 			method: 'POST',
 			url: `${URL}/upload-image/${id}`,
 			headers: {
-				token: token,
 				'Content-Type': 'multipart/form-data',
 			},
 			data: image,

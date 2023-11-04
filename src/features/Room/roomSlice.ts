@@ -26,7 +26,7 @@ export interface IRoomState {
 
 const initialState: IRoomState = {
 	roomList: [],
-	locationID: '61697f97efe193001c0a5b69',
+	locationID: '2b7bb1eb-0f82-437a-4f72-08dbdcfa0b33',
 	isLoading: false,
 	successMsg: '',
 	error: '',

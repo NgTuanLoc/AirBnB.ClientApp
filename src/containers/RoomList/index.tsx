@@ -44,7 +44,7 @@ const RoomList = () => {
 	return (
 		<StyledContainer>
 			{roomList.map((item) => {
-				return <Room key={item._id} {...item} />;
+				return <Room key={item.id} {...item} />;
 			})}
 		</StyledContainer>
 	);

@@ -63,7 +63,7 @@ const AdminForm = <T extends { [key: string]: any }>({
 		dispatch(dispatchFunction(data));
 
 		if (formData) {
-			const imageData = { id: data._id, image: formData };
+			const imageData = { id: data.id, image: formData };
 			dispatch(dispatchUploadImageFunction(imageData));
 		}
 

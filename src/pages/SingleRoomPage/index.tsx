@@ -22,7 +22,7 @@ const SingleRoomPage = () => {
 	const {
 		selectedRoom: {
 			name,
-			locationId: { province },
+			location: { province },
 		},
 	} = useAppSelector((store) => store.room);
 

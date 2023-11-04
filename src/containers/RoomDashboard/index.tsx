@@ -205,32 +205,51 @@ const RoomDashboard = () => {
 					<StyledTableBody>
 						{displayRoom.map((item) => {
 							const {
-								_id,
+								id,
 								name,
-								guests,
-								bedRoom,
-								bath,
-								elevator,
-								hotTub,
-								pool,
-								indoorFireplace,
-								dryer,
-								gym,
-								kitchen,
-								wifi,
-								heating,
-								cableTV,
-								// description,
-								image,
+								// homeType,
+								// roomType,
+								totalOccupancy,
+								totalBedrooms,
+								// totalBathrooms,
+								// summary,
+								// address,
+								hasTV,
+								hasKitchen,
+								hasAirCon,
+								hasHeating,
+								hasInternet,
 								price,
+								// publishedAt,
+								// owner,
+								// latitude,
+								// longitude,
+								// location,
+								imageList,
 							} = item;
 							return (
-								<StyledRow key={_id}>
-									<StyledItem>{_id}</StyledItem>
+								<StyledRow key={id}>
+									<StyledItem>{id}</StyledItem>
 									<StyledItem>{name}</StyledItem>
-									<StyledItem>{guests ? guests : 0}</StyledItem>
-									<StyledItem>{bedRoom ? bedRoom : 0}</StyledItem>
+									<StyledItem>{totalOccupancy ? totalOccupancy : 0}</StyledItem>
+									<StyledItem>{totalBedrooms ? totalBedrooms : 0}</StyledItem>
 									<StyledItem>
+										{hasTV ? <StyledTickIcon /> : <StyledStopIcon />}
+									</StyledItem>
+									<StyledItem>
+										{hasKitchen ? <StyledTickIcon /> : <StyledStopIcon />}
+									</StyledItem>
+									<StyledItem>
+										{hasAirCon ? <StyledTickIcon /> : <StyledStopIcon />}
+									</StyledItem>
+									<StyledItem>
+										{hasHeating ? <StyledTickIcon /> : <StyledStopIcon />}
+									</StyledItem>
+									<StyledItem>
+										{hasInternet ? <StyledTickIcon /> : <StyledStopIcon />}
+									</StyledItem>
+
+									{/* <StyledItem>
 										{bath ? <StyledTickIcon /> : <StyledStopIcon />}
 									</StyledItem>
 									<StyledItem>
@@ -262,27 +281,26 @@ const RoomDashboard = () => {
 									</StyledItem>
 									<StyledItem>
 										{cableTV ? <StyledTickIcon /> : <StyledStopIcon />}
-									</StyledItem>
+									</StyledItem> */}
 									{/* <StyledItem>
 											{description ? description : 'Empty'}
 										</StyledItem> */}
 									<StyledItem>
-										<Image url={image} alt={name} />
+										<Image
+											url={imageList.map((image) => image.highQualityUrl)[0]}
+											alt={name}
+										/>
 									</StyledItem>
 									<StyledItem>{price ? price : 'Not Provided'}</StyledItem>
 									<StyledItem>
 										<StyledButtonContainer>
-											<Button onClickHandler={showRoom(_id)} bgColor='#28a745'>
+											<Button onClickHandler={showRoom(id)} bgColor='#28a745'>
 												Info
 											</Button>
-											<Button
-												onClickHandler={updateRoom(_id)}
-												bgColor='#ffc107'>
+											<Button onClickHandler={updateRoom(id)} bgColor='#ffc107'>
 												Update
 											</Button>
-											<Button
-												onClickHandler={deleteRoom(_id)}
-												bgColor='#dc3545'>
+											<Button onClickHandler={deleteRoom(id)} bgColor='#dc3545'>
 												Delete
 											</Button>
 										</StyledButtonContainer>

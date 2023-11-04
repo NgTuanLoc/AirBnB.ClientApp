@@ -14,40 +14,45 @@ import {
 } from './style';
 
 const RoomDetails = ({
-	image,
+	id,
 	name,
-	locationId,
-	guests,
-	bedRoom,
-	bath,
-	elevator,
-	hotTub,
-	pool,
-	indoorFireplace,
-	dryer,
-	gym,
-	kitchen,
-	wifi,
-	heating,
-	cableTV,
+	// homeType,
+	// roomType,
+	totalOccupancy,
+	totalBedrooms,
+	totalBathrooms,
+	// summary,
+	// address,
+	hasTV,
+	hasKitchen,
+	hasAirCon,
+	hasHeating,
+	hasInternet,
 	price,
-	_id,
+	// publishedAt,
+	// owner,
+	// latitude,
+	// longitude,
+	location,
+	imageList,
 }: IRoom) => {
+	const { highQualityUrl } = imageList[0];
 	return (
 		<StyledContainer>
-			<Image url={image} alt={name} />
+			<Image url={highQualityUrl} alt={name} />
 			<StyledInfoContainer>
-				<StyledActionLink to={`/room/${_id}`}>{name}</StyledActionLink>
+				<StyledActionLink to={`/room/${id}`}>{name}</StyledActionLink>
 				<StyledParagraph>
-					{locationId ? locationId.province : 'not provided'} -{' '}
-					{locationId ? locationId.name : 'not provided'}
+					{location ? location.province : 'not provided'} -{' '}
+					{location ? location.name : 'not provided'}
 				</StyledParagraph>
 				<Line margin='0.8rem auto' />
 				<StyledParagraph bold>
-					{guests} guests - {bedRoom} bedrooms - {bath} bathrooms
+					{totalOccupancy} guests - {totalBedrooms} bedrooms - {totalBathrooms}{' '}
+					bathrooms
 				</StyledParagraph>
 				<StyledListContainer>
-					<li className='list-item'>
+					{/* <li className='list-item'>
 						Elevator{' '}
 						<StyledSpan>
 							{elevator ? (
@@ -76,8 +81,8 @@ const RoomDetails = ({
 								<AiOutlineClose className='danger' />
 							)}
 						</StyledSpan>
-					</li>
-					<li className='list-item'>
+					</li> */}
+					{/* <li className='list-item'>
 						Indoor FirePlace{' '}
 						<StyledSpan>
 							{indoorFireplace ? (
@@ -96,11 +101,11 @@ const RoomDetails = ({
 								<AiOutlineClose className='danger' />
 							)}
 						</StyledSpan>
-					</li>
+					</li> */}
 					<li className='list-item'>
-						Gym{' '}
+						Air Condition{' '}
 						<StyledSpan>
-							{gym ? (
+							{hasAirCon ? (
 								<TiTickOutline className='success' />
 							) : (
 								<AiOutlineClose className='danger' />
@@ -110,7 +115,7 @@ const RoomDetails = ({
 					<li className='list-item'>
 						Kitchen{' '}
 						<StyledSpan>
-							{kitchen ? (
+							{hasKitchen ? (
 								<TiTickOutline className='success' />
 							) : (
 								<AiOutlineClose className='danger' />
@@ -120,17 +125,27 @@ const RoomDetails = ({
 					<li className='list-item'>
 						Wifi{' '}
 						<StyledSpan>
-							{wifi ? (
+							{hasInternet ? (
 								<TiTickOutline className='success' />
 							) : (
 								<AiOutlineClose className='danger' />
 							)}
 						</StyledSpan>
 					</li>
-					<li className='list-item'>
+					{/* <li className='list-item'>
 						Elevator{' '}
 						<StyledSpan>
 							{elevator ? (
+								<TiTickOutline className='success' />
+							) : (
+								<AiOutlineClose className='danger' />
+							)}
+						</StyledSpan>
+					</li> */}
+					<li className='list-item'>
+						Tv{' '}
+						<StyledSpan>
+							{hasTV ? (
 								<TiTickOutline className='success' />
 							) : (
 								<AiOutlineClose className='danger' />
@@ -140,14 +155,14 @@ const RoomDetails = ({
 					<li className='list-item'>
 						Heating{' '}
 						<StyledSpan>
-							{heating ? (
+							{hasHeating ? (
 								<TiTickOutline className='success' />
 							) : (
 								<AiOutlineClose className='danger' />
 							)}
 						</StyledSpan>
 					</li>
-					<li className='list-item'>
+					{/* <li className='list-item'>
 						CableTV{' '}
 						<StyledSpan>
 							{cableTV ? (
@@ -156,7 +171,7 @@ const RoomDetails = ({
 								<AiOutlineClose className='danger' />
 							)}
 						</StyledSpan>
-					</li>
+					</li> */}
 				</StyledListContainer>
 				<StyledPrice>
 					{price?.toLocaleString()}VND<StyledSpan>/night</StyledSpan>

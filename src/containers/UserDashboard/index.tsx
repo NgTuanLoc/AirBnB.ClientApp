@@ -14,8 +14,6 @@ import { searchUser } from '../../features/User/userSlice';
 import { Loading, Button, Image } from '../../components';
 import { AdminForm } from '../../components';
 import { type FormType } from '../../components/AdminForm';
-import { IUser } from '../../@types/User';
-import { transformDate } from '../../utils';
 import {
 	StyledContainer,
 	StyledSearchButton,
@@ -189,42 +187,38 @@ const UserDashboard = () => {
 					<StyledTableBody>
 						{displayUser.map((item) => {
 							const {
-								_id,
-								name,
+								id,
+								personName,
 								email,
-								phone,
-								birthday,
-								gender,
+								phoneNumber,
+								// birthday,
+								// gender,
 								address,
-								type,
-								avatar,
+								roleList,
+								profileImage,
 							} = item;
 							return (
-								<StyledRow key={_id}>
-									<StyledItem>{_id}</StyledItem>
-									<StyledItem>{name}</StyledItem>
+								<StyledRow key={id}>
+									<StyledItem>{id}</StyledItem>
+									<StyledItem>{personName}</StyledItem>
 									<StyledItem>{email}</StyledItem>
-									<StyledItem>{phone}</StyledItem>
-									<StyledItem>{transformDate(new Date(birthday))}</StyledItem>
-									<StyledItem>{gender ? 'Male' : 'Female'}</StyledItem>
+									<StyledItem>{phoneNumber}</StyledItem>
+									{/* <StyledItem>{transformDate(new Date(birthday))}</StyledItem> */}
+									{/* <StyledItem>{gender ? 'Male' : 'Female'}</StyledItem> */}
 									<StyledItem>{address}</StyledItem>
-									<StyledItem>{type}</StyledItem>
+									<StyledItem>{roleList.join('/')}</StyledItem>
 									<StyledItem>
-										<Image url={avatar as string} alt={name} />
+										<Image url={profileImage as string} alt={personName} />
 									</StyledItem>
 									<StyledItem>
 										<StyledButtonContainer>
-											<Button onClickHandler={showUser(_id)} bgColor='#28a745'>
+											<Button onClickHandler={showUser(id)} bgColor='#28a745'>
 												Info
 											</Button>
-											<Button
-												onClickHandler={updateUser(_id)}
-												bgColor='#ffc107'>
+											<Button onClickHandler={updateUser(id)} bgColor='#ffc107'>
 												Update
 											</Button>
-											<Button
-												onClickHandler={deleteUser(_id)}
-												bgColor='#dc3545'>
+											<Button onClickHandler={deleteUser(id)} bgColor='#dc3545'>
 												Delete
 											</Button>
 										</StyledButtonContainer>

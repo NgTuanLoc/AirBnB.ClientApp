@@ -35,7 +35,7 @@ const ReviewContainer = ({ roomId }: IReviewContainer) => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [search, setSearch] = useState('');
 	const mappedRatingList = ratingList.map((item) => {
-		const { _id, userId, content, created_at } = item;
+		const { id, userId, content, created_at } = item;
 		let userAvatar = DEFAULT_IMAGE;
 		let name = 'Unknown';
 		if (userId) {
@@ -44,7 +44,7 @@ const ReviewContainer = ({ roomId }: IReviewContainer) => {
 		}
 
 		const user = {
-			id: _id,
+			id: id,
 			avatar: userAvatar,
 			name,
 			review: content,

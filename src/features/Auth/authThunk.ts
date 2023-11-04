@@ -1,9 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { axiosInstance } from '../../utils';
-import { IAuth, IRegister } from '../../@types/Auth';
 
-const URL = '/api/auth';
+const URL = '/api/v1/auth';
 
 const loginThunk = createAsyncThunk<IAuth, { email: string; password: string }>(
 	'auth/login',
@@ -43,13 +42,14 @@ const registerThunk = createAsyncThunk<IAuth, IRegister>(
 				method: 'POST',
 				url: `${URL}/register`,
 				data: {
-					name: user.name,
+					personName: user.personName,
 					email: user.email,
 					password: user.password,
+					confirmPassword: user.confirmPassword,
 					phone: user.phone,
-					birthday: user.birthday,
-					gender: user.gender === 'Man' ? true : false,
 					address: user.address,
+					// birthday: user.birthday,
+					// gender: user.gender === 'Man' ? true : false,
 				},
 			};
 

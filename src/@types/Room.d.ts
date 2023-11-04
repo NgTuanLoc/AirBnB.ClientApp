@@ -1,27 +1,26 @@
 import { ILocation } from './Location';
 
-interface IRoom {
-	deleteAt: boolean;
-	_id: string;
+interface IRoom extends IBaseModel {
 	name: string;
-	guests: number;
-	bedRoom: number;
-	bath: number;
-	description: string;
+	homeType: string;
+	roomType: string;
+	totalOccupancy: number;
+	totalBedrooms: number;
+	totalBathrooms: number;
+	summary: string;
+	address: string;
+	hasTV: boolean;
+	hasKitchen: boolean;
+	hasAirCon: boolean;
+	hasHeating: boolean;
+	hasInternet: boolean;
 	price: number;
-	elevator: boolean;
-	hotTub: boolean;
-	pool: boolean;
-	indoorFireplace: boolean;
-	dryer: boolean;
-	gym: boolean;
-	kitchen: boolean;
-	wifi: boolean;
-	heating: boolean;
-	cableTV: boolean;
-	locationId: ILocation;
-	__v: number;
-	image: string;
+	publishedAt?: Date;
+	owner?: IUser;
+	latitude: number;
+	longitude: number;
+	location: ILocation;
+	imageList: IImage[];
 }
 
 export { IRoom };
