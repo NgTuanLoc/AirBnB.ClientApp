@@ -17,8 +17,8 @@ const CustomImage = ({
 	alt,
 	gridArea,
 	borderRadius,
-	heartIcon = false,
-}: IImage) => {
+}: // heartIcon = false,
+IImage) => {
 	const isImageLoaded = useProgressiveImg(url);
 
 	if (!url) {

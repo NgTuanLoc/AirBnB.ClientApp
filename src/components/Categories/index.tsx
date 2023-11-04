@@ -1,7 +1,7 @@
 import { SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { Navigation } from 'swiper';
+import { Navigation } from 'swiper/modules';
 import { useMediaQuery } from 'react-responsive';
 import Skeleton from 'react-loading-skeleton';
 

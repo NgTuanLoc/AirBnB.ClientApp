@@ -1,4 +1,4 @@
-import { useState, useRef, ChangeEvent, KeyboardEvent } from 'react';
+import { useState, useRef, ChangeEvent } from 'react';
 import { AiOutlineWarning } from 'react-icons/ai';
 
 import { transformDate, isValidDate } from '../../utils';
@@ -22,7 +22,8 @@ const BookingDateInput = () => {
 
 	const checkOutInputRef = useRef<HTMLInputElement>(null);
 
-	const onKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+	// e: KeyboardEvent<HTMLInputElement>
+	const onKeyDownHandler = (e: any) => {
 		const checkOutInput = checkOutInputRef.current;
 		const name = e.target.name;
 

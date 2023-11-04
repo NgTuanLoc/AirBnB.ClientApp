@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 export const usePagination = (
 	defaultMaxPage: number,
-	itemPerPage: number = 10,
+	// itemPerPage: number = 10,
 	numberOfPageButton: number = 7
 ) => {
 	const [currentPage, setCurrentPage] = useState<number>(0);
