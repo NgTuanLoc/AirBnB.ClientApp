@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { loginThunk, registerThunk } from './authThunk';
+import { getUserThunk, loginThunk, registerThunk } from './authThunk';
 
 export interface IAuthState {
 	authStatus: 'PENDING' | 'UNAUTHORIZED' | 'SUCCESS';
@@ -20,7 +20,6 @@ const authSlice = createSlice({
 	reducers: {
 		logout: (state: IAuthState) => {
 			state.auth = null;
-			localStorage.removeItem('userLogin');
 		},
 	},
 	extraReducers(builder) {
@@ -33,6 +32,20 @@ const authSlice = createSlice({
 			state.error = '';
 		});
 		builder.addCase(loginThunk.rejected, (state, { payload }) => {
+			state.authStatus = 'UNAUTHORIZED';
+			if (payload) {
+				state.error = payload as string;
+			}
+		});
+		builder.addCase(getUserThunk.pending, (state) => {
+			state.authStatus = 'PENDING';
+		});
+		builder.addCase(getUserThunk.fulfilled, (state, { payload }) => {
+			state.authStatus = 'SUCCESS';
+			state.auth = payload;
+			state.error = '';
+		});
+		builder.addCase(getUserThunk.rejected, (state, { payload }) => {
 			state.authStatus = 'UNAUTHORIZED';
 			if (payload) {
 				state.error = payload as string;

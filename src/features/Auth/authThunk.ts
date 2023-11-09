@@ -16,16 +16,24 @@ const loginThunk = createAsyncThunk<IAuth, { email: string; password: string }>(
 					password: user.password,
 				},
 			};
-
 			const response = await axiosInstance.request(params);
-			const token = {
-				email: user.email,
-				password: user.password,
-				token: response.data.token,
-				type: response.data.user.type,
-			};
 
-			localStorage.setItem('userLogin', JSON.stringify(token));
+			return response.data;
+		} catch (error: any) {
+			return thunkAPI.rejectWithValue(`${error.response.status}`);
+		}
+	}
+);
+
+const getUserThunk = createAsyncThunk<IAuth>(
+	'auth/getUser',
+	async (_, thunkAPI) => {
+		try {
+			const params = {
+				method: 'GET',
+				url: `/api/v1/user/get-user`,
+			};
+			const response = await axiosInstance.request(params);
 
 			return response.data;
 		} catch (error: any) {
@@ -67,4 +75,4 @@ const registerThunk = createAsyncThunk<IAuth, IRegister>(
 	}
 );
 
-export { loginThunk, registerThunk };
+export { loginThunk, registerThunk, getUserThunk };

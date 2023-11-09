@@ -9,6 +9,7 @@ export interface IAxiosParams<T> {
 // Set config defaults when creating the instance
 const axiosInstance = axios.create({
 	baseURL: import.meta.env.VITE_API_DOMAIN,
+	withCredentials: true,
 });
 
 // Alter defaults after instance has been created

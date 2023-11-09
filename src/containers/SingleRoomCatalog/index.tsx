@@ -135,10 +135,10 @@ const SingleRoomCatalog = () => {
 					</StyledSkeletonLoadingWrapper>
 					<StyledSkeletonLoadingWrapper gridArea='image-4'>
 						{isLoading ? (
-							<Skeleton borderRadius='var(--radius) 0 var(--radius) 0' />
+							<Skeleton borderRadius='0 0 var(--radius) 0' />
 						) : (
 							<StyledImage
-								borderRadius='var(--radius) 0 var(--radius) 0'
+								borderRadius='0 0 var(--radius) 0'
 								url={imageUrlList[4]}
 								alt={name}
 							/>

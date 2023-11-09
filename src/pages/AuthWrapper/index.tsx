@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { ReactNode, useEffect } from 'react';
 
-import { useAppDispatch, useAppSelector, useLocalStorage } from '../../hooks';
-import { loginThunk } from '../../features/Auth/authThunk';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { getUserThunk } from '../../features/Auth/authThunk';
 import { Loading } from '../../components';
 
 interface IAuthWrapper {
@@ -10,21 +10,11 @@ interface IAuthWrapper {
 }
 
 const AuthWrapper = ({ children }: IAuthWrapper) => {
-	const [userLogin] = useLocalStorage('userLogin', {
-		email: '',
-		password: '',
-		token: '',
-	});
 	const { authStatus } = useAppSelector((store) => store.auth);
 	const dispatch = useAppDispatch();
 
 	useEffect(() => {
-		dispatch(
-			loginThunk({
-				email: userLogin.email,
-				password: userLogin.password,
-			})
-		);
+		dispatch(getUserThunk());
 	}, []);
 
 	if (authStatus === 'PENDING') return <Loading />;
